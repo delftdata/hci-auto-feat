@@ -151,6 +151,7 @@ class FeatureDiscovery:
     def evalute_paths(self, top_k_paths: int = 2):
         evaluation_functions.evaluate_paths(self, top_k_paths)
 
+
 if __name__ == "__main__":
 
     autofeat = FeatureDiscovery()
@@ -158,12 +159,12 @@ if __name__ == "__main__":
     autofeat.set_dataset_repository(dataset_repository=["credit"])
     autofeat.find_relationships(threshold=0.8)
     # autofeat.read_relationships()
-    # # autofeat.display_best_relationships()
+    # autofeat.display_best_relationships()
     # autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
     # autofeat.explain_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
-    autofeat.compute_join_paths(top_k_features=2)
+    # autofeat.compute_join_paths(top_k_features=2)
     # autofeat.inspect_join_path(2)
-    autofeat.show_features(path_id=3, show_discarded_features=True)
+    # autofeat.show_features(path_id=3, show_discarded_features=True)
     # autofeat.display_join_paths(top_k=2)
     # df = autofeat.materialise_join_path(path_id=1)
     # print(list(df.columns))

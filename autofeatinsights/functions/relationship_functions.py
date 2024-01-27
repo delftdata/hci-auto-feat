@@ -97,13 +97,16 @@ def display_best_relationships(autofeat):
     for table1 in tables:
         for table2 in tables:
             if table1 == table2:
-                highest_weights.append([autofeat.weight_string_mapping[table1], autofeat.weight_string_mapping[table2], 1])
+                highest_weights.append([autofeat.weight_string_mapping[table1], 
+                                        autofeat.weight_string_mapping[table2], 1])
             else:
                 weight = get_best_weight(autofeat, table1, table2)
                 if weight is not None:
                     highest_weights.append([autofeat.weight_string_mapping[weight.from_table], 
                                             autofeat.weight_string_mapping[weight.to_table], 
                                             weight.weight])
+    if len(autofeat.datasets) == 1:
+        highest_weights = [[i[0].split("/")[-1], i[1].split("/")[-1], i[2]] for i in highest_weights]
     df = pd.DataFrame(highest_weights, columns=["from_table", "to_table", "weight"])
     seaborn.heatmap(df.pivot(index="from_table", columns="to_table", values="weight"), square=True)
     plt.xticks(fontsize="small", rotation=30) 
