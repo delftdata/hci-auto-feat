@@ -11,7 +11,7 @@ class Join():
 
     def __init__(self, from_table: str,
                  to_table: str, from_col: str, to_col: str,
-                 data_quality: float, rel_red: dict):
+                 data_quality: float, rel_red: dict, rel_red_discarded: dict):
 
         self.from_table = from_table
         self.to_table = to_table
@@ -19,6 +19,7 @@ class Join():
         self.to_col = to_col
         self.data_quality = data_quality
         self.rel_red = rel_red
+        self.rel_red_discarded = rel_red_discarded
    
     def get_from_prefix(self):
         return self.from_table + "." + self.from_col

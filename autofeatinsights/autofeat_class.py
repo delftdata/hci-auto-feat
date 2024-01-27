@@ -125,34 +125,14 @@ class FeatureDiscovery:
                                                          total=len(tables) * (len(tables) - 1) / 2))
         print(temp)
         self.weights = temp
-        f = open("weights.txt", "w")
-        stringlist = []
-        for i in self.weights:
-            stringlist.append(f"{i.from_table}--{i.to_table}--{i.from_col}--{i.to_col}--{i.weight},")
-        f.writelines(stringlist)
-        f.close()
-    
-    # def find_relationships(self, threshold: float = 0.5):
-    #     tables = self.get_tables_repository()                
-    #     weights = []
-    #     self.weight_string_mapping = {}
-    #     for t in tables:
-    #         if len(t) > 20:
-    #             new_string = t.split("/")[0] + "/" + t.split("/")[1][:3] + "..." + t.split("/")[1][-7:]
-    #             self.weight_string_mapping[t] = new_string
-    #         else:
-    #             self.weight_string_mapping[t] = t
-    #     for combination in tqdm.tqdm(itertools.combinations(tables, 2), total=len(tables) * (len(tables) - 1) / 2):
-    #         (table1, table2) = combination
-    #         df1 = pd.read_csv("data/benchmark/" + table1)
-    #         df2 = pd.read_csv("data/benchmark/" + table2)
-    #         matches = self.calculate_coma(df1, df2)
-    #         for m in matches.items():
-    #             ((_, col_from), (_, col_to)), similarity = m
-    #             if similarity > threshold:
-    #                 weights.append(Weight(table1, table2, col_from, col_to, similarity))
-    #                 weights.append(Weight(table2, table1, col_to, col_from, similarity))
-    #     self.weights = weights
+
+        # Uncomment for saving weights to file.
+        # f = open("weights.txt", "w")
+        # stringlist = []
+        # for i in self.weights:
+        #     stringlist.append(f"{i.from_table}--{i.to_table}--{i.from_col}--{i.to_col}--{i.weight},")
+        # f.writelines(stringlist)
+        # f.close()
 
     def get_tables_repository(self):
         tables = []
@@ -162,7 +142,6 @@ class FeatureDiscovery:
         return tables
     
     def display_relationships(self):
-        print("displaying weights")
         tables = self.get_tables_repository()
         highest_weights = []
         for table1 in tables:
@@ -177,7 +156,7 @@ class FeatureDiscovery:
                                                 weight.weight])
         df = pd.DataFrame(highest_weights, columns=["from_table", "to_table", "weight"])
         seaborn.heatmap(df.pivot(index="from_table", columns="to_table", values="weight"), square=True)
-        plt.xticks(fontsize="small", rotation=90) 
+        plt.xticks(fontsize="small", rotation=30) 
         plt.show()
 
     def get_best_weight(self, table1: str, table2: str) -> Weight:
@@ -221,24 +200,24 @@ class FeatureDiscovery:
                                         path=Path(begin=(self.base_table), joins=[], rank=0, ), 
                                         data_quality_threshhold=data_qualtiy_threshold)
 
-    def display_join_paths_dsplot(self, top_k: None):
-        if top_k is None:
-            top_k = len(self.paths)
-        sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k]
-        for index, path in enumerate(sorted_paths):
-            graph_dic = {}
-            graph_dic[path.begin] = []
-            i: Join
-            for i in path.joins:
-                if i.from_table not in graph_dic:
-                    graph_dic[i.from_table] = []
-                if i.to_table not in graph_dic:
-                    graph_dic[i.to_table] = []
-            for i in path.joins:
-                graph_dic[i.from_table].append(i.to_table)
-            dsGraph(graph_dic, directed=True).plot(output_path=(f"graph-{index}.png"))
+    # def display_join_paths_dsplot(self, top_k: None):
+    #     if top_k is None:
+    #         top_k = len(self.paths)
+    #     sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k]
+    #     for index, path in enumerate(sorted_paths):
+    #         graph_dic = {}
+    #         graph_dic[path.begin] = []
+    #         i: Join
+    #         for i in path.joins:
+    #             if i.from_table not in graph_dic:
+    #                 graph_dic[i.from_table] = []
+    #             if i.to_table not in graph_dic:
+    #                 graph_dic[i.to_table] = []
+    #         for i in path.joins:
+    #             graph_dic[i.from_table].append(i.to_table)
+    #         dsGraph(graph_dic, directed=True).plot(output_path=(f"graph-{index}.png"))
 
-    def display_join_paths_networkx(self, top_k: None):
+    def display_join_paths(self, top_k: None):
         if top_k is None:
             top_k = len(self.paths)
         sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k]
@@ -307,14 +286,14 @@ class FeatureDiscovery:
                             selected_features=self.partial_join_selected_features[str(previous_table_join)],
                         )
                         if result is not None:
-                            score, rel_score, red_score, features, discarded = result
+                            score, rel_score, red_score, features, rel_discarded, red_discarded = result
                             join = Join(prop.from_table, prop.to_table, 
-                                        prop.from_col, prop.to_col, data_quality, {"rel": rel_score, "red": red_score})
+                                        prop.from_col, prop.to_col, data_quality, {"rel": rel_score, "red": red_score}, 
+                                        {"rel": rel_discarded, "red": red_discarded})
                             all_features = self.partial_join_selected_features[str(previous_table_join)]
                             all_features.extend(features)
                             self.partial_join_selected_features[str(join_list)] = all_features
                             path.features = all_features
-                            path.discarded = discarded
                             path.rank = score
                         path.add_join(join)
                         path.id = len(self.paths)
@@ -387,7 +366,7 @@ class FeatureDiscovery:
         relevant_features = new_features
         sum_m = 0
         m = 1
-        feature_score_relevance, discarded_features = self.rel_red.measure_relevance(
+        feature_score_relevance, rel_discarded_features = self.rel_red.measure_relevance(
             dataframe=X, new_features=features, target_column=y
         )
         # feature_score_relevance = feature_score_relevance[:top_feat]
@@ -403,7 +382,7 @@ class FeatureDiscovery:
         feature_score_redundancy, red_discarded_features = self.rel_red.measure_redundancy(
             dataframe=X, selected_features=selected_features, relevant_features=relevant_features, target_column=y
         )
-        discarded_features += red_discarded_features
+
         if len(feature_score_redundancy) == 0:
             return None
 
@@ -413,7 +392,7 @@ class FeatureDiscovery:
 
         score = (o * sum_m + m * sum_o) / (m * o)
 
-        return score, feature_score_relevance, feature_score_redundancy, final_features, discarded_features
+        return score, feature_score_relevance, feature_score_redundancy, final_features, rel_discarded_features, red_discarded_features
 
     def data_quality_calculation(self, joined_df: pd.DataFrame, prop: Weight) -> float:
         total_length = joined_df.shape[0]
@@ -494,10 +473,10 @@ if __name__ == "__main__":
     autofeat.set_dataset_repository(dataset_repository=["credit"])
     autofeat.find_relationships(threshold=0.5)
     # autofeat.read_relationships()
-    # autofeat.display_relationships()
+    autofeat.display_relationships()
     autofeat.compute_join_paths()
     autofeat.show_features(path_id=1, show_discarded_features=True)
-    # autofeat.display_join_paths(top_k=2)
+    autofeat.display_join_paths(top_k=2)
     # df = autofeat.materialise_join_path(path_id=1)
     # print(list(df.columns))
     # autofeat.evaluate_paths(top_k_paths=2)
