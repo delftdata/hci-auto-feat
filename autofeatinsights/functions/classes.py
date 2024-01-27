@@ -30,7 +30,7 @@ class Join():
     def __str__(self) -> str:
         return "Join from " + self.from_table + "." + self.from_col + " to " \
             + self.to_table + "." + self.to_col + " with null ratio " \
-            + str(self.null_ratio) + " and rel_red " + str(self.rel_red)
+            + str(self.null_ratio) + "."
 
     def __repr__(self) -> str:
         return f"{self.from_table}.{self.from_col} -> {self.to_table}.{self.to_col}"
@@ -38,9 +38,7 @@ class Join():
     def explain(self) -> str:
         return "This is a join from: " + self.get_from_prefix() \
             + " to " + self.get_to_prefix() \
-            + " with Null Ratio: " + str(self.null_ratio) \
-            + " and Relevance/Redundancy " + str(self.rel_red)
- 
+            + " with Null Ratio: " + str(self.null_ratio) + "." 
 
 class Path:
 
