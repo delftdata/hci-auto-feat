@@ -60,12 +60,12 @@ def find_relationships(autofeat, threshold: float = 0.5):
                                                      total=len(tables) * (len(tables) - 1) / 2))
     autofeat.weights = temp
     # Uncomment for saving weights to file.
-    # f = open("weights.txt", "w")
-    # stringlist = []
-    # for i in self.weights:
-    #     stringlist.append(f"{i.from_table}--{i.to_table}--{i.from_col}--{i.to_col}--{i.weight},")
-    # f.writelines(stringlist)
-    # f.close()
+    f = open("weights.txt", "w")
+    stringlist = []
+    for i in autofeat.weights:
+        stringlist.append(f"{i.from_table}--{i.to_table}--{i.from_col}--{i.to_col}--{i.weight},")
+    f.writelines(stringlist)
+    f.close()
 
 
 def add_relationship(autofeat, table1: str, col1: str, table2: str, col2: str, weight: float):
@@ -90,7 +90,7 @@ def update_relationship(autofeat, table1: str, col1: str, table2: str, col2: str
     autofeat.add_relationship(table1, col1, table2, col2, weight)
 
 
-def display_relationships(autofeat):
+def display_best_relationships(autofeat):
     tables = autofeat.get_tables_repository()
     highest_weights = []
     for table1 in tables:
@@ -107,6 +107,7 @@ def display_relationships(autofeat):
     seaborn.heatmap(df.pivot(index="from_table", columns="to_table", values="weight"), square=True)
     plt.xticks(fontsize="small", rotation=30) 
     plt.show()
+
    
     
 def get_best_weight(autofeat, table1: str, table2: str) -> Weight:

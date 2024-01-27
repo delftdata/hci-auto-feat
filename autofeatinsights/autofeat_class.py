@@ -127,8 +127,8 @@ class FeatureDiscovery:
         logging.info("Step 1: Finding relationships")
         relationship_functions.find_relationships(self, threshold)
 
-    def display_relationships(self):
-        relationship_functions.display_relationships(self)
+    def display_best_relationships(self):
+        relationship_functions.display_best_relationships(self)
     
     def compute_join_paths(self):
         tree_functions.compute_join_paths(self)
@@ -144,12 +144,12 @@ if __name__ == "__main__":
     autofeat = FeatureDiscovery()
     autofeat.set_base_table(base_table="credit/table_0_0.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["credit"])
-    autofeat.find_relationships(threshold=0.5)
+    autofeat.find_relationships(threshold=0.1)
     # autofeat.read_relationships()
-    autofeat.display_relationships()
-    autofeat.compute_join_paths()
-    autofeat.show_features(path_id=1, show_discarded_features=True)
-    autofeat.display_join_paths(top_k=2)
+    autofeat.display_best_relationships()
+    # autofeat.compute_join_paths()
+    # autofeat.show_features(path_id=1, show_discarded_features=True)
+    # autofeat.display_join_paths(top_k=2)
     # df = autofeat.materialise_join_path(path_id=1)
     # print(list(df.columns))
     # autofeat.evaluate_paths(top_k_paths=2)
