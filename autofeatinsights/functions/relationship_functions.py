@@ -8,6 +8,7 @@ import seaborn
 from valentine.algorithms import Coma
 from valentine import valentine_match
 import matplotlib.pyplot as plt
+from tabulate import tabulate
 
 
 def read_relationships(self):
@@ -118,6 +119,21 @@ def display_table_relationship(autofeat, table1: str, table2: str):
     seaborn.heatmap(df.pivot(index="from_column", columns="to_column", values="weight"), square=True)
     plt.xticks(fontsize="small", rotation=30) 
     plt.show()
+
+
+def explain_relationship(autofeat, table1: str, table2: str):
+    weights = [i for i in autofeat.weights if (i.from_table == table1 or i.from_table == table2) 
+               and (i.to_table == table1 or i.to_table == table2)]
+    rows = []
+    if len(weights) == 0:
+        print(f"There are no relationships between {table1} and {table2}.")
+        return
+    for i in weights:
+        rows.append([autofeat.weight_string_mapping[i.from_table], 
+                     autofeat.weight_string_mapping[i.to_table], i.weight])
+    print(f"Relationships between {table1} and {table2}:")
+    table = tabulate(rows, headers=["from_table", "to_table", "weight"])
+    print(table)
     
 
 def get_best_weight(autofeat, table1: str, table2: str) -> Weight:

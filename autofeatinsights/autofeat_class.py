@@ -132,7 +132,7 @@ class FeatureDiscovery:
     
     def display_table_relationship(self, table1: str, table2: str):
         relationship_functions.display_table_relationship(self, table1, table2)
-        
+
     def compute_join_paths(self):
         tree_functions.compute_join_paths(self)
 
@@ -142,6 +142,8 @@ class FeatureDiscovery:
     def display_join_paths(self, top_k: None):
         tree_functions.display_join_paths(self, top_k)
 
+    def explain_relationship(self, table1: str, table2: str):
+        relationship_functions.explain_relationship(self, table1, table2)
 
 
 if __name__ == "__main__":
@@ -150,8 +152,9 @@ if __name__ == "__main__":
     autofeat.set_dataset_repository(dataset_repository=["credit"])
     autofeat.find_relationships(threshold=0.1)
     # autofeat.read_relationships()
-    autofeat.display_best_relationships()
+    # autofeat.display_best_relationships()
     autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
+    autofeat.explain_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
     # autofeat.compute_join_paths()
     # autofeat.show_features(path_id=1, show_discarded_features=True)
     # autofeat.display_join_paths(top_k=2)
