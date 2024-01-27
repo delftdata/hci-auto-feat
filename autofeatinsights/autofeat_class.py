@@ -1,6 +1,9 @@
 import logging
 import glob
 import tempfile
+import functions.relationship_functions as relationship_functions
+import functions.tree_functions as tree_functions
+import functions.feature_functions as feature_functions
 from functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
 from typing import List, Set
 from functions.classes import Weight, Path, Result
@@ -114,15 +117,27 @@ class FeatureDiscovery:
     #     path_tokens = path.split("--")
     #     return len(path_tokens) - 1
 
-    def show_features(self, path_id: int, show_discarded_features: bool = False):
-        path = self.get_path_by_id(path_id)
-        path.show_table(show_discarded_features)
-
     def get_weights_from_table(self, table: str):
         return [i for i in self.weights if i.from_table == table]
     
     def get_weights_from_and_to_table(self, from_table, to_table):
         return [i for i in self.weights if i.from_table == from_table and i.to_table == to_table]
+
+    def find_relationships(self, threshold: float = 0.5):
+        logging.info("Step 1: Finding relationships")
+        relationship_functions.find_relationships(self, threshold)
+
+    def display_relationships(self):
+        relationship_functions.display_relationships(self)
+    
+    def compute_join_paths(self):
+        tree_functions.compute_join_paths(self)
+
+    def show_features(self, path_id: int, show_discarded_features: bool = False):
+        feature_functions.show_features(self, path_id, show_discarded_features)
+
+    def display_join_paths(self, top_k: None):
+        tree_functions.display_join_paths(self, top_k)
 
 
 if __name__ == "__main__":

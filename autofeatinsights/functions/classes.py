@@ -71,7 +71,7 @@ class Path:
                         rel_rel_dict[name]["data_quality"] = i.data_quality
         return rel_rel_dict
     
-    def showTable(self):
+    def show_table(self, discarded_features: bool = False):
         scores = self.get_rel_red()
         table_data = []
         for key, values in scores.items():

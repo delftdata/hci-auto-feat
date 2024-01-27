@@ -1,7 +1,7 @@
 autogluon
 deprecation == 2.1.0
 dsplot
-ITMO-FS == 0.3.3
+ITMO-FS
 graphviz
 joblib == 1.2.0
 matplotlib
@@ -12,6 +12,7 @@ numpy
 pandas
 polars
 pyvis
+qpsolvers
 scikit-learn
 seaborn == 0.11.2
 tqdm == 4.64.0
