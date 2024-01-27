@@ -33,7 +33,7 @@ def stream_feature_selection(autofeat, path: Path, queue: set, null_ratio_thresh
         autofeat.discovered.add(base_node_id)
         near_weights = get_adjacent_nodes(autofeat, {base_node_id}, 0.5)
         neighbours = [n.to_table for n in near_weights]
-        neighbours = list(set(neighbours).difference(autofeat.discovered))
+        neighbours = sorted((set(neighbours).difference(autofeat.discovered)))
         all_neighbours.update(neighbours)
         for n in neighbours:
             autofeat.discovered.add(n)
@@ -62,6 +62,7 @@ def stream_feature_selection(autofeat, path: Path, queue: set, null_ratio_thresh
                     join_list: [str] = previous_table_join + [prop.to_table]
                     filename = f"{autofeat.base_table.replace('/', '-')}_{str(uuid.uuid4())}.parquet"
                     if previous_join[prop.get_from_prefix()].dtype != right_df[prop.get_to_prefix()].dtype:
+                        current_queue.append(previous_table_join)
                         continue
                     joined_df = pd.merge(left=previous_join, right=right_df, left_on=(prop.get_from_prefix()),
                                          right_on=(prop.get_to_prefix()), how="left")
@@ -158,7 +159,9 @@ def streaming_relevance_redundancy(
 
 
 def inspect_join_path(self, path_id):
-    path = self.get_path_by_id(self, path_id)
+    path = get_path_by_id(self, path_id)
+    if path is None:
+        return
     print(path)
 
 
@@ -173,7 +176,10 @@ def materialise_join_path(self, path_id):
 
 
 def get_path_by_id(self, path_id) -> Path:
-    return [i for i in self.paths if i.id == path_id][0]
+    list = [i for i in self.paths if i.id == path_id]
+    if len(list) == 0:
+        return None
+    return list[0]
 
 
 def get_adjacent_nodes(self, nodes: list, threshold: float) -> [Weight]:

@@ -85,7 +85,7 @@ class Path:
         ret_string = "Begin: " + self.begin
         for i in self.joins:
             ret_string += "\n \t" + str(i)
-        ret_string += "\n \t rank: " + str(self.rank)
+        ret_string += "\n \t rank: " + ("%.2f" % self.rank)
         return ret_string
     
     def __repr__(self) -> str:
@@ -97,7 +97,7 @@ class Path:
         for i in self.path:
             ret_str += "\n \t from (table.column) " + i.get_from_prefix() \
                 + " to (table.column)" + i.get_to_prefix()
-        ret_str += "\n The rank of the path is " + str(self.rank) + "."
+        ret_str += "\n The rank of the path is " + ("%.2f" % self.rank) + "."
         return ret_str
     
 
@@ -153,9 +153,9 @@ class Result():
 
     def __str__(self) -> str:
         ret_string = "Result with model" + self.model \
-            + "\n \t rank:" + str(self.rank) \
+            + "\n \t rank:" + ("%.2f" % self.rank) \
             + " \n \t with path:" + str(self.path) \
-            + " \n \t Accuracy:" + str(self.accuracy) \
+            + " \n \t Accuracy:" + ("%.2f" % self.accuracy) \
             + " \n \t Feature importance:"
         for i in self.feature_importance[0]:
             ret_string += "\n \t \t " + str(i) + " : " \
