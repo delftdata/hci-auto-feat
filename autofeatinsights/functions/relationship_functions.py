@@ -5,7 +5,7 @@ from joblib import Parallel, delayed
 import itertools
 import tqdm
 import seaborn
-from valentine.algorithms import Coma
+from valentine.algorithms import Coma, JaccardDistanceMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
 from tabulate import tabulate
@@ -29,20 +29,23 @@ def read_relationships(self):
             self.weight_string_mapping[t] = t
 
 
-def find_relationships(autofeat, threshold: float = 0.5):
+def find_relationships(autofeat, threshold: float = 0.5, matcher: str = "coma"):
     manager = Manager()
     temp = manager.list()
 
     # This function calculates the COMA weights between 2 tables in the datasets.
-    def calculate_coma(table1: pd.DataFrame, table2: pd.DataFrame) -> dict:
-        matches = valentine_match(table1, table2, Coma())
+    def calculate_matches(table1: pd.DataFrame, table2: pd.DataFrame, matcher: str) -> dict:
+        if matcher == "jaccard":
+            matches = valentine_match(table1, table2, JaccardDistanceMatcher())
+        else:
+            matches = valentine_match(table1, table2, Coma())
         return matches
     
-    def profile(combination):
+    def profile(combination, matcher="coma"):
         (table1, table2) = combination
         df1 = pd.read_csv("data/benchmark/" + table1)
         df2 = pd.read_csv("data/benchmark/" + table2)
-        matches = calculate_coma(df1, df2)
+        matches = calculate_matches(df1, df2, matcher)
         for m in matches.items():
             ((_, col_from), (_, col_to)), similarity = m
             if similarity > threshold:
@@ -56,7 +59,7 @@ def find_relationships(autofeat, threshold: float = 0.5):
             autofeat.weight_string_mapping[t] = new_string
         else:
             autofeat.weight_string_mapping[t] = t
-    Parallel(n_jobs=-1)(delayed(profile)(combination) 
+    Parallel(n_jobs=-1)(delayed(profile)(combination, matcher)
                         for combination in tqdm.tqdm(itertools.combinations(tables, 2), 
                                                      total=len(tables) * (len(tables) - 1) / 2))
     autofeat.weights = temp

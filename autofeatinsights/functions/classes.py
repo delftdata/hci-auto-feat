@@ -40,6 +40,7 @@ class Join():
             + " to " + self.get_to_prefix() \
             + " with Null Ratio: " + str(self.null_ratio) + "." 
 
+
 class Path:
 
     def __init__(self, begin: str, joins: [Join] = None, rank: float = None):

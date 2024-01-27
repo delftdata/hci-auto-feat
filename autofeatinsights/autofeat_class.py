@@ -123,9 +123,9 @@ class FeatureDiscovery:
     def get_weights_from_and_to_table(self, from_table, to_table):
         return [i for i in self.weights if i.from_table == from_table and i.to_table == to_table]
 
-    def find_relationships(self, threshold: float = 0.5):
+    def find_relationships(self, matcher="coma", threshold: float = 0.5):
         logging.info("Step 1: Finding relationships")
-        relationship_functions.find_relationships(self, threshold)
+        relationship_functions.find_relationships(self, threshold, matcher)
 
     def display_best_relationships(self):
         relationship_functions.display_best_relationships(self)
@@ -157,7 +157,7 @@ if __name__ == "__main__":
     autofeat = FeatureDiscovery()
     autofeat.set_base_table(base_table="credit/table_0_0.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["credit"])
-    autofeat.find_relationships(threshold=0.8)
+    autofeat.find_relationships(threshold=0.8, matcher="jaccard")
     # autofeat.read_relationships()
     # autofeat.display_best_relationships()
     # autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
