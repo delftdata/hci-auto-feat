@@ -1,0 +1,19 @@
+autogluon
+deprecation == 2.1.0
+dsplot
+ITMO-FS == 0.3.3
+graphviz
+joblib == 1.2.0
+matplotlib
+neo4j == 4.4.0
+notebook == 6.4.5
+networkx
+numpy
+pandas
+polars
+pyvis
+scikit-learn
+seaborn == 0.11.2
+tqdm == 4.64.0
+typer == 0.9.0
+valentine

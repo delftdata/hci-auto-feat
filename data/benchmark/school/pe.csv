@@ -1,0 +1,1600 @@
+Borough,Admin District,Geographical District,Location Code,DBN,School Level ,Student Enrollment,Full Time Licensed PE Teachers,F Status PE Teachers*,Itinerant PE Teachers*,Sum of F Status and Itinerant*,Total Part Time and Full Time PE Teachers*,Shared PE teachers with another school*,Ratio of Full Time Licensed PE Teachers to Students*
+Manhattan,1,1,M015,01M015,Elementary                         ,146,1,0,0,0,1,0,1:146
+Manhattan,1,1,M019,01M019,Elementary                         ,237,1,0,0,0,1,0,1:237
+Manhattan,1,1,M020,01M020,Elementary                         ,459,1,0,0,0,1,0,1:459
+Manhattan,1,1,M034,01M034,K-8                                ,314,1,0,0,0,1,0,1:314
+Manhattan,1,1,M063,01M063,Elementary                         ,171,0,0,0,0,0,0,0
+Manhattan,1,1,M064,01M064,Elementary                         ,218,1,0,0,0,1,0,1:218
+Manhattan,1,1,M110,01M110,Elementary                         ,342,1,0,0,0,1,0,1:342
+Manhattan,1,1,M134,01M134,Elementary                         ,302,1,0,0,0,1,0,1:302
+Manhattan,1,1,M140,01M140,K-8                                ,342,1,0,0,0,1,0,1:342
+Manhattan,1,1,M142,01M142,Elementary                         ,308,1,0,0,0,1,0,1:308
+Manhattan,1,1,M184,01M184,K-8                                ,621,2,0,0,0,2,0,1:311
+Manhattan,1,1,M188,01M188,K-8                                ,374,1,0,0,0,1,0,1:374
+Manhattan,1,1,M292,01M292,High School                        ,132,2,0,0,0,2,0,1:66
+Manhattan,1,1,M301,01M301,Junior High-Intermediate-Middle    ,119,1,0,0,0,1,0,1:119
+Manhattan,1,1,M315,01M315,Elementary                         ,274,0,0,0,0,0,0,0
+Manhattan,1,1,M332,01M332,Junior High-Intermediate-Middle    ,224,1,0,0,0,1,0,1:224
+Manhattan,1,1,M361,01M361,Elementary                         ,249,0,0,0,0,0,0,0
+Manhattan,1,1,M363,01M363,Elementary                         ,280,1,0,0,0,1,0,1:280
+Manhattan,1,1,M364,01M364,Elementary                         ,287,0,0,0,0,0,0,0
+Manhattan,1,1,M378,01M378,Junior High-Intermediate-Middle    ,275,2,0,0,0,2,0,1:138
+Manhattan,1,1,M448,01M448,High School                        ,378,1,0,0,0,1,0,1:378
+Manhattan,1,1,M450,01M450,Secondary School                   ,677,0,0,0,0,0,0,0
+Manhattan,1,1,M458,01M458,High School                        ,104,1,0,0,0,1,0,1:104
+Manhattan,1,1,M509,01M509,High School                        ,178,1,0,0,0,1,0,1:178
+Manhattan,1,1,M515,01M515,High School                        ,419,1,0,0,0,1,0,1:419
+Manhattan,1,1,M539,01M539,K-12 All Grades                    ,1734,6,0,0,0,6,0,1:289
+Manhattan,1,1,M650,01M650,High School                        ,157,1,0,0,0,1,0,1:157
+Manhattan,1,1,M696,01M696,High School                        ,544,3,0,0,0,3,0,1:181
+Manhattan,1,1,M839,01M839,Junior High-Intermediate-Middle    ,367,1,0,0,0,1,0,1:367
+Manhattan,2,2,M001,02M001,Elementary                         ,301,1,0,0,0,1,0,1:301
+Manhattan,2,2,M002,02M002,Elementary                         ,547,0,0,0,0,0,0,0
+Manhattan,2,2,M003,02M003,Elementary                         ,712,0,0,0,0,0,0,0
+Manhattan,2,2,M006,02M006,Elementary                         ,634,1,0,0,0,1,0,1:634
+Manhattan,2,2,M011,02M011,Elementary                         ,884,2,0,0,0,2,0,1:442
+Manhattan,2,2,M033,02M033,Elementary                         ,571,1,0,0,0,1,0,1:571
+Manhattan,2,2,M040,02M040,Elementary                         ,609,0,0,0,0,0,0,0
+Manhattan,2,2,M041,02M041,Elementary                         ,650,0,0,0,0,0,0,0
+Manhattan,2,2,M042,02M042,Elementary                         ,595,0,0,0,0,0,0,0
+Manhattan,2,2,M047,02M047,High School                        ,173,2,0,0,0,2,0,1:87
+Manhattan,2,2,M051,02M051,Elementary                         ,313,0,1,0,1,1,0,0
+Manhattan,2,2,M059,02M059,Elementary                         ,554,0,0,0,0,0,0,0
+Manhattan,2,2,M077,02M077,Elementary                         ,358,0,0,0,0,0,0,0
+Manhattan,2,2,M089,02M089,Elementary                         ,366,0,0,1,1,1,1,0
+Manhattan,2,2,M104,02M104,Junior High-Intermediate-Middle    ,1127,3,1,0,1,4,0,1:376
+Manhattan,2,2,M111,02M111,Elementary                         ,269,1,0,0,0,1,0,1:269
+Manhattan,2,2,M114,02M114,Junior High-Intermediate-Middle    ,427,1,0,0,0,1,0,1:427
+Manhattan,2,2,M116,02M116,Elementary                         ,509,1,0,0,0,1,0,1:509
+Manhattan,2,2,M124,02M124,Elementary                         ,703,0,0,0,0,0,0,0
+Manhattan,2,2,M126,02M126,K-8                                ,729,1,0,0,0,1,0,1:729
+Manhattan,2,2,M130,02M130,Elementary                         ,916,0,0,0,0,0,0,0
+Manhattan,2,2,M131,02M131,Junior High-Intermediate-Middle    ,439,1,0,0,0,1,0,1:439
+Manhattan,2,2,M135,02M135,High School                        ,292,2,1,0,1,3,1,1:146
+Manhattan,2,2,M139,02M139,High School                        ,363,2,0,0,0,2,1,1:182
+Manhattan,2,2,M150,02M150,Elementary                         ,157,0,0,0,0,0,0,0
+Manhattan,2,2,M151,02M151,Elementary                         ,498,1,0,0,0,1,0,1:498
+Manhattan,2,2,M158,02M158,Elementary                         ,673,1,0,0,0,1,0,1:673
+Manhattan,2,2,M167,02M167,Junior High-Intermediate-Middle    ,1321,2,0,0,0,2,0,1:661
+Manhattan,2,2,M177,02M177,Junior High-Intermediate-Middle    ,204,1,0,0,0,1,0,1:204
+Manhattan,2,2,M183,02M183,Elementary                         ,521,0,0,0,0,0,0,0
+Manhattan,2,2,M198,02M198,Elementary                         ,395,1,0,0,0,1,0,1:395
+Manhattan,2,2,M212,02M212,Elementary                         ,336,1,0,0,0,1,0,1:336
+Manhattan,2,2,M217,02M217,K-8                                ,527,1,0,0,0,1,0,1:527
+Manhattan,2,2,M225,02M225,K-8                                ,268,0,0,0,0,0,0,0
+Manhattan,2,2,M234,02M234,Elementary                         ,665,0,0,0,0,0,0,0
+Manhattan,2,2,M255,02M255,Junior High-Intermediate-Middle    ,387,1,0,0,0,1,0,1:387
+Manhattan,2,2,M260,02M260,Secondary School                   ,483,2,0,0,0,2,0,1:242
+Manhattan,2,2,M267,02M267,Elementary                         ,372,1,0,0,0,1,0,1:372
+Manhattan,2,2,M276,02M276,K-8                                ,822,2,0,0,0,2,0,1:411
+Manhattan,2,2,M280,02M280,High School                        ,260,1,1,0,1,2,1,1:260
+Manhattan,2,2,M281,02M281,Elementary                         ,139,0,1,0,1,1,0,0
+Manhattan,2,2,M282,02M282,High School                        ,274,1,0,0,0,1,0,1:274
+Manhattan,2,2,M288,02M288,High School                        ,377,1,0,0,0,1,0,1:377
+Manhattan,2,2,M289,02M289,Junior High-Intermediate-Middle    ,278,0,0,1,1,1,1,0
+Manhattan,2,2,M290,02M290,Elementary                         ,585,0,0,0,0,0,0,0
+Manhattan,2,2,M294,02M294,High School                        ,320,1,0,0,0,1,0,1:320
+Manhattan,2,2,M296,02M296,High School                        ,365,2,0,0,0,2,0,1:183
+Manhattan,2,2,M298,02M298,High School                        ,485,2,0,0,0,2,0,1:243
+Manhattan,2,2,M300,02M300,High School                        ,355,1,0,0,0,1,0,1:355
+Manhattan,2,2,M303,02M303,High School                        ,389,1,0,0,0,1,0,1:389
+Manhattan,2,2,M305,02M305,High School                        ,287,2,0,0,0,2,0,1:144
+Manhattan,2,2,M308,02M308,High School                        ,325,1,0,0,0,1,0,1:325
+Manhattan,2,2,M312,02M312,Junior High-Intermediate-Middle    ,537,2,0,0,0,2,0,1:269
+Manhattan,2,2,M313,02M313,High School                        ,182,1,0,0,0,1,0,1:182
+Manhattan,2,2,M316,02M316,High School                        ,252,1,0,0,0,1,0,1:252
+Manhattan,2,2,M340,02M340,Elementary                         ,140,0,0,0,0,0,0,0
+Manhattan,2,2,M343,02M343,Elementary                         ,330,1,0,0,0,1,0,1:330
+Manhattan,2,2,M347,02M347,K-8                                ,130,0,0,0,0,0,0,0
+Manhattan,2,2,M374,02M374,High School                        ,511,2,0,0,0,2,0,1:256
+Manhattan,2,2,M376,02M376,High School                        ,437,1,0,0,0,1,0,1:437
+Manhattan,2,2,M392,02M392,High School                        ,403,2,0,0,0,2,0,1:202
+Manhattan,2,2,M393,02M393,High School                        ,421,2,0,0,0,2,1,1:211
+Manhattan,2,2,M394,02M394,High School                        ,257,2,0,0,0,2,0,1:129
+Manhattan,2,2,M397,02M397,K-8                                ,465,1,0,0,0,1,0,1:465
+Manhattan,2,2,M399,02M399,High School                        ,382,3,0,0,0,3,0,1:127
+Manhattan,2,2,M400,02M400,High School                        ,1144,6,0,0,0,6,0,1:191
+Manhattan,2,2,M407,02M407,Secondary School                   ,464,1,0,0,0,1,0,1:464
+Manhattan,2,2,M408,02M408,Secondary School                   ,534,0,0,0,0,0,0,0
+Manhattan,2,2,M411,02M411,High School                        ,439,1,0,0,0,1,0,1:439
+Manhattan,2,2,M412,02M412,High School                        ,526,1,0,0,0,1,0,1:526
+Manhattan,2,2,M413,02M413,Secondary School                   ,740,2,0,0,0,2,0,1:370
+Manhattan,2,2,M414,02M414,High School                        ,441,1,0,0,0,1,0,1:441
+Manhattan,2,2,M416,02M416,High School                        ,542,3,0,0,0,3,0,1:181
+Manhattan,2,2,M418,02M418,High School                        ,652,2,0,0,0,2,0,1:326
+Manhattan,2,2,M419,02M419,High School                        ,343,1,0,0,0,1,0,1:343
+Manhattan,2,2,M420,02M420,High School                        ,1709,5,0,0,0,5,0,1:342
+Manhattan,2,2,M422,02M422,Secondary School                   ,594,4,0,0,0,4,0,1:149
+Manhattan,2,2,M425,02M425,High School                        ,546,1,0,0,0,1,0,1:546
+Manhattan,2,2,M427,02M427,High School                        ,259,2,0,0,0,2,0,1:130
+Manhattan,2,2,M432,02M432,High School                        ,286,1,0,0,0,1,0,1:286
+Manhattan,2,2,M437,02M437,High School                        ,442,3,0,0,0,3,0,1:147
+Manhattan,2,2,M438,02M438,High School                        ,331,3,0,0,0,3,0,1:110
+Manhattan,2,2,M439,02M439,High School                        ,427,2,0,0,0,2,0,1:214
+Manhattan,2,2,M442,02M442,K-8                                ,147,0,0,0,0,0,0,0
+Manhattan,2,2,M449,02M449,High School                        ,422,0,0,0,0,0,0,0
+Manhattan,2,2,M459,02M459,High School                        ,309,1,0,0,0,1,0,1:309
+Manhattan,2,2,M475,02M475,High School                        ,3332,10,0,0,0,10,0,1:333
+Manhattan,2,2,M489,02M489,High School                        ,723,2,0,0,0,2,0,1:362
+Manhattan,2,2,M500,02M500,High School                        ,244,1,0,0,0,1,0,1:244
+Manhattan,2,2,M507,02M507,High School                        ,445,2,0,0,0,2,1,1:223
+Manhattan,2,2,M519,02M519,High School                        ,476,1,0,0,0,1,0,1:476
+Manhattan,2,2,M520,02M520,High School                        ,351,2,0,0,0,2,0,1:176
+Manhattan,2,2,M527,02M527,Elementary                         ,283,0,0,0,0,0,0,0
+Manhattan,2,2,M529,02M529,High School                        ,569,2,0,0,0,2,0,1:285
+Manhattan,2,2,M531,02M531,High School                        ,241,0,0,0,0,0,0,0
+Manhattan,2,2,M533,02M533,High School                        ,396,3,0,0,0,3,0,1:132
+Manhattan,2,2,M534,02M534,High School                        ,439,1,0,0,0,1,0,1:439
+Manhattan,2,2,M542,02M542,High School                        ,502,1,0,0,0,1,0,1:502
+Manhattan,2,2,M543,02M543,High School                        ,385,1,0,1,1,2,1,1:385
+Manhattan,2,2,M544,02M544,High School                        ,198,1,0,0,0,1,0,1:198
+Manhattan,2,2,M545,02M545,High School                        ,396,1,1,0,1,2,0,1:396
+Manhattan,2,2,M546,02M546,High School                        ,441,2,0,0,0,2,0,1:221
+Manhattan,2,2,M550,02M550,High School                        ,357,1,0,0,0,1,0,1:357
+Manhattan,2,2,M551,02M551,High School                        ,430,1,0,0,0,1,0,1:430
+Manhattan,2,2,M560,02M560,High School                        ,446,0,0,0,0,0,0,0
+Manhattan,2,2,M565,02M565,High School                        ,154,0,0,0,0,0,0,0
+Manhattan,2,2,M570,02M570,High School                        ,217,1,0,0,0,1,0,1:217
+Manhattan,2,2,M575,02M575,High School                        ,519,3,0,0,0,3,0,1:173
+Manhattan,2,2,M580,02M580,High School                        ,499,3,0,0,0,3,0,1:166
+Manhattan,2,2,M586,02M586,High School                        ,47,1,0,0,0,1,0,1:47
+Manhattan,2,2,M600,02M600,High School                        ,1617,5,0,0,0,5,0,1:323
+Manhattan,2,2,M605,02M605,High School                        ,190,0,0,0,0,0,0,0
+Manhattan,2,2,M615,02M615,High School                        ,405,1,0,0,0,1,0,1:405
+Manhattan,2,2,M630,02M630,High School                        ,1388,5,0,0,0,5,0,1:278
+Manhattan,2,2,M655,02M655,Secondary School                   ,565,3,0,0,0,3,0,1:188
+Manhattan,2,2,M896,02M896,Junior High-Intermediate-Middle    ,380,1,0,0,0,1,0,1:380
+Manhattan,2,2,M933,02M933,Junior High-Intermediate-Middle    ,227,1,0,0,0,1,0,1:227
+Manhattan,3,3,M009,03M009,Elementary                         ,568,0,0,0,0,0,0,0
+Manhattan,3,3,M054,03M054,Junior High-Intermediate-Middle    ,835,2,0,0,0,2,0,1:418
+Manhattan,3,3,M075,03M075,Elementary                         ,552,1,0,0,0,1,0,1:552
+Manhattan,3,3,M076,03M076,K-8                                ,440,1,0,0,0,1,0,1:440
+Manhattan,3,3,M084,03M084,Elementary                         ,508,1,0,0,0,1,0,1:508
+Manhattan,3,3,M087,03M087,Elementary                         ,831,1,0,0,0,1,0,1:831
+Manhattan,3,3,M145,03M145,Elementary                         ,290,1,0,0,0,1,0,1:290
+Manhattan,3,3,M149,03M149,K-8                                ,219,1,0,0,0,1,0,1:219
+Manhattan,3,3,M163,03M163,Elementary                         ,526,0,0,0,0,0,0,0
+Manhattan,3,3,M165,03M165,K-8                                ,632,2,0,0,0,2,0,1:316
+Manhattan,3,3,M166,03M166,Elementary                         ,611,1,0,0,0,1,0,1:611
+Manhattan,3,3,M180,03M180,K-8                                ,491,2,0,0,0,2,0,1:246
+Manhattan,3,3,M185,03M185,Early Childhood                    ,164,0,0,0,0,0,0,0
+Manhattan,3,3,M191,03M191,K-8                                ,333,1,0,0,0,1,0,1:333
+Manhattan,3,3,M199,03M199,Elementary                         ,867,0,0,0,0,0,0,0
+Manhattan,3,3,M208,03M208,Elementary                         ,119,0,0,0,0,0,0,0
+Manhattan,3,3,M241,03M241,Elementary                         ,119,0,0,0,0,0,0,0
+Manhattan,3,3,M242,03M242,Elementary                         ,160,1,0,0,0,1,0,1:160
+Manhattan,3,3,M243,03M243,Junior High-Intermediate-Middle    ,232,0,0,0,0,0,0,0
+Manhattan,3,3,M245,03M245,Junior High-Intermediate-Middle    ,394,0,0,0,0,0,0,0
+Manhattan,3,3,M247,03M247,Junior High-Intermediate-Middle    ,202,0,0,0,0,0,0,0
+Manhattan,3,3,M250,03M250,Junior High-Intermediate-Middle    ,183,0,0,0,0,0,0,0
+Manhattan,3,3,M256,03M256,Junior High-Intermediate-Middle    ,141,1,0,0,0,1,0,1:141
+Manhattan,3,3,M258,03M258,Junior High-Intermediate-Middle    ,211,1,0,0,0,1,0,1:211
+Manhattan,3,3,M291,03M291,Secondary School                   ,236,1,0,0,0,1,0,1:236
+Manhattan,3,3,M299,03M299,High School                        ,402,2,0,0,0,2,0,1:201
+Manhattan,3,3,M307,03M307,High School                        ,382,1,0,0,0,1,0,1:382
+Manhattan,3,3,M333,03M333,K-8                                ,743,1,0,0,0,1,0,1:743
+Manhattan,3,3,M334,03M334,K-8                                ,550,1,0,0,0,1,0,1:550
+Manhattan,3,3,M402,03M402,High School                        ,284,1,0,0,0,1,0,1:284
+Manhattan,3,3,M403,03M403,High School                        ,392,2,0,0,0,2,0,1:196
+Manhattan,3,3,M404,03M404,High School                        ,112,1,0,0,0,1,0,1:112
+Manhattan,3,3,M415,03M415,Secondary School                   ,278,2,0,0,0,2,0,1:139
+Manhattan,3,3,M417,03M417,High School                        ,389,2,0,0,0,2,0,1:195
+Manhattan,3,3,M421,03M421,Junior High-Intermediate-Middle    ,192,0,0,0,0,0,0,0
+Manhattan,3,3,M452,03M452,Elementary                         ,310,1,0,0,0,1,0,1:310
+Manhattan,3,2,M479,03M479,High School                        ,1277,2,0,0,0,2,0,1:639
+Manhattan,3,3,M485,03M485,High School                        ,2652,6,0,0,0,6,0,1:442
+Manhattan,3,3,M492,03M492,High School                        ,460,4,0,0,0,4,0,1:115
+Manhattan,3,3,M494,03M494,High School                        ,491,3,0,0,0,3,0,1:164
+Manhattan,3,3,M505,03M505,High School                        ,272,2,0,0,0,2,0,1:136
+Manhattan,3,3,M541,03M541,High School                        ,445,1,1,0,1,2,0,1:445
+Manhattan,3,3,M859,03M859,K-12 All Grades                    ,309,1,0,0,0,1,0,1:309
+Manhattan,3,3,M860,03M860,Secondary School                   ,345,1,0,0,0,1,0,1:345
+Manhattan,3,3,M862,03M862,Junior High-Intermediate-Middle    ,337,0,0,0,0,0,0,0
+Manhattan,4,4,M007,04M007,K-8                                ,333,1,0,0,0,1,0,1:333
+Manhattan,4,4,M012,04M012,K-8                                ,561,1,0,0,0,1,0,1:561
+Manhattan,4,4,M037,04M037,Elementary                         ,161,0,0,0,0,0,0,0
+Manhattan,4,4,M038,04M038,Elementary                         ,174,1,0,0,0,1,0,1:174
+Manhattan,4,4,M050,04M050,K-8                                ,219,1,0,0,0,1,0,1:219
+Manhattan,4,4,M057,04M057,K-8                                ,771,0,0,0,0,0,0,0
+Manhattan,4,4,M072,04M072,K-8                                ,611,1,0,0,0,1,0,1:611
+Manhattan,4,4,M083,04M083,Elementary                         ,424,0,0,0,0,0,0,0
+Manhattan,4,4,M096,04M096,K-8                                ,413,1,0,0,0,1,0,1:413
+Manhattan,4,4,M102,04M102,Elementary                         ,270,1,0,0,0,1,0,1:270
+Manhattan,4,4,M108,04M108,K-8                                ,471,2,0,0,0,2,0,1:236
+Manhattan,4,4,M112,04M112,Early Childhood                    ,292,0,0,0,0,0,0,0
+Manhattan,4,4,M146,04M146,Elementary                         ,313,1,0,0,0,1,0,1:313
+Manhattan,4,4,M155,04M155,Elementary                         ,274,1,0,0,0,1,0,1:274
+Manhattan,4,4,M171,04M171,K-8                                ,701,1,0,0,0,1,0,1:701
+Manhattan,4,4,M182,04M182,Elementary                         ,330,0,0,0,0,0,0,0
+Manhattan,4,4,M206,04M206,K-8                                ,465,1,0,0,0,1,0,1:465
+Manhattan,4,4,M224,04M224,Junior High-Intermediate-Middle    ,154,0,1,0,1,1,0,0
+Manhattan,4,4,M372,04M372,Secondary School                   ,557,2,0,0,0,2,0,1:279
+Manhattan,4,4,M375,04M375,Elementary                         ,262,1,0,0,0,1,0,1:262
+Manhattan,4,4,M377,04M377,Junior High-Intermediate-Middle    ,136,0,0,0,0,0,0,0
+Manhattan,4,4,M406,04M406,Junior High-Intermediate-Middle    ,128,1,0,0,0,1,0,1:128
+Manhattan,4,4,M409,04M409,High School                        ,145,1,0,0,0,1,0,1:145
+Manhattan,4,4,M435,04M435,High School                        ,1576,6,0,0,0,6,0,1:263
+Manhattan,4,4,M495,04M495,High School                        ,409,1,0,0,0,1,0,1:409
+Manhattan,4,4,M497,04M497,Elementary                         ,175,0,0,0,0,0,0,0
+Manhattan,4,4,M555,04M555,High School                        ,468,1,0,0,0,1,0,1:468
+Manhattan,4,4,M610,04M610,Secondary School                   ,480,1,0,0,0,1,0,1:480
+Manhattan,4,4,M680,04M680,High School                        ,286,1,0,0,0,1,0,1:286
+Manhattan,4,4,M825,04M825,Junior High-Intermediate-Middle    ,189,1,0,0,0,1,0,1:189
+Manhattan,4,4,M964,04M964,K-8                                ,362,1,0,0,0,1,0,1:362
+Manhattan,5,5,M030,05M030,Elementary                         ,234,2,0,0,0,2,0,1:117
+Manhattan,5,5,M036,05M036,Elementary                         ,335,0,0,0,0,0,0,0
+Manhattan,5,5,M046,05M046,K-8                                ,611,1,0,0,0,1,0,1:611
+Manhattan,5,5,M092,05M092,Elementary                         ,238,0,0,0,0,0,0,0
+Manhattan,5,5,M123,05M123,K-8                                ,426,1,0,0,0,1,0,1:426
+Manhattan,5,5,M125,05M125,Elementary                         ,198,1,0,0,0,1,0,1:198
+Manhattan,5,5,M129,05M129,K-8                                ,386,1,0,0,0,1,0,1:386
+Manhattan,5,5,M133,05M133,Elementary                         ,179,1,0,0,0,1,0,1:179
+Manhattan,5,5,M148,05M148,Secondary School                   ,260,1,0,0,0,1,1,1:260
+Manhattan,5,5,M154,05M154,Elementary                         ,259,1,0,0,0,1,0,1:259
+Manhattan,5,5,M157,05M157,High School                        ,226,1,0,0,0,1,0,1:226
+Manhattan,5,5,M161,05M161,K-8                                ,793,2,0,0,0,2,0,1:397
+Manhattan,5,5,M175,05M175,Elementary                         ,269,1,0,0,0,1,0,1:269
+Manhattan,5,5,M194,05M194,Elementary                         ,161,1,0,0,0,1,0,1:161
+Manhattan,5,5,M197,05M197,Elementary                         ,268,1,0,0,0,1,0,1:268
+Manhattan,5,5,M200,05M200,Elementary                         ,370,1,0,0,0,1,0,1:370
+Manhattan,5,5,M285,05M285,High School                        ,188,1,0,0,0,1,0,1:188
+Manhattan,5,5,M286,05M286,Junior High-Intermediate-Middle    ,220,1,0,0,0,1,0,1:220
+Manhattan,5,5,M302,05M302,Junior High-Intermediate-Middle    ,132,0,0,0,0,0,0,0
+Manhattan,5,5,M304,05M304,High School                        ,327,1,0,0,0,1,0,1:327
+Manhattan,5,5,M318,05M318,Elementary                         ,213,0,0,0,0,0,0,0
+Manhattan,5,5,M362,05M362,Secondary School                   ,679,1,0,0,0,1,0,1:679
+Manhattan,5,5,M367,05M367,High School                        ,104,1,0,0,0,1,0,1:104
+Manhattan,5,5,M369,05M369,High School                        ,311,0,0,0,0,0,0,0
+Manhattan,5,5,M499,05M499,Secondary School                   ,1321,4,0,0,0,4,0,1:330
+Manhattan,5,5,M514,05M514,Junior High-Intermediate-Middle    ,153,0,0,0,0,0,0,0
+Manhattan,5,5,M517,05M517,K-8                                ,244,1,0,0,0,1,0,1:244
+Manhattan,5,5,M670,05M670,Secondary School                   ,526,2,0,0,0,2,0,1:263
+Manhattan,5,5,M692,05M692,High School                        ,459,2,0,0,0,2,0,1:230
+Manhattan,6,6,M004,06M004,Elementary                         ,568,1,0,0,0,1,0,1:568
+Manhattan,6,6,M005,06M005,Elementary                         ,539,0,0,0,0,0,0,0
+Manhattan,6,6,M008,06M008,Elementary                         ,494,2,0,0,0,2,0,1:247
+Manhattan,6,6,M018,06M018,K-8                                ,344,1,0,0,0,1,0,1:344
+Manhattan,6,6,M028,06M028,Elementary                         ,620,0,0,0,0,0,0,0
+Manhattan,6,6,M048,06M048,Elementary                         ,529,0,0,0,0,0,0,0
+Manhattan,6,6,M052,06M052,Junior High-Intermediate-Middle    ,316,2,0,0,0,2,0,1:158
+Manhattan,6,6,M098,06M098,Elementary                         ,435,0,0,0,0,0,0,0
+Manhattan,6,6,M103,06M103,Elementary                         ,271,0,0,0,0,0,0,0
+Manhattan,6,6,M115,06M115,Elementary                         ,457,1,0,0,0,1,0,1:457
+Manhattan,6,6,M128,06M128,Elementary                         ,528,1,0,0,0,1,0,1:528
+Manhattan,6,6,M132,06M132,Elementary                         ,353,0,0,0,0,0,0,0
+Manhattan,6,6,M143,06M143,Junior High-Intermediate-Middle    ,298,1,0,0,0,1,0,1:298
+Manhattan,6,6,M152,06M152,Elementary                         ,524,0,0,0,0,0,0,0
+Manhattan,6,6,M153,06M153,Elementary                         ,584,0,0,0,0,0,0,0
+Manhattan,6,6,M173,06M173,Elementary                         ,471,1,0,0,0,1,0,1:471
+Manhattan,6,6,M178,06M178,Elementary                         ,272,1,0,0,0,1,0,1:272
+Manhattan,6,6,M187,06M187,K-8                                ,788,1,0,0,0,1,0,1:788
+Manhattan,6,6,M189,06M189,Elementary                         ,811,1,0,0,0,1,0,1:811
+Manhattan,6,6,M192,06M192,Elementary                         ,225,0,0,0,0,0,0,0
+Manhattan,6,6,M209,06M209,Junior High-Intermediate-Middle    ,243,1,0,0,0,1,0,1:243
+Manhattan,6,6,M210,06M210,K-8                                ,416,1,0,0,0,1,0,1:416
+Manhattan,6,6,M211,06M211,High School                        ,273,1,0,0,0,1,0,1:273
+Manhattan,6,6,M218,06M218,Junior High-Intermediate-Middle    ,183,2,0,0,0,2,0,1:92
+Manhattan,6,6,M223,06M223,Junior High-Intermediate-Middle    ,283,1,0,0,0,1,0,1:283
+Manhattan,6,6,M278,06M278,K-8                                ,545,1,0,0,0,1,0,1:545
+Manhattan,6,6,M293,06M293,Secondary School                   ,588,2,0,0,0,2,0,1:294
+Manhattan,6,6,M311,06M311,K-8                                ,418,2,0,0,0,2,0,1:209
+Manhattan,6,6,M314,06M314,Elementary                         ,278,0,0,0,0,0,0,0
+Manhattan,6,6,M319,06M319,Junior High-Intermediate-Middle    ,456,1,0,0,0,1,0,1:456
+Manhattan,6,6,M322,06M322,Junior High-Intermediate-Middle    ,309,2,0,0,0,2,0,1:155
+Manhattan,6,6,M324,06M324,Junior High-Intermediate-Middle    ,409,2,0,0,0,2,0,1:205
+Manhattan,06,06,M325,06M325,Elementary                         ,185,0,0,0,0,0,0,0
+Manhattan,6,6,M328,06M328,Junior High-Intermediate-Middle    ,224,1,0,0,0,1,0,1:224
+Manhattan,6,6,M346,06M346,Secondary School                   ,651,3,0,0,0,3,0,1:217
+Manhattan,6,6,M348,06M348,K-12 All Grades                    ,741,0,0,0,0,0,0,0
+Manhattan,6,6,M349,06M349,Junior High-Intermediate-Middle    ,143,0,0,0,0,0,0,0
+Manhattan,6,6,M366,06M366,K-8                                ,502,0,0,0,0,0,0,0
+Manhattan,6,6,M368,06M368,Elementary                         ,194,0,0,0,0,0,0,0
+Manhattan,6,6,M423,06M423,High School                        ,179,2,0,0,0,2,0,1:90
+Manhattan,6,6,M462,06M462,High School                        ,400,2,0,0,0,2,0,1:200
+Manhattan,6,6,M463,06M463,High School                        ,363,2,0,0,0,2,0,1:182
+Manhattan,6,6,M467,06M467,High School                        ,534,3,0,0,0,3,0,1:178
+Manhattan,6,6,M468,06M468,High School                        ,410,2,1,0,1,3,0,1:205
+Manhattan,6,6,M513,06M513,Elementary                         ,199,0,0,0,0,0,0,0
+Manhattan,6,6,M528,06M528,Junior High-Intermediate-Middle    ,193,0,0,0,0,0,0,0
+Manhattan,6,6,M540,06M540,High School                        ,1289,5,0,0,0,5,0,1:258
+Manhattan,6,6,M552,06M552,High School                        ,463,2,0,0,0,2,0,1:232
+Bronx,7,7,X001,07X001,Elementary                         ,556,1,0,0,0,1,0,1:556
+Bronx,7,7,X005,07X005,K-8                                ,652,1,0,0,0,1,0,1:652
+Bronx,7,7,X018,07X018,Elementary                         ,523,1,0,0,0,1,0,1:523
+Bronx,7,7,X025,07X025,Elementary                         ,441,0,0,0,0,0,0,0
+Bronx,7,7,X029,07X029,K-8                                ,696,1,0,0,0,1,0,1:696
+Bronx,7,7,X030,07X030,Elementary                         ,510,1,0,0,0,1,0,1:510
+Bronx,7,7,X031,07X031,K-8                                ,638,0,0,0,0,0,0,0
+Bronx,7,7,X043,07X043,Elementary                         ,415,1,0,0,0,1,0,1:415
+Bronx,7,7,X049,07X049,Elementary                         ,572,1,0,0,0,1,0,1:572
+Bronx,7,7,X065,07X065,Elementary                         ,358,1,0,0,0,1,0,1:358
+Bronx,7,7,X151,07X151,Junior High-Intermediate-Middle    ,228,1,0,0,0,1,0,1:228
+Bronx,7,7,X154,07X154,Elementary                         ,334,1,0,0,0,1,0,1:334
+Bronx,7,7,X157,07X157,Elementary                         ,573,1,0,0,0,1,0,1:573
+Bronx,7,7,X161,07X161,Elementary                         ,418,0,0,0,0,0,0,0
+Bronx,07,07,X162,07X162,Junior High-Intermediate-Middle    ,362,1,0,0,0,1,0,1:362
+Bronx,7,7,X179,07X179,Elementary                         ,305,0,0,0,0,0,0,0
+Bronx,7,7,X221,07X221,Secondary School                   ,637,2,0,0,0,2,0,1:319
+Bronx,7,7,X223,07X223,Secondary School                   ,682,1,0,0,0,1,0,1:682
+Bronx,7,7,X224,07X224,Junior High-Intermediate-Middle    ,375,0,0,1,1,1,1,0
+Bronx,7,7,X259,07X259,High School                        ,427,1,0,0,0,1,0,1:427
+Bronx,7,7,X277,07X277,Elementary                         ,384,1,0,0,0,1,0,1:384
+Bronx,7,7,X296,07X296,Junior High-Intermediate-Middle    ,273,1,0,0,0,1,0,1:273
+Bronx,7,7,X298,07X298,Junior High-Intermediate-Middle    ,246,1,0,0,0,1,0,1:246
+Bronx,7,7,X334,07X334,High School                        ,395,1,0,0,0,1,0,1:395
+Bronx,7,7,X343,07X343,Junior High-Intermediate-Middle    ,296,0,0,1,1,1,1,0
+Bronx,7,7,X359,07X359,Elementary                         ,299,1,0,0,0,1,0,1:299
+Bronx,7,7,X369,07X369,Elementary                         ,200,0,0,0,0,0,0,0
+Bronx,7,7,X379,07X379,High School                        ,142,1,0,0,0,1,0,1:142
+Bronx,7,7,X381,07X381,High School                        ,145,1,0,0,0,1,0,1:145
+Bronx,7,7,X427,07X427,High School                        ,268,1,0,0,0,1,0,1:268
+Bronx,7,7,X473,07X473,High School                        ,356,2,0,0,0,2,0,1:178
+Bronx,7,7,X495,07X495,High School                        ,461,1,0,0,0,1,0,1:461
+Bronx,7,7,X500,07X500,Secondary School                   ,518,1,0,0,0,1,0,1:518
+Bronx,7,7,X522,07X522,High School                        ,520,2,0,0,0,2,0,1:260
+Bronx,7,7,X527,07X527,High School                        ,468,2,0,0,0,2,0,1:234
+Bronx,7,7,X547,07X547,High School                        ,343,2,0,0,0,2,0,1:172
+Bronx,7,7,X548,07X548,High School                        ,497,3,0,0,0,3,0,1:166
+Bronx,7,7,X551,07X551,Secondary School                   ,559,3,0,0,0,3,0,1:186
+Bronx,7,7,X557,07X557,High School                        ,170,2,0,0,0,2,0,1:85
+Bronx,7,7,X600,07X600,High School                        ,422,2,0,0,0,2,0,1:211
+Bronx,7,7,X670,07X670,High School                        ,402,3,0,0,0,3,0,1:134
+Bronx,8,8,X014,08X014,Elementary                         ,554,1,0,0,0,1,0,1:554
+Bronx,8,8,X036,08X036,Elementary                         ,662,1,0,0,0,1,0,1:662
+Bronx,8,8,X048,08X048,Elementary                         ,676,1,0,0,0,1,0,1:676
+Bronx,8,8,X062,08X062,Elementary                         ,598,1,0,0,0,1,0,1:598
+Bronx,8,8,X069,08X069,Elementary                         ,515,1,0,0,0,1,0,1:515
+Bronx,8,8,X071,08X071,K-8                                ,1646,5,0,0,0,5,0,1:329
+Bronx,8,8,X072,08X072,Elementary                         ,743,0,0,0,0,0,0,0
+Bronx,8,8,X075,08X075,Elementary                         ,549,1,0,0,0,1,0,1:549
+Bronx,8,8,X093,08X093,Elementary                         ,273,1,0,0,0,1,0,1:273
+Bronx,8,8,X100,08X100,Elementary                         ,525,0,0,0,0,0,0,0
+Bronx,8,8,X101,08X101,Junior High-Intermediate-Middle    ,491,2,0,0,0,2,0,1:246
+Bronx,8,8,X107,08X107,Elementary                         ,498,0,0,0,0,0,0,0
+Bronx,8,8,X119,08X119,Elementary                         ,877,0,0,0,0,0,0,0
+Bronx,8,8,X123,08X123,Junior High-Intermediate-Middle    ,310,1,0,0,0,1,0,1:310
+Bronx,8,8,X125,08X125,Junior High-Intermediate-Middle    ,348,1,0,0,0,1,0,1:348
+Bronx,8,8,X130,08X130,Elementary                         ,452,1,0,0,0,1,0,1:452
+Bronx,8,8,X131,08X131,Junior High-Intermediate-Middle    ,448,2,0,0,0,2,0,1:224
+Bronx,8,8,X138,08X138,Elementary                         ,640,1,0,0,0,1,0,1:640
+Bronx,8,8,X140,08X140,Elementary                         ,583,0,0,0,0,0,0,0
+Bronx,8,8,X146,08X146,Elementary                         ,353,0,0,0,0,0,0,0
+Bronx,8,8,X152,08X152,Elementary                         ,800,0,0,0,0,0,0,0
+Bronx,8,8,X182,08X182,Elementary                         ,861,0,0,0,0,0,0,0
+Bronx,8,8,X269,08X269,Secondary School                   ,606,2,0,0,0,2,0,1:303
+Bronx,8,8,X282,08X282,High School                        ,275,2,0,0,0,2,0,1:138
+Bronx,8,8,X293,08X293,High School                        ,413,1,0,0,0,1,0,1:413
+Bronx,8,8,X301,08X301,Junior High-Intermediate-Middle    ,215,1,0,0,0,1,0,1:215
+Bronx,8,8,X302,08X302,Junior High-Intermediate-Middle    ,476,1,0,0,0,1,0,1:476
+Bronx,8,8,X304,08X304,Elementary                         ,450,1,0,0,0,1,0,1:450
+Bronx,08,08,X305,08X305,High School                        ,271,1,0,0,0,1,0,1:271
+Bronx,8,8,X312,08X312,High School                        ,403,2,0,0,0,2,0,1:202
+Bronx,8,8,X320,08X320,High School                        ,418,4,0,0,0,4,0,1:105
+Bronx,8,8,X332,08X332,High School                        ,137,1,0,0,0,1,0,1:137
+Bronx,8,8,X333,08X333,Elementary                         ,368,0,0,0,0,0,0,0
+Bronx,08,08,X335,08X335,Elementary                         ,242,1,0,0,0,1,0,1:242
+Bronx,8,8,X337,08X337,Junior High-Intermediate-Middle    ,530,2,0,0,0,2,0,1:265
+Bronx,8,8,X348,08X348,High School                        ,338,1,0,0,0,1,0,1:338
+Bronx,8,8,X349,08X349,High School                        ,378,1,0,0,0,1,0,1:378
+Bronx,8,8,X367,08X367,Secondary School                   ,643,2,0,0,0,2,0,1:322
+Bronx,8,8,X371,08X371,Junior High-Intermediate-Middle    ,329,0,0,1,1,1,1,0
+Bronx,8,8,X375,08X375,Junior High-Intermediate-Middle    ,214,2,0,0,0,2,0,1:107
+Bronx,8,8,X376,08X376,Secondary School                   ,386,1,0,0,0,1,0,1:386
+Bronx,8,8,X377,08X377,High School                        ,123,1,0,0,0,1,0,1:123
+Bronx,8,8,X392,08X392,Elementary                         ,169,1,0,0,0,1,1,1:169
+Bronx,8,8,X405,08X405,High School                        ,716,5,0,0,0,5,0,1:143
+Bronx,8,8,X424,08X424,Junior High-Intermediate-Middle    ,275,2,0,0,0,2,0,1:138
+Bronx,8,8,X432,08X432,High School                        ,290,1,0,0,0,1,0,1:290
+Bronx,8,8,X448,08X448,Junior High-Intermediate-Middle    ,368,1,0,0,0,1,0,1:368
+Bronx,8,8,X452,08X452,High School                        ,264,1,0,0,0,1,0,1:264
+Bronx,8,8,X467,08X467,Junior High-Intermediate-Middle    ,306,0,0,1,1,1,1,0
+Bronx,8,8,X519,08X519,High School                        ,188,1,0,0,0,1,0,1:188
+Bronx,8,8,X530,08X530,High School                        ,139,1,0,0,0,1,0,1:139
+Bronx,8,8,X537,08X537,High School                        ,163,1,0,0,0,1,0,1:163
+Bronx,8,8,X558,08X558,High School                        ,554,3,0,0,0,3,0,1:185
+Bronx,8,8,X559,08X559,High School                        ,251,1,0,0,0,1,0,1:251
+Bronx,8,8,X561,08X561,High School                        ,420,2,0,0,0,2,0,1:210
+Bronx,8,8,X562,08X562,Junior High-Intermediate-Middle    ,320,2,0,0,0,2,0,1:160
+Bronx,9,9,X004,09X004,K-8                                ,472,2,0,0,0,2,0,1:236
+Bronx,9,9,X011,09X011,Elementary                         ,615,1,0,0,0,1,0,1:615
+Bronx,9,9,X022,09X022,Junior High-Intermediate-Middle    ,401,2,0,0,0,2,0,1:201
+Bronx,9,9,X028,09X028,Elementary                         ,670,0,0,0,0,0,0,0
+Bronx,9,9,X035,09X035,Elementary                         ,641,0,0,0,0,0,0,0
+Bronx,9,9,X042,09X042,Elementary                         ,381,1,0,0,0,1,0,1:381
+Bronx,9,9,X053,09X053,Elementary                         ,1018,2,0,0,0,2,0,1:509
+Bronx,9,9,X055,09X055,Elementary                         ,586,2,0,0,0,2,0,1:293
+Bronx,9,9,X058,09X058,Elementary                         ,424,0,0,0,0,0,0,0
+Bronx,9,9,X063,09X063,Elementary                         ,536,0,0,0,0,0,0,0
+Bronx,9,9,X070,09X070,Elementary                         ,1208,3,0,0,0,3,0,1:403
+Bronx,9,9,X073,09X073,Elementary                         ,652,1,0,0,0,1,0,1:652
+Bronx,9,9,X088,09X088,Early Childhood                    ,155,1,0,0,0,1,0,1:155
+Bronx,9,9,X109,09X109,Elementary                         ,628,1,0,0,0,1,0,1:628
+Bronx,9,9,X110,09X110,Elementary                         ,401,0,0,0,0,0,0,0
+Bronx,9,9,X114,09X114,Elementary                         ,736,2,0,0,0,2,0,1:368
+Bronx,9,9,X117,09X117,Junior High-Intermediate-Middle    ,539,1,0,0,0,1,0,1:539
+Bronx,9,9,X126,09X126,Elementary                         ,528,1,0,0,0,1,0,1:528
+Bronx,9,9,X128,09X128,Junior High-Intermediate-Middle    ,360,1,0,0,0,1,0,1:360
+Bronx,9,9,X132,09X132,Elementary                         ,364,1,0,0,0,1,0,1:364
+Bronx,09,09,X145,09X145,Junior High-Intermediate-Middle    ,265,1,0,0,0,1,0,1:265
+Bronx,9,9,X163,09X163,Elementary                         ,477,1,0,0,0,1,0,1:477
+Bronx,9,9,X170,09X170,Early Childhood                    ,259,0,0,0,0,0,0,0
+Bronx,9,9,X199,09X199,Elementary                         ,713,2,0,0,0,2,0,1:357
+Bronx,9,9,X204,09X204,Elementary                         ,559,1,0,0,0,1,0,1:559
+Bronx,9,9,X215,09X215,Junior High-Intermediate-Middle    ,247,1,0,0,0,1,0,1:247
+Bronx,9,9,X218,09X218,K-8                                ,977,3,0,0,0,3,0,1:326
+Bronx,9,9,X219,09X219,Junior High-Intermediate-Middle    ,292,0,0,0,0,0,0,0
+Bronx,9,9,X227,09X227,High School                        ,369,2,0,0,0,2,0,1:185
+Bronx,9,9,X229,09X229,Junior High-Intermediate-Middle    ,222,1,0,0,0,1,0,1:222
+Bronx,9,9,X231,09X231,Secondary School                   ,481,3,0,0,0,3,0,1:160
+Bronx,9,9,X232,09X232,Junior High-Intermediate-Middle    ,451,2,0,0,0,2,0,1:226
+Bronx,9,9,X236,09X236,Elementary                         ,287,1,0,0,0,1,0,1:287
+Bronx,9,9,X241,09X241,Secondary School                   ,619,2,0,0,0,2,0,1:310
+Bronx,9,9,X250,09X250,High School                        ,403,2,0,0,0,2,0,1:202
+Bronx,9,9,X252,09X252,High School                        ,356,1,0,0,0,1,0,1:356
+Bronx,9,9,X260,09X260,High School                        ,433,1,0,0,0,1,0,1:433
+Bronx,9,9,X263,09X263,High School                        ,354,2,0,0,0,2,0,1:177
+Bronx,9,9,X274,09X274,Elementary                         ,696,1,0,0,0,1,0,1:696
+Bronx,09,09,X276,09X276,High School                        ,133,1,0,0,0,1,0,1:133
+Bronx,9,9,X294,09X294,Elementary                         ,474,1,0,0,0,1,0,1:474
+Bronx,9,9,X297,09X297,High School                        ,334,1,0,0,0,1,0,1:334
+Bronx,9,9,X303,09X303,Junior High-Intermediate-Middle    ,306,2,0,0,0,2,0,1:153
+Bronx,9,9,X311,09X311,Elementary                         ,387,1,0,0,0,1,0,1:387
+Bronx,9,9,X313,09X313,Junior High-Intermediate-Middle    ,284,1,0,0,0,1,0,1:284
+Bronx,9,9,X323,09X323,Junior High-Intermediate-Middle    ,426,1,0,0,0,1,0,1:426
+Bronx,9,9,X324,09X324,Secondary School                   ,516,2,0,0,0,2,0,1:258
+Bronx,9,9,X325,09X325,Junior High-Intermediate-Middle    ,239,1,0,0,0,1,0,1:239
+Bronx,9,9,X327,09X327,Secondary School                   ,695,2,0,1,1,3,1,1:348
+Bronx,9,9,X328,09X328,Junior High-Intermediate-Middle    ,185,1,0,0,0,1,0,1:185
+Bronx,9,9,X329,09X329,High School                        ,257,1,0,0,0,1,0,1:257
+Bronx,9,9,X339,09X339,Junior High-Intermediate-Middle    ,454,2,0,0,0,2,0,1:227
+Bronx,9,9,X350,09X350,Secondary School                   ,215,1,0,0,0,1,0,1:215
+Bronx,9,9,X361,09X361,Junior High-Intermediate-Middle    ,384,2,0,0,0,2,0,1:192
+Bronx,9,9,X365,09X365,High School                        ,298,2,0,0,0,2,0,1:149
+Bronx,9,9,X403,09X403,High School                        ,379,2,0,0,0,2,0,1:190
+Bronx,9,9,X404,09X404,High School                        ,345,1,0,0,0,1,0,1:345
+Bronx,9,9,X412,09X412,High School                        ,245,2,0,0,0,2,0,1:123
+Bronx,9,9,X413,09X413,Secondary School                   ,399,3,0,0,0,3,0,1:133
+Bronx,9,9,X443,09X443,Elementary                         ,451,1,0,0,0,1,0,1:451
+Bronx,9,9,X449,09X449,Elementary                         ,406,1,0,0,0,1,0,1:406
+Bronx,9,9,X454,09X454,Junior High-Intermediate-Middle    ,411,2,0,0,0,2,0,1:206
+Bronx,9,9,X457,09X457,Elementary                         ,534,2,0,0,0,2,0,1:267
+Bronx,9,9,X505,09X505,Secondary School                   ,735,3,0,0,0,3,0,1:245
+Bronx,9,9,X517,09X517,High School                        ,365,0,0,0,0,0,0,0
+Bronx,9,9,X525,09X525,High School                        ,549,4,0,0,0,4,0,1:137
+Bronx,9,9,X543,09X543,High School                        ,249,1,0,0,0,1,0,1:249
+Bronx,9,9,X555,09X555,Elementary                         ,374,0,0,1,1,1,1,0
+Bronx,9,9,X564,09X564,High School                        ,351,3,0,0,0,3,0,1:117
+Bronx,9,9,X568,09X568,Secondary School                   ,374,2,0,0,0,2,0,1:187
+Bronx,10,10,X003,10X003,K-8                                ,293,1,0,0,0,1,0,1:293
+Bronx,10,10,X007,10X007,Elementary                         ,738,1,0,0,0,1,0,1:738
+Bronx,10,10,X008,10X008,Elementary                         ,1025,1,0,0,0,1,0,1:1025
+Bronx,10,10,X009,10X009,Elementary                         ,728,0,0,0,0,0,0,0
+Bronx,10,10,X015,10X015,K-8                                ,488,1,0,0,0,1,0,1:488
+Bronx,10,10,X020,10X020,K-8                                ,1012,3,0,0,0,3,0,1:337
+Bronx,10,10,X023,10X023,Elementary                         ,431,1,0,0,0,1,0,1:431
+Bronx,10,10,X024,10X024,Elementary                         ,937,2,0,0,0,2,0,1:469
+Bronx,10,10,X032,10X032,Elementary                         ,737,1,0,0,0,1,0,1:737
+Bronx,10,10,X033,10X033,Elementary                         ,853,3,0,0,0,3,0,1:284
+Bronx,10,10,X037,10X037,K-8                                ,591,0,0,0,0,0,0,0
+Bronx,10,10,X045,10X045,Junior High-Intermediate-Middle    ,679,2,0,0,0,2,0,1:340
+Bronx,10,10,X046,10X046,Elementary                         ,964,0,0,0,0,0,0,0
+Bronx,10,10,X051,10X051,Elementary                         ,205,0,0,0,0,0,0,0
+Bronx,10,10,X054,10X054,Elementary                         ,406,0,0,0,0,0,0,0
+Bronx,10,10,X056,10X056,Elementary                         ,646,0,0,0,0,0,0,0
+Bronx,10,10,X059,10X059,Elementary                         ,506,1,0,0,0,1,0,1:506
+Bronx,10,10,X077,10X077,Elementary                         ,248,1,0,0,0,1,0,1:248
+Bronx,10,10,X080,10X080,Junior High-Intermediate-Middle    ,612,2,0,0,0,2,0,1:306
+Bronx,10,10,X081,10X081,Elementary                         ,712,0,0,0,0,0,0,0
+Bronx,10,10,X085,10X085,Elementary                         ,859,1,0,0,0,1,0,1:859
+Bronx,10,10,X086,10X086,Elementary                         ,1597,2,0,0,0,2,0,1:799
+Bronx,10,10,X091,10X091,Elementary                         ,717,1,0,0,0,1,0,1:717
+Bronx,10,10,X094,10X094,Elementary                         ,1196,1,0,0,0,1,0,1:1196
+Bronx,10,10,X095,10X095,K-8                                ,1273,2,0,0,0,2,0,1:637
+Bronx,10,10,X118,10X118,Junior High-Intermediate-Middle    ,1108,3,0,0,0,3,0,1:369
+Bronx,10,10,X141,10X141,Secondary School                   ,1418,4,0,0,0,4,0,1:355
+Bronx,10,10,X159,10X159,Elementary                         ,186,0,0,0,0,0,0,0
+Bronx,10,10,X205,10X205,Elementary                         ,975,0,0,0,0,0,0,0
+Bronx,10,10,X206,10X206,Junior High-Intermediate-Middle    ,181,1,0,0,0,1,0,1:181
+Bronx,10,10,X207,10X207,Early Childhood                    ,297,1,0,0,0,1,0,1:297
+Bronx,10,10,X209,10X209,Early Childhood                    ,234,1,0,0,0,1,0,1:234
+Bronx,10,10,X213,10X213,High School                        ,359,2,0,0,0,2,0,1:180
+Bronx,10,10,X225,10X225,Secondary School                   ,583,3,0,0,0,3,0,1:194
+Bronx,10,10,X226,10X226,Elementary                         ,419,0,0,0,0,0,0,0
+Bronx,10,10,X228,10X228,Junior High-Intermediate-Middle    ,266,1,0,0,0,1,0,1:266
+Bronx,10,10,X237,10X237,High School                        ,483,2,0,0,0,2,0,1:242
+Bronx,10,10,X243,10X243,Secondary School                   ,563,3,0,0,0,3,1,1:188
+Bronx,10,10,X244,10X244,Junior High-Intermediate-Middle    ,693,4,0,0,0,4,0,1:173
+Bronx,10,10,X246,10X246,Elementary                         ,710,1,0,0,0,1,0,1:710
+Bronx,10,10,X254,10X254,Junior High-Intermediate-Middle    ,454,2,0,0,0,2,0,1:227
+Bronx,10,10,X264,10X264,High School                        ,418,2,0,0,0,2,0,1:209
+Bronx,10,10,X268,10X268,High School                        ,406,1,0,0,0,1,0,1:406
+Bronx,10,10,X279,10X279,K-8                                ,1062,4,0,0,0,4,0,1:266
+Bronx,10,10,X280,10X280,K-8                                ,863,0,0,0,0,0,0,0
+Bronx,10,10,X284,10X284,High School                        ,347,1,0,0,0,1,0,1:347
+Bronx,10,10,X291,10X291,Elementary                         ,635,0,0,0,0,0,0,0
+Bronx,10,10,X306,10X306,Elementary                         ,679,1,0,0,0,1,0,1:679
+Bronx,10,10,X307,10X307,Elementary                         ,381,0,0,0,0,0,0,0
+Bronx,10,10,X308,10X308,Junior High-Intermediate-Middle    ,268,1,0,0,0,1,0,1:268
+Bronx,10,10,X310,10X310,Elementary                         ,690,1,0,0,0,1,0,1:690
+Bronx,10,10,X315,10X315,K-8                                ,269,1,0,0,0,1,0,1:269
+Bronx,10,10,X319,10X319,High School                        ,155,0,2,0,2,2,0,0
+Bronx,10,10,X331,10X331,Junior High-Intermediate-Middle    ,384,1,0,0,0,1,0,1:384
+Bronx,10,10,X340,10X340,Elementary                         ,606,1,0,0,0,1,0,1:606
+Bronx,10,10,X342,10X342,Secondary School                   ,487,4,0,0,0,4,0,1:122
+Bronx,10,10,X344,10X344,Elementary                         ,389,1,0,0,0,1,0,1:389
+Bronx,10,10,X351,10X351,High School                        ,432,2,0,0,0,2,0,1:216
+Bronx,10,10,X353,10X353,High School                        ,426,1,0,0,0,1,0,1:426
+Bronx,10,10,X360,10X360,Elementary                         ,425,0,0,0,0,0,0,0
+Bronx,10,10,X363,10X363,Junior High-Intermediate-Middle    ,478,4,0,0,0,4,0,1:120
+Bronx,10,10,X368,10X368,Secondary School                   ,923,4,0,0,0,4,0,1:231
+Bronx,10,10,X374,10X374,High School                        ,443,3,0,0,0,3,1,1:148
+Bronx,10,10,X382,10X382,Elementary                         ,276,0,0,0,0,0,0,0
+Bronx,10,10,X386,10X386,Elementary                         ,517,2,0,0,0,2,0,1:259
+Bronx,10,10,X390,10X390,Junior High-Intermediate-Middle    ,491,1,0,0,0,1,0,1:491
+Bronx,10,10,X391,10X391,Junior High-Intermediate-Middle    ,488,3,0,0,0,3,0,1:163
+Bronx,10,10,X396,10X396,Elementary                         ,296,2,0,0,0,2,0,1:148
+Bronx,10,10,X397,10X397,High School                        ,317,0,0,0,0,0,0,0
+Bronx,10,10,X433,10X433,High School                        ,423,2,0,0,0,2,0,1:212
+Bronx,10,10,X434,10X434,High School                        ,399,2,0,0,0,2,1,1:200
+Bronx,10,10,X437,10X437,High School                        ,357,1,0,0,0,1,1,1:357
+Bronx,10,10,X438,10X438,High School                        ,306,1,0,0,0,1,1,1:306
+Bronx,10,10,X439,10X439,High School                        ,318,2,0,0,0,2,1,1:159
+Bronx,10,10,X440,10X440,High School                        ,1245,8,0,0,0,8,0,1:156
+Bronx,10,10,X442,10X442,High School                        ,409,2,0,0,0,2,0,1:205
+Bronx,10,10,X445,10X445,High School                        ,2971,10,0,0,0,10,0,1:297
+Bronx,10,10,X447,10X447,Junior High-Intermediate-Middle    ,459,0,0,0,0,0,0,0
+Bronx,10,10,X459,10X459,Junior High-Intermediate-Middle    ,248,1,0,0,0,1,0,1:248
+Bronx,10,10,X477,10X477,High School                        ,414,0,0,0,0,0,0,0
+Bronx,10,10,X524,10X524,High School                        ,293,2,0,0,0,2,0,1:147
+Bronx,10,10,X546,10X546,High School                        ,351,1,0,0,0,1,0,1:351
+Bronx,10,10,X549,10X549,High School                        ,422,2,0,0,0,2,0,1:211
+Bronx,10,10,X565,10X565,High School                        ,372,3,0,0,0,3,0,1:124
+Bronx,10,10,X696,10X696,High School                        ,375,2,0,0,0,2,0,1:188
+Bronx,11,11,X016,11X016,Elementary                         ,339,0,0,0,0,0,0,0
+Bronx,11,11,X019,11X019,K-8                                ,502,1,0,0,0,1,0,1:502
+Bronx,11,11,X021,11X021,Elementary                         ,633,1,0,0,0,1,0,1:633
+Bronx,11,11,X041,11X041,Elementary                         ,883,0,0,0,0,0,0,0
+Bronx,11,11,X068,11X068,Elementary                         ,665,1,0,0,0,1,0,1:665
+Bronx,11,11,X076,11X076,Elementary                         ,935,0,0,0,0,0,1,0
+Bronx,11,11,X078,11X078,Elementary                         ,724,0,0,0,0,0,0,0
+Bronx,11,11,X083,11X083,K-8                                ,1676,3,0,0,0,3,0,1:559
+Bronx,11,11,X087,11X087,Elementary                         ,583,0,0,0,0,0,0,0
+Bronx,11,11,X089,11X089,K-8                                ,1380,2,0,0,0,2,0,1:690
+Bronx,11,11,X096,11X096,Elementary                         ,929,1,0,0,0,1,0,1:929
+Bronx,11,11,X097,11X097,Elementary                         ,671,0,0,0,0,0,0,0
+Bronx,11,11,X103,11X103,Elementary                         ,1110,3,0,0,0,3,0,1:370
+Bronx,11,11,X105,11X105,Elementary                         ,1150,1,0,0,0,1,0,1:1150
+Bronx,11,11,X106,11X106,Elementary                         ,1001,1,0,0,0,1,0,1:1001
+Bronx,11,11,X108,11X108,Elementary                         ,561,1,0,0,0,1,0,1:561
+Bronx,11,11,X111,11X111,Elementary                         ,590,1,0,0,0,1,0,1:590
+Bronx,11,11,X112,11X112,Elementary                         ,319,1,0,0,0,1,0,1:319
+Bronx,11,11,X121,11X121,Elementary                         ,869,0,0,0,0,0,0,0
+Bronx,11,11,X127,11X127,Junior High-Intermediate-Middle    ,752,2,0,0,0,2,0,1:376
+Bronx,11,11,X144,11X144,Junior High-Intermediate-Middle    ,467,1,0,0,0,1,0,1:467
+Bronx,11,11,X153,11X153,Elementary                         ,659,1,0,0,0,1,0,1:659
+Bronx,11,11,X160,11X160,Elementary                         ,354,1,0,0,0,1,0,1:354
+Bronx,11,11,X169,11X169,Elementary                         ,360,0,0,0,0,0,0,0
+Bronx,11,11,X175,11X175,K-8                                ,328,0,0,0,0,0,0,0
+Bronx,11,11,X178,11X178,Elementary                         ,457,0,0,0,0,0,0,0
+Bronx,11,11,X180,11X180,Junior High-Intermediate-Middle    ,860,2,0,0,0,2,0,1:430
+Bronx,11,11,X181,11X181,Junior High-Intermediate-Middle    ,830,1,0,0,0,1,0,1:830
+Bronx,11,11,X189,11X189,Elementary                         ,350,0,0,0,0,0,0,0
+Bronx,11,11,X194,11X194,K-8                                ,1279,4,0,0,0,4,0,1:320
+Bronx,11,11,X249,11X249,High School                        ,294,0,0,0,0,0,0,0
+Bronx,11,11,X253,11X253,High School                        ,292,1,0,0,0,1,0,1:292
+Bronx,11,11,X265,11X265,High School                        ,363,2,0,0,0,2,0,1:182
+Bronx,11,11,X270,11X270,High School                        ,328,2,0,0,0,2,0,1:164
+Bronx,11,11,X275,11X275,High School                        ,505,2,0,0,0,2,0,1:253
+Bronx,11,11,X287,11X287,Junior High-Intermediate-Middle    ,246,1,0,0,0,1,0,1:246
+Bronx,11,11,X288,11X288,High School                        ,593,3,0,0,0,3,0,1:198
+Bronx,11,11,X289,11X289,Junior High-Intermediate-Middle    ,293,1,0,0,0,1,0,1:293
+Bronx,11,11,X290,11X290,High School                        ,379,1,0,0,0,1,0,1:379
+Bronx,11,11,X299,11X299,High School                        ,459,2,0,0,0,2,0,1:230
+Bronx,11,11,X326,11X326,Junior High-Intermediate-Middle    ,380,1,0,0,0,1,0,1:380
+Bronx,11,11,X355,11X355,Junior High-Intermediate-Middle    ,316,1,0,0,0,1,0,1:316
+Bronx,11,11,X357,11X357,Elementary                         ,231,0,0,0,0,0,0,0
+Bronx,11,11,X370,11X370,Junior High-Intermediate-Middle    ,361,2,0,0,0,2,0,1:181
+Bronx,11,11,X418,11X418,High School                        ,433,2,0,0,0,2,0,1:217
+Bronx,11,11,X455,11X455,High School                        ,1855,9,0,0,0,9,0,1:206
+Bronx,11,11,X462,11X462,Junior High-Intermediate-Middle    ,256,0,0,0,0,0,0,0
+Bronx,11,11,X468,11X468,Junior High-Intermediate-Middle    ,323,1,0,0,0,1,0,1:323
+Bronx,11,11,X481,11X481,Elementary                         ,95,0,0,0,0,0,0,0
+Bronx,11,11,X483,11X483,Elementary                         ,71,0,0,0,0,0,0,0
+Bronx,11,11,X498,11X498,K-8                                ,628,1,0,0,0,1,0,1:628
+Bronx,11,11,X508,11X508,High School                        ,416,2,0,0,0,2,0,1:208
+Bronx,11,11,X509,11X509,High School                        ,315,2,0,0,0,2,0,1:158
+Bronx,11,11,X513,11X513,High School                        ,364,2,0,0,0,2,0,1:182
+Bronx,11,11,X514,11X514,High School                        ,359,2,0,0,0,2,0,1:180
+Bronx,11,11,X529,11X529,Junior High-Intermediate-Middle    ,334,1,0,0,0,1,0,1:334
+Bronx,11,11,X532,11X532,Junior High-Intermediate-Middle    ,292,1,0,0,0,1,0,1:292
+Bronx,11,11,X542,11X542,High School                        ,470,1,0,0,0,1,0,1:470
+Bronx,11,11,X544,11X544,High School                        ,411,1,0,0,0,1,0,1:411
+Bronx,11,11,X545,11X545,High School                        ,322,1,0,0,0,1,0,1:322
+Bronx,11,11,X556,11X556,Junior High-Intermediate-Middle    ,381,2,0,0,0,2,0,1:191
+Bronx,11,11,X566,11X566,Junior High-Intermediate-Middle    ,443,2,0,0,0,2,1,1:222
+Bronx,11,11,X567,11X567,Elementary                         ,299,1,0,0,0,1,0,1:299
+Bronx,12,12,X006,12X006,Elementary                         ,461,1,0,0,0,1,0,1:461
+Bronx,12,12,X044,12X044,Elementary                         ,212,1,0,0,0,1,0,1:212
+Bronx,12,12,X047,12X047,Elementary                         ,1065,0,0,0,0,0,0,0
+Bronx,12,12,X057,12X057,Elementary                         ,473,1,0,0,0,1,0,1:473
+Bronx,12,12,X061,12X061,Elementary                         ,253,1,0,0,0,1,0,1:253
+Bronx,12,12,X066,12X066,Elementary                         ,587,1,0,0,0,1,0,1:587
+Bronx,12,12,X067,12X067,Elementary                         ,517,1,0,0,0,1,0,1:517
+Bronx,12,12,X092,12X092,Elementary                         ,375,0,0,0,0,0,0,0
+Bronx,12,12,X098,12X098,Junior High-Intermediate-Middle    ,196,1,0,0,0,1,0,1:196
+Bronx,12,12,X129,12X129,Junior High-Intermediate-Middle    ,512,1,0,0,0,1,0,1:512
+Bronx,12,12,X134,12X134,Elementary                         ,592,0,0,0,0,0,0,0
+Bronx,12,12,X150,12X150,Elementary                         ,825,0,0,0,0,0,0,0
+Bronx,12,12,X190,12X190,Junior High-Intermediate-Middle    ,236,1,0,0,0,1,0,1:236
+Bronx,12,12,X195,12X195,Elementary                         ,910,2,0,0,0,2,0,1:455
+Bronx,12,12,X196,12X196,Elementary                         ,906,2,0,0,0,2,0,1:453
+Bronx,12,12,X211,12X211,K-8                                ,529,1,0,0,0,1,0,1:529
+Bronx,12,12,X212,12X212,K-8                                ,380,2,0,0,0,2,0,1:190
+Bronx,12,12,X214,12X214,K-8                                ,972,1,0,0,0,1,0,1:972
+Bronx,12,12,X217,12X217,Junior High-Intermediate-Middle    ,277,2,0,0,0,2,0,1:139
+Bronx,12,12,X242,12X242,Secondary School                   ,647,2,0,0,0,2,0,1:324
+Bronx,12,12,X248,12X248,High School                        ,378,2,0,0,0,2,0,1:189
+Bronx,12,12,X251,12X251,High School                        ,304,2,0,0,0,2,0,1:152
+Bronx,12,12,X267,12X267,Secondary School                   ,541,1,0,0,0,1,0,1:541
+Bronx,12,12,X271,12X271,Secondary School                   ,621,1,0,0,0,1,0,1:621
+Bronx,12,12,X273,12X273,Junior High-Intermediate-Middle    ,232,1,0,0,0,1,0,1:232
+Bronx,12,12,X286,12X286,Junior High-Intermediate-Middle    ,260,1,0,0,0,1,0,1:260
+Bronx,12,12,X300,12X300,Elementary                         ,556,1,0,0,0,1,0,1:556
+Bronx,12,12,X314,12X314,Elementary                         ,283,1,0,0,0,1,0,1:283
+Bronx,12,12,X316,12X316,Junior High-Intermediate-Middle    ,369,1,0,0,0,1,0,1:369
+Bronx,12,12,X318,12X318,Junior High-Intermediate-Middle    ,272,1,0,0,0,1,0,1:272
+Bronx,12,12,X321,12X321,High School                        ,103,1,0,0,0,1,0,1:103
+Bronx,12,12,X341,12X341,Junior High-Intermediate-Middle    ,130,2,0,0,0,2,0,1:65
+Bronx,12,12,X372,12X372,Secondary School                   ,523,2,0,0,0,2,0,1:262
+Bronx,12,12,X383,12X383,Junior High-Intermediate-Middle    ,237,0,0,0,0,0,0,0
+Bronx,12,12,X384,12X384,Junior High-Intermediate-Middle    ,251,1,0,0,0,1,0,1:251
+Bronx,12,12,X388,12X388,High School                        ,415,3,0,0,0,3,0,1:138
+Bronx,12,12,X446,12X446,High School                        ,120,1,0,0,0,1,0,1:120
+Bronx,12,12,X458,12X458,Elementary                         ,125,0,0,0,0,0,0,0
+Bronx,12,12,X463,12X463,Elementary                         ,241,0,0,0,0,0,0,0
+Bronx,12,12,X478,12X478,High School                        ,302,2,0,0,0,2,0,1:151
+Bronx,12,12,X479,12X479,High School                        ,245,1,0,0,0,1,0,1:245
+Bronx,12,12,X480,12X480,High School                        ,138,1,0,0,0,1,0,1:138
+Bronx,12,12,X511,12X511,High School                        ,352,2,0,0,0,2,0,1:176
+Bronx,12,12,X521,12X521,High School                        ,376,2,0,0,0,2,0,1:188
+Bronx,12,12,X531,12X531,Elementary                         ,440,0,0,0,0,0,0,0
+Bronx,12,12,X536,12X536,Elementary                         ,401,0,0,0,0,0,0,0
+Bronx,12,12,X550,12X550,High School                        ,400,2,0,0,0,2,0,1:200
+Bronx,12,12,X682,12X682,High School                        ,418,1,0,0,0,1,0,1:418
+Bronx,12,12,X684,12X684,High School                        ,419,2,0,0,0,2,0,1:210
+Bronx,12,12,X691,12X691,Elementary                         ,285,0,0,0,0,0,0,0
+Bronx,12,12,X692,12X692,High School                        ,283,1,0,0,0,1,0,1:283
+Brooklyn,13,13,K003,13K003,Elementary                         ,343,1,0,0,0,1,0,1:343
+Brooklyn,13,13,K008,13K008,K-8                                ,915,1,0,0,0,1,0,1:915
+Brooklyn,13,13,K009,13K009,Elementary                         ,751,0,0,0,0,0,0,0
+Brooklyn,13,13,K011,13K011,Elementary                         ,794,1,0,0,0,1,0,1:794
+Brooklyn,13,13,K020,13K020,Elementary                         ,345,0,0,0,0,0,0,0
+Brooklyn,13,13,K044,13K044,Elementary                         ,161,0,0,0,0,0,0,0
+Brooklyn,13,13,K046,13K046,Elementary                         ,261,0,0,0,0,0,0,0
+Brooklyn,13,13,K054,13K054,Elementary                         ,189,0,0,0,0,0,0,0
+Brooklyn,13,13,K056,13K056,Elementary                         ,177,0,0,0,0,0,0,0
+Brooklyn,13,13,K067,13K067,Elementary                         ,194,0,0,0,0,0,0,0
+Brooklyn,13,13,K093,13K093,Elementary                         ,239,0,0,0,0,0,0,0
+Brooklyn,13,13,K113,13K113,Junior High-Intermediate-Middle    ,309,1,0,0,0,1,0,1:309
+Brooklyn,13,13,K133,13K133,Elementary                         ,651,0,0,0,0,0,0,0
+Brooklyn,13,13,K256,13K256,Elementary                         ,223,0,0,0,0,0,0,0
+Brooklyn,13,13,K265,13K265,Secondary School                   ,357,1,0,0,0,1,0,1:357
+Brooklyn,13,13,K266,13K266,Junior High-Intermediate-Middle    ,156,1,0,0,0,1,0,1:156
+Brooklyn,13,13,K270,13K270,Elementary                         ,108,1,0,0,0,1,0,1:108
+Brooklyn,13,13,K282,13K282,K-8                                ,731,1,0,0,0,1,0,1:731
+Brooklyn,13,13,K287,13K287,Elementary                         ,164,0,0,0,0,0,0,0
+Brooklyn,13,13,K301,13K301,Junior High-Intermediate-Middle    ,104,1,0,0,0,1,0,1:104
+Brooklyn,13,13,K305,13K305,Elementary                         ,122,0,0,0,0,0,0,0
+Brooklyn,13,13,K307,13K307,Elementary                         ,309,1,0,0,0,1,0,1:309
+Brooklyn,13,13,K313,13K313,Junior High-Intermediate-Middle    ,132,0,1,1,2,2,1,0
+Brooklyn,13,13,K350,13K350,High School                        ,243,1,0,0,0,1,0,1:243
+Brooklyn,13,13,K351,13K351,Junior High-Intermediate-Middle    ,136,1,0,0,0,1,0,1:136
+Brooklyn,13,13,K412,13K412,High School                        ,383,1,0,0,0,1,0,1:383
+Brooklyn,13,13,K419,13K419,High School                        ,506,3,0,0,0,3,0,1:169
+Brooklyn,13,13,K430,13K430,High School                        ,5616,18,0,0,0,18,0,1:312
+Brooklyn,13,13,K439,13K439,High School                        ,338,1,0,0,0,1,0,1:338
+Brooklyn,13,13,K483,13K483,High School                        ,440,2,0,0,0,2,0,1:220
+Brooklyn,13,13,K492,13K492,K-8                                ,511,1,0,0,0,1,0,1:511
+Brooklyn,13,13,K499,13K499,High School                        ,219,2,0,0,0,2,0,1:110
+Brooklyn,13,13,K527,13K527,Secondary School                   ,451,3,0,0,0,3,0,1:150
+Brooklyn,13,13,K553,13K553,High School                        ,99,1,0,0,0,1,0,1:99
+Brooklyn,13,13,K575,13K575,High School                        ,63,1,0,0,0,1,0,1:63
+Brooklyn,13,13,K595,13K595,High School                        ,347,2,0,0,0,2,0,1:174
+Brooklyn,13,13,K605,13K605,High School                        ,640,5,0,0,0,5,0,1:128
+Brooklyn,13,13,K616,13K616,High School                        ,139,1,0,0,0,1,0,1:139
+Brooklyn,13,13,K670,13K670,High School                        ,836,3,0,0,0,3,0,1:279
+Brooklyn,13,13,K674,13K674,High School                        ,409,3,0,0,0,3,0,1:136
+Brooklyn,13,13,K691,13K691,Junior High-Intermediate-Middle    ,197,1,0,0,0,1,0,1:197
+Brooklyn,14,14,K016,14K016,Elementary                         ,212,1,0,0,0,1,0,1:212
+Brooklyn,14,14,K017,14K017,Elementary                         ,259,0,0,0,0,0,0,0
+Brooklyn,14,14,K018,14K018,Elementary                         ,154,0,0,0,0,0,0,0
+Brooklyn,14,14,K023,14K023,Elementary                         ,254,1,0,0,0,1,0,1:254
+Brooklyn,14,14,K031,14K031,Elementary                         ,493,0,1,0,1,1,0,0
+Brooklyn,14,14,K034,14K034,Elementary                         ,441,1,0,0,0,1,0,1:441
+Brooklyn,14,14,K050,14K050,Junior High-Intermediate-Middle    ,253,1,0,0,0,1,0,1:253
+Brooklyn,14,14,K059,14K059,Elementary                         ,273,0,0,0,0,0,0,0
+Brooklyn,14,14,K071,14K071,Secondary School                   ,552,4,0,0,0,4,0,1:138
+Brooklyn,14,14,K084,14K084,K-8                                ,709,1,0,0,0,1,0,1:709
+Brooklyn,14,14,K110,14K110,Elementary                         ,402,0,0,0,0,0,0,0
+Brooklyn,14,14,K120,14K120,Elementary                         ,375,1,0,0,0,1,0,1:375
+Brooklyn,14,14,K126,14K126,Junior High-Intermediate-Middle    ,374,1,0,0,0,1,0,1:374
+Brooklyn,14,14,K132,14K132,Elementary                         ,607,0,0,0,0,0,0,0
+Brooklyn,14,14,K147,14K147,Elementary                         ,252,0,0,0,0,0,0,0
+Brooklyn,14,14,K157,14K157,K-8                                ,470,1,0,0,0,1,0,1:470
+Brooklyn,14,14,K196,14K196,Elementary                         ,313,1,0,0,0,1,0,1:313
+Brooklyn,14,14,K250,14K250,Elementary                         ,505,1,0,0,0,1,0,1:505
+Brooklyn,14,14,K257,14K257,Elementary                         ,575,0,0,0,0,0,0,0
+Brooklyn,14,14,K297,14K297,Elementary                         ,210,0,0,0,0,0,0,0
+Brooklyn,14,14,K318,14K318,Junior High-Intermediate-Middle    ,1337,3,0,0,0,3,0,1:446
+Brooklyn,14,14,K319,14K319,Early Childhood                    ,88,0,0,0,0,0,0,0
+Brooklyn,14,14,K380,14K380,Elementary                         ,527,1,0,0,0,1,0,1:527
+Brooklyn,14,14,K414,14K414,Elementary                         ,557,1,0,0,0,1,0,1:557
+Brooklyn,14,14,K449,14K449,High School                        ,711,3,0,0,0,3,0,1:237
+Brooklyn,14,14,K454,14K454,High School                        ,210,1,0,0,0,1,0,1:210
+Brooklyn,14,14,K474,14K474,High School                        ,776,6,0,0,0,6,1,1:129
+Brooklyn,14,14,K477,14K477,High School                        ,369,2,0,0,0,2,0,1:185
+Brooklyn,14,14,K478,14K478,High School                        ,844,3,0,0,0,3,1,1:281
+Brooklyn,14,14,K488,14K488,High School                        ,507,2,0,0,0,2,0,1:254
+Brooklyn,14,14,K558,14K558,High School                        ,545,2,0,0,0,2,0,1:273
+Brooklyn,14,14,K561,14K561,High School                        ,648,3,0,0,0,3,0,1:216
+Brooklyn,14,14,K577,14K577,Junior High-Intermediate-Middle    ,501,2,0,0,0,2,0,1:251
+Brooklyn,14,14,K582,14K582,Junior High-Intermediate-Middle    ,254,1,0,0,0,1,0,1:254
+Brooklyn,14,14,K586,14K586,Secondary School                   ,472,1,0,0,0,1,0,1:472
+Brooklyn,14,14,K610,14K610,High School                        ,291,2,0,0,0,2,0,1:146
+Brooklyn,14,14,K614,14K614,Secondary School                   ,370,1,0,0,0,1,0,1:370
+Brooklyn,14,14,K632,14K632,High School                        ,101,1,0,0,0,1,0,1:101
+Brooklyn,14,14,K685,14K685,High School                        ,225,1,0,0,0,1,0,1:225
+Brooklyn,15,15,K001,15K001,Elementary                         ,1157,0,0,0,0,0,0,0
+Brooklyn,15,15,K010,15K010,Elementary                         ,908,1,0,0,0,1,0,1:908
+Brooklyn,15,15,K015,15K015,Elementary                         ,357,0,0,0,0,0,0,0
+Brooklyn,15,15,K024,15K024,Elementary                         ,599,0,0,0,0,0,0,0
+Brooklyn,15,15,K029,15K029,Elementary                         ,890,1,0,0,0,1,0,1:890
+Brooklyn,15,15,K032,15K032,Elementary                         ,463,1,0,0,0,1,0,1:463
+Brooklyn,15,15,K038,15K038,Elementary                         ,438,0,0,0,0,0,0,0
+Brooklyn,15,15,K039,15K039,Elementary                         ,386,0,0,0,0,0,0,0
+Brooklyn,15,15,K051,15K051,Junior High-Intermediate-Middle    ,1117,2,0,0,0,2,0,1:559
+Brooklyn,15,15,K058,15K058,Elementary                         ,911,0,0,0,0,0,0,0
+Brooklyn,15,15,K088,15K088,Junior High-Intermediate-Middle    ,1277,4,0,0,0,4,0,1:319
+Brooklyn,15,15,K094,15K094,Elementary                         ,1356,0,0,0,0,0,0,0
+Brooklyn,15,15,K107,15K107,Elementary                         ,561,0,0,0,0,0,0,0
+Brooklyn,15,15,K118,15K118,Elementary                         ,213,0,0,0,0,0,0,0
+Brooklyn,15,15,K124,15K124,Elementary                         ,293,0,0,0,0,0,0,0
+Brooklyn,15,15,K130,15K130,Elementary                         ,713,0,0,0,0,0,0,0
+Brooklyn,15,15,K131,15K131,Elementary                         ,960,1,0,0,0,1,0,1:960
+Brooklyn,15,15,K136,15K136,Junior High-Intermediate-Middle    ,462,2,0,0,0,2,0,1:231
+Brooklyn,15,15,K146,15K146,Elementary                         ,602,1,0,0,0,1,0,1:602
+Brooklyn,15,15,K154,15K154,Elementary                         ,523,0,0,0,0,0,0,0
+Brooklyn,15,15,K169,15K169,Elementary                         ,1534,1,0,0,0,1,0,1:1534
+Brooklyn,15,15,K172,15K172,Elementary                         ,544,1,0,0,0,1,0,1:544
+Brooklyn,15,15,K230,15K230,Elementary                         ,1085,1,0,0,0,1,0,1:1085
+Brooklyn,15,15,K261,15K261,Elementary                         ,720,1,0,0,0,1,0,1:720
+Brooklyn,15,15,K295,15K295,Elementary                         ,413,0,2,0,2,2,0,0
+Brooklyn,15,15,K321,15K321,Elementary                         ,1427,1,1,0,1,2,0,1:1427
+Brooklyn,15,15,K423,15K423,High School                        ,123,1,0,0,0,1,0,1:123
+Brooklyn,15,15,K429,15K429,Secondary School                   ,177,2,0,0,0,2,0,1:89
+Brooklyn,15,15,K442,15K442,Junior High-Intermediate-Middle    ,206,1,0,0,0,1,0,1:206
+Brooklyn,15,15,K443,15K443,Junior High-Intermediate-Middle    ,553,0,0,0,0,0,0,0
+Brooklyn,15,15,K447,15K447,Junior High-Intermediate-Middle    ,515,2,0,0,0,2,0,1:258
+Brooklyn,15,15,K448,15K448,Secondary School                   ,641,3,0,0,0,3,0,1:214
+Brooklyn,15,15,K462,15K462,High School                        ,386,1,0,0,0,1,0,1:386
+Brooklyn,15,15,K463,15K463,High School                        ,208,1,0,0,0,1,0,1:208
+Brooklyn,15,15,K464,15K464,Secondary School                   ,572,3,0,0,0,3,0,1:191
+Brooklyn,15,15,K497,15K497,Secondary School                   ,519,2,0,0,0,2,0,1:260
+Brooklyn,15,15,K516,15K516,Elementary                         ,282,1,0,0,0,1,0,1:282
+Brooklyn,15,15,K519,15K519,High School                        ,541,3,0,0,0,3,0,1:180
+Brooklyn,15,15,K529,15K529,High School                        ,145,1,0,0,0,1,0,1:145
+Brooklyn,15,15,K592,15K592,High School                        ,243,2,1,0,1,3,0,1:122
+Brooklyn,15,15,K656,15K656,High School                        ,833,4,0,0,0,4,0,1:208
+Brooklyn,15,15,K667,15K667,High School                        ,1175,10,0,0,0,10,0,1:118
+Brooklyn,15,15,K676,15K676,Elementary                         ,163,0,0,0,0,0,0,0
+Brooklyn,15,15,K684,15K684,High School                        ,651,4,0,0,0,4,0,1:163
+Brooklyn,15,15,K698,15K698,High School                        ,143,1,0,0,0,1,0,1:143
+Brooklyn,15,15,K821,15K821,Junior High-Intermediate-Middle    ,491,2,0,0,0,2,0,1:246
+Brooklyn,15,15,K839,15K839,Junior High-Intermediate-Middle    ,206,1,0,0,0,1,0,1:206
+Brooklyn,16,16,K005,16K005,Elementary                         ,173,1,0,0,0,1,0,1:173
+Brooklyn,16,16,K021,16K021,Elementary                         ,517,0,0,0,0,0,0,0
+Brooklyn,16,16,K025,16K025,Elementary                         ,101,0,0,0,0,0,0,0
+Brooklyn,16,16,K026,16K026,Elementary                         ,170,0,0,0,0,0,0,0
+Brooklyn,16,16,K028,16K028,Elementary                         ,138,1,0,0,0,1,0,1:138
+Brooklyn,16,16,K035,16K035,Junior High-Intermediate-Middle    ,168,1,0,0,0,1,0,1:168
+Brooklyn,16,16,K040,16K040,Elementary                         ,255,0,0,0,0,0,0,0
+Brooklyn,16,16,K057,16K057,Junior High-Intermediate-Middle    ,201,1,0,0,0,1,0,1:201
+Brooklyn,16,16,K081,16K081,Elementary                         ,261,0,0,0,0,0,0,0
+Brooklyn,16,16,K243,16K243,Elementary                         ,202,1,0,0,0,1,0,1:202
+Brooklyn,16,16,K262,16K262,K-8                                ,341,1,0,0,0,1,0,1:341
+Brooklyn,16,16,K267,16K267,Junior High-Intermediate-Middle    ,139,0,0,0,0,0,0,0
+Brooklyn,16,16,K308,16K308,K-8                                ,277,1,0,0,0,1,0,1:277
+Brooklyn,16,16,K309,16K309,Elementary                         ,158,1,0,0,0,1,0,1:158
+Brooklyn,16,16,K335,16K335,Elementary                         ,245,1,0,0,0,1,0,1:245
+Brooklyn,16,16,K393,16K393,High School                        ,47,1,0,0,0,1,0,1:47
+Brooklyn,16,16,K455,16K455,High School                        ,354,2,1,0,1,3,0,1:177
+Brooklyn,16,16,K498,16K498,High School                        ,594,2,0,0,0,2,0,1:297
+Brooklyn,16,16,K584,16K584,Junior High-Intermediate-Middle    ,68,1,0,0,0,1,0,1:68
+Brooklyn,16,16,K594,16K594,High School                        ,173,1,0,0,0,1,0,1:173
+Brooklyn,16,16,K627,16K627,Elementary                         ,242,1,0,0,0,1,0,1:242
+Brooklyn,16,16,K628,16K628,Elementary                         ,200,0,0,0,0,0,0,0
+Brooklyn,16,16,K669,16K669,High School                        ,142,1,0,0,0,1,0,1:142
+Brooklyn,16,16,K681,16K681,Junior High-Intermediate-Middle    ,127,1,0,0,0,1,0,1:127
+Brooklyn,16,16,K688,16K688,High School                        ,99,1,0,0,0,1,0,1:99
+Brooklyn,16,16,K765,16K765,High School                        ,226,1,1,0,1,2,0,1:226
+Brooklyn,17,17,K002,17K002,Junior High-Intermediate-Middle    ,487,1,0,0,0,1,0,1:487
+Brooklyn,17,17,K006,17K006,Elementary                         ,684,1,0,0,0,1,0,1:684
+Brooklyn,17,23,K012,17K012,Elementary                         ,202,1,0,0,0,1,0,1:202
+Brooklyn,17,17,K061,17K061,Junior High-Intermediate-Middle    ,851,2,0,0,0,2,0,1:426
+Brooklyn,17,17,K091,17K091,Elementary                         ,271,2,0,0,0,2,0,1:136
+Brooklyn,17,17,K092,17K092,Elementary                         ,402,0,0,0,0,0,0,0
+Brooklyn,17,17,K122,17K122,High School                        ,542,2,0,1,1,3,1,1:271
+Brooklyn,17,17,K138,17K138,K-8                                ,535,1,0,0,0,1,0,1:535
+Brooklyn,17,17,K161,17K161,Elementary                         ,330,0,0,0,0,0,0,0
+Brooklyn,17,17,K181,17K181,K-8                                ,722,2,0,0,0,2,0,1:361
+Brooklyn,17,17,K189,17K189,K-8                                ,1001,1,0,0,0,1,0,1:1001
+Brooklyn,17,17,K191,17K191,Elementary                         ,154,1,0,0,0,1,0,1:154
+Brooklyn,17,17,K221,17K221,Elementary                         ,308,0,0,0,0,0,0,0
+Brooklyn,17,17,K241,17K241,Elementary                         ,462,1,0,0,0,1,0,1:462
+Brooklyn,17,17,K246,17K246,Junior High-Intermediate-Middle    ,407,1,0,0,0,1,0,1:407
+Brooklyn,17,17,K249,17K249,Elementary                         ,837,1,0,0,0,1,0,1:837
+Brooklyn,17,17,K289,17K289,Elementary                         ,340,0,0,0,0,0,0,0
+Brooklyn,17,17,K316,17K316,Elementary                         ,423,1,0,0,0,1,0,1:423
+Brooklyn,17,13,K340,17K340,Junior High-Intermediate-Middle    ,241,1,0,0,0,1,0,1:241
+Brooklyn,17,17,K352,17K352,Junior High-Intermediate-Middle    ,161,1,0,0,0,1,0,1:161
+Brooklyn,17,17,K353,17K353,Junior High-Intermediate-Middle    ,158,1,0,0,0,1,0,1:158
+Brooklyn,17,17,K354,17K354,Junior High-Intermediate-Middle    ,196,2,0,0,0,2,0,1:98
+Brooklyn,17,17,K375,17K375,Elementary                         ,378,0,0,0,0,0,0,0
+Brooklyn,17,17,K382,17K382,Secondary School                   ,358,3,0,0,0,3,0,1:119
+Brooklyn,17,17,K394,17K394,K-8                                ,453,1,0,0,0,1,0,1:453
+Brooklyn,17,17,K397,17K397,Elementary                         ,177,0,0,0,0,0,0,0
+Brooklyn,17,17,K398,17K398,Elementary                         ,274,0,0,0,0,0,0,0
+Brooklyn,17,17,K399,17K399,Elementary                         ,416,1,0,0,0,1,0,1:416
+Brooklyn,17,17,K408,17K408,High School                        ,152,1,0,0,0,1,0,1:152
+Brooklyn,17,23,K484,17K484,Junior High-Intermediate-Middle    ,130,1,0,0,0,1,0,1:130
+Brooklyn,17,17,K489,17K489,High School                        ,68,1,0,0,0,1,0,1:68
+Brooklyn,17,17,K524,17K524,High School                        ,390,2,0,0,0,2,0,1:195
+Brooklyn,17,17,K528,17K528,High School                        ,185,1,0,0,0,1,0,1:185
+Brooklyn,17,17,K531,17K531,Secondary School                   ,336,2,0,0,0,2,0,1:168
+Brooklyn,17,17,K532,17K532,Elementary                         ,389,1,0,0,0,1,0,1:389
+Brooklyn,17,17,K533,17K533,Secondary School                   ,197,2,0,0,0,2,0,1:99
+Brooklyn,17,17,K537,17K537,High School                        ,389,1,0,0,0,1,0,1:389
+Brooklyn,17,17,K539,17K539,High School                        ,332,2,0,0,0,2,0,1:166
+Brooklyn,17,17,K543,17K543,Secondary School                   ,541,2,0,0,0,2,0,1:271
+Brooklyn,17,17,K546,17K546,High School                        ,440,2,0,0,0,2,0,1:220
+Brooklyn,17,17,K547,17K547,High School                        ,344,3,0,0,0,3,0,1:115
+Brooklyn,17,17,K548,17K548,High School                        ,283,1,0,0,0,1,0,1:283
+Brooklyn,17,17,K568,17K568,High School                        ,103,1,0,0,0,1,0,1:103
+Brooklyn,17,17,K590,17K590,Secondary School                   ,1201,3,0,0,0,3,0,1:400
+Brooklyn,17,17,K600,17K600,High School                        ,1168,6,0,0,0,6,0,1:195
+Brooklyn,17,17,K705,17K705,Elementary                         ,310,1,0,0,0,1,0,1:310
+Brooklyn,17,17,K722,17K722,Junior High-Intermediate-Middle    ,239,1,0,0,0,1,0,1:239
+Brooklyn,17,17,K745,17K745,High School                        ,344,2,0,0,0,2,0,1:172
+Brooklyn,17,17,K751,17K751,High School                        ,356,1,0,1,1,2,1,1:356
+Brooklyn,17,17,K770,17K770,Elementary                         ,231,1,0,0,0,1,0,1:231
+Brooklyn,18,18,K066,18K066,K-8                                ,772,1,1,0,1,2,0,1:772
+Brooklyn,18,18,K068,18K068,Junior High-Intermediate-Middle    ,378,1,0,0,0,1,0,1:378
+Brooklyn,18,18,K114,18K114,Elementary                         ,450,0,0,0,0,0,0,0
+Brooklyn,18,18,K115,18K115,Elementary                         ,872,0,0,0,0,0,0,0
+Brooklyn,18,18,K135,18K135,Elementary                         ,553,0,0,0,0,0,0,0
+Brooklyn,18,18,K208,18K208,Elementary                         ,380,0,0,0,0,0,0,0
+Brooklyn,18,18,K211,18K211,Junior High-Intermediate-Middle    ,508,2,0,0,0,2,0,1:254
+Brooklyn,18,18,K219,18K219,Elementary                         ,434,0,0,0,0,0,0,0
+Brooklyn,18,18,K233,18K233,Elementary                         ,403,0,0,0,0,0,0,0
+Brooklyn,18,18,K235,18K235,K-8                                ,1202,2,0,0,0,2,0,1:601
+Brooklyn,18,18,K244,18K244,Elementary                         ,500,0,0,0,0,0,0,0
+Brooklyn,18,18,K268,18K268,Elementary                         ,358,0,0,0,0,0,0,0
+Brooklyn,18,18,K272,18K272,Elementary                         ,393,0,0,0,0,0,0,0
+Brooklyn,18,18,K276,18K276,Elementary                         ,548,0,0,0,0,0,0,0
+Brooklyn,18,18,K279,18K279,Elementary                         ,385,0,0,0,0,0,0,0
+Brooklyn,18,18,K285,18K285,Junior High-Intermediate-Middle    ,634,1,0,0,0,1,0,1:634
+Brooklyn,18,18,K366,18K366,Junior High-Intermediate-Middle    ,420,1,0,0,0,1,0,1:420
+Brooklyn,18,18,K563,18K563,High School                        ,681,4,1,0,1,5,0,1:170
+Brooklyn,18,18,K566,18K566,High School                        ,201,2,0,0,0,2,0,1:101
+Brooklyn,18,18,K567,18K567,High School                        ,333,1,0,0,0,1,0,1:333
+Brooklyn,18,18,K569,18K569,High School                        ,351,2,0,0,0,2,0,1:176
+Brooklyn,18,18,K576,18K576,High School                        ,313,2,0,0,0,2,0,1:157
+Brooklyn,18,18,K578,18K578,High School                        ,127,1,0,0,0,1,0,1:127
+Brooklyn,18,18,K581,18K581,Junior High-Intermediate-Middle    ,119,1,0,0,0,1,0,1:119
+Brooklyn,18,18,K588,18K588,Junior High-Intermediate-Middle    ,182,1,0,0,0,1,0,1:182
+Brooklyn,18,18,K589,18K589,High School                        ,155,1,0,0,0,1,0,1:155
+Brooklyn,18,18,K598,18K598,Junior High-Intermediate-Middle    ,152,1,0,0,0,1,0,1:152
+Brooklyn,18,18,K617,18K617,High School                        ,258,2,0,0,0,2,0,1:129
+Brooklyn,18,18,K629,18K629,High School                        ,304,2,0,0,0,2,0,1:152
+Brooklyn,18,18,K633,18K633,High School                        ,410,3,0,0,0,3,0,1:137
+Brooklyn,18,18,K635,18K635,High School                        ,158,1,0,0,0,1,0,1:158
+Brooklyn,18,18,K637,18K637,High School                        ,248,2,0,0,0,2,0,1:124
+Brooklyn,18,18,K642,18K642,High School                        ,274,2,0,0,0,2,1,1:137
+Brooklyn,18,18,K673,18K673,High School                        ,132,1,0,0,0,1,0,1:132
+Brooklyn,18,18,K763,18K763,Junior High-Intermediate-Middle    ,222,1,0,0,0,1,0,1:222
+Brooklyn,19,19,K007,19K007,Elementary                         ,841,0,0,0,0,0,0,0
+Brooklyn,19,19,K013,19K013,Elementary                         ,405,0,0,0,0,0,0,0
+Brooklyn,19,19,K065,19K065,Elementary                         ,601,1,0,0,0,1,0,1:601
+Brooklyn,19,19,K089,19K089,K-8                                ,432,1,0,0,0,1,0,1:432
+Brooklyn,19,19,K108,19K108,Elementary                         ,839,0,0,0,0,0,0,0
+Brooklyn,19,19,K149,19K149,Elementary                         ,601,1,0,0,0,1,0,1:601
+Brooklyn,19,19,K158,19K158,Elementary                         ,527,0,0,0,0,0,0,0
+Brooklyn,19,19,K159,19K159,Elementary                         ,782,1,0,0,0,1,0,1:782
+Brooklyn,19,19,K171,19K171,Junior High-Intermediate-Middle    ,426,1,0,0,0,1,0,1:426
+Brooklyn,19,19,K190,19K190,Elementary                         ,133,0,0,0,0,0,0,0
+Brooklyn,19,19,K202,19K202,Elementary                         ,404,1,0,0,0,1,0,1:404
+Brooklyn,19,19,K213,19K213,Elementary                         ,266,1,0,0,0,1,0,1:266
+Brooklyn,19,19,K214,19K214,Elementary                         ,792,0,0,0,0,0,0,0
+Brooklyn,19,19,K218,19K218,Junior High-Intermediate-Middle    ,369,2,0,0,0,2,0,1:185
+Brooklyn,19,19,K224,19K224,Elementary                         ,361,1,0,0,0,1,0,1:361
+Brooklyn,19,19,K273,19K273,Elementary                         ,288,1,0,0,0,1,0,1:288
+Brooklyn,19,19,K290,19K290,Elementary                         ,487,1,0,0,0,1,0,1:487
+Brooklyn,19,19,K292,19K292,Junior High-Intermediate-Middle    ,533,2,0,0,0,2,0,1:267
+Brooklyn,19,19,K306,19K306,K-8                                ,434,2,0,0,0,2,0,1:217
+Brooklyn,19,19,K311,19K311,Junior High-Intermediate-Middle    ,102,1,0,0,0,1,0,1:102
+Brooklyn,19,19,K325,19K325,Elementary                         ,199,1,0,0,0,1,0,1:199
+Brooklyn,19,19,K328,19K328,Elementary                         ,199,0,0,0,0,0,0,0
+Brooklyn,19,19,K345,19K345,Elementary                         ,553,0,0,0,0,0,0,0
+Brooklyn,19,19,K346,19K346,Elementary                         ,560,2,0,0,0,2,0,1:280
+Brooklyn,19,19,K364,19K364,Junior High-Intermediate-Middle    ,306,2,0,0,0,2,0,1:153
+Brooklyn,19,19,K404,19K404,Secondary School                   ,540,2,0,0,0,2,0,1:270
+Brooklyn,19,19,K409,19K409,Secondary School                   ,492,1,0,0,0,1,0,1:492
+Brooklyn,19,19,K422,19K422,Secondary School                   ,382,3,0,0,0,3,0,1:127
+Brooklyn,19,19,K452,19K452,Junior High-Intermediate-Middle    ,314,1,0,0,0,1,0,1:314
+Brooklyn,19,19,K502,19K502,High School                        ,304,1,0,0,0,1,0,1:304
+Brooklyn,19,19,K504,19K504,High School                        ,238,1,0,0,0,1,0,1:238
+Brooklyn,19,19,K507,19K507,High School                        ,416,2,0,0,0,2,0,1:208
+Brooklyn,19,19,K510,19K510,High School                        ,221,1,0,0,0,1,0,1:221
+Brooklyn,19,19,K557,19K557,Elementary                         ,280,1,0,0,0,1,0,1:280
+Brooklyn,19,19,K583,19K583,High School                        ,188,1,0,1,1,2,1,1:188
+Brooklyn,19,19,K615,19K615,High School                        ,754,4,0,0,0,4,0,1:189
+Brooklyn,19,19,K618,19K618,High School                        ,375,2,0,0,0,2,0,1:188
+Brooklyn,19,19,K639,19K639,High School                        ,269,1,0,1,1,2,1,1:269
+Brooklyn,19,19,K654,19K654,Junior High-Intermediate-Middle    ,283,0,0,0,0,0,0,0
+Brooklyn,19,19,K659,19K659,High School                        ,197,3,0,0,0,3,0,1:66
+Brooklyn,19,19,K660,19K660,High School                        ,385,4,0,0,0,4,0,1:96
+Brooklyn,19,19,K661,19K661,Junior High-Intermediate-Middle    ,374,1,0,0,0,1,0,1:374
+Brooklyn,19,19,K662,19K662,Junior High-Intermediate-Middle    ,430,2,0,0,0,2,0,1:215
+Brooklyn,19,19,K663,19K663,Junior High-Intermediate-Middle    ,136,1,0,0,0,1,0,1:136
+Brooklyn,19,19,K677,19K677,Elementary                         ,478,1,0,0,0,1,0,1:478
+Brooklyn,19,19,K678,19K678,Junior High-Intermediate-Middle    ,241,1,0,0,0,1,0,1:241
+Brooklyn,19,19,K683,19K683,High School                        ,285,2,0,0,0,2,0,1:143
+Brooklyn,19,19,K760,19K760,Junior High-Intermediate-Middle    ,290,2,0,0,0,2,0,1:145
+Brooklyn,19,19,K764,19K764,High School                        ,211,0,0,2,2,2,1,0
+Brooklyn,20,20,K030,20K030,K-8                                ,767,3,0,0,0,3,0,1:256
+Brooklyn,20,20,K048,20K048,Elementary                         ,547,1,0,0,0,1,0,1:547
+Brooklyn,20,20,K062,20K062,Junior High-Intermediate-Middle    ,1154,4,0,0,0,4,0,1:289
+Brooklyn,20,20,K069,20K069,Elementary                         ,804,0,0,0,0,0,0,0
+Brooklyn,20,20,K102,20K102,Elementary                         ,1373,1,0,0,0,1,0,1:1373
+Brooklyn,20,20,K104,20K104,K-8                                ,1228,3,0,0,0,3,0,1:409
+Brooklyn,20,20,K105,20K105,Elementary                         ,1518,0,0,0,0,0,0,0
+Brooklyn,20,20,K112,20K112,Elementary                         ,625,0,1,0,1,1,0,0
+Brooklyn,20,20,K127,20K127,Elementary                         ,500,0,1,0,1,1,0,0
+Brooklyn,20,20,K160,20K160,Elementary                         ,1252,0,0,0,0,0,0,0
+Brooklyn,20,20,K163,20K163,K-8                                ,594,1,0,0,0,1,0,1:594
+Brooklyn,20,20,K164,20K164,Elementary                         ,583,0,2,0,2,2,0,0
+Brooklyn,20,20,K170,20K170,Elementary                         ,1015,1,0,0,0,1,0,1:1015
+Brooklyn,20,20,K176,20K176,Elementary                         ,1361,1,0,0,0,1,0,1:1361
+Brooklyn,20,20,K179,20K179,Elementary                         ,835,0,0,0,0,0,0,0
+Brooklyn,20,20,K180,20K180,K-8                                ,1107,1,0,0,0,1,0,1:1107
+Brooklyn,20,20,K185,20K185,Elementary                         ,656,0,0,0,0,0,0,0
+Brooklyn,20,20,K186,20K186,Elementary                         ,971,0,0,0,0,0,0,0
+Brooklyn,20,20,K187,20K187,Junior High-Intermediate-Middle    ,889,3,0,0,0,3,0,1:296
+Brooklyn,20,20,K192,20K192,K-8                                ,628,1,0,0,0,1,0,1:628
+Brooklyn,20,20,K200,20K200,Elementary                         ,1198,0,0,0,0,0,0,0
+Brooklyn,20,20,K201,20K201,Junior High-Intermediate-Middle    ,1499,4,0,0,0,4,0,1:375
+Brooklyn,20,20,K204,20K204,Elementary                         ,1126,0,0,0,0,0,0,0
+Brooklyn,20,20,K205,20K205,Elementary                         ,1154,0,0,0,0,0,0,0
+Brooklyn,20,20,K220,20K220,Junior High-Intermediate-Middle    ,1438,4,0,0,0,4,0,1:360
+Brooklyn,20,20,K223,20K223,Junior High-Intermediate-Middle    ,975,3,0,0,0,3,0,1:325
+Brooklyn,20,20,K227,20K227,Junior High-Intermediate-Middle    ,1339,5,0,0,0,5,0,1:268
+Brooklyn,20,20,K229,20K229,K-8                                ,1173,1,2,0,2,3,0,1:1173
+Brooklyn,20,20,K247,20K247,Elementary                         ,826,1,0,0,0,1,0,1:826
+Brooklyn,20,20,K259,20K259,Junior High-Intermediate-Middle    ,1723,5,0,0,0,5,0,1:345
+Brooklyn,20,20,K264,20K264,Elementary                         ,485,0,0,0,0,0,0,0
+Brooklyn,20,20,K310,20K310,Elementary                         ,404,0,0,0,0,0,0,0
+Brooklyn,20,20,K445,20K445,High School                        ,3434,18,0,0,0,18,0,1:191
+Brooklyn,20,20,K485,20K485,High School                        ,1225,5,0,0,0,5,0,1:245
+Brooklyn,20,20,K490,20K490,High School                        ,4220,19,1,0,1,20,1,1:222
+Brooklyn,20,20,K503,20K503,Elementary                         ,1060,1,0,0,0,1,0,1:1060
+Brooklyn,20,20,K505,20K505,High School                        ,2919,15,1,0,1,16,0,1:195
+Brooklyn,20,20,K506,20K506,Elementary                         ,804,0,0,0,0,0,0,0
+Brooklyn,20,20,K609,20K609,Secondary School                   ,541,2,0,0,0,2,0,1:271
+Brooklyn,20,20,K682,20K682,Elementary                         ,357,1,0,0,0,1,0,1:357
+Brooklyn,20,20,K686,20K686,K-8                                ,576,1,0,0,0,1,0,1:576
+Brooklyn,20,20,K748,20K748,Elementary                         ,547,1,0,0,0,1,0,1:547
+Brooklyn,20,20,K971,20K971,Elementary                         ,356,1,0,0,0,1,0,1:356
+Brooklyn,21,21,K090,21K090,Elementary                         ,529,0,0,0,0,0,0,0
+Brooklyn,21,21,K095,21K095,K-8                                ,884,1,0,0,0,1,0,1:884
+Brooklyn,21,21,K096,21K096,Junior High-Intermediate-Middle    ,693,2,0,0,0,2,0,1:347
+Brooklyn,21,21,K097,21K097,Elementary                         ,772,0,0,0,0,0,0,0
+Brooklyn,21,21,K098,21K098,Junior High-Intermediate-Middle    ,1500,2,0,0,0,2,0,1:750
+Brooklyn,21,21,K099,21K099,K-8                                ,794,3,0,0,0,3,0,1:265
+Brooklyn,21,21,K100,21K100,Elementary                         ,703,0,0,0,0,0,0,0
+Brooklyn,21,21,K101,21K101,Elementary                         ,866,0,0,0,0,0,0,0
+Brooklyn,21,21,K121,21K121,K-8                                ,317,1,0,0,0,1,0,1:317
+Brooklyn,21,21,K128,21K128,Elementary                         ,429,0,0,0,0,0,0,0
+Brooklyn,21,21,K153,21K153,Elementary                         ,453,0,0,0,0,0,0,0
+Brooklyn,21,21,K177,21K177,Elementary                         ,913,0,0,0,0,0,0,0
+Brooklyn,21,21,K188,21K188,Elementary                         ,416,1,0,0,0,1,0,1:416
+Brooklyn,21,21,K199,21K199,Elementary                         ,472,1,0,0,0,1,0,1:472
+Brooklyn,21,21,K209,21K209,K-8                                ,663,1,0,0,0,1,0,1:663
+Brooklyn,21,21,K212,21K212,Elementary                         ,603,1,0,0,0,1,0,1:603
+Brooklyn,21,21,K215,21K215,Elementary                         ,815,2,0,0,0,2,0,1:408
+Brooklyn,21,21,K216,21K216,Elementary                         ,609,0,0,0,0,0,0,0
+Brooklyn,21,21,K225,21K225,K-8                                ,888,1,0,0,0,1,0,1:888
+Brooklyn,21,21,K226,21K226,K-8                                ,928,2,0,0,0,2,0,1:464
+Brooklyn,21,21,K228,21K228,Junior High-Intermediate-Middle    ,1371,5,0,0,0,5,0,1:274
+Brooklyn,21,21,K238,21K238,K-8                                ,508,1,0,0,0,1,0,1:508
+Brooklyn,21,21,K239,21K239,Junior High-Intermediate-Middle    ,1264,5,0,0,0,5,0,1:253
+Brooklyn,21,21,K253,21K253,Elementary                         ,823,0,0,0,0,0,0,0
+Brooklyn,21,21,K281,21K281,Junior High-Intermediate-Middle    ,1258,4,0,0,0,4,0,1:315
+Brooklyn,21,21,K288,21K288,K-8                                ,594,1,0,0,0,1,0,1:594
+Brooklyn,21,21,K303,21K303,Junior High-Intermediate-Middle    ,469,1,0,0,0,1,0,1:469
+Brooklyn,21,21,K329,21K329,Elementary                         ,366,0,0,0,0,0,0,0
+Brooklyn,21,21,K337,21K337,High School                        ,335,1,0,0,0,1,0,1:335
+Brooklyn,21,21,K344,21K344,High School                        ,547,3,0,0,0,3,0,1:182
+Brooklyn,21,21,K348,21K348,High School                        ,246,1,0,0,0,1,0,1:246
+Brooklyn,21,21,K410,21K410,High School                        ,1838,12,0,0,0,12,0,1:153
+Brooklyn,21,21,K468,21K468,Secondary School                   ,628,2,0,0,0,2,0,1:314
+Brooklyn,21,21,K525,21K525,High School                        ,3700,16,0,0,0,16,0,1:231
+Brooklyn,21,21,K540,21K540,High School                        ,2141,9,0,0,0,9,0,1:238
+Brooklyn,21,21,K559,21K559,High School                        ,256,1,0,0,0,1,0,1:256
+Brooklyn,21,21,K572,21K572,High School                        ,311,1,0,0,0,1,0,1:311
+Brooklyn,21,21,K620,21K620,High School                        ,469,3,0,0,0,3,0,1:156
+Brooklyn,21,21,K690,21K690,Secondary School                   ,884,5,0,0,0,5,0,1:177
+Brooklyn,21,21,K728,21K728,High School                        ,153,1,0,0,0,1,0,1:153
+Brooklyn,22,22,K014,22K014,Junior High-Intermediate-Middle    ,512,2,0,0,0,2,0,1:256
+Brooklyn,22,22,K052,22K052,Elementary                         ,733,0,0,0,0,0,0,0
+Brooklyn,22,22,K078,22K078,Junior High-Intermediate-Middle    ,559,3,0,0,0,3,0,1:186
+Brooklyn,22,22,K109,22K109,K-8                                ,616,1,0,0,0,1,0,1:616
+Brooklyn,22,22,K119,22K119,Elementary                         ,388,0,0,0,0,0,0,0
+Brooklyn,22,22,K134,22K134,Elementary                         ,550,0,0,0,0,0,0,0
+Brooklyn,22,22,K139,22K139,Elementary                         ,870,1,0,0,0,1,0,1:870
+Brooklyn,22,22,K152,22K152,Elementary                         ,734,0,0,0,0,0,0,0
+Brooklyn,22,22,K193,22K193,Elementary                         ,754,0,0,0,0,0,0,0
+Brooklyn,22,22,K194,22K194,Elementary                         ,440,1,0,0,0,1,0,1:440
+Brooklyn,22,22,K195,22K195,Elementary                         ,451,1,0,0,0,1,0,1:451
+Brooklyn,22,22,K197,22K197,Elementary                         ,559,1,0,0,0,1,0,1:559
+Brooklyn,22,22,K198,22K198,Elementary                         ,390,0,0,0,0,0,0,0
+Brooklyn,22,22,K203,22K203,Elementary                         ,688,0,0,0,0,0,0,0
+Brooklyn,22,22,K206,22K206,K-8                                ,1432,2,0,0,0,2,0,1:716
+Brooklyn,22,22,K207,22K207,K-8                                ,1247,2,0,0,0,2,0,1:624
+Brooklyn,22,22,K217,22K217,Elementary                         ,1098,0,0,0,0,0,0,0
+Brooklyn,22,22,K222,22K222,Elementary                         ,863,1,0,0,0,1,0,1:863
+Brooklyn,22,22,K234,22K234,Junior High-Intermediate-Middle    ,1957,6,0,0,0,6,0,1:326
+Brooklyn,22,22,K236,22K236,Elementary                         ,490,1,0,0,0,1,0,1:490
+Brooklyn,22,22,K240,22K240,Junior High-Intermediate-Middle    ,770,2,0,0,0,2,0,1:385
+Brooklyn,22,22,K245,22K245,Elementary                         ,279,0,0,0,0,0,0,0
+Brooklyn,22,22,K251,22K251,Elementary                         ,487,0,0,0,0,0,0,0
+Brooklyn,22,22,K254,22K254,Elementary                         ,727,0,0,0,0,0,0,0
+Brooklyn,22,22,K255,22K255,Elementary                         ,894,1,0,0,0,1,0,1:894
+Brooklyn,22,22,K269,22K269,Elementary                         ,304,1,0,0,0,1,0,1:304
+Brooklyn,22,22,K277,22K277,Elementary                         ,408,1,0,0,0,1,0,1:408
+Brooklyn,22,22,K278,22K278,Junior High-Intermediate-Middle    ,1009,5,0,0,0,5,0,1:202
+Brooklyn,22,22,K312,22K312,Elementary                         ,760,1,0,0,0,1,0,1:760
+Brooklyn,22,22,K315,22K315,Elementary                         ,612,0,0,0,0,0,0,0
+Brooklyn,22,22,K326,22K326,Early Childhood                    ,165,0,0,0,0,0,0,0
+Brooklyn,22,22,K361,22K361,Early Childhood                    ,375,0,0,0,0,0,0,0
+Brooklyn,22,22,K381,22K381,Junior High-Intermediate-Middle    ,284,2,0,0,0,2,0,1:142
+Brooklyn,22,22,K405,22K405,High School                        ,3909,17,0,0,0,17,0,1:230
+Brooklyn,22,22,K425,22K425,High School                        ,3224,17,0,0,0,17,0,1:190
+Brooklyn,22,22,K535,22K535,High School                        ,1014,4,0,0,0,4,0,1:254
+Brooklyn,22,15,K555,22K555,High School                        ,611,2,0,0,0,2,0,1:306
+Brooklyn,22,22,K611,22K611,High School                        ,402,2,0,0,0,2,0,1:201
+Brooklyn,22,22,K630,22K630,High School                        ,137,2,0,0,0,2,0,1:69
+Brooklyn,23,23,K041,23K041,K-8                                ,439,1,0,0,0,1,0,1:439
+Brooklyn,23,23,K137,23K137,K-8                                ,252,1,0,0,0,1,0,1:252
+Brooklyn,23,23,K150,23K150,Elementary                         ,173,1,0,0,0,1,0,1:173
+Brooklyn,23,23,K155,23K155,K-8                                ,368,0,0,0,0,0,0,0
+Brooklyn,23,23,K156,23K156,Elementary                         ,662,0,0,0,0,0,0,0
+Brooklyn,23,23,K165,23K165,K-8                                ,299,1,0,0,0,1,0,1:299
+Brooklyn,23,23,K178,23K178,K-8                                ,302,1,0,0,0,1,0,1:302
+Brooklyn,23,23,K184,23K184,K-8                                ,451,0,0,0,0,0,0,0
+Brooklyn,23,23,K284,23K284,K-8                                ,435,2,0,0,0,2,0,1:218
+Brooklyn,23,23,K298,23K298,Elementary                         ,167,1,0,0,0,1,0,1:167
+Brooklyn,23,23,K323,23K323,K-8                                ,425,0,0,0,0,0,0,0
+Brooklyn,23,23,K327,23K327,K-8                                ,344,2,0,0,0,2,0,1:172
+Brooklyn,23,23,K363,23K363,Junior High-Intermediate-Middle    ,85,1,0,0,0,1,0,1:85
+Brooklyn,23,23,K392,23K392,Junior High-Intermediate-Middle    ,284,1,0,0,0,1,0,1:284
+Brooklyn,23,23,K401,23K401,Elementary                         ,227,1,0,0,0,1,0,1:227
+Brooklyn,23,23,K446,23K446,Elementary                         ,304,1,0,0,0,1,0,1:304
+Brooklyn,23,23,K493,23K493,High School                        ,268,1,0,0,0,1,0,1:268
+Brooklyn,23,23,K514,23K514,High School                        ,174,1,0,0,0,1,0,1:174
+Brooklyn,23,23,K518,23K518,Junior High-Intermediate-Middle    ,197,1,0,0,0,1,0,1:197
+Brooklyn,23,23,K522,23K522,Junior High-Intermediate-Middle    ,157,1,0,0,0,1,0,1:157
+Brooklyn,23,23,K599,23K599,Elementary                         ,269,0,0,0,0,0,0,0
+Brooklyn,23,23,K643,23K643,High School                        ,184,1,0,0,0,1,0,1:184
+Brooklyn,23,23,K644,23K644,Secondary School                   ,605,1,0,0,0,1,0,1:605
+Brooklyn,23,23,K646,23K646,High School                        ,163,2,0,0,0,2,0,1:82
+Brooklyn,23,23,K647,23K647,High School                        ,138,1,0,0,0,1,0,1:138
+Brooklyn,23,23,K664,23K664,Junior High-Intermediate-Middle    ,88,1,0,0,0,1,0,1:88
+Brooklyn,23,23,K668,23K668,Junior High-Intermediate-Middle    ,104,1,0,0,0,1,0,1:104
+Brooklyn,23,23,K671,23K671,Junior High-Intermediate-Middle    ,190,1,0,0,0,1,0,1:190
+Brooklyn,23,23,K697,23K697,Secondary School                   ,265,1,0,0,0,1,0,1:265
+Queens,24,24,Q005,24Q005,Junior High-Intermediate-Middle    ,1790,5,0,0,0,5,0,1:358
+Queens,24,24,Q007,24Q007,Early Childhood                    ,938,1,0,0,0,1,0,1:938
+Queens,24,24,Q012,24Q012,Elementary                         ,1203,1,0,0,0,1,0,1:1203
+Queens,24,24,Q013,24Q013,Elementary                         ,1527,0,0,0,0,0,0,0
+Queens,24,24,Q014,24Q014,Elementary                         ,1702,1,0,0,0,1,0,1:1702
+Queens,24,24,Q016,24Q016,Elementary                         ,1607,2,0,0,0,2,0,1:804
+Queens,24,24,Q019,24Q019,Elementary                         ,1896,1,0,0,0,1,0,1:1896
+Queens,24,24,Q028,24Q028,Early Childhood                    ,495,1,0,0,0,1,0,1:495
+Queens,24,24,Q049,24Q049,K-8                                ,1112,2,0,0,0,2,0,1:556
+Queens,24,24,Q058,24Q058,Elementary                         ,967,1,0,0,0,1,0,1:967
+Queens,24,24,Q061,24Q061,Junior High-Intermediate-Middle    ,2110,4,0,0,0,4,0,1:528
+Queens,24,24,Q068,24Q068,Elementary                         ,613,0,0,0,0,0,0,0
+Queens,24,24,Q071,24Q071,Elementary                         ,727,2,0,0,0,2,0,1:364
+Queens,24,24,Q073,24Q073,Junior High-Intermediate-Middle    ,2005,6,0,0,0,6,0,1:334
+Queens,24,24,Q077,24Q077,Junior High-Intermediate-Middle    ,983,3,0,0,0,3,0,1:328
+Queens,24,24,Q081,24Q081,Elementary                         ,655,0,0,0,0,0,0,0
+Queens,24,24,Q087,24Q087,K-8                                ,504,0,0,0,0,0,0,0
+Queens,24,24,Q088,24Q088,Elementary                         ,969,0,0,0,0,0,0,0
+Queens,24,24,Q089,24Q089,Elementary                         ,1948,2,0,0,0,2,0,1:974
+Queens,24,24,Q091,24Q091,Elementary                         ,661,0,0,0,0,0,0,0
+Queens,24,24,Q093,24Q093,Junior High-Intermediate-Middle    ,1082,4,0,0,0,4,0,1:271
+Queens,24,24,Q102,24Q102,K-8                                ,1216,3,0,0,0,3,0,1:405
+Queens,24,24,Q110,24Q110,Elementary                         ,590,1,0,0,0,1,0,1:590
+Queens,24,24,Q113,24Q113,K-8                                ,891,1,0,0,0,1,0,1:891
+Queens,24,24,Q119,24Q119,K-8                                ,1196,3,0,0,0,3,0,1:399
+Queens,24,24,Q125,24Q125,Junior High-Intermediate-Middle    ,1475,4,0,0,0,4,0,1:369
+Queens,24,24,Q128,24Q128,K-8                                ,959,3,0,0,0,3,0,1:320
+Queens,24,24,Q143,24Q143,Elementary                         ,1649,2,0,0,0,2,0,1:825
+Queens,24,24,Q153,24Q153,Elementary                         ,1215,1,0,0,0,1,0,1:1215
+Queens,24,24,Q199,24Q199,Elementary                         ,895,0,0,0,0,0,0,0
+Queens,24,24,Q211,24Q211,Elementary                         ,261,1,0,0,0,1,0,1:261
+Queens,24,24,Q229,24Q229,Elementary                         ,1380,2,0,0,0,2,0,1:690
+Queens,24,24,Q236,24Q236,High School                        ,277,1,0,0,0,1,0,1:277
+Queens,24,24,Q239,24Q239,Elementary                         ,523,1,0,0,0,1,0,1:523
+Queens,24,24,Q264,24Q264,High School                        ,551,2,0,0,0,2,0,1:276
+Queens,24,24,Q267,24Q267,High School                        ,398,2,0,0,0,2,0,1:199
+Queens,24,24,Q290,24Q290,Elementary                         ,502,1,0,0,0,1,0,1:502
+Queens,24,24,Q293,24Q293,High School                        ,491,1,0,0,0,1,0,1:491
+Queens,24,24,Q296,24Q296,High School                        ,439,2,0,0,0,2,0,1:220
+Queens,24,24,Q299,24Q299,High School                        ,594,2,0,0,0,2,0,1:297
+Queens,24,24,Q305,24Q305,Elementary                         ,566,1,0,0,0,1,0,1:566
+Queens,24,24,Q307,24Q307,Elementary                         ,942,2,0,0,0,2,0,1:471
+Queens,24,24,Q311,24Q311,Junior High-Intermediate-Middle    ,527,2,0,0,0,2,0,1:264
+Queens,24,24,Q330,24Q330,Elementary                         ,560,1,0,0,0,1,0,1:560
+Queens,24,24,Q343,24Q343,Elementary                         ,259,1,0,0,0,1,0,1:259
+Queens,24,24,Q455,24Q455,High School                        ,1733,8,0,0,0,8,0,1:217
+Queens,24,24,Q485,24Q485,High School                        ,1614,9,0,0,0,9,0,1:179
+Queens,24,24,Q520,24Q520,High School                        ,473,1,0,0,0,1,0,1:473
+Queens,24,24,Q530,24Q530,High School                        ,499,1,0,0,0,1,0,1:499
+Queens,24,24,Q550,24Q550,High School                        ,776,4,0,0,0,4,0,1:194
+Queens,24,24,Q560,24Q560,Secondary School                   ,615,3,0,0,0,3,0,1:205
+Queens,24,24,Q585,24Q585,High School                        ,1004,3,0,0,0,3,0,1:335
+Queens,24,24,Q600,24Q600,High School                        ,1478,7,0,0,0,7,0,1:211
+Queens,24,24,Q610,24Q610,High School                        ,2079,6,0,0,0,6,0,1:347
+Queens,24,24,Q744,24Q744,High School                        ,152,1,0,0,0,1,0,1:152
+Queens,24,24,Q877,24Q877,Elementary                         ,442,1,0,0,0,1,0,1:442
+Queens,25,25,Q020,25Q020,Elementary                         ,1184,1,0,0,0,1,0,1:1184
+Queens,25,25,Q021,25Q021,Elementary                         ,1268,0,0,0,0,0,0,0
+Queens,25,25,Q022,25Q022,Elementary                         ,822,0,0,0,0,0,0,0
+Queens,25,25,Q024,25Q024,Elementary                         ,936,1,0,0,0,1,0,1:936
+Queens,25,25,Q025,25Q025,Junior High-Intermediate-Middle    ,937,2,0,0,0,2,0,1:469
+Queens,25,25,Q029,25Q029,Elementary                         ,639,1,0,0,0,1,0,1:639
+Queens,25,25,Q032,25Q032,Elementary                         ,910,0,0,0,0,0,0,0
+Queens,25,25,Q079,25Q079,Elementary                         ,1030,1,0,0,0,1,0,1:1030
+Queens,25,25,Q107,25Q107,Elementary                         ,857,0,0,0,0,0,0,0
+Queens,25,25,Q120,25Q120,Elementary                         ,945,1,0,0,0,1,0,1:945
+Queens,25,25,Q129,25Q129,Elementary                         ,1039,0,0,0,0,0,0,0
+Queens,25,26,Q130,25Q130,Early Childhood                    ,303,0,0,0,0,0,0,0
+Queens,25,25,Q154,25Q154,Elementary                         ,637,1,0,0,0,1,0,1:637
+Queens,25,25,Q163,25Q163,Elementary                         ,646,1,0,0,0,1,0,1:646
+Queens,25,25,Q164,25Q164,K-8                                ,646,1,0,0,0,1,0,1:646
+Queens,25,25,Q165,25Q165,Elementary                         ,686,0,0,0,0,0,0,0
+Queens,25,25,Q169,25Q169,Elementary                         ,392,0,0,0,0,0,0,0
+Queens,25,25,Q184,25Q184,Elementary                         ,471,1,0,0,0,1,0,1:471
+Queens,25,25,Q185,25Q185,Junior High-Intermediate-Middle    ,1473,4,0,0,0,4,0,1:368
+Queens,25,25,Q189,25Q189,Junior High-Intermediate-Middle    ,697,2,0,0,0,2,0,1:349
+Queens,25,25,Q193,25Q193,Elementary                         ,488,1,0,0,0,1,0,1:488
+Queens,25,25,Q194,25Q194,Junior High-Intermediate-Middle    ,1149,2,2,0,2,4,0,1:575
+Queens,25,25,Q200,25Q200,K-8                                ,421,2,0,0,0,2,0,1:211
+Queens,25,25,Q201,25Q201,Elementary                         ,427,1,0,0,0,1,0,1:427
+Queens,25,25,Q209,25Q209,Elementary                         ,583,1,0,0,0,1,0,1:583
+Queens,25,25,Q214,25Q214,Elementary                         ,500,1,0,0,0,1,0,1:500
+Queens,25,25,Q219,25Q219,K-8                                ,607,2,0,0,0,2,0,1:304
+Queens,25,25,Q237,25Q237,Junior High-Intermediate-Middle    ,1283,4,0,0,0,4,0,1:321
+Queens,25,25,Q240,25Q240,High School                        ,530,2,0,0,0,2,0,1:265
+Queens,25,25,Q241,25Q241,High School                        ,386,1,0,0,0,1,0,1:386
+Queens,25,25,Q242,25Q242,Early Childhood                    ,341,0,0,0,0,0,0,0
+Queens,25,25,Q244,25Q244,Early Childhood                    ,410,0,0,0,0,0,0,0
+Queens,25,25,Q250,25Q250,Junior High-Intermediate-Middle    ,375,2,0,0,0,2,0,1:188
+Queens,25,25,Q252,25Q252,Secondary School                   ,561,3,0,0,0,3,0,1:187
+Queens,25,25,Q263,25Q263,High School                        ,413,2,0,0,0,2,0,1:207
+Queens,25,25,Q281,25Q281,Secondary School                   ,663,2,0,0,0,2,0,1:332
+Queens,25,25,Q285,25Q285,Secondary School                   ,553,2,0,0,0,2,0,1:277
+Queens,25,25,Q294,25Q294,Junior High-Intermediate-Middle    ,365,0,1,0,1,1,0,0
+Queens,25,25,Q425,25Q425,High School                        ,3316,16,0,0,0,16,0,1:207
+Queens,25,25,Q460,25Q460,High School                        ,1596,9,0,0,0,9,0,1:177
+Queens,25,25,Q499,25Q499,K-8                                ,456,1,0,0,0,1,0,1:456
+Queens,25,25,Q525,25Q525,High School                        ,1101,6,0,0,0,6,0,1:184
+Queens,25,25,Q540,25Q540,High School                        ,284,2,0,0,0,2,0,1:142
+Queens,25,25,Q670,25Q670,High School                        ,703,3,0,0,0,3,0,1:234
+Queens,25,25,Q792,25Q792,High School                        ,140,1,0,0,0,1,0,1:140
+Queens,26,26,Q018,26Q018,Elementary                         ,611,1,0,0,0,1,0,1:611
+Queens,26,26,Q026,26Q026,Elementary                         ,628,0,0,0,0,0,0,0
+Queens,26,26,Q031,26Q031,Elementary                         ,499,0,0,0,0,0,0,0
+Queens,26,26,Q041,26Q041,Elementary                         ,492,0,0,0,0,0,0,0
+Queens,26,26,Q046,26Q046,Elementary                         ,568,1,0,0,0,1,0,1:568
+Queens,26,26,Q067,26Q067,Junior High-Intermediate-Middle    ,869,2,0,0,0,2,0,1:435
+Queens,26,26,Q074,26Q074,Junior High-Intermediate-Middle    ,1115,3,0,0,0,3,0,1:372
+Queens,26,26,Q094,26Q094,Elementary                         ,355,1,0,0,0,1,0,1:355
+Queens,26,26,Q098,26Q098,Elementary                         ,226,0,4,0,4,4,1,0
+Queens,26,26,Q115,26Q115,Elementary                         ,646,0,0,0,0,0,0,0
+Queens,26,26,Q133,26Q133,Elementary                         ,464,0,0,0,0,0,0,0
+Queens,26,26,Q158,26Q158,Junior High-Intermediate-Middle    ,1056,4,0,0,0,4,0,1:264
+Queens,26,26,Q159,26Q159,Elementary                         ,612,0,0,0,0,0,0,0
+Queens,26,26,Q162,26Q162,Elementary                         ,661,1,0,0,0,1,0,1:661
+Queens,26,26,Q172,26Q172,Junior High-Intermediate-Middle    ,968,2,0,0,0,2,0,1:484
+Queens,26,26,Q173,26Q173,Elementary                         ,892,1,0,0,0,1,0,1:892
+Queens,26,26,Q178,26Q178,K-8                                ,492,1,0,0,0,1,0,1:492
+Queens,26,26,Q186,26Q186,Elementary                         ,353,1,0,0,0,1,0,1:353
+Queens,26,26,Q188,26Q188,Elementary                         ,665,0,0,0,0,0,0,0
+Queens,26,26,Q191,26Q191,Elementary                         ,349,0,0,0,0,0,0,0
+Queens,26,26,Q203,26Q203,Elementary                         ,847,1,0,0,0,1,0,1:847
+Queens,26,26,Q205,26Q205,Elementary                         ,281,0,0,0,0,0,0,0
+Queens,26,26,Q213,26Q213,Elementary                         ,377,0,0,0,0,0,0,0
+Queens,26,26,Q216,26Q216,Junior High-Intermediate-Middle    ,1414,1,0,0,0,1,0,1:1414
+Queens,26,26,Q221,26Q221,Elementary                         ,595,1,0,0,0,1,0,1:595
+Queens,26,26,Q266,26Q266,K-8                                ,634,1,0,0,0,1,0,1:634
+Queens,26,26,Q315,26Q315,High School                        ,310,2,0,0,0,2,0,1:155
+Queens,26,26,Q415,26Q415,High School                        ,3617,15,0,0,0,15,0,1:241
+Queens,26,26,Q430,26Q430,High School                        ,4324,9,0,0,0,9,0,1:480
+Queens,26,26,Q435,26Q435,High School                        ,1108,7,0,0,0,7,0,1:158
+Queens,26,26,Q495,26Q495,High School                        ,2911,11,0,0,0,11,0,1:265
+Queens,26,26,Q566,26Q566,High School                        ,1074,6,0,0,0,6,0,1:179
+Queens,27,27,Q042,27Q042,K-8                                ,625,2,0,0,0,2,0,1:313
+Queens,27,27,Q043,27Q043,K-8                                ,797,1,0,0,0,1,0,1:797
+Queens,27,27,Q045,27Q045,Elementary                         ,298,1,0,0,0,1,0,1:298
+Queens,27,27,Q047,27Q047,K-8                                ,195,0,0,0,0,0,0,0
+Queens,27,27,Q051,27Q051,Early Childhood                    ,188,0,0,0,0,0,0,0
+Queens,27,27,Q053,27Q053,Junior High-Intermediate-Middle    ,283,3,0,0,0,3,0,1:94
+Queens,27,27,Q056,27Q056,Elementary                         ,374,0,0,0,0,0,0,0
+Queens,27,27,Q060,27Q060,Elementary                         ,1114,1,0,0,0,1,0,1:1114
+Queens,27,27,Q062,27Q062,Elementary                         ,858,0,0,0,0,0,0,0
+Queens,27,27,Q063,27Q063,Elementary                         ,1230,0,0,0,0,0,0,0
+Queens,27,27,Q064,27Q064,Elementary                         ,626,1,0,0,0,1,0,1:626
+Queens,27,27,Q065,27Q065,Elementary                         ,440,0,0,0,0,0,0,0
+Queens,27,27,Q066,27Q066,Elementary                         ,471,0,0,0,0,0,0,0
+Queens,27,27,Q090,27Q090,Elementary                         ,781,0,0,0,0,0,0,0
+Queens,27,27,Q096,27Q096,Elementary                         ,259,1,0,0,0,1,0,1:259
+Queens,27,27,Q097,27Q097,Elementary                         ,682,0,0,0,0,0,0,0
+Queens,27,27,Q100,27Q100,Elementary                         ,859,0,0,0,0,0,0,0
+Queens,27,27,Q104,27Q104,Elementary                         ,619,0,0,0,0,0,0,0
+Queens,27,27,Q105,27Q105,K-8                                ,747,2,0,0,0,2,0,1:374
+Queens,27,27,Q106,27Q106,Elementary                         ,173,0,0,0,0,0,0,0
+Queens,27,27,Q108,27Q108,Elementary                         ,1396,1,0,0,0,1,0,1:1396
+Queens,27,27,Q114,27Q114,K-8                                ,635,2,0,0,0,2,0,1:318
+Queens,27,27,Q123,27Q123,Elementary                         ,616,0,0,0,0,0,0,0
+Queens,27,27,Q124,27Q124,K-8                                ,1205,3,0,0,0,3,0,1:402
+Queens,27,27,Q137,27Q137,Junior High-Intermediate-Middle    ,1885,5,0,0,0,5,0,1:377
+Queens,27,27,Q146,27Q146,K-8                                ,671,1,0,0,0,1,0,1:671
+Queens,27,27,Q155,27Q155,Elementary                         ,449,0,0,0,0,0,0,0
+Queens,27,27,Q183,27Q183,K-8                                ,498,1,0,0,0,1,0,1:498
+Queens,27,27,Q197,27Q197,Elementary                         ,433,0,0,0,0,0,0,0
+Queens,27,27,Q202,27Q202,Junior High-Intermediate-Middle    ,1065,4,0,0,0,4,0,1:266
+Queens,27,27,Q207,27Q207,K-8                                ,646,2,0,0,0,2,0,1:323
+Queens,27,27,Q210,27Q210,Junior High-Intermediate-Middle    ,1801,5,0,0,0,5,0,1:360
+Queens,27,27,Q223,27Q223,Elementary                         ,531,0,0,0,0,0,0,0
+Queens,27,27,Q226,27Q226,Junior High-Intermediate-Middle    ,867,3,0,0,0,3,0,1:289
+Queens,27,27,Q232,27Q232,K-8                                ,1004,2,0,0,0,2,0,1:502
+Queens,27,27,Q253,27Q253,Elementary                         ,538,1,0,0,0,1,0,1:538
+Queens,27,27,Q254,27Q254,Elementary                         ,600,1,0,0,0,1,0,1:600
+Queens,27,27,Q260,27Q260,High School                        ,292,2,0,0,0,2,0,1:146
+Queens,27,27,Q261,27Q261,High School                        ,238,1,0,0,0,1,0,1:238
+Queens,27,27,Q262,27Q262,Secondary School                   ,786,3,0,0,0,3,0,1:262
+Queens,27,27,Q273,27Q273,Elementary                         ,312,0,0,0,0,0,0,0
+Queens,27,27,Q282,27Q282,Junior High-Intermediate-Middle    ,257,1,0,0,0,1,0,1:257
+Queens,27,27,Q297,27Q297,Junior High-Intermediate-Middle    ,388,2,0,0,0,2,0,1:194
+Queens,27,27,Q302,27Q302,High School                        ,406,3,0,0,0,3,0,1:135
+Queens,27,27,Q306,27Q306,Elementary                         ,399,1,0,0,0,1,0,1:399
+Queens,27,27,Q308,27Q308,High School                        ,598,3,0,0,0,3,0,1:199
+Queens,27,27,Q309,27Q309,Secondary School                   ,576,4,0,0,0,4,0,1:144
+Queens,27,27,Q314,27Q314,High School                        ,246,1,0,0,0,1,0,1:246
+Queens,27,27,Q316,27Q316,Elementary                         ,203,1,0,0,0,1,0,1:203
+Queens,27,27,Q317,27Q317,Elementary                         ,419,1,0,0,0,1,0,1:419
+Queens,27,27,Q318,27Q318,Junior High-Intermediate-Middle    ,220,1,0,0,0,1,0,1:220
+Queens,27,27,Q319,27Q319,Junior High-Intermediate-Middle    ,297,1,0,0,0,1,0,1:297
+Queens,27,27,Q323,27Q323,Secondary School                   ,1346,4,0,0,0,4,0,1:337
+Queens,27,27,Q324,27Q324,High School                        ,289,2,0,0,0,2,0,1:145
+Queens,27,27,Q333,27Q333,K-8                                ,408,1,0,0,0,1,0,1:408
+Queens,27,27,Q334,27Q334,High School                        ,276,1,0,0,0,1,0,1:276
+Queens,27,27,Q351,27Q351,High School                        ,316,1,0,0,0,1,0,1:316
+Queens,27,27,Q362,27Q362,Elementary                         ,476,0,0,0,0,0,0,0
+Queens,27,27,Q400,27Q400,High School                        ,327,3,0,0,0,3,0,1:109
+Queens,27,27,Q475,27Q475,High School                        ,1610,10,0,0,0,10,0,1:161
+Queens,27,27,Q480,27Q480,High School                        ,2000,17,0,0,0,17,0,1:118
+Queens,27,27,Q650,27Q650,High School                        ,1004,5,0,0,0,5,0,1:201
+Queens,28,28,Q008,28Q008,Junior High-Intermediate-Middle    ,319,2,0,0,0,2,0,1:160
+Queens,28,28,Q040,28Q040,Elementary                         ,425,0,0,0,0,0,0,0
+Queens,28,28,Q048,28Q048,Elementary                         ,524,1,0,0,0,1,0,1:524
+Queens,28,28,Q050,28Q050,Elementary                         ,710,0,0,0,0,0,0,0
+Queens,28,28,Q054,28Q054,Elementary                         ,554,0,0,0,0,0,0,0
+Queens,28,28,Q055,28Q055,Elementary                         ,442,0,0,0,0,0,0,0
+Queens,28,28,Q072,28Q072,Junior High-Intermediate-Middle    ,419,2,0,0,0,2,0,1:210
+Queens,28,28,Q080,28Q080,Elementary                         ,456,0,0,0,0,0,0,0
+Queens,28,28,Q082,28Q082,Elementary                         ,628,1,0,0,0,1,0,1:628
+Queens,28,28,Q086,28Q086,Elementary                         ,926,0,0,0,0,0,0,0
+Queens,28,28,Q099,28Q099,Elementary                         ,787,0,0,0,0,0,0,0
+Queens,28,28,Q101,28Q101,Elementary                         ,634,1,1,0,1,2,0,1:634
+Queens,28,28,Q117,28Q117,Elementary                         ,919,0,0,0,0,0,0,0
+Queens,28,28,Q121,28Q121,Elementary                         ,875,0,0,0,0,0,0,0
+Queens,28,28,Q139,28Q139,Elementary                         ,741,0,0,0,0,0,0,0
+Queens,28,28,Q140,28Q140,Elementary                         ,388,0,0,0,0,0,0,0
+Queens,28,28,Q144,28Q144,Elementary                         ,807,1,0,0,0,1,0,1:807
+Queens,28,28,Q157,28Q157,Junior High-Intermediate-Middle    ,1549,3,0,0,0,3,0,1:516
+Queens,28,28,Q160,28Q160,Elementary                         ,581,0,0,0,0,0,0,0
+Queens,28,28,Q161,28Q161,Elementary                         ,672,0,0,0,0,0,0,0
+Queens,28,28,Q167,28Q167,Secondary School                   ,814,5,0,0,0,5,0,1:163
+Queens,28,28,Q174,28Q174,Elementary                         ,625,0,0,0,0,0,0,0
+Queens,28,28,Q175,28Q175,Elementary                         ,714,1,0,0,0,1,0,1:714
+Queens,28,28,Q182,28Q182,Elementary                         ,767,0,0,0,0,0,0,0
+Queens,28,28,Q190,28Q190,Junior High-Intermediate-Middle    ,994,4,0,0,0,4,0,1:249
+Queens,28,28,Q196,28Q196,Elementary                         ,909,0,1,0,1,1,0,0
+Queens,28,28,Q206,28Q206,Elementary                         ,530,0,0,0,0,0,0,0
+Queens,28,28,Q217,28Q217,Junior High-Intermediate-Middle    ,1589,3,0,0,0,3,0,1:530
+Queens,28,28,Q220,28Q220,Elementary                         ,641,0,0,0,0,0,0,0
+Queens,28,28,Q284,28Q284,Secondary School                   ,614,2,0,0,0,2,0,1:307
+Queens,28,28,Q287,28Q287,Junior High-Intermediate-Middle    ,347,2,0,0,0,2,0,1:174
+Queens,28,28,Q303,28Q303,Early Childhood                    ,172,0,0,0,0,0,0,0
+Queens,28,28,Q310,28Q310,Secondary School                   ,636,2,0,0,0,2,0,1:318
+Queens,28,28,Q312,28Q312,Elementary                         ,106,0,0,0,0,0,0,0
+Queens,28,28,Q325,28Q325,High School                        ,461,2,0,0,0,2,0,1:231
+Queens,28,28,Q328,28Q328,High School                        ,426,1,0,0,0,1,0,1:426
+Queens,28,28,Q332,28Q332,Junior High-Intermediate-Middle    ,308,1,0,0,0,1,0,1:308
+Queens,28,28,Q338,28Q338,High School                        ,137,1,0,0,0,1,0,1:137
+Queens,28,28,Q349,28Q349,Elementary                         ,156,0,0,0,0,0,0,0
+Queens,28,28,Q350,28Q350,High School                        ,503,3,0,0,0,3,0,1:168
+Queens,28,28,Q354,28Q354,Elementary                         ,586,1,0,0,0,1,0,1:586
+Queens,28,28,Q358,28Q358,Junior High-Intermediate-Middle    ,257,0,0,0,0,0,0,0
+Queens,28,28,Q440,28Q440,High School                        ,3765,12,0,0,0,12,0,1:314
+Queens,28,28,Q505,28Q505,High School                        ,3151,17,0,0,0,17,0,1:185
+Queens,28,28,Q620,28Q620,High School                        ,2037,8,0,0,0,8,0,1:255
+Queens,28,28,Q680,28Q680,Secondary School                   ,693,3,0,0,0,3,0,1:231
+Queens,28,28,Q686,28Q686,High School                        ,1031,6,0,0,0,6,0,1:172
+Queens,28,28,Q687,28Q687,High School                        ,458,2,0,0,0,2,0,1:229
+Queens,28,28,Q690,28Q690,High School                        ,498,4,0,0,0,4,0,1:125
+Queens,28,28,Q896,28Q896,Secondary School                   ,552,2,0,0,0,2,0,1:276
+Queens,29,29,Q015,29Q015,Elementary                         ,409,1,0,0,0,1,0,1:409
+Queens,29,29,Q033,29Q033,Elementary                         ,946,0,0,0,0,0,0,0
+Queens,29,29,Q034,29Q034,Elementary                         ,508,2,0,0,0,2,0,1:254
+Queens,29,29,Q035,29Q035,Elementary                         ,616,0,0,0,0,0,0,0
+Queens,29,29,Q036,29Q036,Elementary                         ,439,0,0,0,0,0,0,0
+Queens,29,29,Q037,29Q037,Elementary                         ,434,1,0,0,0,1,0,1:434
+Queens,29,29,Q038,29Q038,Elementary                         ,214,1,0,0,0,1,0,1:214
+Queens,29,29,Q052,29Q052,Elementary                         ,393,1,0,0,0,1,0,1:393
+Queens,29,29,Q059,29Q059,Junior High-Intermediate-Middle    ,526,3,0,0,0,3,0,1:175
+Queens,29,29,Q095,29Q095,Elementary                         ,1405,1,0,0,0,1,0,1:1405
+Queens,29,29,Q109,29Q109,Junior High-Intermediate-Middle    ,989,2,0,0,0,2,0,1:495
+Queens,29,29,Q116,29Q116,K-8                                ,658,2,0,0,0,2,0,1:329
+Queens,29,29,Q118,29Q118,Elementary                         ,443,1,0,0,0,1,0,1:443
+Queens,29,29,Q131,29Q131,Elementary                         ,838,1,0,0,0,1,0,1:838
+Queens,29,29,Q132,29Q132,Elementary                         ,337,1,0,0,0,1,0,1:337
+Queens,29,29,Q134,29Q134,Elementary                         ,365,1,0,0,0,1,0,1:365
+Queens,29,29,Q135,29Q135,Elementary                         ,891,1,0,0,0,1,0,1:891
+Queens,29,29,Q136,29Q136,Elementary                         ,574,0,0,0,0,0,0,0
+Queens,29,29,Q138,29Q138,K-8                                ,698,1,0,0,0,1,0,1:698
+Queens,29,29,Q147,29Q147,K-8                                ,552,2,0,0,0,2,0,1:276
+Queens,29,29,Q156,29Q156,Elementary                         ,246,1,0,0,0,1,0,1:246
+Queens,29,29,Q176,29Q176,Elementary                         ,663,0,0,0,0,0,0,0
+Queens,29,29,Q181,29Q181,Elementary                         ,287,0,0,0,0,0,0,0
+Queens,29,29,Q192,29Q192,Junior High-Intermediate-Middle    ,451,1,0,0,0,1,0,1:451
+Queens,29,29,Q195,29Q195,Elementary                         ,498,0,0,0,0,0,0,0
+Queens,29,26,Q208,29Q208,K-8                                ,720,3,0,0,0,3,0,1:240
+Queens,29,29,Q238,29Q238,Junior High-Intermediate-Middle    ,1425,4,0,0,0,4,0,1:356
+Queens,29,29,Q243,29Q243,High School                        ,387,2,0,0,0,2,0,1:194
+Queens,29,29,Q248,29Q248,High School                        ,427,2,0,0,0,2,0,1:214
+Queens,29,29,Q251,29Q251,Elementary                         ,311,1,0,0,0,1,0,1:311
+Queens,29,29,Q259,29Q259,Secondary School                   ,587,2,0,0,0,2,0,1:294
+Queens,29,29,Q265,29Q265,High School                        ,457,2,0,0,0,2,0,1:229
+Queens,29,29,Q268,29Q268,K-8                                ,594,1,0,0,0,1,0,1:594
+Queens,29,29,Q270,29Q270,K-8                                ,676,1,0,0,0,1,0,1:676
+Queens,29,29,Q272,29Q272,High School                        ,442,3,0,0,0,3,0,1:147
+Queens,29,29,Q283,29Q283,Secondary School                   ,579,3,0,0,0,3,0,1:193
+Queens,29,29,Q289,29Q289,Junior High-Intermediate-Middle    ,223,2,0,0,0,2,0,1:112
+Queens,29,29,Q295,29Q295,K-8                                ,480,1,0,0,0,1,0,1:480
+Queens,29,29,Q313,29Q313,High School                        ,288,1,0,0,0,1,0,1:288
+Queens,29,29,Q326,29Q326,High School                        ,326,2,0,0,0,2,0,1:163
+Queens,29,29,Q327,29Q327,Secondary School                   ,482,2,0,0,0,2,0,1:241
+Queens,29,29,Q355,29Q355,Junior High-Intermediate-Middle    ,300,1,0,1,1,2,1,1:300
+Queens,29,29,Q356,29Q356,Junior High-Intermediate-Middle    ,280,1,0,1,1,2,1,1:280
+Queens,29,29,Q360,29Q360,Elementary                         ,111,0,0,0,0,0,0,0
+Queens,29,29,Q492,29Q492,High School                        ,365,1,0,0,0,1,0,1:365
+Queens,29,29,Q498,29Q498,High School                        ,422,2,0,0,0,2,0,1:211
+Queens,30,30,Q002,30Q002,Elementary                         ,562,1,0,0,0,1,0,1:562
+Queens,30,30,Q010,30Q010,Junior High-Intermediate-Middle    ,723,2,0,0,0,2,1,1:362
+Queens,30,30,Q011,30Q011,Elementary                         ,1088,0,0,0,0,0,0,0
+Queens,30,30,Q017,30Q017,Elementary                         ,500,2,0,0,0,2,0,1:250
+Queens,30,30,Q069,30Q069,Elementary                         ,948,0,0,0,0,0,0,0
+Queens,30,30,Q070,30Q070,Elementary                         ,774,0,0,0,0,0,0,0
+Queens,30,30,Q076,30Q076,Elementary                         ,413,1,0,0,0,1,0,1:413
+Queens,30,30,Q078,30Q078,K-8                                ,593,2,0,0,0,2,0,1:297
+Queens,30,30,Q084,30Q084,Elementary                         ,222,0,0,0,0,0,0,0
+Queens,30,30,Q085,30Q085,Elementary                         ,540,1,0,0,0,1,0,1:540
+Queens,30,30,Q092,30Q092,Elementary                         ,830,0,0,0,0,0,0,0
+Queens,30,30,Q111,30Q111,K-8                                ,232,0,0,0,0,0,0,0
+Queens,30,30,Q112,30Q112,Elementary                         ,423,1,0,0,0,1,0,1:423
+Queens,30,30,Q122,30Q122,K-8                                ,1293,4,0,0,0,4,0,1:323
+Queens,30,30,Q126,30Q126,Junior High-Intermediate-Middle    ,607,2,0,0,0,2,0,1:304
+Queens,30,30,Q127,30Q127,K-8                                ,1168,3,0,0,0,3,0,1:389
+Queens,30,30,Q141,30Q141,Junior High-Intermediate-Middle    ,1092,4,0,0,0,4,0,1:273
+Queens,30,30,Q145,30Q145,Junior High-Intermediate-Middle    ,1820,3,0,0,0,3,0,1:607
+Queens,30,30,Q148,30Q148,Elementary                         ,857,1,0,0,0,1,0,1:857
+Queens,30,30,Q149,30Q149,Elementary                         ,1081,2,0,0,0,2,0,1:541
+Queens,30,30,Q150,30Q150,Elementary                         ,1062,1,0,0,0,1,0,1:1062
+Queens,30,30,Q151,30Q151,Elementary                         ,346,0,0,0,0,0,0,0
+Queens,30,30,Q152,30Q152,Elementary                         ,1111,1,0,0,0,1,0,1:1111
+Queens,30,30,Q166,30Q166,Elementary                         ,1093,2,0,0,0,2,0,1:547
+Queens,30,30,Q171,30Q171,Elementary                         ,422,0,0,0,0,0,0,0
+Queens,30,30,Q204,30Q204,Junior High-Intermediate-Middle    ,480,3,0,0,0,3,0,1:160
+Queens,30,30,Q212,30Q212,Elementary                         ,764,1,0,0,0,1,0,1:764
+Queens,30,30,Q222,30Q222,Early Childhood                    ,245,1,0,0,0,1,0,1:245
+Queens,30,30,Q227,30Q227,Junior High-Intermediate-Middle    ,1558,3,0,0,0,3,0,1:519
+Queens,30,30,Q228,30Q228,Early Childhood                    ,285,0,0,0,0,0,0,0
+Queens,30,30,Q230,30Q230,Junior High-Intermediate-Middle    ,1278,4,0,0,0,4,0,1:320
+Queens,30,30,Q234,30Q234,Elementary                         ,511,0,0,0,0,0,0,0
+Queens,30,30,Q235,30Q235,Junior High-Intermediate-Middle    ,136,1,0,0,0,1,0,1:136
+Queens,30,30,Q258,30Q258,High School                        ,428,3,0,0,0,3,0,1:143
+Queens,30,30,Q280,30Q280,Elementary                         ,698,2,0,0,0,2,0,1:349
+Queens,30,30,Q286,30Q286,Secondary School                   ,548,1,0,0,0,1,0,1:548
+Queens,30,30,Q291,30Q291,Junior High-Intermediate-Middle    ,401,2,0,0,0,2,0,1:201
+Queens,30,30,Q300,30Q300,K-8                                ,365,1,0,0,0,1,0,1:365
+Queens,30,30,Q301,30Q301,High School                        ,534,1,0,0,0,1,0,1:534
+Queens,30,30,Q329,30Q329,Elementary                         ,289,0,0,0,0,0,0,0
+Queens,30,30,Q361,30Q361,Elementary                         ,130,0,0,0,0,0,0,0
+Queens,30,30,Q445,30Q445,High School                        ,2171,10,0,0,0,10,0,1:217
+Queens,30,30,Q450,30Q450,High School                        ,1949,9,0,0,0,9,0,1:217
+Queens,30,30,Q501,30Q501,High School                        ,838,3,0,0,0,3,0,1:279
+Queens,30,30,Q502,30Q502,High School                        ,939,6,0,0,0,6,0,1:157
+Queens,30,30,Q555,30Q555,High School                        ,841,5,0,0,0,5,0,1:168
+Queens,30,30,Q575,30Q575,High School                        ,975,4,0,0,0,4,0,1:244
+Queens,30,30,Q580,30Q580,Secondary School                   ,515,2,0,0,0,2,0,1:258
+Staten Island,31,31,R001,31R001,Elementary                         ,453,1,0,0,0,1,0,1:453
+Staten Island,31,31,R002,31R002,Junior High-Intermediate-Middle    ,838,2,0,0,0,2,0,1:419
+Staten Island,31,31,R003,31R003,Elementary                         ,773,1,0,0,0,1,0,1:773
+Staten Island,31,31,R004,31R004,Elementary                         ,689,0,0,0,0,0,0,0
+Staten Island,31,31,R005,31R005,Elementary                         ,279,0,0,0,0,0,0,0
+Staten Island,31,31,R006,31R006,Elementary                         ,528,0,0,0,0,0,0,0
+Staten Island,31,31,R007,31R007,Junior High-Intermediate-Middle    ,1144,2,0,0,0,2,0,1:572
+Staten Island,31,31,R008,31R008,Elementary                         ,562,0,0,0,0,0,0,0
+Staten Island,31,31,R009,31R009,Elementary                         ,222,1,0,0,0,1,0,1:222
+Staten Island,31,31,R010,31R010,Elementary                         ,136,0,0,0,0,0,0,0
+Staten Island,31,31,R011,31R011,Elementary                         ,250,1,0,0,0,1,0,1:250
+Staten Island,31,31,R013,31R013,Elementary                         ,832,1,0,0,0,1,0,1:832
+Staten Island,31,31,R016,31R016,Elementary                         ,456,1,0,0,0,1,0,1:456
+Staten Island,31,31,R018,31R018,Elementary                         ,489,1,0,0,0,1,0,1:489
+Staten Island,31,31,R019,31R019,Elementary                         ,574,0,0,0,0,0,0,0
+Staten Island,31,31,R020,31R020,Elementary                         ,462,0,0,0,0,0,0,0
+Staten Island,31,31,R021,31R021,Elementary                         ,358,0,0,0,0,0,0,0
+Staten Island,31,31,R022,31R022,Elementary                         ,938,1,0,0,0,1,0,1:938
+Staten Island,31,31,R023,31R023,Elementary                         ,480,0,0,0,0,0,0,0
+Staten Island,31,31,R024,31R024,Junior High-Intermediate-Middle    ,1277,4,0,0,0,4,0,1:319
+Staten Island,31,31,R026,31R026,Elementary                         ,220,0,0,0,0,0,0,0
+Staten Island,31,31,R027,31R027,Junior High-Intermediate-Middle    ,967,4,0,0,0,4,0,1:242
+Staten Island,31,31,R028,31R028,Secondary School                   ,183,1,0,0,0,1,0,1:183
+Staten Island,31,31,R029,31R029,Elementary                         ,661,0,0,0,0,0,0,0
+Staten Island,31,31,R030,31R030,Elementary                         ,791,0,0,0,0,0,0,0
+Staten Island,31,31,R031,31R031,Elementary                         ,340,1,0,0,0,1,0,1:340
+Staten Island,31,31,R032,31R032,Elementary                         ,608,0,0,0,0,0,0,0
+Staten Island,31,31,R034,31R034,Junior High-Intermediate-Middle    ,1108,2,0,0,0,2,0,1:554
+Staten Island,31,31,R035,31R035,Elementary                         ,381,1,0,0,0,1,0,1:381
+Staten Island,31,31,R036,31R036,Elementary                         ,786,0,0,0,0,0,0,0
+Staten Island,31,31,R038,31R038,Elementary                         ,339,0,0,0,0,0,0,0
+Staten Island,31,31,R039,31R039,Elementary                         ,515,1,0,0,0,1,0,1:515
+Staten Island,31,31,R041,31R041,Elementary                         ,649,1,0,0,0,1,0,1:649
+Staten Island,31,31,R042,31R042,Elementary                         ,951,0,0,0,0,0,0,0
+Staten Island,31,31,R044,31R044,Elementary                         ,791,1,0,0,0,1,0,1:791
+Staten Island,31,31,R045,31R045,Elementary                         ,808,0,0,0,0,0,0,0
+Staten Island,31,31,R046,31R046,Elementary                         ,256,1,0,0,0,1,0,1:256
+Staten Island,31,31,R047,31R047,High School                        ,481,2,0,0,0,2,0,1:241
+Staten Island,31,31,R048,31R048,K-8                                ,947,3,0,0,0,3,0,1:316
+Staten Island,31,31,R049,31R049,Junior High-Intermediate-Middle    ,713,3,0,0,0,3,0,1:238
+Staten Island,31,31,R050,31R050,Elementary                         ,746,0,0,0,0,0,0,0
+Staten Island,31,31,R051,31R051,Junior High-Intermediate-Middle    ,1242,3,0,0,0,3,0,1:414
+Staten Island,31,31,R052,31R052,Elementary                         ,433,1,0,0,0,1,0,1:433
+Staten Island,31,31,R053,31R053,Elementary                         ,719,0,0,0,0,0,0,0
+Staten Island,31,31,R054,31R054,Elementary                         ,688,0,0,0,0,0,0,0
+Staten Island,31,31,R055,31R055,Elementary                         ,584,0,0,0,0,0,0,0
+Staten Island,31,31,R056,31R056,Elementary                         ,522,0,0,0,0,0,0,0
+Staten Island,31,31,R057,31R057,Elementary                         ,601,0,0,0,0,0,0,0
+Staten Island,31,31,R058,31R058,Elementary                         ,674,1,0,0,0,1,0,1:674
+Staten Island,31,31,R059,31R059,Elementary                         ,183,1,0,0,0,1,0,1:183
+Staten Island,31,31,R060,31R060,Elementary                         ,842,0,0,0,0,0,0,0
+Staten Island,31,31,R061,31R061,Junior High-Intermediate-Middle    ,997,3,0,0,0,3,0,1:332
+Staten Island,31,31,R062,31R062,Elementary                         ,121,0,0,0,0,0,0,0
+Staten Island,31,31,R063,31R063,Junior High-Intermediate-Middle    ,449,3,0,0,0,3,0,1:150
+Staten Island,31,31,R064,31R064,High School                        ,419,3,0,0,0,3,0,1:140
+Staten Island,31,31,R065,31R065,Elementary                         ,385,0,0,0,0,0,0,0
+Staten Island,31,31,R068,31R068,Elementary                         ,54,0,0,0,0,0,1,0
+Staten Island,31,31,R069,31R069,Elementary                         ,924,1,0,0,0,1,0,1:924
+Staten Island,31,31,R072,31R072,Junior High-Intermediate-Middle    ,1310,4,0,0,0,4,0,1:328
+Staten Island,31,31,R074,31R074,Elementary                         ,296,0,0,0,0,0,0,0
+Staten Island,31,31,R075,31R075,Junior High-Intermediate-Middle    ,1369,5,0,0,0,5,0,1:274
+Staten Island,31,31,R078,31R078,Elementary                         ,773,1,0,0,0,1,0,1:773
+Staten Island,31,31,R080,31R080,K-12 All Grades                    ,1292,3,1,0,1,4,0,1:431
+Staten Island,31,31,R440,31R440,High School                        ,2810,12,0,0,0,12,0,1:234
+Staten Island,31,31,R445,31R445,High School                        ,1415,6,0,0,0,6,0,1:236
+Staten Island,31,31,R450,31R450,High School                        ,2347,10,0,0,0,10,0,1:235
+Staten Island,31,31,R455,31R455,High School                        ,3794,16,0,0,0,16,0,1:237
+Staten Island,31,31,R460,31R460,High School                        ,3189,15,0,0,0,15,0,1:213
+Staten Island,31,31,R470,31R470,High School                        ,104,1,0,0,0,1,0,1:104
+Staten Island,31,31,R600,31R600,High School                        ,718,3,0,0,0,3,0,1:239
+Staten Island,31,31,R605,31R605,High School                        ,1309,6,0,0,0,6,0,1:218
+Staten Island,31,31,R861,31R861,K-8                                ,887,2,0,0,0,2,0,1:444
+Brooklyn,32,32,K045,32K045,K-8                                ,646,2,0,0,0,2,0,1:323
+Brooklyn,32,32,K075,32K075,Elementary                         ,330,0,0,0,0,0,0,0
+Brooklyn,32,32,K086,32K086,Elementary                         ,375,0,0,0,0,0,0,0
+Brooklyn,32,32,K106,32K106,Elementary                         ,417,0,0,0,0,0,0,0
+Brooklyn,32,32,K116,32K116,Elementary                         ,438,1,0,0,0,1,0,1:438
+Brooklyn,32,32,K123,32K123,Elementary                         ,616,0,0,0,0,0,0,0
+Brooklyn,32,32,K145,32K145,Elementary                         ,560,0,0,0,0,0,0,0
+Brooklyn,32,32,K151,32K151,Elementary                         ,288,0,0,0,0,0,0,0
+Brooklyn,32,32,K162,32K162,Junior High-Intermediate-Middle    ,402,2,0,0,0,2,0,1:201
+Brooklyn,32,32,K168,32K168,High School                        ,255,1,0,0,0,1,0,1:255
+Brooklyn,32,32,K274,32K274,Elementary                         ,391,0,0,0,0,0,0,0
+Brooklyn,32,32,K291,32K291,Junior High-Intermediate-Middle    ,287,1,0,0,0,1,0,1:287
+Brooklyn,32,32,K299,32K299,Elementary                         ,257,1,0,0,0,1,0,1:257
+Brooklyn,32,32,K347,32K347,Junior High-Intermediate-Middle    ,286,1,0,0,0,1,0,1:286
+Brooklyn,32,32,K349,32K349,Junior High-Intermediate-Middle    ,285,1,0,0,0,1,0,1:285
+Brooklyn,32,32,K376,32K376,Elementary                         ,541,0,0,0,0,0,0,0
+Brooklyn,32,32,K377,32K377,K-8                                ,316,1,0,0,0,1,0,1:316
+Brooklyn,32,32,K383,32K383,Junior High-Intermediate-Middle    ,895,2,0,0,0,2,0,1:448
+Brooklyn,32,32,K384,32K384,K-8                                ,513,1,0,0,0,1,0,1:513
+Brooklyn,32,32,K403,32K403,High School                        ,266,1,0,0,0,1,0,1:266
+Brooklyn,32,32,K545,32K545,High School                        ,480,1,0,0,0,1,0,1:480
+Brooklyn,32,32,K549,32K549,High School                        ,350,2,0,0,0,2,0,1:175
+Brooklyn,32,32,K552,32K552,High School                        ,173,1,0,0,0,1,0,1:173
+Brooklyn,32,32,K554,32K554,Secondary School                   ,408,0,0,0,0,0,0,0
+Brooklyn,32,32,K556,32K556,High School                        ,259,2,0,0,0,2,0,1:130
+Brooklyn,32,32,K562,32K562,Junior High-Intermediate-Middle    ,305,2,0,0,0,2,0,1:153
+Brooklyn,32,32,K564,32K564,High School                        ,161,1,0,0,0,1,0,1:161
+Brooklyn,75,19,K004,75K004,Elementary                         ,299,8,0,0,0,8,0,1:37
+Brooklyn,75,19,K036,75K036,K-12 All Grades                    ,251,3,0,0,0,3,0,1:84
+Brooklyn,75,15,K053,75K053,K-12 All Grades                    ,404,5,0,0,0,5,0,1:81
+Brooklyn,75,22,K077,75K077,K-12 All Grades                    ,242,3,0,0,0,3,0,1:81
+Brooklyn,75,13,K140,75K140,K-8                                ,256,4,0,0,0,4,0,1:64
+Brooklyn,75,17,K141,75K141,K-12 All Grades                    ,310,3,0,0,0,3,0,1:103
+Brooklyn,75,20,K231,75K231,K-8                                ,293,5,0,0,0,5,0,1:59
+Brooklyn,75,14,K368,75K368,K-12 All Grades                    ,195,3,0,0,0,3,0,1:65
+Brooklyn,75,15,K369,75K369,K-12 All Grades                    ,540,4,0,0,0,4,0,1:135
+Brooklyn,75,21,K370,75K370,K-12 All Grades                    ,227,4,0,0,0,4,0,1:57
+Brooklyn,75,15,K371,75K371,High School                        ,181,2,0,0,0,2,0,1:91
+Brooklyn,75,15,K372,75K372,Elementary                         ,209,1,0,0,0,1,0,1:209
+Brooklyn,75,14,K373,75K373,High School                        ,333,2,0,0,0,2,0,1:167
+Brooklyn,75,23,K396,75K396,K-8                                ,288,2,0,0,0,2,0,1:144
+Brooklyn,75,21,K721,75K721,High School                        ,471,5,0,0,0,5,0,1:94
+Brooklyn,75,13,K753,75K753,High School                        ,166,4,0,0,0,4,0,1:42
+Brooklyn,75,21,K771,75K771,K-12 All Grades                    ,334,7,0,0,0,7,0,1:48
+Brooklyn,75,22,K811,75K811,Secondary School                   ,304,3,0,0,0,3,0,1:101
+Manhattan,75,2,M035,75M035,K-12 All Grades                    ,181,4,0,0,0,4,0,1:45
+Manhattan,75,5,M079,75M079,Secondary School                   ,242,3,0,0,0,3,0,1:81
+Manhattan,75,2,M094,75M094,K-12 All Grades                    ,368,1,0,0,0,1,0,1:368
+Manhattan,75,5,M138,75M138,K-12 All Grades                    ,526,2,0,0,0,2,0,1:263
+Manhattan,75,2,M169,75M169,K-12 All Grades                    ,344,3,0,0,0,3,0,1:115
+Manhattan,75,2,M226,75M226,K-12 All Grades                    ,221,4,0,0,0,4,0,1:55
+Manhattan,75,2,M721,75M721,Secondary School                   ,146,3,0,0,0,3,0,1:49
+Manhattan,75,1,M751,75M751,High School                        ,118,2,0,0,0,2,0,1:59
+Manhattan,75,3,M811,75M811,K-8                                ,311,3,0,0,0,3,0,1:104
+Queens,75,26,Q004,75Q004,K-8                                ,350,4,0,0,0,4,0,1:88
+Queens,75,24,Q009,75Q009,K-8                                ,565,6,0,0,0,6,0,1:94
+Queens,75,26,Q023,75Q023,K-12 All Grades                    ,169,4,0,0,0,4,0,1:42
+Queens,75,24,Q075,75Q075,K-8                                ,457,7,0,0,0,7,0,1:65
+Queens,75,26,Q177,75Q177,K-12 All Grades                    ,453,5,0,0,0,5,0,1:91
+Queens,75,26,Q224,75Q224,K-8                                ,319,5,0,0,0,5,0,1:64
+Queens,75,28,Q233,75Q233,K-12 All Grades                    ,408,3,0,0,0,3,0,1:136
+Queens,75,25,Q255,75Q255,K-12 All Grades                    ,394,8,0,0,0,8,0,1:49
+Queens,75,0,Q256,75Q256,K-12 All Grades                    ,370,6,0,0,0,6,0,1:62
+Queens,75,30,Q277,75Q277,K-12 All Grades                    ,291,7,0,0,0,7,0,1:42
+Queens,75,24,Q721,75Q721,High School                        ,457,4,0,0,0,4,0,1:114
+Queens,75,28,Q752,75Q752,High School                        ,272,4,0,0,0,4,0,1:68
+Queens,75,26,Q811,75Q811,K-12 All Grades                    ,342,4,0,0,0,4,0,1:86
+Queens,75,26,Q993,75Q993,K-12 All Grades                    ,488,3,0,0,0,3,0,1:163
+Staten Island,75,31,R025,75R025,K-12 All Grades                    ,390,2,0,0,0,2,0,1:195
+Staten Island,75,31,R037,75R037,K-12 All Grades                    ,306,4,0,0,0,4,0,1:77
+Staten Island,75,31,R373,75R373,K-8                                ,482,2,0,0,0,2,0,1:241
+Staten Island,75,31,R721,75R721,Secondary School                   ,406,4,0,0,0,4,0,1:102
+Bronx,75,8,X010,75X010,K-12 All Grades                    ,441,9,0,0,0,9,0,1:49
+Bronx,75,11,X012,75X012,Secondary School                   ,273,2,0,0,0,2,0,1:137
+Bronx,75,7,X017,75X017,K-8                                ,376,3,0,0,0,3,0,1:125
+Bronx,75,10,X168,75X168,K-12 All Grades                    ,439,4,0,0,0,4,0,1:110
+Bronx,75,11,X176,75X176,K-12 All Grades                    ,772,10,0,0,0,10,0,1:77
+Bronx,75,12,X186,75X186,K-12 All Grades                    ,618,5,0,0,0,5,0,1:124
+Bronx,75,10,X188,75X188,K-12 All Grades                    ,390,5,0,0,0,5,0,1:78
+Bronx,75,12,X352,75X352,K-8                                ,445,2,0,0,0,2,0,1:223
+Bronx,75,10,X469,75X469,Elementary                         ,233,2,0,0,0,2,0,1:117
+Bronx,75,11,X721,75X721,High School                        ,474,3,0,0,0,3,0,1:158
+Bronx,75,11,X723,75X723,K-12 All Grades                    ,382,1,0,0,0,1,0,1:382
+Bronx,75,7,X754,75X754,High School                        ,403,6,0,0,0,6,0,1:67
+Bronx,75,12,X811,75X811,Secondary School                   ,583,3,0,0,0,3,0,1:194

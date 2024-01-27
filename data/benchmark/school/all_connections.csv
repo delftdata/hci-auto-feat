@@ -1,0 +1,324 @@
+from_path,from_table,from_column,to_path,to_label,to_column
+school/,Schools_Progress_Report_2012-2013.csv,DBN,school/,oss.csv,DBN
+school/,Schools_Progress_Report_2012-2013.csv,DBN,school/,esl.csv,DBN
+school/,Schools_Progress_Report_2012-2013.csv,DBN,school/,ap.csv,DBN
+school/,Schools_Progress_Report_2012-2013.csv,DBN,school/,disc.csv,DBN
+school/,Schools_Progress_Report_2012-2013.csv,DBN,school/,sat.csv,DBN
+school/,Schools_Progress_Report_2012-2013.csv,SCHOOL,school/,transfer.csv,School Type
+school/,Schools_Progress_Report_2012-2013.csv,SCHOOL,school/,transfer.csv,School Name
+school/,Schools_Progress_Report_2012-2013.csv,2012-2013 OVERALL SCORE,school/,transfer.csv,Overall Score
+school/,Schools_Progress_Report_2012-2013.csv,2012-2013 OVERALL GRADE,school/,transfer.csv,Overall Grade
+school/,Schools_Progress_Report_2012-2013.csv,2012-2013 PROGRESS GRADE,school/,transfer.csv,Progress Grade
+school/,Schools_Progress_Report_2012-2013.csv,2012-2013PERFORMANCE GRADE,school/,transfer.csv,Performance Grade
+school/,Schools_Progress_Report_2012-2013.csv,2012-2013 ENVIRONMENT GRADE,school/,transfer.csv,Environment Grade
+school/,Schools_Progress_Report_2012-2013.csv,2012-2013 COLLEGE AND CAREER READINESS GRADE,school/,transfer.csv,College and Career Readiness Grade
+school/,Schools_Progress_Report_2012-2013.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,Schools_Progress_Report_2012-2013.csv,PRINCIPAL,school/,2010_Gen_Ed_Survey_Data.csv,principal
+school/,Schools_Progress_Report_2012-2013.csv,DBN,school/,transfer.csv,DBN
+school/,Schools_Progress_Report_2012-2013.csv,PRINCIPAL,school/,transfer.csv,Principal
+school/,Schools_Progress_Report_2012-2013.csv,DBN,school/,base.csv,DBN
+school/,base.csv,School Name,school/,ap.csv,SchoolName
+school/,base.csv,School Type,school/,transfer.csv,School Type
+school/,base.csv,School Name,school/,transfer.csv,School Name
+school/,base.csv,School Name,school/,sat.csv,School Name
+school/,base.csv,DBN,school/,gender.csv,DBN
+school/,base.csv,DBN,school/,s2tr.csv,DBN
+school/,base.csv,DBN,school/,oss.csv,DBN
+school/,base.csv,DBN,school/,esl.csv,DBN
+school/,base.csv,DBN,school/,ap.csv,DBN
+school/,base.csv,DBN,school/,pe.csv,DBN
+school/,base.csv,DBN,school/,disc.csv,DBN
+school/,base.csv,DBN,school/,qr.csv,DBN
+school/,base.csv,DBN,school/,math.csv,DBN
+school/,base.csv,DBN,school/,sat.csv,DBN
+school/,base.csv,DBN,school/,transfer.csv,DBN
+school/,base.csv,DBN,school/,yabc.csv,DBN
+school/,base.csv,DBN,school/,crime.csv,DBN
+school/,base.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,base.csv,DBN,school/,Schools_Progress_Report_2012-2013.csv,DBN
+school/,2010_Gen_Ed_Survey_Data.csv,borough,nyc/,capital_projects2.csv,Borough
+school/,2010_Gen_Ed_Survey_Data.csv,borough,nyc/,film_permits.csv,Borough
+school/,2010_Gen_Ed_Survey_Data.csv,borough,nyc/,evictions.csv,BOROUGH
+school/,2010_Gen_Ed_Survey_Data.csv,borough,nyc/,housing.csv,Borough
+school/,2010_Gen_Ed_Survey_Data.csv,DBN,school/,oss.csv,DBN
+school/,2010_Gen_Ed_Survey_Data.csv,DBN,school/,esl.csv,DBN
+school/,2010_Gen_Ed_Survey_Data.csv,DBN,school/,ap.csv,DBN
+school/,2010_Gen_Ed_Survey_Data.csv,DBN,school/,disc.csv,DBN
+school/,2010_Gen_Ed_Survey_Data.csv,DBN,school/,sat.csv,DBN
+school/,2010_Gen_Ed_Survey_Data.csv,DBN,school/,transfer.csv,DBN
+school/,2010_Gen_Ed_Survey_Data.csv,principal,school/,transfer.csv,Principal
+school/,2010_Gen_Ed_Survey_Data.csv,enrollment,school/,transfer.csv,Enrollment
+school/,2010_Gen_Ed_Survey_Data.csv,DBN,school/,base.csv,DBN
+school/,crime.csv,Borough,nyc/,capital_projects2.csv,Borough
+school/,crime.csv,Borough,nyc/,film_permits.csv,Borough
+school/,crime.csv,Borough,nyc/,evictions.csv,BOROUGH
+school/,crime.csv,Borough,nyc/,housing.csv,Borough
+school/,crime.csv,Address,nyc/,housing.csv,Address
+school/,crime.csv,DBN,school/,oss.csv,DBN
+school/,crime.csv,Location Name,school/,oss.csv,LOCATION NAME
+school/,crime.csv,DBN,school/,esl.csv,DBN
+school/,crime.csv,DBN,school/,ap.csv,DBN
+school/,crime.csv,DBN,school/,disc.csv,DBN
+school/,crime.csv,Location Name,school/,disc.csv,LOCATION NAME
+school/,crime.csv,DBN,school/,sat.csv,DBN
+school/,crime.csv,DBN,school/,transfer.csv,DBN
+school/,crime.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,crime.csv,Borough,school/,2010_Gen_Ed_Survey_Data.csv,borough
+school/,crime.csv,DBN,school/,Schools_Progress_Report_2012-2013.csv,DBN
+school/,crime.csv,DBN,school/,qr.csv,DBN
+school/,crime.csv,DBN,school/,yabc.csv,DBN
+school/,crime.csv,Geographical District Code,school/,pe.csv,Geographical District
+school/,crime.csv,DBN,school/,pe.csv,DBN
+school/,crime.csv,Borough,school/,pe.csv,Borough
+school/,crime.csv,Location Code,school/,pe.csv,Location Code
+school/,crime.csv,DBN,school/,math.csv,DBN
+school/,crime.csv,DBN,school/,2013_NYC_School_Survey.csv,DBN
+school/,crime.csv,DBN,school/,base.csv,DBN
+school/,yabc.csv,DBN,school/,sat.csv,DBN
+school/,yabc.csv,DBN,school/,oss.csv,DBN
+school/,yabc.csv,DBN,school/,esl.csv,DBN
+school/,yabc.csv,School Name,school/,ap.csv,SchoolName
+school/,yabc.csv,DBN,school/,ap.csv,DBN
+school/,yabc.csv,DBN,school/,disc.csv,DBN
+school/,yabc.csv,DBN,school/,base.csv,DBN
+school/,yabc.csv,DBN,school/,Schools_Progress_Report_2012-2013.csv,DBN
+school/,yabc.csv,College and Career Readiness Grade,school/,transfer.csv,College and Career Readiness Grade
+school/,yabc.csv,Closing the Achievement Gap Points,school/,transfer.csv,Closing the Achievement Gap Points
+school/,yabc.csv,% Students with Disabilities,school/,transfer.csv,% Students with Disabilities
+school/,yabc.csv,Average English Proficiency,school/,transfer.csv,Average English Proficiency
+school/,yabc.csv,Average Math Proficiency,school/,transfer.csv,Average Math Proficiency
+school/,yabc.csv,% Black or Hispanic,school/,transfer.csv,% Black or Hispanic
+school/,yabc.csv,Performance Grade,school/,transfer.csv,Performance Grade
+school/,yabc.csv,Environment Grade,school/,transfer.csv,Environment Grade
+school/,yabc.csv,% Self-Contained,school/,transfer.csv,% Self-Contained
+school/,yabc.csv,Progress Grade,school/,transfer.csv,Progress Grade
+school/,yabc.csv,Overall Score,school/,transfer.csv,Overall Score
+school/,yabc.csv,Overall Grade,school/,transfer.csv,Overall Grade
+school/,yabc.csv,Overall Rank,school/,transfer.csv,Overall Rank
+school/,yabc.csv,School Name,school/,transfer.csv,School Name
+school/,yabc.csv,School Type,school/,transfer.csv,School Type
+school/,yabc.csv,Enrollment,school/,transfer.csv,Enrollment
+school/,yabc.csv,% Overage,school/,transfer.csv,% Overage
+school/,yabc.csv,% ELL,school/,transfer.csv,% ELL
+school/,yabc.csv,DBN,school/,transfer.csv,DBN
+school/,yabc.csv,DBN,school/,qr.csv,DBN
+school/,yabc.csv,Overall Rank,school/,qr.csv,Overall Rating
+school/,yabc.csv,College and Career Readiness Grade,school/,Schools_Progress_Report_2012-2013.csv,2012-2013 COLLEGE AND CAREER READINESS GRADE
+school/,yabc.csv,Environment Grade,school/,Schools_Progress_Report_2012-2013.csv,2012-2013 ENVIRONMENT GRADE
+school/,yabc.csv,Performance Grade,school/,Schools_Progress_Report_2012-2013.csv,2012-2013PERFORMANCE GRADE
+school/,yabc.csv,Progress Grade,school/,Schools_Progress_Report_2012-2013.csv,2012-2013 PROGRESS GRADE
+school/,yabc.csv,Overall Score,school/,Schools_Progress_Report_2012-2013.csv,2012-2013 OVERALL SCORE
+school/,yabc.csv,Overall Grade,school/,Schools_Progress_Report_2012-2013.csv,2012-2013 OVERALL GRADE
+school/,yabc.csv,Assistant Principal,school/,Schools_Progress_Report_2012-2013.csv,PRINCIPAL
+school/,yabc.csv,School Name,school/,Schools_Progress_Report_2012-2013.csv,SCHOOL
+school/,yabc.csv,School Type,school/,Schools_Progress_Report_2012-2013.csv,SCHOOL
+school/,yabc.csv,School Name,school/,base.csv,School Name
+school/,yabc.csv,School Type,school/,base.csv,School Type
+school/,yabc.csv,Enrollment,school/,2010_Gen_Ed_Survey_Data.csv,enrollment
+school/,yabc.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,yabc.csv,Assistant Principal,school/,transfer.csv,Principal
+school/,yabc.csv,School Name,school/,sat.csv,School Name
+school/,transfer.csv,School Name,school/,sat.csv,School Name
+school/,transfer.csv,DBN,school/,oss.csv,DBN
+school/,transfer.csv,DBN,school/,esl.csv,DBN
+school/,transfer.csv,School Name,school/,ap.csv,SchoolName
+school/,transfer.csv,DBN,school/,ap.csv,DBN
+school/,transfer.csv,DBN,school/,disc.csv,DBN
+school/,transfer.csv,DBN,school/,sat.csv,DBN
+school/,transfer.csv,DBN,school/,base.csv,DBN
+school/,sat.csv,DBN,school/,oss.csv,DBN
+school/,sat.csv,DBN,school/,esl.csv,DBN
+school/,sat.csv,School Name,school/,ap.csv,SchoolName
+school/,sat.csv,DBN,school/,disc.csv,DBN
+school/,sat.csv,DBN,school/,ap.csv,DBN
+school/,sat.csv,DBN,school/,base.csv,DBN
+school/,math.csv,DBN,school/,transfer.csv,DBN
+school/,math.csv,Category,nyc/,capital_projects2.csv,Category
+school/,math.csv,Category,nyc/,film_permits.csv,Category
+school/,math.csv,DBN,school/,oss.csv,DBN
+school/,math.csv,DBN,school/,ap.csv,DBN
+school/,math.csv,DBN,school/,disc.csv,DBN
+school/,math.csv,DBN,school/,sat.csv,DBN
+school/,math.csv,DBN,school/,base.csv,DBN
+school/,math.csv,Mean Scale Score,school/,esl.csv,Mean Scale Score
+school/,math.csv,Number Tested,school/,esl.csv,Number Tested
+school/,math.csv,Level 3+4 #,school/,esl.csv,Level 3+4 #
+school/,math.csv,Level 3+4 %,school/,esl.csv,Level 3+4 %
+school/,math.csv,Level 1 #,school/,esl.csv,Level 1 #
+school/,math.csv,Level 1 %,school/,esl.csv,Level 1 %
+school/,math.csv,Level 2 #,school/,esl.csv,Level 2 #
+school/,math.csv,Level 2 %,school/,esl.csv,Level 2 %
+school/,math.csv,Level 3 #,school/,esl.csv,Level 3 #
+school/,math.csv,Level 3 %,school/,esl.csv,Level 3 %
+school/,math.csv,Level 4 #,school/,esl.csv,Level 4 #
+school/,math.csv,Level 4 %,school/,esl.csv,Level 4 %
+school/,math.csv,Category,school/,esl.csv,Category
+school/,math.csv,Grade,school/,esl.csv,Grade
+school/,math.csv,Year,school/,esl.csv,Year
+school/,math.csv,DBN,school/,esl.csv,DBN
+school/,math.csv,DBN,school/,pe.csv,DBN
+school/,math.csv,DBN,school/,yabc.csv,DBN
+school/,math.csv,DBN,school/,qr.csv,DBN
+school/,math.csv,DBN,school/,Schools_Progress_Report_2012-2013.csv,DBN
+school/,math.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,qr.csv,DBN,school/,oss.csv,DBN
+school/,qr.csv,DBN,school/,esl.csv,DBN
+school/,qr.csv,DBN,school/,ap.csv,DBN
+school/,qr.csv,DBN,school/,disc.csv,DBN
+school/,qr.csv,DBN,school/,sat.csv,DBN
+school/,qr.csv,Overall Rating,school/,transfer.csv,Overall Rank
+school/,qr.csv,DBN,school/,transfer.csv,DBN
+school/,qr.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,qr.csv,DBN,school/,Schools_Progress_Report_2012-2013.csv,DBN
+school/,qr.csv,DBN,school/,base.csv,DBN
+school/,disc.csv,DBN,school/,oss.csv,DBN
+school/,disc.csv,LOCATION NAME,school/,oss.csv,LOCATION NAME
+school/,disc.csv,LOCATION CATEGORY,school/,oss.csv,LOCATION CATEGORY
+school/,disc.csv,ADMINISTRATIVE DISTRICT,school/,oss.csv,ADMINISTRATIVE DISTRICT
+school/,disc.csv,DBN,school/,esl.csv,DBN
+school/,disc.csv,DBN,school/,ap.csv,DBN
+school/,disc.csv,DBN,school/,base.csv,DBN
+school/,pe.csv,Borough,nyc/,capital_projects2.csv,Borough
+school/,pe.csv,Borough,nyc/,film_permits.csv,Borough
+school/,pe.csv,Borough,nyc/,evictions.csv,BOROUGH
+school/,pe.csv,Borough,nyc/,housing.csv,Borough
+school/,pe.csv,Location Code,school/,oss.csv,LOCATION NAME
+school/,pe.csv,Admin District,school/,oss.csv,ADMINISTRATIVE DISTRICT
+school/,pe.csv,DBN,school/,oss.csv,DBN
+school/,pe.csv,DBN,school/,esl.csv,DBN
+school/,pe.csv,DBN,school/,ap.csv,DBN
+school/,pe.csv,Admin District,school/,disc.csv,ADMINISTRATIVE DISTRICT
+school/,pe.csv,DBN,school/,disc.csv,DBN
+school/,pe.csv,DBN,school/,sat.csv,DBN
+school/,pe.csv,Student Enrollment,school/,transfer.csv,Enrollment
+school/,pe.csv,DBN,school/,transfer.csv,DBN
+school/,pe.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,pe.csv,Borough,school/,2010_Gen_Ed_Survey_Data.csv,borough
+school/,pe.csv,School Level ,school/,Schools_Progress_Report_2012-2013.csv,SCHOOL LEVEL*
+school/,pe.csv,DBN,school/,Schools_Progress_Report_2012-2013.csv,DBN
+school/,pe.csv,DBN,school/,qr.csv,DBN
+school/,pe.csv,Student Enrollment,school/,yabc.csv,Enrollment
+school/,pe.csv,DBN,school/,yabc.csv,DBN
+school/,pe.csv,DBN,school/,base.csv,DBN
+school/,ap.csv,DBN,school/,oss.csv,DBN
+school/,ap.csv,DBN,school/,esl.csv,DBN
+school/,ap.csv,DBN,school/,base.csv,DBN
+school/,esl.csv,DBN,school/,base.csv,DBN
+school/,esl.csv,Category,nyc/,capital_projects2.csv,Category
+school/,esl.csv,Category,nyc/,film_permits.csv,Category
+school/,esl.csv,DBN,school/,oss.csv,DBN
+school/,oss.csv,DBN,school/,base.csv,DBN
+school/,s2tr.csv,DBN,school/,oss.csv,DBN
+school/,s2tr.csv,DBN,school/,esl.csv,DBN
+school/,s2tr.csv,School Name,school/,ap.csv,SchoolName
+school/,s2tr.csv,DBN,school/,disc.csv,DBN
+school/,s2tr.csv,DBN,school/,transfer.csv,DBN
+school/,s2tr.csv,School Name,school/,transfer.csv,School Name
+school/,s2tr.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,s2tr.csv,DBN,school/,Schools_Progress_Report_2012-2013.csv,DBN
+school/,s2tr.csv,School Name,school/,qr.csv,School Year
+school/,s2tr.csv,DBN,school/,yabc.csv,DBN
+school/,s2tr.csv,School Name,school/,yabc.csv,School Name
+school/,s2tr.csv,DBN,school/,pe.csv,DBN
+school/,s2tr.csv,DBN,school/,math.csv,DBN
+school/,s2tr.csv,DBN,school/,crime.csv,DBN
+school/,s2tr.csv,School Name,school/,gender.csv,chool Name
+school/,s2tr.csv,DBN,school/,gender.csv,DBN
+school/,s2tr.csv,DBN,school/,ap.csv,DBN
+school/,s2tr.csv,DBN,school/,sat.csv,DBN
+school/,s2tr.csv,School Name,school/,sat.csv,School Name
+school/,s2tr.csv,School Name,school/,base.csv,School Name
+school/,s2tr.csv,DBN,school/,qr.csv,DBN
+school/,s2tr.csv,DBN,school/,2013_NYC_School_Survey.csv,DBN
+school/,s2tr.csv,School Name,school/,2013_NYC_School_Survey.csv,School Name
+school/,s2tr.csv,DBN,school/,base.csv,DBN
+school/,gender.csv,Level1_%,school/,esl.csv,Level 1 %
+school/,gender.csv,Category,nyc/,capital_projects2.csv,Category
+school/,gender.csv,Category,nyc/,film_permits.csv,Category
+school/,gender.csv,DBN,school/,oss.csv,DBN
+school/,gender.csv,Level3+4_%,school/,esl.csv,Level 3+4 %
+school/,gender.csv,Level4_%,school/,esl.csv,Level 4 %
+school/,gender.csv,Level4_%,school/,esl.csv,Level 3 %
+school/,gender.csv,Level4_%,school/,esl.csv,Level 2 %
+school/,gender.csv,Level4_%,school/,esl.csv,Level 1 %
+school/,gender.csv,Level3_%,school/,esl.csv,Level 4 %
+school/,gender.csv,Level3_%,school/,esl.csv,Level 3 %
+school/,gender.csv,Level3_%,school/,esl.csv,Level 2 %
+school/,gender.csv,Level3_%,school/,esl.csv,Level 1 %
+school/,gender.csv,Level2_%,school/,esl.csv,Level 4 %
+school/,gender.csv,Level2_%,school/,esl.csv,Level 3 %
+school/,gender.csv,Level2_%,school/,esl.csv,Level 2 %
+school/,gender.csv,Level2_%,school/,esl.csv,Level 1 %
+school/,gender.csv,Level1_%,school/,esl.csv,Level 4 %
+school/,gender.csv,Level1_%,school/,esl.csv,Level 3 %
+school/,gender.csv,Level1_%,school/,esl.csv,Level 2 %
+school/,gender.csv,DBN,school/,base.csv,DBN
+school/,gender.csv,Mean Scale Score,school/,math.csv,Mean Scale Score
+school/,gender.csv,Number Tested,school/,math.csv,Number Tested
+school/,gender.csv,Category,school/,math.csv,Category
+school/,gender.csv,Grade,school/,math.csv,Grade
+school/,gender.csv,Year,school/,math.csv,Year
+school/,gender.csv,DBN,school/,math.csv,DBN
+school/,gender.csv,Mean Scale Score,school/,esl.csv,Mean Scale Score
+school/,gender.csv,Number Tested,school/,esl.csv,Number Tested
+school/,gender.csv,Category,school/,esl.csv,Category
+school/,gender.csv,Grade,school/,esl.csv,Grade
+school/,gender.csv,Year,school/,esl.csv,Year
+school/,gender.csv,DBN,school/,esl.csv,DBN
+school/,gender.csv,DBN,school/,crime.csv,DBN
+school/,gender.csv,DBN,school/,2013_NYC_School_Survey.csv,DBN
+school/,gender.csv,chool Name,school/,2013_NYC_School_Survey.csv,School Name
+school/,gender.csv,Level1_%,school/,math.csv,Level 1 %
+school/,gender.csv,Level1_%,school/,math.csv,Level 2 %
+school/,gender.csv,Level1_%,school/,math.csv,Level 3 %
+school/,gender.csv,Level1_%,school/,math.csv,Level 4 %
+school/,gender.csv,Level2_%,school/,math.csv,Level 1 %
+school/,gender.csv,Level2_%,school/,math.csv,Level 2 %
+school/,gender.csv,Level2_%,school/,math.csv,Level 3 %
+school/,gender.csv,Level2_%,school/,math.csv,Level 4 %
+school/,gender.csv,Level3_%,school/,math.csv,Level 1 %
+school/,gender.csv,Level3_%,school/,math.csv,Level 2 %
+school/,gender.csv,Level3_%,school/,math.csv,Level 3 %
+school/,gender.csv,Level3_%,school/,math.csv,Level 4 %
+school/,gender.csv,Level4_%,school/,math.csv,Level 1 %
+school/,gender.csv,Level4_%,school/,math.csv,Level 2 %
+school/,gender.csv,Level4_%,school/,math.csv,Level 3 %
+school/,gender.csv,Level4_%,school/,math.csv,Level 4 %
+school/,gender.csv,Level3+4_%,school/,math.csv,Level 3+4 %
+school/,gender.csv,DBN,school/,pe.csv,DBN
+school/,gender.csv,DBN,school/,yabc.csv,DBN
+school/,gender.csv,chool Name,school/,yabc.csv,School Name
+school/,gender.csv,DBN,school/,qr.csv,DBN
+school/,gender.csv,DBN,school/,Schools_Progress_Report_2012-2013.csv,DBN
+school/,gender.csv,chool Name,school/,base.csv,School Name
+school/,gender.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,gender.csv,DBN,school/,transfer.csv,DBN
+school/,gender.csv,chool Name,school/,transfer.csv,School Name
+school/,gender.csv,DBN,school/,sat.csv,DBN
+school/,gender.csv,chool Name,school/,sat.csv,School Name
+school/,gender.csv,DBN,school/,disc.csv,DBN
+school/,gender.csv,DBN,school/,ap.csv,DBN
+school/,2013_NYC_School_Survey.csv,DBN,school/,oss.csv,DBN
+school/,2013_NYC_School_Survey.csv,DBN,school/,esl.csv,DBN
+school/,2013_NYC_School_Survey.csv,School Name,school/,ap.csv,SchoolName
+school/,2013_NYC_School_Survey.csv,DBN,school/,ap.csv,DBN
+school/,2013_NYC_School_Survey.csv,DBN,school/,disc.csv,DBN
+school/,2013_NYC_School_Survey.csv,DBN,school/,sat.csv,DBN
+school/,2013_NYC_School_Survey.csv,School Name,school/,sat.csv,School Name
+school/,2013_NYC_School_Survey.csv,DBN,school/,transfer.csv,DBN
+school/,2013_NYC_School_Survey.csv,School Type,school/,transfer.csv,School Type
+school/,2013_NYC_School_Survey.csv,School Name,school/,transfer.csv,School Name
+school/,2013_NYC_School_Survey.csv,DBN,school/,2010_Gen_Ed_Survey_Data.csv,DBN
+school/,2013_NYC_School_Survey.csv,DBN,school/,Schools_Progress_Report_2012-2013.csv,DBN
+school/,2013_NYC_School_Survey.csv,DBN,school/,qr.csv,DBN
+school/,2013_NYC_School_Survey.csv,DBN,school/,yabc.csv,DBN
+school/,2013_NYC_School_Survey.csv,School Type,school/,yabc.csv,School Type
+school/,2013_NYC_School_Survey.csv,School Name,school/,yabc.csv,School Name
+school/,2013_NYC_School_Survey.csv,DBN,school/,pe.csv,DBN
+school/,2013_NYC_School_Survey.csv,DBN,school/,math.csv,DBN
+school/,2013_NYC_School_Survey.csv,DBN,school/,base.csv,DBN
+school/,2013_NYC_School_Survey.csv,School Type,school/,base.csv,School Type
+school/,2013_NYC_School_Survey.csv,School Name,school/,base.csv,School Name
+school/,2013_NYC_School_Survey.csv,Total Parent Response Rate (%),school/,base.csv,Total Parent Response Rate (%)
+school/,2013_NYC_School_Survey.csv,Total Student Response Rate (%),school/,base.csv,Total Student Response Rate (%)
+school/,2013_NYC_School_Survey.csv,Total Teacher Response Rate (%),school/,base.csv,Total Teacher Response Rate (%)

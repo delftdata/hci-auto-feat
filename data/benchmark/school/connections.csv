@@ -1,0 +1,16 @@
+fk_table,fk_column,pk_table,pk_column
+base.csv,DBN,Schools_Progress_Report_2012-2013.csv,DBN
+base.csv,DBN,2010_Gen_Ed_Survey_Data.csv,DBN
+base.csv,DBN,crime.csv,DBN
+base.csv,DBN,yabc.csv,DBN
+base.csv,DBN,transfer.csv,DBN
+base.csv,DBN,sat.csv,DBN
+base.csv,DBN,math.csv,DBN
+base.csv,DBN,qr.csv,DBN
+base.csv,DBN,disc.csv,DBN
+base.csv,DBN,pe.csv,DBN
+base.csv,DBN,ap.csv,DBN
+base.csv,DBN,esl.csv,DBN
+base.csv,DBN,oss.csv,DBN
+base.csv,DBN,s2tr.csv,DBN
+base.csv,DBN,gender.csv,DBN
