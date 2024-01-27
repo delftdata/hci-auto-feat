@@ -83,9 +83,10 @@ class Path:
 
     def __str__(self) -> str:
         ret_string = "Begin: " + self.begin
-        for i in self.joins:
-            ret_string += "\n \t" + str(i)
-        ret_string += "\n \t rank: " + ("%.2f" % self.rank)
+        table = tabulate([[i.from_table + "." + i.from_col, i.to_table + "." + i.to_col, i.null_ratio] 
+                          for i in self.joins], headers=["From", "To", "Null Ratio"], tablefmt="grid")
+        ret_string += "\nJoins: \n" + table
+        ret_string += "\nRank: " + ("%.2f" % self.rank)
         return ret_string
     
     def __repr__(self) -> str:
