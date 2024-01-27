@@ -11,17 +11,17 @@ from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 
 
-def compute_join_paths(autofeat, null_ratio_threshold: float = 0.5):
+def compute_join_paths(autofeat, top_k_features, null_ratio_threshold: float = 0.5):
     logging.info("Step 2: Calculating paths")
     emptyPath = Path(begin=autofeat.base_table, joins=[], rank=0)
     emptyPath.id = 0
     autofeat.paths.append(emptyPath)
-    stream_feature_selection(autofeat=autofeat, queue={autofeat.base_table}, 
+    stream_feature_selection(autofeat=autofeat, top_k_features=top_k_features, queue={autofeat.base_table}, 
                              path=Path(begin=(autofeat.base_table), joins=[], rank=0, ), 
                              null_ratio_threshold=null_ratio_threshold)
 
 
-def stream_feature_selection(autofeat, path: Path, queue: set, null_ratio_threshold: float, 
+def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, null_ratio_threshold: float, 
                              previous_queue: list = None):
     if len(queue) == 0:
         return
@@ -72,17 +72,23 @@ def stream_feature_selection(autofeat, path: Path, queue: set, null_ratio_thresh
                         continue
                     result = streaming_relevance_redundancy(
                         autofeat,
+                        top_k_features=top_k_features,
                         dataframe=joined_df.copy(),
                         new_features=list(right_df.columns),
                         selected_features=autofeat.partial_join_selected_features[str(previous_table_join)],
                     )
                     if result is not None:
-                        score, rel_score, red_score, features, rel_discarded, red_discarded = result
+                        score, rel_score, red_score, final_features, rel_discarded, red_discarded = result
+                        remaining_rel_score = [i for i in rel_score if i[0] in final_features]
+                        remaining_red_score = [i for i in red_score if i[0] in final_features]
+                        red_discarded = red_discarded + [i for i in red_score if i[0] not in final_features]
+                        rel_discarded = rel_discarded + [i for i in rel_score if i[0] not in final_features]
                         join = Join(prop.from_table, prop.to_table, 
-                                    prop.from_col, prop.to_col, null_ratio, {"rel": rel_score, "red": red_score}, 
+                                    prop.from_col, prop.to_col, null_ratio, {"rel": remaining_rel_score, 
+                                                                             "red": remaining_red_score}, 
                                     {"rel": rel_discarded, "red": red_discarded})
                         all_features = autofeat.partial_join_selected_features[str(previous_table_join)]
-                        all_features.extend(features)
+                        all_features.extend(final_features)
                         autofeat.partial_join_selected_features[str(join_list)] = all_features
                         path.features = all_features
                         path.rank = score
@@ -92,7 +98,7 @@ def stream_feature_selection(autofeat, path: Path, queue: set, null_ratio_thresh
                     autofeat.join_name_mapping[str(join_list)] = filename
                     current_queue.append(join_list)
             previous_queue += current_queue
-    stream_feature_selection(autofeat, path, all_neighbours, null_ratio_threshold, previous_queue)
+    stream_feature_selection(autofeat, top_k_features, path, all_neighbours, null_ratio_threshold, previous_queue)
 
 
 def display_join_paths(self, top_k: None):
@@ -113,7 +119,7 @@ def display_join_paths(self, top_k: None):
 
 
 def streaming_relevance_redundancy(
-    self, dataframe: pd.DataFrame, new_features: list[str], selected_features: list[str]
+    self, top_k_features, dataframe: pd.DataFrame, new_features: list[str], selected_features: list[str]
 ) -> Optional[Tuple[float, list[dict]]]:
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, verbosity=0
@@ -123,16 +129,13 @@ def streaming_relevance_redundancy(
     y = df[self.targetColumn]
 
     features = list(set(X.columns).intersection(set(new_features)))
-    # top_feat = len(features) if len(features) < self.top_k else self.top_k
+    top_feat = len(features) if len(features) < top_k_features else top_k_features
 
-    relevant_features = new_features
-    sum_m = 0
     m = 1
     feature_score_relevance, rel_discarded_features = self.rel_red.measure_relevance(
         dataframe=X, new_features=features, target_column=y
     )
-    # feature_score_relevance = feature_score_relevance[:top_feat]
-    feature_score_relevance = feature_score_relevance
+    feature_score_relevance = feature_score_relevance[:top_feat]
     if len(feature_score_relevance) == 0:
         return None
     relevant_features = list(dict(feature_score_relevance).keys())

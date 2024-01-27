@@ -8,17 +8,17 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 
 
-def evaluate_paths(self, top_k_paths: int = 2):
+def evaluate_paths(autofeat, top_k_paths: int = 2):
     logging.info("Step 3: Evaluating paths")
-    sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k_paths]
+    sorted_paths = sorted(autofeat.paths, key=lambda x: x.rank, reverse=True)[:top_k_paths]
     print(sorted_paths)
     for path in tqdm.tqdm(sorted_paths, total=len(sorted_paths)):
-        self.evaluate_table(path.id)
+        autofeat.evaluate_table(path.id)
     
 
-def evaluate_table(self, path_id: int):
-    path = self.get_path_by_id(path_id)
-    base_df = get_df_with_prefix(self.base_table, self.targetColumn)
+def evaluate_table(autofeat, path_id: int):
+    path = autofeat.get_path_by_id(path_id)
+    base_df = get_df_with_prefix(autofeat.base_table, autofeat.targetColumn)
     i: Join
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
@@ -26,11 +26,11 @@ def evaluate_table(self, path_id: int):
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
         verbosity=0).fit_transform(X=base_df)
-    X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=[self.targetColumn]), 
-                                                        df[self.targetColumn], test_size=0.2, random_state=10)
-    X_train[self.targetColumn] = y_train
-    X_test[self.targetColumn] = y_test
-    predictor = TabularPredictor(label=self.targetColumn,
+    X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=[autofeat.targetColumn]), 
+                                                        df[autofeat.targetColumn], test_size=0.2, random_state=10)
+    X_train[autofeat.targetColumn] = y_train
+    X_test[autofeat.targetColumn] = y_test
+    predictor = TabularPredictor(label=autofeat.targetColumn,
                                  problem_type="binary",
                                  verbosity=0,
                                  path="AutogluonModels/" + "models").fit(
@@ -45,7 +45,7 @@ def evaluate_table(self, path_id: int):
         result.model = model
         result.rank = path.rank
         result.path = path
-        self.add_result(result)
+        autofeat.add_result(result)
 
 
 def add_result(self, result):

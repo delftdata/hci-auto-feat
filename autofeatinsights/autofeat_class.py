@@ -4,6 +4,7 @@ import tempfile
 import functions.relationship_functions as relationship_functions
 import functions.tree_functions as tree_functions
 import functions.feature_functions as feature_functions
+import functions.evaluation_functions as evaluation_functions
 from functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
 from typing import List, Set
 from functions.classes import Weight, Path, Result
@@ -132,8 +133,8 @@ class FeatureDiscovery:
     def display_table_relationship(self, table1: str, table2: str):
         relationship_functions.display_table_relationship(self, table1, table2)
 
-    def compute_join_paths(self):
-        tree_functions.compute_join_paths(self)
+    def compute_join_paths(self, top_k_features: int = 10):
+        tree_functions.compute_join_paths(self, top_k_features)
 
     def show_features(self, path_id: int, show_discarded_features: bool = False):
         feature_functions.show_features(self, path_id, show_discarded_features)
@@ -147,8 +148,11 @@ class FeatureDiscovery:
     def inspect_join_path(self, path_id: int):
         tree_functions.inspect_join_path(self, path_id)
 
+    def evalute_paths(self, top_k_paths: int = 2):
+        evaluation_functions.evaluate_paths(self, top_k_paths)
 
 if __name__ == "__main__":
+
     autofeat = FeatureDiscovery()
     autofeat.set_base_table(base_table="credit/table_0_0.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["credit"])
@@ -157,10 +161,9 @@ if __name__ == "__main__":
     # # autofeat.display_best_relationships()
     # autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
     # autofeat.explain_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
-    autofeat.compute_join_paths()
-    print([i.rank for i in autofeat.paths if i.id == 2])
-    autofeat.inspect_join_path(2)
-    # autofeat.show_features(path_id=1, show_discarded_features=True)
+    autofeat.compute_join_paths(top_k_features=2)
+    # autofeat.inspect_join_path(2)
+    autofeat.show_features(path_id=3, show_discarded_features=True)
     # autofeat.display_join_paths(top_k=2)
     # df = autofeat.materialise_join_path(path_id=1)
     # print(list(df.columns))

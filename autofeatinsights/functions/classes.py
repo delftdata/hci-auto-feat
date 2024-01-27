@@ -64,8 +64,22 @@ class Path:
                 for j in i.rel_red[rel_red]:
                     name, val = j
                     if name not in rel_rel_dict:
-                        rel_rel_dict[name] = {"rel": 0, "red": 0,
-                                              "null_ratio": 0}
+                        rel_rel_dict[name] = {"null_ratio": 0, "rel": None, "red": None}
+                    rel_rel_dict[name][rel_red] = val
+                    if rel_rel_dict[name]["null_ratio"] == 0:
+                        rel_rel_dict[name]["null_ratio"] = i.null_ratio
+        return rel_rel_dict
+    
+    def get_discarded_rel_red(self):
+        rel_rel_dict = {}
+        i: Join
+        for i in self.joins:
+            # dict[i.to_table + "." + i.to_col] = {}
+            for rel_red in i.rel_red_discarded:
+                for j in i.rel_red_discarded[rel_red]:
+                    name, val = j
+                    if name not in rel_rel_dict:
+                        rel_rel_dict[name] = {"null_ratio": 0, "rel": None, "red": None}
                     rel_rel_dict[name][rel_red] = val
                     if rel_rel_dict[name]["null_ratio"] == 0:
                         rel_rel_dict[name]["null_ratio"] = i.null_ratio
@@ -75,11 +89,21 @@ class Path:
         scores = self.get_rel_red()
         table_data = []
         for key, values in scores.items():
-            row = [key, values['rel'], values['red'], values["null_ratio"]]
+            row = [key, values["null_ratio"], values['rel'], values['red']]
             table_data.append(row)
-        # Displaying the table
-        table = tabulate(table_data, headers=["Key", "Relevance", "Redundancy", "Null Ratio"], tablefmt="grid")
+        # Displaying the table 
+        table = tabulate(table_data, headers=["Key", "Null Ratio", "Relevance", "Redundancy"], tablefmt="grid")
         print(table)
+        if discarded_features:
+            print("Discarded Features")
+            discarded_scores = self.get_discarded_rel_red()
+            table_data = []
+            for key, values in discarded_scores.items():
+                row = [key, values["null_ratio"], values['rel'], values['red']]
+                table_data.append(row)
+            # Displaying the table
+            table = tabulate(table_data, headers=["Key", "Null Ratio", "Relevance", "Redundancy"], tablefmt="grid")
+            print(table)
 
     def __str__(self) -> str:
         ret_string = "Begin: " + self.begin

@@ -131,8 +131,9 @@ class RelevanceRedundancy:
 
         feature_scores = list(zip(np.array(dataframe.columns)[np.array(new_features_int)], normalised_scores))
         final_feature_scores_mrmr = [(name, value) for name, value in feature_scores if value > 0]
-
-        return sorted(final_feature_scores_mrmr, key=lambda s: s[1], reverse=True), []
+        discarded_red_scores = list(set(feature_scores) - set(final_feature_scores_mrmr))
+        
+        return sorted(final_feature_scores_mrmr, key=lambda s: s[1], reverse=True), discarded_red_scores
 
     def measure_relevance_and_redundancy(
         self, dataframe: pd.DataFrame, selected_features: List[str], new_features: List[str], target_column: pd.Series
