@@ -24,7 +24,7 @@ class FeatureDiscovery:
     exlude_tables: [(str, str)]
     partial_join_selected_features: dict = {}
     explore: bool
-    data_quality_threshhold: float
+    null_ratio_threshold: float
 
     def __init__(self):
 
@@ -40,7 +40,6 @@ class FeatureDiscovery:
         self.exclude_features = []
         self.temp_dir = tempfile.TemporaryDirectory()
         # self.explore = explore
-        # self.data_quality_threshhold = data_quality_threshhold
         # self.top_k = top_k
         # self.rel_red = RelevanceRedundancy(targetColumn, jmi=jmi, pearson=pearson)
         self.paths = []
@@ -152,10 +151,10 @@ if __name__ == "__main__":
     autofeat.set_dataset_repository(dataset_repository=["credit"])
     autofeat.find_relationships(threshold=0.1)
     # autofeat.read_relationships()
-    # autofeat.display_best_relationships()
-    autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
-    autofeat.explain_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
-    # autofeat.compute_join_paths()
+    # # autofeat.display_best_relationships()
+    # autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
+    # autofeat.explain_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
+    autofeat.compute_join_paths()
     # autofeat.show_features(path_id=1, show_discarded_features=True)
     # autofeat.display_join_paths(top_k=2)
     # df = autofeat.materialise_join_path(path_id=1)

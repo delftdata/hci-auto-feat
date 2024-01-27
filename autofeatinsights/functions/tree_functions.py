@@ -11,34 +11,17 @@ from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 
 
-def compute_join_paths(autofeat, data_qualtiy_threshold: float = 0.5):
+def compute_join_paths(autofeat, null_ratio_threshold: float = 0.5):
     logging.info("Step 2: Calculating paths")
     emptyPath = Path(begin=autofeat.base_table, joins=[], rank=0)
     emptyPath.id = 0
     autofeat.paths.append(emptyPath)
     stream_feature_selection(autofeat=autofeat, queue={autofeat.base_table}, 
                              path=Path(begin=(autofeat.base_table), joins=[], rank=0, ), 
-                             data_quality_threshhold=data_qualtiy_threshold)
+                             null_ratio_threshold=null_ratio_threshold)
 
 
-def display_join_paths(self, top_k: None):
-    if top_k is None:
-        top_k = len(self.paths)
-    sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k]
-    for index, path in enumerate(sorted_paths):
-        graph = networkx.DiGraph()
-        labels = {}
-        for i in path.joins:
-            graph.add_edge(i.from_table, i.to_table)
-            labels[(i.from_table, i.to_table)] = i.from_col + " -> " + i.to_col
-        pos = networkx.spring_layout(graph)
-        networkx.draw(graph, pos=pos, with_labels=True)
-        networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-        plt.title(f"Rank: {path.rank}")
-        plt.show()
-
-
-def stream_feature_selection(autofeat, path: Path, queue: set, data_quality_threshhold: float, 
+def stream_feature_selection(autofeat, path: Path, queue: set, null_ratio_threshold: float, 
                              previous_queue: list = None):
     if len(queue) == 0:
         return
@@ -78,12 +61,13 @@ def stream_feature_selection(autofeat, path: Path, queue: set, data_quality_thre
                 for prop in highest_join_keys:
                     join_list: [str] = previous_table_join + [prop.to_table]
                     filename = f"{autofeat.base_table.replace('/', '-')}_{str(uuid.uuid4())}.parquet"
-                    # TODO: Check if column types are similar.
+                    if previous_join[prop.get_from_prefix()].dtype != right_df[prop.get_to_prefix()].dtype:
+                        continue
                     joined_df = pd.merge(left=previous_join, right=right_df, left_on=(prop.get_from_prefix()),
                                          right_on=(prop.get_to_prefix()), how="left")
                     joined_df.to_parquet(pt(autofeat.temp_dir.name) / filename)
-                    data_quality = data_quality_calculation(autofeat, joined_df, prop)
-                    if data_quality < data_quality_threshhold:
+                    null_ratio = null_ratio_calculation(autofeat, joined_df, prop)
+                    if null_ratio < null_ratio_threshold:
                         continue
                     result = streaming_relevance_redundancy(
                         autofeat,
@@ -94,7 +78,7 @@ def stream_feature_selection(autofeat, path: Path, queue: set, data_quality_thre
                     if result is not None:
                         score, rel_score, red_score, features, rel_discarded, red_discarded = result
                         join = Join(prop.from_table, prop.to_table, 
-                                    prop.from_col, prop.to_col, data_quality, {"rel": rel_score, "red": red_score}, 
+                                    prop.from_col, prop.to_col, null_ratio, {"rel": rel_score, "red": red_score}, 
                                     {"rel": rel_discarded, "red": red_discarded})
                         all_features = autofeat.partial_join_selected_features[str(previous_table_join)]
                         all_features.extend(features)
@@ -107,7 +91,24 @@ def stream_feature_selection(autofeat, path: Path, queue: set, data_quality_thre
                     autofeat.join_name_mapping[str(join_list)] = filename
                     current_queue.append(join_list)
             previous_queue += current_queue
-    stream_feature_selection(autofeat, path, all_neighbours, data_quality_threshhold, previous_queue)
+    stream_feature_selection(autofeat, path, all_neighbours, null_ratio_threshold, previous_queue)
+
+
+def display_join_paths(self, top_k: None):
+    if top_k is None:
+        top_k = len(self.paths)
+    sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k]
+    for index, path in enumerate(sorted_paths):
+        graph = networkx.DiGraph()
+        labels = {}
+        for i in path.joins:
+            graph.add_edge(i.from_table, i.to_table)
+            labels[(i.from_table, i.to_table)] = i.from_col + " -> " + i.to_col
+        pos = networkx.spring_layout(graph)
+        networkx.draw(graph, pos=pos, with_labels=True)
+        networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
+        plt.title(f"Rank: {path.rank}")
+        plt.show()
 
 
 def streaming_relevance_redundancy(
@@ -183,7 +184,7 @@ def get_adjacent_nodes(self, nodes: list, threshold: float) -> [Weight]:
     return return_list
 
 
-def data_quality_calculation(self, joined_df: pd.DataFrame, prop: Weight) -> float:
+def null_ratio_calculation(self, joined_df: pd.DataFrame, prop: Weight) -> float:
     total_length = joined_df.shape[0]
     non_nulls = joined_df[prop.get_to_prefix()].count()
     return non_nulls / total_length

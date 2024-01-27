@@ -11,13 +11,13 @@ class Join():
 
     def __init__(self, from_table: str,
                  to_table: str, from_col: str, to_col: str,
-                 data_quality: float, rel_red: dict, rel_red_discarded: dict):
+                 null_ratio: float, rel_red: dict, rel_red_discarded: dict):
 
         self.from_table = from_table
         self.to_table = to_table
         self.from_col = from_col
         self.to_col = to_col
-        self.data_quality = data_quality
+        self.null_ratio = null_ratio
         self.rel_red = rel_red
         self.rel_red_discarded = rel_red_discarded
    
@@ -29,8 +29,8 @@ class Join():
    
     def __str__(self) -> str:
         return "Join from " + self.from_table + "." + self.from_col + " to " \
-            + self.to_table + "." + self.to_col + " with data quality " \
-            + str(self.data_quality) + " and rel_red " + str(self.rel_red)
+            + self.to_table + "." + self.to_col + " with null ratio " \
+            + str(self.null_ratio) + " and rel_red " + str(self.rel_red)
 
     def __repr__(self) -> str:
         return f"{self.from_table}.{self.from_col} -> {self.to_table}.{self.to_col}"
@@ -38,7 +38,7 @@ class Join():
     def explain(self) -> str:
         return "This is a join from: " + self.get_from_prefix() \
             + " to " + self.get_to_prefix() \
-            + " with Data Quality: " + str(self.data_quality) \
+            + " with Null Ratio: " + str(self.null_ratio) \
             + " and Relevance/Redundancy " + str(self.rel_red)
  
 
@@ -65,20 +65,20 @@ class Path:
                     name, val = j
                     if name not in rel_rel_dict:
                         rel_rel_dict[name] = {"rel": 0, "red": 0,
-                                              "data_quality": 0}
+                                              "null_ratio": 0}
                     rel_rel_dict[name][rel_red] = val
-                    if rel_rel_dict[name]["data_quality"] == 0:
-                        rel_rel_dict[name]["data_quality"] = i.data_quality
+                    if rel_rel_dict[name]["null_ratio"] == 0:
+                        rel_rel_dict[name]["null_ratio"] = i.null_ratio
         return rel_rel_dict
     
     def show_table(self, discarded_features: bool = False):
         scores = self.get_rel_red()
         table_data = []
         for key, values in scores.items():
-            row = [key, values['rel'], values['red'], values["data_quality"]]
+            row = [key, values['rel'], values['red'], values["null_ratio"]]
             table_data.append(row)
         # Displaying the table
-        table = tabulate(table_data, headers=["Key", "Relevance", "Redundancy", "Data Quality"], tablefmt="grid")
+        table = tabulate(table_data, headers=["Key", "Relevance", "Redundancy", "Null Ratio"], tablefmt="grid")
         print(table)
 
     def __str__(self) -> str:
