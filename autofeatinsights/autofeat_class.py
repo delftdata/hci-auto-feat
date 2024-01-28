@@ -148,23 +148,24 @@ class FeatureDiscovery:
     def inspect_join_path(self, path_id: int):
         tree_functions.inspect_join_path(self, path_id)
 
-    def evalute_paths(self, top_k_paths: int = 2):
+    def evaluate_paths(self, top_k_paths: int = 2):
         evaluation_functions.evaluate_paths(self, top_k_paths)
 
     def adjust_relevance_value(self, path_id: int, feature: str, value: float):
-        tree_functions.adjust_relevance_value(self, path_id, feature, value)
+        feature_functions.adjust_relevance_value(self, path_id, feature, value)
 
     def adjust_redundancy_value(self, path_id: int, feature: str, value: float):
-        tree_functions.adjust_redundancy_value(self, path_id, feature, value)
+        feature_functions.adjust_redundancy_value(self, path_id, feature, value)
 
     def adjust_null_ratio(self, path_id: int, table: str, value: float):
-        tree_functions.adjust_null_ratio(self, path_id, table, value)
+        feature_functions.adjust_null_ratio(self, path_id, table, value)
 
     def move_feature_to_discarded(self, path_id: int, feature: str):
-        tree_functions.move_feature_to_discarded(self, path_id, feature)
+        feature_functions.move_feature_to_discarded(self, path_id, feature)
 
     def move_feature_to_selected(self, path_id: int, feature: str):
-        tree_functions.move_feature_to_selected(self, path_id, feature)
+        feature_functions.move_feature_to_selected(self, path_id, feature)
+
 
 if __name__ == "__main__":
 
@@ -177,13 +178,13 @@ if __name__ == "__main__":
     # autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
     # autofeat.explain_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
     autofeat.compute_join_paths()
-    autofeat.show_features(1, show_discarded_features=True)
-    autofeat.move_feature_to_discarded(1, "credit/table_1_1.csv.other_parties")
-    # autofeat.adjust_relevance_value(1, "credit/table_1_1.csv.other_parties", 0.5)
-    # autofeat.adjust_null_ratio(1, "credit/table_1_1.csv", 0.5)
-    autofeat.show_features(1, show_discarded_features=True)
-    autofeat.move_feature_to_selected(1, "credit/table_1_1.csv.other_parties")
-    autofeat.show_features(1, show_discarded_features=True)
+    # autofeat.show_features(1, show_discarded_features=True)
+    # autofeat.move_feature_to_discarded(1, "credit/table_1_1.csv.other_parties")
+    # # autofeat.adjust_relevance_value(1, "credit/table_1_1.csv.other_parties", 0.5)
+    # # autofeat.adjust_null_ratio(1, "credit/table_1_1.csv", 0.5)
+    # autofeat.show_features(1, show_discarded_features=True)
+    # autofeat.move_feature_to_selected(1, "credit/table_1_1.csv.other_parties")
+    # autofeat.show_features(1, show_discarded_features=True)
     # autofeat.inspect_join_path(2)
     # autofeat.show_features(path_id=3, show_discarded_features=True)
     # autofeat.display_join_paths(top_k=2)

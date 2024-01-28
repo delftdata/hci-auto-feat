@@ -59,6 +59,7 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                     previous_join = pd.read_parquet(key_path)
                 prop: Weight
                 for prop in highest_join_keys:
+                    new_path = deepcopy(path)
                     join_list: [str] = previous_table_join + [prop.to_table]
                     filename = f"{autofeat.base_table.replace('/', '-')}_{str(uuid.uuid4())}.parquet"
                     if previous_join[prop.get_from_prefix()].dtype != right_df[prop.get_to_prefix()].dtype:
@@ -90,11 +91,11 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                         all_features = autofeat.partial_join_selected_features[str(previous_table_join)]
                         all_features.extend(final_features)
                         autofeat.partial_join_selected_features[str(join_list)] = all_features
-                        path.features = all_features
-                        path.rank = score
-                    path.add_join(join)
-                    path.id = len(autofeat.paths)
-                    autofeat.paths.append(deepcopy(path))
+                        new_path.features = all_features
+                        new_path.rank = score
+                        new_path.add_join(join)
+                        new_path.id = len(autofeat.paths)
+                    autofeat.paths.append(new_path)
                     autofeat.join_name_mapping[str(join_list)] = filename
                     current_queue.append(join_list)
             previous_queue += current_queue

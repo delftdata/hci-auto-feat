@@ -2,6 +2,7 @@ import logging
 from functions.helper_functions import get_df_with_prefix
 import tqdm
 from functions.classes import Result, Join
+import functions.tree_functions as tree_functions
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 from autogluon.tabular import TabularPredictor
 from sklearn.model_selection import train_test_split
@@ -11,17 +12,18 @@ import pandas as pd
 def evaluate_paths(autofeat, top_k_paths: int = 2):
     logging.info("Step 3: Evaluating paths")
     sorted_paths = sorted(autofeat.paths, key=lambda x: x.rank, reverse=True)[:top_k_paths]
-    print(sorted_paths)
     for path in tqdm.tqdm(sorted_paths, total=len(sorted_paths)):
-        autofeat.evaluate_table(path.id)
+        print("Evaluating path: ", path.id)
+        evaluate_table(autofeat, path.id)
     
 
 def evaluate_table(autofeat, path_id: int):
-    path = autofeat.get_path_by_id(path_id)
+    path = tree_functions.get_path_by_id(autofeat, path_id)
     base_df = get_df_with_prefix(autofeat.base_table, autofeat.targetColumn)
     i: Join
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
+        print(i.get_from_prefix(), i.get_to_prefix())
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
