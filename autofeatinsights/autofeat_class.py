@@ -151,6 +151,15 @@ class FeatureDiscovery:
     def evalute_paths(self, top_k_paths: int = 2):
         evaluation_functions.evaluate_paths(self, top_k_paths)
 
+    def adjust_relevance_value(self, path_id: int, feature: str, value: float):
+        tree_functions.adjust_relevance_value(self, path_id, feature, value)
+
+    def adjust_redundancy_value(self, path_id: int, feature: str, value: float):
+        tree_functions.adjust_redundancy_value(self, path_id, feature, value)
+
+    def adjust_null_ratio(self, path_id: int, table: str, value: float):
+        tree_functions.adjust_null_ratio(self, path_id, table, value)
+
 
 if __name__ == "__main__":
 
@@ -162,7 +171,11 @@ if __name__ == "__main__":
     # autofeat.display_best_relationships()
     # autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
     # autofeat.explain_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
-    # autofeat.compute_join_paths(top_k_features=2)
+    autofeat.compute_join_paths()
+    autofeat.show_features(1)
+    autofeat.adjust_relevance_value(1, "credit/table_1_1.csv.other_parties", 0.5)
+    autofeat.adjust_null_ratio(1, "credit/table_1_1.csv", 0.5)
+    autofeat.show_features(1)
     # autofeat.inspect_join_path(2)
     # autofeat.show_features(path_id=3, show_discarded_features=True)
     # autofeat.display_join_paths(top_k=2)
