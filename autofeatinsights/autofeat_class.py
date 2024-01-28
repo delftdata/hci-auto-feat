@@ -189,4 +189,4 @@ if __name__ == "__main__":
     # autofeat.display_join_paths(top_k=2)
     # df = autofeat.materialise_join_path(path_id=1)
     # print(list(df.columns))
-    # autofeat.evaluate_paths(top_k_paths=2)
+    autofeat.evaluate_paths(top_k_paths=2)
