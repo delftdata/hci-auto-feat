@@ -9,11 +9,11 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 
 
-def evaluate_paths(autofeat, top_k_paths: int = 2):
+def evaluate_paths(autofeat, top_k_results: int = 5):
     logging.info("Step 3: Evaluating paths")
-    sorted_paths = sorted(autofeat.paths, key=lambda x: x.rank, reverse=True)[:top_k_paths]
+    autofeat.top_k_results = top_k_results
+    sorted_paths = sorted(autofeat.paths, key=lambda x: x.rank, reverse=True)[:top_k_results]
     for path in tqdm.tqdm(sorted_paths, total=len(sorted_paths)):
-        print("Evaluating path: ", path.id)
         evaluate_table(autofeat, path.id)
     
 
@@ -23,7 +23,6 @@ def evaluate_table(autofeat, path_id: int):
     i: Join
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
-        print(i.get_from_prefix(), i.get_to_prefix())
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
@@ -47,7 +46,7 @@ def evaluate_table(autofeat, path_id: int):
         result.model = model
         result.rank = path.rank
         result.path = path
-        autofeat.add_result(result)
+        add_result(autofeat, result)
 
 
 def add_result(self, result):
@@ -56,3 +55,9 @@ def add_result(self, result):
 
 def show_result(self, id: str):
     return self.results[id].show_graph
+
+
+def rerun(autofeat):
+    if len(autofeat.results) > 0:
+        print("Recalculating results...")
+        evaluate_paths(autofeat, autofeat.top_k_results)

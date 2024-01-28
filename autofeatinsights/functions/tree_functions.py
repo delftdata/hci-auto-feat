@@ -9,10 +9,12 @@ from functions.helper_functions import get_df_with_prefix
 import uuid
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
+import functions.evaluation_functions as evaluation_functions
 
 
 def compute_join_paths(autofeat, top_k_features, null_ratio_threshold: float = 0.5):
     logging.info("Step 2: Calculating paths")
+    autofeat.top_k_features = top_k_features
     emptyPath = Path(begin=autofeat.base_table, joins=[], rank=0)
     emptyPath.id = 0
     autofeat.paths.append(emptyPath)
@@ -68,7 +70,7 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                     joined_df = pd.merge(left=previous_join, right=right_df, left_on=(prop.get_from_prefix()),
                                          right_on=(prop.get_to_prefix()), how="left")
                     joined_df.to_parquet(pt(autofeat.temp_dir.name) / filename)
-                    null_ratio = null_ratio_calculation(autofeat, joined_df, prop)
+                    null_ratio = null_ratio_calculation(joined_df, prop)
                     if null_ratio < null_ratio_threshold:
                         continue
                     result = streaming_relevance_redundancy(
@@ -194,7 +196,14 @@ def get_adjacent_nodes(self, nodes: list, threshold: float) -> [Weight]:
     return return_list
 
 
-def null_ratio_calculation(self, joined_df: pd.DataFrame, prop: Weight) -> float:
+def null_ratio_calculation(joined_df: pd.DataFrame, prop: Weight) -> float:
     total_length = joined_df.shape[0]
     non_nulls = joined_df[prop.get_to_prefix()].count()
     return non_nulls / total_length
+
+
+def rerun(autofeat):
+    if len(autofeat.paths) > 0:
+        print("Recalculating paths")
+        compute_join_paths(autofeat, top_k_features=autofeat.top_k_features)
+        evaluation_functions.rerun(autofeat)

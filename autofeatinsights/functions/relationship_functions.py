@@ -9,6 +9,7 @@ from valentine.algorithms import Coma, JaccardDistanceMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
 from tabulate import tabulate
+import functions.tree_functions as tree_functions
 
 
 def read_relationships(self):
@@ -29,10 +30,12 @@ def read_relationships(self):
             self.weight_string_mapping[t] = t
 
 
-def find_relationships(autofeat, threshold: float = 0.5, matcher: str = "coma"):
+def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: str = "coma"):
     manager = Manager()
     temp = manager.list()
-
+    autofeat.relationship_threshold = relationship_threshold
+    autofeat.matcher = matcher
+    
     # This function calculates the COMA weights between 2 tables in the datasets.
     def calculate_matches(table1: pd.DataFrame, table2: pd.DataFrame, matcher: str) -> dict:
         if matcher == "jaccard":
@@ -48,7 +51,7 @@ def find_relationships(autofeat, threshold: float = 0.5, matcher: str = "coma"):
         matches = calculate_matches(df1, df2, matcher)
         for m in matches.items():
             ((_, col_from), (_, col_to)), similarity = m
-            if similarity > threshold:
+            if similarity > relationship_threshold:
                 temp.append(Weight(table1, table2, col_from, col_to, similarity))
                 temp.append(Weight(table2, table1, col_to, col_from, similarity))
     tables = autofeat.get_tables_repository()
@@ -75,6 +78,7 @@ def find_relationships(autofeat, threshold: float = 0.5, matcher: str = "coma"):
 def add_relationship(autofeat, table1: str, col1: str, table2: str, col2: str, weight: float):
     autofeat.weights.append(Weight(table1, table2, col1, col2, weight))
     autofeat.weights.append(Weight(table2, table1, col2, col1, weight))
+    tree_functions.rerun(autofeat)
 
 
 def remove_relationship(autofeat, table1: str, col1: str, table2: str, col2):
@@ -87,11 +91,13 @@ def remove_relationship(autofeat, table1: str, col1: str, table2: str, col2):
         return
     for i in weights:
         autofeat.weights.remove(i)
+    tree_functions.rerun(autofeat)
 
 
 def update_relationship(autofeat, table1: str, col1: str, table2: str, col2: str, weight: float):
     autofeat.remove_relationship(table1, col1, table2, col2)
     autofeat.add_relationship(table1, col1, table2, col2, weight)
+    tree_functions.rerun(autofeat)
 
 
 def display_best_relationships(autofeat):
@@ -147,3 +153,10 @@ def get_best_weight(autofeat, table1: str, table2: str) -> Weight:
     if len(weights) == 0:
         return None
     return max(weights, key=lambda x: x.weight)
+
+
+def rerun(autofeat, threshold, matcher):
+    if len(autofeat.weights) > 0:
+        print("Relationships are recaclculated.")
+        find_relationships(autofeat, threshold, matcher)
+        tree_functions.rerun(autofeat)
