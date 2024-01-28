@@ -1,2 +1,6 @@
 api.txt
 .venv/
+/AutogluonModels
+**/**/__pycache__
+/venv
+.idea
