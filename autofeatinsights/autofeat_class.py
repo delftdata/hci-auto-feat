@@ -171,19 +171,26 @@ class FeatureDiscovery:
     def move_feature_to_selected(self, path_id: int, feature: str):
         feature_functions.move_feature_to_selected(self, path_id, feature)
 
+    def augment_dataset(self, relation_threshold: float = 0.5, matcher="coma", top_k_features: int = 10, 
+                        top_k_paths: int = 2):
+        self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher)
+        self.compute_join_paths(top_k_features=top_k_features)
+        self.evaluate_paths(top_k_paths=top_k_paths)
+
 
 if __name__ == "__main__":
 
     autofeat = FeatureDiscovery()
     autofeat.set_base_table(base_table="credit/table_0_0.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["credit"])
-    autofeat.find_relationships(relationship_threshold=0.8, matcher="jaccard")
+    autofeat.augment_dataset()
+    # autofeat.find_relationships(relationship_threshold=0.8, matcher="jaccard")
     # autofeat.add_table("school_best/")
     # autofeat.read_relationships()
     # autofeat.display_best_relationships()
     # autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
     # autofeat.explain_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
-    autofeat.compute_join_paths()
+    # autofeat.compute_join_paths()
     # autofeat.show_features(1, show_discarded_features=True)
     # autofeat.move_feature_to_discarded(1, "credit/table_1_1.csv.other_parties")
     # # autofeat.adjust_relevance_value(1, "credit/table_1_1.csv.other_parties", 0.5)
@@ -196,5 +203,5 @@ if __name__ == "__main__":
     # autofeat.display_join_paths(top_k=2)
     # df = autofeat.materialise_join_path(path_id=1)
     # print(list(df.columns))
-    autofeat.evaluate_paths(top_k_paths=2)
-    autofeat.add_relationship("credit/table_0_0.csv", "residence_since", "credit/table_1_1.csv", "housing", 0.8)
+    # autofeat.evaluate_paths(top_k_paths=2)
+    # autofeat.add_relationship("credit/table_0_0.csv", "residence_since", "credit/table_1_1.csv", "housing", 0.8)
