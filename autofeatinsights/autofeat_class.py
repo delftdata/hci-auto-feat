@@ -92,17 +92,17 @@ class FeatureDiscovery:
     #             graph_dic[i.from_table].append(i.to_table)
     #         dsGraph(graph_dic, directed=True).plot(output_path=(f"graph-{index}.png"))
 
-    # def add_table(self, dataset: str, table: str):
-    #     logging.warning("This means that the algorithm has to recalculate it's weights and paths.")
-    #     self.extra_tables.append((dataset, table))
-    #     self.data_discover(silent=True)
+    def add_table(self, table: str):
+        self.extra_tables.append(table)
+        if self.relationship_threshold is not None and self.matcher is not None:
+            relationship_functions.rerun(self, self.relationship_threshold, self.matcher)
 
-    # def remove_table(self, dataset: str, table: str):
-    #     logging.warning("This means that the algorithm has to recalculate it's weights and paths.")
-    #     if (dataset, table) in self.extra_tables:
-    #         self.extra_tables.remove((dataset, table))
-    #     self.exclude_tables.append((dataset, table))
-    #     self.data_discover(silent=True)
+    def remove_table(self, table: str):
+        if table in self.extra_tables:
+            self.extra_tables.remove(table)
+        self.exclude_tables.append(table)
+        if self.relationship_threshold is not None and self.matcher is not None:
+            relationship_functions.rerun(self, self.relationship_threshold, self.matcher)
 
     # def add_feature(self, dataset: str, table: str, feature: str):
     #     # logging.warnin("This means that the algorithm has to recalculate it's weights and paths.")
@@ -123,12 +123,17 @@ class FeatureDiscovery:
     def get_weights_from_and_to_table(self, from_table, to_table):
         return [i for i in self.weights if i.from_table == from_table and i.to_table == to_table]
 
-    def find_relationships(self, matcher="coma", threshold: float = 0.5):
+    def find_relationships(self, matcher="coma", relationship_threshold: float = 0.5):
+        self.matcher = matcher
+        self.relation_threshold = relationship_threshold
         logging.info("Step 1: Finding relationships")
-        relationship_functions.find_relationships(self, threshold, matcher)
+        relationship_functions.find_relationships(self, relationship_threshold, matcher)
 
     def display_best_relationships(self):
         relationship_functions.display_best_relationships(self)
+
+    def add_relationship(self, table1: str, col1: str, table2: str, col2: str, weight: float):
+        relationship_functions.add_relationship(self, table1, col1, table2, col2, weight)
     
     def display_table_relationship(self, table1: str, table2: str):
         relationship_functions.display_table_relationship(self, table1, table2)
@@ -172,7 +177,8 @@ if __name__ == "__main__":
     autofeat = FeatureDiscovery()
     autofeat.set_base_table(base_table="credit/table_0_0.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["credit"])
-    autofeat.find_relationships(threshold=0.8, matcher="jaccard")
+    autofeat.find_relationships(relationship_threshold=0.8, matcher="jaccard")
+    # autofeat.add_table("school_best/")
     # autofeat.read_relationships()
     # autofeat.display_best_relationships()
     # autofeat.display_table_relationship("credit/table_0_0.csv", "credit/table_1_1.csv")
@@ -191,3 +197,4 @@ if __name__ == "__main__":
     # df = autofeat.materialise_join_path(path_id=1)
     # print(list(df.columns))
     autofeat.evaluate_paths(top_k_paths=2)
+    autofeat.add_relationship("credit/table_0_0.csv", "residence_since", "credit/table_1_1.csv", "housing", 0.8)
