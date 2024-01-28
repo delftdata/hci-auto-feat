@@ -228,3 +228,33 @@ def adjust_null_ratio(self, path_id, table_name, value):
     for join in path.joins:
         if join.to_table == table_name:
             join.null_ratio = value
+
+
+def move_feature_to_discarded(self, path_id, feature_name):
+    path = get_path_by_id(self, path_id)
+    if path is None:
+        return
+    for join in path.joins:
+        for index, item in enumerate(join.rel_red["rel"]):
+            if item[0] == feature_name:
+                join.rel_red["rel"].pop(index)
+                join.rel_red_discarded["rel"].append(item)
+        for index, item in enumerate(join.rel_red["red"]):
+            if item[0] == feature_name:
+                join.rel_red["red"].pop(index)
+                join.rel_red_discarded["red"].append(item)
+
+
+def move_feature_to_selected(self, path_id, feature_name):
+    path = get_path_by_id(self, path_id)
+    if path is None:
+        return
+    for join in path.joins:
+        for index, item in enumerate(join.rel_red_discarded["rel"]):
+            if item[0] == feature_name:
+                join.rel_red_discarded["rel"].pop(index)
+                join.rel_red["rel"].append(item)
+        for index, item in enumerate(join.rel_red_discarded["red"]):
+            if item[0] == feature_name:
+                join.rel_red_discarded["red"].pop(index)
+                join.rel_red["red"].append(item)
