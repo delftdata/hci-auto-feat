@@ -49,7 +49,7 @@ def evaluate_table(autofeat, algorithms, path_id: int, verbose=False):
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
-        # Filter selected featurs
+    base_df = base_df[path.features]
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
         verbosity=0).fit_transform(X=base_df)
@@ -57,6 +57,7 @@ def evaluate_table(autofeat, algorithms, path_id: int, verbose=False):
     for model in hyper_parameters:
         X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=[autofeat.targetColumn]), 
                                                             df[autofeat.targetColumn], test_size=0.2, random_state=10)
+        
         X_train[autofeat.targetColumn] = y_train
         X_test[autofeat.targetColumn] = y_test
         predictor = TabularPredictor(label=autofeat.targetColumn,

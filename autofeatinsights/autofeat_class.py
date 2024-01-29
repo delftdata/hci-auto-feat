@@ -212,8 +212,10 @@ if __name__ == "__main__":
     autofeat.set_dataset_repository(dataset_repository=["school_best"])
     autofeat.read_relationships()
     autofeat.compute_join_paths(top_k_features=5)
-    autofeat.display_join_paths()
-    autofeat.show_features(1, show_discarded_features=True)
+    autofeat.display_join_path(1)
+    # autofeat.show_features(1, show_discarded_features=True)
+    df = autofeat.materialise_join_path(1)
+    print(df)
 # autofeat.update_relationship(table1="school_best/base.csv", col1="DBN", table2="school_best/qr.csv", col2="DBN", weight=0.2)
 
     # autofeat.find_relationships(relationship_threshold=0.8, matcher="jaccard")
