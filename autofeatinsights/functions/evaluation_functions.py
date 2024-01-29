@@ -41,7 +41,7 @@ def evaluate_paths(autofeat, algorithm, top_k_results: int = 5, verbose=False, e
         evaluate_table(autofeat, algorithm, path.id, verbose=verbose)
     if explain:
         best_tree = sorted(autofeat.results, key=lambda x: x.accuracy, reverse=True)[0]
-        print(f"2. AutoFeat creates M join trees: the best performing join tree is tree: {best_tree.path.id}")
+        print(f"2. AutoFeat creates {len(autofeat.paths)} join trees: the best performing join tree is tree: {best_tree.path.id}")
         path = tree_functions.get_path_by_id(autofeat, best_tree.path.id)
         print(path.explain())
         autofeat.show_features(best_tree.path.id)

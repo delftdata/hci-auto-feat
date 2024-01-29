@@ -98,6 +98,8 @@ class Path:
             discarded_scores = self.get_discarded_rel_red()
             table_data = []
             for key, values in discarded_scores.items():
+                if len(key) > 10:
+                    key = key[:5] + "..." + key[-5:]
                 row = [key, values["null_ratio"], values['rel'], values['red']]
                 table_data.append(row)
             # Displaying the table
@@ -116,13 +118,13 @@ class Path:
         return self.begin + " -> " + str(self.joins)
    
     def explain(self) -> str:
-        ret_str = "The path starts at the table " + self.begin \
-            + ". \n The path has the following joins: "
+        ret_str = "The join tree starts at the table " + self.begin \
+            + ". \nThe join tree has the following joins: "
         for i in self.joins:
             ret_str += "\n \t from (table.column) " + i.get_from_prefix() \
-                + " to (table.column)" + i.get_to_prefix() + "with null ratio " \
-                + str(i.null_ratio) + "."
-        ret_str += "\n The rank of the path is " + ("%.2f" % self.rank) + "."
+                + " to (table.column)" + i.get_to_prefix() + " with null ratio " \
+                + ("%.2f" % i.null_ratio) + "."
+        ret_str += "\nThe rank of the path is " + ("%.2f" % self.rank) + "."
         return ret_str
     
 
@@ -191,8 +193,7 @@ class Result():
         feature_list = []
         for i in self.feature_importance[0]:
             feature_list.append([i, self.feature_importance[0][i]])
-        return "The result is calculated by evaluating the path with the AutoML algorithm AutoGluon. \
-            The AutoML algorithm is run on the path " + str(self.path) \
+        return "The result is calculated by evaluating the path with the AutoML algorithm AutoGluon." \
             + ". \n The accuracy of the model is " + str(self.accuracy) \
             + ". \n The feature importance of the model is " \
             + tabulate(feature_list, headers=["Feature", "Importance"], tablefmt="grid")

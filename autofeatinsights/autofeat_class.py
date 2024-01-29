@@ -204,7 +204,8 @@ class FeatureDiscovery:
                         top_k_features: int = 10, 
                         top_k_paths: int = 2, explain=True):
         # self.read_relationships()
-        self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, explain=explain)
+        self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, 
+                                explain=explain)
         self.compute_join_paths(top_k_features=top_k_features, explain=explain)
         self.evaluate_paths(algorithm=algorithm, top_k_paths=top_k_paths, explain=explain)
 
