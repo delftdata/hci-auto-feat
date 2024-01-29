@@ -88,6 +88,8 @@ class Path:
         scores = self.get_rel_red()
         table_data = []
         for key, values in scores.items():
+            if len(key) > 20:
+                key = key[:10] + "..." + key[-10:]
             row = [key, values["null_ratio"], values['rel'], values['red']]
             table_data.append(row)
         # Displaying the table 
@@ -98,8 +100,8 @@ class Path:
             discarded_scores = self.get_discarded_rel_red()
             table_data = []
             for key, values in discarded_scores.items():
-                if len(key) > 10:
-                    key = key[:5] + "..." + key[-5:]
+                if len(key) > 20:
+                    key = key[:10] + "..." + key[-10:]
                 row = [key, values["null_ratio"], values['rel'], values['red']]
                 table_data.append(row)
             # Displaying the table
@@ -192,10 +194,14 @@ class Result():
     def explain(self) -> str:
         feature_list = []
         for i in self.feature_importance[0]:
-            feature_list.append([i, self.feature_importance[0][i]])
+            if len(i) > 20:
+                i_string = i[:10] + "..." + i[-10:]
+            else:
+                i_string = i
+            feature_list.append([i_string, self.feature_importance[0][i]])
         return "The result is calculated by evaluating the path with the AutoML algorithm AutoGluon." \
             + ". \n The accuracy of the model is " + str(self.accuracy) \
-            + ". \n The feature importance of the model is " \
+            + ". \n The feature importance of the model is \n" \
             + tabulate(feature_list, headers=["Feature", "Importance"], tablefmt="grid")
 
 

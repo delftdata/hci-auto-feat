@@ -33,10 +33,13 @@ def get_hyperparameters(algorithm: str = None) -> list[dict]:
         )
     
 
-def evaluate_paths(autofeat, algorithm, top_k_results: int = 5, verbose=False, explain=False):
+def evaluate_paths(autofeat, algorithm, top_k_results: int = 5,
+                   explain=False, verbose=True):
     autofeat.results = []
     autofeat.top_k_results = top_k_results
     sorted_paths = sorted(autofeat.paths, key=lambda x: x.rank, reverse=True)[:top_k_results]
+    if verbose:
+        print("Evaluating join trees...")
     for path in tqdm.tqdm(sorted_paths, total=len(sorted_paths)):
         evaluate_table(autofeat, algorithm, path.id, verbose=verbose)
     if explain:
@@ -69,7 +72,7 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
         X_test[autofeat.targetColumn] = y_test
         predictor = TabularPredictor(label=autofeat.targetColumn,
                                      problem_type="binary",
-                                     verbosity=(2 if verbose else 0),
+                                     verbosity=0,
                                      path="AutogluonModels/" + "models").fit(
                                          train_data=X_train, hyperparameters=model)
         model_names = predictor.model_names()
@@ -83,8 +86,7 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
             result.rank = path.rank
             result.path = path
             add_result(autofeat, result)
-            if verbose:
-                print(result.explain())
+
 
 
 def add_result(self, result):
@@ -97,6 +99,7 @@ def show_result(self, id: str):
 
 def get_best_result(autofeat):
     return max(autofeat.results, key=lambda x: x.accuracy)[0]
+
 
 def rerun(autofeat):
     if len(autofeat.results) > 0:

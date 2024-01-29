@@ -12,9 +12,9 @@ from tabulate import tabulate
 import functions.tree_functions as tree_functions
 
 
-def read_relationships(self):
+def read_relationships(self, file_path):
     self.weights = []
-    f = open("weights.txt", "r")
+    f = open(file_path, "r")
     stringlist = f.read().split(",")
     for i in stringlist:
         if i != "":
@@ -31,7 +31,8 @@ def read_relationships(self):
             self.weight_string_mapping[t] = t
 
 
-def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: str = "coma", explain=False):
+def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: str = "coma", 
+                       explain=False, verbose=True):
     manager = Manager()
     temp = manager.list()
     autofeat.relationship_threshold = relationship_threshold
@@ -67,12 +68,14 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
         print(f"1. AutoFeat computes the relationships between {len(tables)} tables from the {autofeat.datasets}" 
               + f" repository, using {matcher} similarity score with a threshold of {relationship_threshold}" 
               + f"(i.e., all the relationships with a similarity < {relationship_threshold} will be discarded).")
+    if verbose and not explain:
+        print("Calculating relationships...")
     Parallel(n_jobs=-1)(delayed(profile)(combination, matcher)
                         for combination in tqdm.tqdm(itertools.combinations(tables, 2), 
                                                      total=len(tables) * (len(tables) - 1) / 2))
     autofeat.weights = temp
     # Uncomment for saving weights to file.
-    f = open("weights.txt", "w")
+    f = open(f"saved_weights/{autofeat.base_table}_{relationship_threshold}_{matcher}_weights.txt", "w")
     stringlist = []
     for i in autofeat.weights:
         stringlist.append(f"{i.from_table}--{i.to_table}--{i.from_col}--{i.to_col}--{i.weight},")

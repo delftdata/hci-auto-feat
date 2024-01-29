@@ -1,6 +1,7 @@
 import logging
 import glob
 import tempfile
+import os.path
 import functions.relationship_functions as relationship_functions
 import functions.tree_functions as tree_functions
 import functions.feature_functions as feature_functions
@@ -123,13 +124,15 @@ class FeatureDiscovery:
     def get_weights_from_and_to_table(self, from_table, to_table):
         return [i for i in self.weights if i.from_table == from_table and i.to_table == to_table]
 
-    def find_relationships(self, matcher="coma", relationship_threshold: float = 0.5, explain=False):
+    def find_relationships(self, matcher="coma", relationship_threshold: float = 0.5, explain=False, 
+                           use_cache=True, verbose=True):
         self.matcher = matcher
         self.relation_threshold = relationship_threshold
-        relationship_functions.find_relationships(self, relationship_threshold, matcher, explain)
+        relationship_functions.find_relationships(self, relationship_threshold, matcher, explain, 
+                                                  use_cache=use_cache, verbose=verbose)
 
-    def read_relationships(self):
-        relationship_functions.read_relationships(self)
+    def read_relationships(self, file_path):
+        relationship_functions.read_relationships(self, file_path)
 
     def display_best_relationships(self):
         relationship_functions.display_best_relationships(self)
@@ -146,8 +149,8 @@ class FeatureDiscovery:
     def display_table_relationship(self, table1: str, table2: str):
         relationship_functions.display_table_relationship(self, table1, table2)
 
-    def compute_join_paths(self, top_k_features: int = 10, explain=False):
-        tree_functions.compute_join_paths(self, top_k_features, explain=explain)
+    def compute_join_paths(self, top_k_features: int = 10, explain=False, verbose=True):
+        tree_functions.compute_join_paths(self, top_k_features, explain=explain, verbose=verbose)
 
     def show_features(self, path_id: int, show_discarded_features: bool = False):
         feature_functions.show_features(self, path_id, show_discarded_features)
@@ -173,8 +176,8 @@ class FeatureDiscovery:
     def inspect_join_path(self, path_id: int):
         tree_functions.inspect_join_path(self, path_id)
 
-    def evaluate_paths(self, algorithm, top_k_paths: int = 2, verbose=False, explain=False):
-        evaluation_functions.evaluate_paths(self, algorithm, top_k_paths, verbose, explain=explain)
+    def evaluate_paths(self, algorithm, top_k_paths: int = 2, verbose=True, explain=False):
+        evaluation_functions.evaluate_paths(self, algorithm, top_k_paths, verbose=verbose, explain=explain)
 
     def get_best_result(self):
         evaluation_functions.get_best_result(self)
@@ -202,11 +205,19 @@ class FeatureDiscovery:
 
     def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, matcher="coma", 
                         top_k_features: int = 10, 
-                        top_k_paths: int = 2, explain=True):
-        # self.read_relationships()
-        self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, 
-                                explain=explain)
-        self.compute_join_paths(top_k_features=top_k_features, explain=explain)
+                        top_k_paths: int = 2, explain=True, verbose=True, use_cache=True):
+        if use_cache:
+            if os.path.isfile(f"saved_weights/{self.base_table}_{relation_threshold}_{matcher}_weights.txt"):
+                if verbose:
+                    print("Reading from cache file: " + f"saved_weights/{self.base_table}_{relation_threshold}_{matcher}_weights.txt")
+                    self.read_relationships(f"saved_weights/{self.base_table}_{relation_threshold}_{matcher}_weights.txt")
+            else:
+                self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, 
+                                        explain=explain, verbose=verbose)
+        else:
+            self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, 
+                                    explain=explain, verbose=verbose)
+        self.compute_join_paths(top_k_features=top_k_features, explain=explain, verbose=verbose)
         self.evaluate_paths(algorithm=algorithm, top_k_paths=top_k_paths, explain=explain)
 
 

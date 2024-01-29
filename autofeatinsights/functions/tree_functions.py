@@ -13,12 +13,14 @@ import functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
 
-def compute_join_paths(autofeat, top_k_features, null_ratio_threshold: float = 0.5, explain=False):
+def compute_join_paths(autofeat, top_k_features, null_ratio_threshold: float = 0.5, explain=False, verbose=True):
     autofeat.paths = []
     autofeat.top_k_features = top_k_features
     emptyPath = Path(begin=autofeat.base_table, joins=[], rank=0)
     emptyPath.id = 0
     autofeat.paths.append(emptyPath)
+    if verbose:
+        print("Calculating join trees...")
     stream_feature_selection(autofeat=autofeat, top_k_features=top_k_features, queue={autofeat.base_table}, 
                              path=Path(begin=(autofeat.base_table), joins=[], rank=0, ), 
                              null_ratio_threshold=null_ratio_threshold)
