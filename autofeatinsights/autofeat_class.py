@@ -212,9 +212,9 @@ class FeatureDiscovery:
 if __name__ == "__main__":
 
     autofeat = FeatureDiscovery()
-    autofeat.set_base_table(base_table="school_best/base.csv", target_column="class")
-    autofeat.set_dataset_repository(dataset_repository=["school_best"])
-    autofeat.augment_dataset()
+    autofeat.set_base_table(base_table="school/base.csv", target_column="class")
+    autofeat.set_dataset_repository(dataset_repository=["school"])
+    autofeat.augment_dataset(explain=True)
     # autofeat.read_relationships()
     # autofeat.compute_join_paths(top_k_features=5)
     # autofeat.display_join_path(1)

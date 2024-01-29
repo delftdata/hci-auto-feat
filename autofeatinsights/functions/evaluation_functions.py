@@ -55,7 +55,8 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
-    base_df = base_df[path.features + [autofeat.targetColumn]]
+    if path.features is not None:
+        base_df = base_df[path.features + [autofeat.targetColumn]]
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
         verbosity=0).fit_transform(X=base_df)
