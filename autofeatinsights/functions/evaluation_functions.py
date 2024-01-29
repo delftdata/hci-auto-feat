@@ -49,6 +49,8 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
         result.rank = path.rank
         result.path = path
         add_result(autofeat, result)
+        if verbose:
+            result.explain()
 
 
 def add_result(self, result):
