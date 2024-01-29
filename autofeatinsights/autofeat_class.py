@@ -1,14 +1,13 @@
 import logging
 import glob
 import tempfile
-import pydot
-import autofeatinsights.functions.relationship_functions as relationship_functions
-import autofeatinsights.functions.tree_functions as tree_functions
-import autofeatinsights.functions.feature_functions as feature_functions
-import autofeatinsights.functions.evaluation_functions as evaluation_functions
-from autofeatinsights.functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
+import functions.relationship_functions as relationship_functions
+import functions.tree_functions as tree_functions
+import functions.feature_functions as feature_functions
+import functions.evaluation_functions as evaluation_functions
+from functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
 from typing import List, Set
-from autofeatinsights.functions.classes import Weight, Path, Result
+from functions.classes import Weight, Path, Result
 import pandas as pd
 from sklearn.model_selection import train_test_split
 logging.basicConfig(level=logging.INFO)
@@ -154,8 +153,11 @@ class FeatureDiscovery:
     def show_features(self, path_id: int, show_discarded_features: bool = False):
         feature_functions.show_features(self, path_id, show_discarded_features)
 
-    def display_join_paths(self, top_k: None):
+    def display_join_paths(self, top_k: int = None):
         tree_functions.display_join_paths(self, top_k)
+    
+    def display_join_path(self, path_id):
+        tree_functions.display_join_path(self, path_id)
 
     def explain_relationship(self, table1: str, table2: str):
         relationship_functions.explain_relationship(self, table1, table2)
@@ -172,11 +174,11 @@ class FeatureDiscovery:
     def inspect_join_path(self, path_id: int):
         tree_functions.inspect_join_path(self, path_id)
 
-    def evaluate_paths(self, algorithm, top_k_paths: int = 2, verbose=False):
-        evaluation_functions.evaluate_paths(self, algorithm, top_k_paths, verbose)
+    def evaluate_paths(self, algorithms, top_k_paths: int = 2, verbose=False):
+        evaluation_functions.evaluate_paths(self, algorithms, top_k_paths, verbose)
 
-    def evaluate_table(self, algorithm, path_id: int, verbose=False):
-        evaluation_functions.evaluate_table(self, algorithm, path_id, verbose)
+    def evaluate_table(self, algorithms, path_id: int, verbose=False):
+        evaluation_functions.evaluate_table(self, algorithms, path_id, verbose)
 
     def adjust_relevance_value(self, path_id: int, feature: str, value: float):
         feature_functions.adjust_relevance_value(self, path_id, feature, value)
@@ -206,9 +208,16 @@ class FeatureDiscovery:
 if __name__ == "__main__":
 
     autofeat = FeatureDiscovery()
-    autofeat.set_base_table(base_table="credit/table_0_0.csv", target_column="class")
-    autofeat.set_dataset_repository(dataset_repository=["credit"])
-    autofeat.augment_dataset()
+    autofeat.set_base_table(base_table="school_best/base.csv", target_column="class")
+    autofeat.set_dataset_repository(dataset_repository=["school_best"])
+    autofeat.read_relationships()
+    autofeat.compute_join_paths(top_k_features=5)
+    autofeat.display_join_path(1)
+    # autofeat.show_features(1, show_discarded_features=True)
+    df = autofeat.materialise_join_path(1)
+    print(df)
+# autofeat.update_relationship(table1="school_best/base.csv", col1="DBN", table2="school_best/qr.csv", col2="DBN", weight=0.2)
+
     # autofeat.find_relationships(relationship_threshold=0.8, matcher="jaccard")
     # autofeat.add_table("school_best/")
     # autofeat.read_relationships()

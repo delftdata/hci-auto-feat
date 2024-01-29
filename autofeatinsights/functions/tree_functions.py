@@ -1,15 +1,16 @@
 import logging
-from autofeatinsights.functions.classes import Path, Join, Weight
+from functions.classes import Path, Join, Weight
 import networkx
 from matplotlib import pyplot as plt
 from pathlib import Path as pt
 import pandas as pd
 from copy import deepcopy
-from autofeatinsights.functions.helper_functions import get_df_with_prefix
+import pydot
+from functions.helper_functions import get_df_with_prefix
 import uuid
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
-import autofeatinsights.functions.evaluation_functions as evaluation_functions
+import functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
 
@@ -97,6 +98,8 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                         path.rank = score
                         path.add_join(join)
                         path.id = len(autofeat.paths)
+                    else:
+                        autofeat.partial_join_selected_features[str(join_list)] = autofeat.partial_join_selected_features[str(previous_table_join)]
                     autofeat.paths.append(deepcopy(path))
                     autofeat.join_name_mapping[str(join_list)] = filename
                     current_queue.append(join_list)
@@ -121,6 +124,22 @@ def display_join_paths(self, top_k: None):
         plt.show()
 
 
+def display_join_path(self, path_id):
+    path = get_path_by_id(self, path_id)
+    if path is None:
+        return
+    graph = networkx.DiGraph()
+    labels = {}
+    for i in path.joins:
+        graph.add_edge(i.from_table, i.to_table)
+        labels[(i.from_table, i.to_table)] = i.from_col + " -> " + i.to_col
+    pos = graphviz_layout(graph, prog="dot")
+    networkx.draw(graph, pos=pos, with_labels=True)
+    networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
+    plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+    plt.show()
+
+
 def streaming_relevance_redundancy(
     self, top_k_features, dataframe: pd.DataFrame, new_features: list[str], selected_features: list[str]
 ) -> Optional[Tuple[float, list[dict]]]:
@@ -139,6 +158,8 @@ def streaming_relevance_redundancy(
         dataframe=X, new_features=features, target_column=y
     )
     feature_score_relevance = feature_score_relevance[:top_feat]
+    rel_discarded_features += feature_score_relevance[top_feat:]
+
     if len(feature_score_relevance) == 0:
         return None
     relevant_features = list(dict(feature_score_relevance).keys())
@@ -178,6 +199,8 @@ def materialise_join_path(self, path_id):
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
+    print(path.features)
+    base_df = base_df[path.features]
     # Filter on selected features in rel_red
     return base_df
 
@@ -211,6 +234,7 @@ def remove_join_from_path(self, path_id: int, table: str):
         if join.to_table == table:
             path.joins.pop(index)
     evaluation_functions.rerun(self)
+
 
 def rerun(autofeat):
     if len(autofeat.paths) > 0:

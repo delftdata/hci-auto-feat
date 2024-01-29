@@ -1,4 +1,4 @@
-from autofeatinsights.functions.classes import Weight
+from functions.classes import Weight
 import pandas as pd
 from multiprocessing import Manager
 from joblib import Parallel, delayed
@@ -9,7 +9,7 @@ from valentine.algorithms import Coma, JaccardDistanceMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
 from tabulate import tabulate
-import autofeatinsights.functions.tree_functions as tree_functions
+import functions.tree_functions as tree_functions
 
 
 def read_relationships(self):
@@ -76,13 +76,14 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
     f.close()
 
 
-def add_relationship(autofeat, table1: str, col1: str, table2: str, col2: str, weight: float):
+def add_relationship(autofeat, table1: str, col1: str, table2: str, col2: str, weight: float, update: bool = True):
     autofeat.weights.append(Weight(table1, table2, col1, col2, weight))
     autofeat.weights.append(Weight(table2, table1, col2, col1, weight))
-    tree_functions.rerun(autofeat)
+    if update:
+        tree_functions.rerun(autofeat)
 
 
-def remove_relationship(autofeat, table1: str, col1: str, table2: str, col2):
+def remove_relationship(autofeat, table1: str, col1: str, table2: str, col2, update: bool = True):
     weights = [i for i in autofeat.weights if i.from_table == table1 
                and i.to_table == table2 and i.from_col == col1 
                and i.to_col == col2]
@@ -93,12 +94,13 @@ def remove_relationship(autofeat, table1: str, col1: str, table2: str, col2):
     for i in weights:
         if i in autofeat.weights:
             autofeat.weights.remove(i)
-    tree_functions.rerun(autofeat)
+    if update:
+        tree_functions.rerun(autofeat)
 
 
 def update_relationship(autofeat, table1: str, col1: str, table2: str, col2: str, weight: float):
-    remove_relationship(autofeat, table1, col1, table2, col2)
-    add_relationship(autofeat, table1, col1, table2, col2, weight)
+    remove_relationship(autofeat, table1, col1, table2, col2, update=False)
+    add_relationship(autofeat, table1, col1, table2, col2, weight, update=False)
     tree_functions.rerun(autofeat)
 
 
