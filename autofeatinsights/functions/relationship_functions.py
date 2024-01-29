@@ -118,7 +118,8 @@ def display_best_relationships(autofeat):
     if len(autofeat.datasets) == 1:
         highest_weights = [[i[0].split("/")[-1], i[1].split("/")[-1], i[2]] for i in highest_weights]
     df = pd.DataFrame(highest_weights, columns=["from_table", "to_table", "weight"])
-    seaborn.heatmap(df.pivot(index="from_table", columns="to_table", values="weight"), square=True, cmap="PiYG")
+    seaborn.heatmap(df.pivot(index="from_table", columns="to_table", values="weight"), square=True, cmap="PiYG",
+                    vmin=autofeat.relation_threshold, vmax=1)
     plt.xlabel("")
     plt.ylabel("")
     plt.xticks(fontsize="small", rotation=30) 
@@ -131,7 +132,8 @@ def display_table_relationship(autofeat, table1: str, table2: str):
         return
     df = pd.DataFrame([[i.from_col, i.to_col, i.weight] for i in weights], 
                       columns=["from_column", "to_column", "weight"])
-    seaborn.heatmap(df.pivot(index="from_column", columns="to_column", values="weight"), square=True, cmap="PiYG")
+    seaborn.heatmap(df.pivot(index="from_column", columns="to_column", values="weight"), square=True, cmap="PiYG", 
+                    vmin=autofeat.relation_threshold, vmax=1)
     plt.xlabel(table2)
     plt.ylabel(table1)
     plt.xticks(fontsize="small", rotation=30) 
