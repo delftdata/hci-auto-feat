@@ -123,11 +123,10 @@ class FeatureDiscovery:
     def get_weights_from_and_to_table(self, from_table, to_table):
         return [i for i in self.weights if i.from_table == from_table and i.to_table == to_table]
 
-    def find_relationships(self, matcher="coma", relationship_threshold: float = 0.5):
+    def find_relationships(self, matcher="coma", relationship_threshold: float = 0.5, explain=False):
         self.matcher = matcher
         self.relation_threshold = relationship_threshold
-        logging.info("Step 1: Finding relationships")
-        relationship_functions.find_relationships(self, relationship_threshold, matcher)
+        relationship_functions.find_relationships(self, relationship_threshold, matcher, explain)
 
     def read_relationships(self):
         relationship_functions.read_relationships(self)
@@ -147,8 +146,8 @@ class FeatureDiscovery:
     def display_table_relationship(self, table1: str, table2: str):
         relationship_functions.display_table_relationship(self, table1, table2)
 
-    def compute_join_paths(self, top_k_features: int = 10):
-        tree_functions.compute_join_paths(self, top_k_features)
+    def compute_join_paths(self, top_k_features: int = 10, explain=False):
+        tree_functions.compute_join_paths(self, top_k_features, explain=explain)
 
     def show_features(self, path_id: int, show_discarded_features: bool = False):
         feature_functions.show_features(self, path_id, show_discarded_features)
@@ -174,11 +173,14 @@ class FeatureDiscovery:
     def inspect_join_path(self, path_id: int):
         tree_functions.inspect_join_path(self, path_id)
 
-    def evaluate_paths(self, algorithms, top_k_paths: int = 2, verbose=False):
-        evaluation_functions.evaluate_paths(self, algorithms, top_k_paths, verbose)
+    def evaluate_paths(self, algorithm, top_k_paths: int = 2, verbose=False, explain=False):
+        evaluation_functions.evaluate_paths(self, algorithm, top_k_paths, verbose, explain=explain)
 
-    def evaluate_table(self, algorithms, path_id: int, verbose=False):
-        evaluation_functions.evaluate_table(self, algorithms, path_id, verbose)
+    def get_best_result(self):
+        evaluation_functions.get_best_result(self)
+
+    def evaluate_table(self, algorithm, path_id: int, verbose=False):
+        evaluation_functions.evaluate_table(self, algorithm, path_id, verbose)
 
     def adjust_relevance_value(self, path_id: int, feature: str, value: float):
         feature_functions.adjust_relevance_value(self, path_id, feature, value)
@@ -198,11 +200,13 @@ class FeatureDiscovery:
     def materialise_join_path(self, path_id: int):
         return tree_functions.materialise_join_path(self, path_id)
 
-    def augment_dataset(self, relation_threshold: float = 0.5, matcher="coma", top_k_features: int = 10, 
-                        top_k_paths: int = 2):
-        self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher)
-        self.compute_join_paths(top_k_features=top_k_features)
-        self.evaluate_paths(top_k_paths=top_k_paths)
+    def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, matcher="coma", 
+                        top_k_features: int = 10, 
+                        top_k_paths: int = 2, explain=True):
+        self.read_relationships()
+        # self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, explain=explain)
+        self.compute_join_paths(top_k_features=top_k_features, explain=explain)
+        self.evaluate_paths(algorithm=algorithm, top_k_paths=top_k_paths, explain=explain)
 
 
 if __name__ == "__main__":
@@ -210,14 +214,15 @@ if __name__ == "__main__":
     autofeat = FeatureDiscovery()
     autofeat.set_base_table(base_table="school_best/base.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["school_best"])
-    autofeat.read_relationships()
-    autofeat.compute_join_paths(top_k_features=5)
-    autofeat.display_join_path(1)
-    # autofeat.show_features(1, show_discarded_features=True)
-    df = autofeat.materialise_join_path(1)
-    print(df)
-# autofeat.update_relationship(table1="school_best/base.csv", col1="DBN", table2="school_best/qr.csv", col2="DBN", weight=0.2)
-
+    autofeat.augment_dataset()
+    # autofeat.read_relationships()
+    # autofeat.compute_join_paths(top_k_features=5)
+    # autofeat.display_join_path(1)
+    # # autofeat.show_features(1, show_discarded_features=True)
+    # df = autofeat.materialise_join_path(1)
+    # print(df)
+# autofeat.update_relationship(table1="school_best/base.csv", col1="DBN", table2="school_best/qr.csv", col2="DBN", 
+    # weight=0.2)
     # autofeat.find_relationships(relationship_threshold=0.8, matcher="jaccard")
     # autofeat.add_table("school_best/")
     # autofeat.read_relationships()

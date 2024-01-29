@@ -1,4 +1,3 @@
-import logging
 from functions.classes import Path, Join, Weight
 import networkx
 from matplotlib import pyplot as plt
@@ -14,8 +13,8 @@ import functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
 
-def compute_join_paths(autofeat, top_k_features, null_ratio_threshold: float = 0.5):
-    logging.info("Step 2: Calculating paths")
+def compute_join_paths(autofeat, top_k_features, null_ratio_threshold: float = 0.5, explain=False):
+    autofeat.paths = []
     autofeat.top_k_features = top_k_features
     emptyPath = Path(begin=autofeat.base_table, joins=[], rank=0)
     emptyPath.id = 0
@@ -99,7 +98,8 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                         path.add_join(join)
                         path.id = len(autofeat.paths)
                     else:
-                        autofeat.partial_join_selected_features[str(join_list)] = autofeat.partial_join_selected_features[str(previous_table_join)]
+                        autofeat.partial_join_selected_features[str(join_list)] = \
+                            autofeat.partial_join_selected_features[str(previous_table_join)]
                     autofeat.paths.append(deepcopy(path))
                     autofeat.join_name_mapping[str(join_list)] = filename
                     current_queue.append(join_list)

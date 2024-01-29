@@ -31,7 +31,7 @@ def read_relationships(self):
             self.weight_string_mapping[t] = t
 
 
-def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: str = "coma"):
+def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: str = "coma", explain=False):
     manager = Manager()
     temp = manager.list()
     autofeat.relationship_threshold = relationship_threshold
@@ -63,6 +63,10 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
             autofeat.weight_string_mapping[t] = new_string
         else:
             autofeat.weight_string_mapping[t] = t
+    if explain:
+        print(f"AutoFeat computes the relationships between N tables from the {autofeat.datasets}" 
+              + f"repository, using {matcher} similarity score with a threshold of {relationship_threshold}" 
+              + f"(i.e., all the relationships with a similarity < {relationship_threshold} will be discarded).")
     Parallel(n_jobs=-1)(delayed(profile)(combination, matcher)
                         for combination in tqdm.tqdm(itertools.combinations(tables, 2), 
                                                      total=len(tables) * (len(tables) - 1) / 2))
@@ -126,7 +130,7 @@ def display_best_relationships(autofeat):
     plt.xlabel("")
     plt.ylabel("")
     plt.xticks(fontsize="small", rotation=30) 
-    plt.show()
+    plt.savefig("heatmap.pdf", dpi=300, bbox_inches='tight')
 
 
 def display_table_relationship(autofeat, table1: str, table2: str):
@@ -141,7 +145,7 @@ def display_table_relationship(autofeat, table1: str, table2: str):
     plt.ylabel(table1)
     plt.xticks(fontsize="small", rotation=30) 
     plt.yticks(fontsize="small", rotation=0)
-    plt.show()
+    plt.savefig("heatmap_base_crime.pdf", dpi=300, bbox_inches='tight')
 
 
 def explain_relationship(autofeat, table1: str, table2: str):

@@ -18,13 +18,12 @@ hyper_parameters = [
 ]
 
 
-def get_hyperparameters(algorithm: [str] = None) -> list[dict]:
+def get_hyperparameters(algorithm: str = None) -> list[dict]:
     if algorithm is None:
         return hyper_parameters
 
     if algorithm == 'LR':
         return [{'LR': {'penalty': 'L1'}}]
-
     model = {algorithm: {}}
     if model in hyper_parameters:
         return [model]
@@ -34,26 +33,33 @@ def get_hyperparameters(algorithm: [str] = None) -> list[dict]:
         )
     
 
-def evaluate_paths(autofeat, algorithms, top_k_results: int = 5, verbose=False):
-    logging.info("Step 3: Evaluating paths")
+def evaluate_paths(autofeat, algorithm, top_k_results: int = 5, verbose=False, explain=False):
+    autofeat.results = []
     autofeat.top_k_results = top_k_results
     sorted_paths = sorted(autofeat.paths, key=lambda x: x.rank, reverse=True)[:top_k_results]
     for path in tqdm.tqdm(sorted_paths, total=len(sorted_paths)):
-        evaluate_table(autofeat, algorithms, path.id, verbose=verbose)
-    
+        evaluate_table(autofeat, algorithm, path.id, verbose=verbose)
+    if explain:
+        best_tree = sorted(autofeat.results, key=lambda x: x.accuracy, reverse=True)[0]
+        print(f"2. AutoFeat creates M join trees: the best performing join tree is tree: {best_tree.path.id}")
+        path = tree_functions.get_path_by_id(autofeat, best_tree.path.id)
+        print(path.explain())
+        autofeat.show_features(best_tree.path.id)
+        print(best_tree.explain())
 
-def evaluate_table(autofeat, algorithms, path_id: int, verbose=False):
+
+def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
     path = tree_functions.get_path_by_id(autofeat, path_id)
     base_df = get_df_with_prefix(autofeat.base_table, autofeat.targetColumn)
     i: Join
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
-    base_df = base_df[path.features]
+    base_df = base_df[path.features + [autofeat.targetColumn]]
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
         verbosity=0).fit_transform(X=base_df)
-    hyper_parameters = get_hyperparameters(algorithms)
+    hyper_parameters = get_hyperparameters(algorithm)
     for model in hyper_parameters:
         X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=[autofeat.targetColumn]), 
                                                             df[autofeat.targetColumn], test_size=0.2, random_state=10)
@@ -64,7 +70,7 @@ def evaluate_table(autofeat, algorithms, path_id: int, verbose=False):
                                      problem_type="binary",
                                      verbosity=(2 if verbose else 0),
                                      path="AutogluonModels/" + "models").fit(
-                                         train_data=X_train, hyperparameters={model})
+                                         train_data=X_train, hyperparameters=model)
         model_names = predictor.model_names()
         for model in model_names[:-1]:
             result = Result()
@@ -87,6 +93,9 @@ def add_result(self, result):
 def show_result(self, id: str):
     return self.results[id].show_graph
 
+
+def get_best_result(autofeat):
+    return max(autofeat.results, key=lambda x: x.accuracy)[0]
 
 def rerun(autofeat):
     if len(autofeat.results) > 0:

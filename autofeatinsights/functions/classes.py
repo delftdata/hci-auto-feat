@@ -118,9 +118,10 @@ class Path:
     def explain(self) -> str:
         ret_str = "The path starts at the table " + self.begin \
             + ". \n The path has the following joins: "
-        for i in self.path:
+        for i in self.joins:
             ret_str += "\n \t from (table.column) " + i.get_from_prefix() \
-                + " to (table.column)" + i.get_to_prefix()
+                + " to (table.column)" + i.get_to_prefix() + "with null ratio " \
+                + str(i.null_ratio) + "."
         ret_str += "\n The rank of the path is " + ("%.2f" % self.rank) + "."
         return ret_str
     
@@ -187,11 +188,14 @@ class Result():
         return ret_string
     
     def explain(self) -> str:
+        feature_list = []
+        for i in self.feature_importance[0]:
+            feature_list.append([i, self.feature_importance[0][i]])
         return "The result is calculated by evaluating the path with the AutoML algorithm AutoGluon. \
             The AutoML algorithm is run on the path " + str(self.path) \
             + ". \n The accuracy of the model is " + str(self.accuracy) \
             + ". \n The feature importance of the model is " \
-            + str(self.feature_importance) + "."
+            + tabulate(feature_list, headers=["Feature", "Importance"], tablefmt="grid")
 
 
 class Weight():
