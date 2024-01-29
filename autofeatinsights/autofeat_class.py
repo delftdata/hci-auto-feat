@@ -1,7 +1,6 @@
 import logging
 import glob
 import tempfile
-import pydot
 import autofeatinsights.functions.relationship_functions as relationship_functions
 import autofeatinsights.functions.tree_functions as tree_functions
 import autofeatinsights.functions.feature_functions as feature_functions

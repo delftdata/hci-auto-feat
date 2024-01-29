@@ -228,6 +228,7 @@ def remove_join_from_path(self, path_id: int, table: str):
             path.joins.pop(index)
     evaluation_functions.rerun(self)
 
+
 def rerun(autofeat):
     if len(autofeat.paths) > 0:
         print("Recalculating paths")
