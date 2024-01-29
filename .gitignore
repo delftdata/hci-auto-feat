@@ -1,8 +1,8 @@
 api.txt
 .venv/
 /**/**/__pycache__
-/**/__pycache__
-/__pycache__
+autofeatinsights/__pycache__
+autofeatinsights/functions/__pycache__
 .DS_Store
 .idea
 env11
