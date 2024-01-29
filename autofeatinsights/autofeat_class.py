@@ -174,11 +174,11 @@ class FeatureDiscovery:
     def inspect_join_path(self, path_id: int):
         tree_functions.inspect_join_path(self, path_id)
 
-    def evaluate_paths(self, algorithm, top_k_paths: int = 2, verbose=False):
-        evaluation_functions.evaluate_paths(self, algorithm, top_k_paths, verbose)
+    def evaluate_paths(self, algorithms, top_k_paths: int = 2, verbose=False):
+        evaluation_functions.evaluate_paths(self, algorithms, top_k_paths, verbose)
 
-    def evaluate_table(self, algorithm, path_id: int, verbose=False):
-        evaluation_functions.evaluate_table(self, algorithm, path_id, verbose)
+    def evaluate_table(self, algorithms, path_id: int, verbose=False):
+        evaluation_functions.evaluate_table(self, algorithms, path_id, verbose)
 
     def adjust_relevance_value(self, path_id: int, feature: str, value: float):
         feature_functions.adjust_relevance_value(self, path_id, feature, value)
