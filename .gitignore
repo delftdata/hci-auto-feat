@@ -1,6 +1,9 @@
 api.txt
 .venv/
 /AutogluonModels
-**/**/__pycache__
+/**/**/__pycache__
+/**/__pycache__
 /venv
 .idea
+.DS_Store
+**/.DS_Store
