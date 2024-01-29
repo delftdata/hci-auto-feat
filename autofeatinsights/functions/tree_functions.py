@@ -1,15 +1,16 @@
 import logging
-from autofeatinsights.functions.classes import Path, Join, Weight
+from functions.classes import Path, Join, Weight
 import networkx
 from matplotlib import pyplot as plt
 from pathlib import Path as pt
 import pandas as pd
 from copy import deepcopy
-from autofeatinsights.functions.helper_functions import get_df_with_prefix
+import pydot
+from functions.helper_functions import get_df_with_prefix
 import uuid
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
-import autofeatinsights.functions.evaluation_functions as evaluation_functions
+import functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
 
@@ -97,6 +98,8 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                         path.rank = score
                         path.add_join(join)
                         path.id = len(autofeat.paths)
+                    else:
+                        autofeat.partial_join_selected_features[str(join_list)] = autofeat.partial_join_selected_features[str(previous_table_join)]
                     autofeat.paths.append(deepcopy(path))
                     autofeat.join_name_mapping[str(join_list)] = filename
                     current_queue.append(join_list)
@@ -155,6 +158,8 @@ def streaming_relevance_redundancy(
         dataframe=X, new_features=features, target_column=y
     )
     feature_score_relevance = feature_score_relevance[:top_feat]
+    rel_discarded_features += feature_score_relevance[top_feat:]
+
     if len(feature_score_relevance) == 0:
         return None
     relevant_features = list(dict(feature_score_relevance).keys())

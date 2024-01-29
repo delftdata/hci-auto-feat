@@ -1,8 +1,8 @@
 import logging
-from autofeatinsights.functions.helper_functions import get_df_with_prefix
+from functions.helper_functions import get_df_with_prefix
 import tqdm
-from autofeatinsights.functions.classes import Result, Join
-import autofeatinsights.functions.tree_functions as tree_functions
+from functions.classes import Result, Join
+import functions.tree_functions as tree_functions
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 from autogluon.tabular import TabularPredictor
 from sklearn.model_selection import train_test_split
