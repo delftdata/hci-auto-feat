@@ -163,6 +163,9 @@ class FeatureDiscovery:
     def explain_path(self, path_id: int):
         tree_functions.explain_path(self, path_id)
 
+    def remove_join_from_path(self, path_id: int, table: str):
+        tree_functions.remove_join_from_path(self, path_id, table)
+
     def explain_result(self, path_id: int, model: str):
         evaluation_functions.explain_result(self, path_id, model)
 

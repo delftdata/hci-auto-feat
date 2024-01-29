@@ -13,6 +13,7 @@ import autofeatinsights.functions.tree_functions as tree_functions
 
 
 def read_relationships(self):
+    self.weights = []
     f = open("weights.txt", "r")
     stringlist = f.read().split(",")
     for i in stringlist:

@@ -117,7 +117,7 @@ def display_join_paths(self, top_k: None):
         pos = graphviz_layout(graph, prog="dot")
         networkx.draw(graph, pos=pos, with_labels=True)
         networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-        plt.title(f"Rank: {('%.2f' % path.rank)}")
+        plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
         plt.show()
 
 
@@ -202,6 +202,15 @@ def null_ratio_calculation(joined_df: pd.DataFrame, prop: Weight) -> float:
     non_nulls = joined_df[prop.get_to_prefix()].count()
     return non_nulls / total_length
 
+
+def remove_join_from_path(self, path_id: int, table: str):
+    path = get_path_by_id(self, path_id)
+    if path is None:
+        return
+    for index, join in enumerate(path.joins):
+        if join.to_table == table:
+            path.joins.pop(index)
+    evaluation_functions.rerun(self)
 
 def rerun(autofeat):
     if len(autofeat.paths) > 0:
