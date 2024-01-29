@@ -13,7 +13,7 @@ import functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
 
-def compute_join_paths(autofeat, top_k_features, null_ratio_threshold: float = 0.5, explain=False, verbose=True):
+def compute_join_paths(autofeat, top_k_features, non_null_ratio_threshold: float = 0.5, explain=False, verbose=True):
     autofeat.paths = []
     autofeat.top_k_features = top_k_features
     emptyPath = Path(begin=autofeat.base_table, joins=[], rank=0)
@@ -23,10 +23,10 @@ def compute_join_paths(autofeat, top_k_features, null_ratio_threshold: float = 0
         print("Calculating join trees...")
     stream_feature_selection(autofeat=autofeat, top_k_features=top_k_features, queue={autofeat.base_table}, 
                              path=Path(begin=(autofeat.base_table), joins=[], rank=0, ), 
-                             null_ratio_threshold=null_ratio_threshold)
+                             non_null_ratio_threshold=non_null_ratio_threshold)
 
 
-def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, null_ratio_threshold: float, 
+def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, non_null_ratio_threshold: float, 
                              previous_queue: list = None):
     if len(queue) == 0:
         return
@@ -72,8 +72,8 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                     joined_df = pd.merge(left=previous_join, right=right_df, left_on=(prop.get_from_prefix()),
                                          right_on=(prop.get_to_prefix()), how="left")
                     joined_df.to_parquet(pt(autofeat.temp_dir.name) / filename)
-                    null_ratio = null_ratio_calculation(joined_df, prop)
-                    if null_ratio < null_ratio_threshold:
+                    non_null_ratio = non_null_ratio_calculation(joined_df, prop)
+                    if non_null_ratio < non_null_ratio_threshold:
                         continue
                     result = streaming_relevance_redundancy(
                         autofeat,
@@ -89,7 +89,7 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                         red_discarded = red_discarded + [i for i in red_score if i[0] not in final_features]
                         rel_discarded = rel_discarded + [i for i in rel_score if i[0] not in final_features]
                         join = Join(prop.from_table, prop.to_table, 
-                                    prop.from_col, prop.to_col, null_ratio, {"rel": remaining_rel_score, 
+                                    prop.from_col, prop.to_col, non_null_ratio, {"rel": remaining_rel_score, 
                                                                              "red": remaining_red_score}, 
                                     {"rel": rel_discarded, "red": red_discarded})
                         all_features = autofeat.partial_join_selected_features[str(previous_table_join)]
@@ -106,7 +106,7 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                     autofeat.join_name_mapping[str(join_list)] = filename
                     current_queue.append(join_list)
             previous_queue += current_queue
-    stream_feature_selection(autofeat, top_k_features, path, all_neighbours, null_ratio_threshold, previous_queue)
+    stream_feature_selection(autofeat, top_k_features, path, all_neighbours, non_null_ratio_threshold, previous_queue)
 
 
 def display_join_paths(self, top_k: None):
@@ -222,7 +222,7 @@ def get_adjacent_nodes(self, nodes: list, threshold: float) -> [Weight]:
     return return_list
 
 
-def null_ratio_calculation(joined_df: pd.DataFrame, prop: Weight) -> float:
+def non_null_ratio_calculation(joined_df: pd.DataFrame, prop: Weight) -> float:
     total_length = joined_df.shape[0]
     non_nulls = joined_df[prop.get_to_prefix()].count()
     return non_nulls / total_length

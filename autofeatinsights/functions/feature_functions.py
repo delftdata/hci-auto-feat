@@ -31,13 +31,13 @@ def adjust_redundancy_value(autofeat, path_id, feature_name, value):
     evaluation_functions.rerun(autofeat)
 
 
-def adjust_null_ratio(autofeat, path_id, table_name, value):
+def adjust_non_null_ratio(autofeat, path_id, table_name, value):
     path = tree_functions.get_path_by_id(autofeat, path_id)
     if path is None:
         return
     for join in path.joins:
         if join.to_table == table_name:
-            join.null_ratio = value
+            join.non_null_ratio = value
     evaluation_functions.rerun(autofeat)
 
 

@@ -26,7 +26,7 @@ class FeatureDiscovery:
     exlude_tables: [(str, str)]
     partial_join_selected_features: dict = {}
     explore: bool
-    null_ratio_threshold: float
+    non_null_ratio_threshold: float
 
     def __init__(self):
 
@@ -191,8 +191,8 @@ class FeatureDiscovery:
     def adjust_redundancy_value(self, path_id: int, feature: str, value: float):
         feature_functions.adjust_redundancy_value(self, path_id, feature, value)
 
-    def adjust_null_ratio(self, path_id: int, table: str, value: float):
-        feature_functions.adjust_null_ratio(self, path_id, table, value)
+    def adjust_non_null_ratio(self, path_id: int, table: str, value: float):
+        feature_functions.adjust_non_null_ratio(self, path_id, table, value)
 
     def move_features_to_discarded(self, path_id: int, features: [str]):
         feature_functions.move_features_to_discarded(self, path_id, features)

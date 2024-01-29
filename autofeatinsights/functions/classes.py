@@ -11,13 +11,13 @@ class Join():
 
     def __init__(self, from_table: str,
                  to_table: str, from_col: str, to_col: str,
-                 null_ratio: float, rel_red: dict, rel_red_discarded: dict):
+                 non_null_ratio: float, rel_red: dict, rel_red_discarded: dict):
 
         self.from_table = from_table
         self.to_table = to_table
         self.from_col = from_col
         self.to_col = to_col
-        self.null_ratio = null_ratio
+        self.non_null_ratio = non_null_ratio
         self.rel_red = rel_red
         self.rel_red_discarded = rel_red_discarded
    
@@ -29,8 +29,8 @@ class Join():
    
     def __str__(self) -> str:
         return "Join from " + self.from_table + "." + self.from_col + " to " \
-            + self.to_table + "." + self.to_col + " with null ratio " \
-            + str(self.null_ratio) + "."
+            + self.to_table + "." + self.to_col + " with Non-Null ratio " \
+            + str(self.non_null_ratio) + "."
 
     def __repr__(self) -> str:
         return f"{self.from_table}.{self.from_col} -> {self.to_table}.{self.to_col}"
@@ -38,7 +38,7 @@ class Join():
     def explain(self) -> str:
         return "This is a join from: " + self.get_from_prefix() \
             + " to " + self.get_to_prefix() \
-            + " with Null Ratio: " + str(self.null_ratio) + "." 
+            + " with Non-Null Ratio: " + str(self.nnon_ull_ratio) + "." 
 
 
 class Path:
@@ -63,10 +63,10 @@ class Path:
                 for j in i.rel_red[rel_red]:
                     name, val = j
                     if name not in rel_rel_dict:
-                        rel_rel_dict[name] = {"null_ratio": 0, "rel": None, "red": None}
+                        rel_rel_dict[name] = {"non_null_ratio": 0, "rel": None, "red": None}
                     rel_rel_dict[name][rel_red] = val
-                    if rel_rel_dict[name]["null_ratio"] == 0:
-                        rel_rel_dict[name]["null_ratio"] = i.null_ratio
+                    if rel_rel_dict[name]["non_null_ratio"] == 0:
+                        rel_rel_dict[name]["non_null_ratio"] = i.non_null_ratio
         return rel_rel_dict
     
     def get_discarded_rel_red(self):
@@ -78,10 +78,10 @@ class Path:
                 for j in i.rel_red_discarded[rel_red]:
                     name, val = j
                     if name not in rel_rel_dict:
-                        rel_rel_dict[name] = {"null_ratio": 0, "rel": None, "red": None}
+                        rel_rel_dict[name] = {"non_null_ratio": 0, "rel": None, "red": None}
                     rel_rel_dict[name][rel_red] = val
-                    if rel_rel_dict[name]["null_ratio"] == 0:
-                        rel_rel_dict[name]["null_ratio"] = i.null_ratio
+                    if rel_rel_dict[name]["non_null_ratio"] == 0:
+                        rel_rel_dict[name]["non_null_ratio"] = i.non_null_ratio
         return rel_rel_dict
     
     def show_table(self, discarded_features: bool = False):
@@ -90,10 +90,10 @@ class Path:
         for key, values in scores.items():
             if len(key) > 20:
                 key = key[:10] + "..." + key[-10:]
-            row = [key, values["null_ratio"], values['rel'], values['red']]
+            row = [key, values["non_null_ratio"], values['rel'], values['red']]
             table_data.append(row)
         # Displaying the table 
-        table = tabulate(table_data, headers=["Key", "Null Ratio", "Relevance", "Redundancy"], tablefmt="grid")
+        table = tabulate(table_data, headers=["Key", "Non-Null Ratio", "Relevance", "Redundancy"], tablefmt="grid")
         print(table)
         if discarded_features:
             print("Discarded Features")
@@ -102,16 +102,16 @@ class Path:
             for key, values in discarded_scores.items():
                 if len(key) > 20:
                     key = key[:10] + "..." + key[-10:]
-                row = [key, values["null_ratio"], values['rel'], values['red']]
+                row = [key, values["non_null_ratio"], values['rel'], values['red']]
                 table_data.append(row)
             # Displaying the table
-            table = tabulate(table_data, headers=["Key", "Null Ratio", "Relevance", "Redundancy"], tablefmt="grid")
+            table = tabulate(table_data, headers=["Key", "Non-Null Ratio", "Relevance", "Redundancy"], tablefmt="grid")
             print(table)
 
     def __str__(self) -> str:
         ret_string = "Begin: " + self.begin
-        table = tabulate([[i.from_table + "." + i.from_col, i.to_table + "." + i.to_col, i.null_ratio] 
-                          for i in self.joins], headers=["From", "To", "Null Ratio"], tablefmt="grid")
+        table = tabulate([[i.from_table + "." + i.from_col, i.to_table + "." + i.to_col, i.non_null_ratio] 
+                          for i in self.joins], headers=["From", "To", "Non-Null Ratio"], tablefmt="grid")
         ret_string += "\nJoins: \n" + table
         ret_string += "\nRank: " + ("%.2f" % self.rank)
         return ret_string
@@ -124,8 +124,8 @@ class Path:
             + ". \nThe join tree has the following joins: "
         for i in self.joins:
             ret_str += "\n \t from (table.column) " + i.get_from_prefix() \
-                + " to (table.column)" + i.get_to_prefix() + " with null ratio " \
-                + ("%.2f" % i.null_ratio) + "."
+                + " to (table.column)" + i.get_to_prefix() + " with Non-Null ratio " \
+                + ("%.2f" % i.non_null_ratio) + "."
         ret_str += "\nThe rank of the path is " + ("%.2f" % self.rank) + "."
         return ret_str
     
