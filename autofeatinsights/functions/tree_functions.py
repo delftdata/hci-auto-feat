@@ -1,15 +1,16 @@
 import logging
-from functions.classes import Path, Join, Weight
+from autofeatinsights.functions.classes import Path, Join, Weight
 import networkx
 from matplotlib import pyplot as plt
 from pathlib import Path as pt
 import pandas as pd
 from copy import deepcopy
-from functions.helper_functions import get_df_with_prefix
+from autofeatinsights.functions.helper_functions import get_df_with_prefix
 import uuid
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
-import functions.evaluation_functions as evaluation_functions
+import autofeatinsights.functions.evaluation_functions as evaluation_functions
+from networkx.drawing.nx_pydot import graphviz_layout
 
 
 def compute_join_paths(autofeat, top_k_features, null_ratio_threshold: float = 0.5):
@@ -61,7 +62,6 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                     previous_join = pd.read_parquet(key_path)
                 prop: Weight
                 for prop in highest_join_keys:
-                    new_path = deepcopy(path)
                     join_list: [str] = previous_table_join + [prop.to_table]
                     filename = f"{autofeat.base_table.replace('/', '-')}_{str(uuid.uuid4())}.parquet"
                     if previous_join[prop.get_from_prefix()].dtype != right_df[prop.get_to_prefix()].dtype:
@@ -93,11 +93,11 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                         all_features = autofeat.partial_join_selected_features[str(previous_table_join)]
                         all_features.extend(final_features)
                         autofeat.partial_join_selected_features[str(join_list)] = all_features
-                        new_path.features = all_features
-                        new_path.rank = score
-                        new_path.add_join(join)
-                        new_path.id = len(autofeat.paths)
-                    autofeat.paths.append(new_path)
+                        path.features = all_features
+                        path.rank = score
+                        path.add_join(join)
+                        path.id = len(autofeat.paths)
+                    autofeat.paths.append(deepcopy(path))
                     autofeat.join_name_mapping[str(join_list)] = filename
                     current_queue.append(join_list)
             previous_queue += current_queue
@@ -114,10 +114,10 @@ def display_join_paths(self, top_k: None):
         for i in path.joins:
             graph.add_edge(i.from_table, i.to_table)
             labels[(i.from_table, i.to_table)] = i.from_col + " -> " + i.to_col
-        pos = networkx.spring_layout(graph)
+        pos = graphviz_layout(graph, prog="dot")
         networkx.draw(graph, pos=pos, with_labels=True)
         networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-        plt.title(f"Rank: {path.rank}")
+        plt.title(f"Rank: {('%.2f' % path.rank)}")
         plt.show()
 
 
@@ -172,12 +172,13 @@ def inspect_join_path(self, path_id):
 
 
 def materialise_join_path(self, path_id):
-    path = self.get_path_by_id(path_id)
+    path = get_path_by_id(self, path_id)
     base_df = get_df_with_prefix(self.base_table, self.targetColumn)
     i: Join
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
+    # Filter on selected features in rel_red
     return base_df
 
 
@@ -207,3 +208,10 @@ def rerun(autofeat):
         print("Recalculating paths")
         compute_join_paths(autofeat, top_k_features=autofeat.top_k_features)
         evaluation_functions.rerun(autofeat)
+
+
+def explain_path(self, path_id: int):
+    path = get_path_by_id(self, path_id)
+    if path is None:
+        return
+    print(path.explain())

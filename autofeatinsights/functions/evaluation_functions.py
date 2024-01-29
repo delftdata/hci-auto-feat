@@ -1,29 +1,30 @@
 import logging
-from functions.helper_functions import get_df_with_prefix
+from autofeatinsights.functions.helper_functions import get_df_with_prefix
 import tqdm
-from functions.classes import Result, Join
-import functions.tree_functions as tree_functions
+from autofeatinsights.functions.classes import Result, Join
+import autofeatinsights.functions.tree_functions as tree_functions
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 from autogluon.tabular import TabularPredictor
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
 
-def evaluate_paths(autofeat, top_k_results: int = 5):
+def evaluate_paths(autofeat, algorithm, top_k_results: int = 5, verbose=False):
     logging.info("Step 3: Evaluating paths")
     autofeat.top_k_results = top_k_results
     sorted_paths = sorted(autofeat.paths, key=lambda x: x.rank, reverse=True)[:top_k_results]
     for path in tqdm.tqdm(sorted_paths, total=len(sorted_paths)):
-        evaluate_table(autofeat, path.id)
+        evaluate_table(autofeat, algorithm, path.id, verbose=verbose)
     
 
-def evaluate_table(autofeat, path_id: int):
+def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
     path = tree_functions.get_path_by_id(autofeat, path_id)
     base_df = get_df_with_prefix(autofeat.base_table, autofeat.targetColumn)
     i: Join
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
+        # Filter selected featurs
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
         verbosity=0).fit_transform(X=base_df)
@@ -33,9 +34,9 @@ def evaluate_table(autofeat, path_id: int):
     X_test[autofeat.targetColumn] = y_test
     predictor = TabularPredictor(label=autofeat.targetColumn,
                                  problem_type="binary",
-                                 verbosity=0,
+                                 verbosity=(2 if verbose else 0),
                                  path="AutogluonModels/" + "models").fit(
-                                     train_data=X_train, hyperparameters={'LR': {'penalty': 'L1'}})
+                                     train_data=X_train, hyperparameters={algorithm: {}})
     model_names = predictor.model_names()
     for model in model_names[:-1]:
         result = Result()
@@ -44,6 +45,7 @@ def evaluate_table(autofeat, path_id: int):
         ft_imp = predictor.feature_importance(data=X_test, model=model, feature_stage="original")
         result.feature_importance = dict(zip(list(ft_imp.index), ft_imp["importance"])),
         result.model = model
+        result.id = path.id + "_" + model
         result.rank = path.rank
         result.path = path
         add_result(autofeat, result)
@@ -61,3 +63,11 @@ def rerun(autofeat):
     if len(autofeat.results) > 0:
         print("Recalculating results...")
         evaluate_paths(autofeat, autofeat.top_k_results)
+
+
+def explain_result(self, path_id: int, model: str):
+    for i in self.results:
+        if i.path_id == path_id and i.model == model:
+            print(i.explain())
+            return
+    print("no result found")

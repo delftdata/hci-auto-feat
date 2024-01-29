@@ -1,13 +1,14 @@
 import logging
 import glob
 import tempfile
-import functions.relationship_functions as relationship_functions
-import functions.tree_functions as tree_functions
-import functions.feature_functions as feature_functions
-import functions.evaluation_functions as evaluation_functions
-from functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
+import pydot
+import autofeatinsights.functions.relationship_functions as relationship_functions
+import autofeatinsights.functions.tree_functions as tree_functions
+import autofeatinsights.functions.feature_functions as feature_functions
+import autofeatinsights.functions.evaluation_functions as evaluation_functions
+from autofeatinsights.functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
 from typing import List, Set
-from functions.classes import Weight, Path, Result
+from autofeatinsights.functions.classes import Weight, Path, Result
 import pandas as pd
 from sklearn.model_selection import train_test_split
 logging.basicConfig(level=logging.INFO)
@@ -129,11 +130,20 @@ class FeatureDiscovery:
         logging.info("Step 1: Finding relationships")
         relationship_functions.find_relationships(self, relationship_threshold, matcher)
 
+    def read_relationships(self):
+        relationship_functions.read_relationships(self)
+
     def display_best_relationships(self):
         relationship_functions.display_best_relationships(self)
 
     def add_relationship(self, table1: str, col1: str, table2: str, col2: str, weight: float):
         relationship_functions.add_relationship(self, table1, col1, table2, col2, weight)
+
+    def remove_relationship(self, table1: str, col1: str, table2: str, col2: str):
+        relationship_functions.remove_relationship(self, table1, col1, table2, col2)
+
+    def update_relationship(self, table1: str, col1: str, table2: str, col2: str, weight: float):
+        relationship_functions.update_relationship(self, table1, col1, table2, col2, weight)
     
     def display_table_relationship(self, table1: str, table2: str):
         relationship_functions.display_table_relationship(self, table1, table2)
@@ -149,12 +159,21 @@ class FeatureDiscovery:
 
     def explain_relationship(self, table1: str, table2: str):
         relationship_functions.explain_relationship(self, table1, table2)
+    
+    def explain_path(self, path_id: int):
+        tree_functions.explain_path(self, path_id)
+
+    def explain_result(self, path_id: int, model: str):
+        evaluation_functions.explain_result(self, path_id, model)
 
     def inspect_join_path(self, path_id: int):
         tree_functions.inspect_join_path(self, path_id)
 
-    def evaluate_paths(self, top_k_paths: int = 2):
-        evaluation_functions.evaluate_paths(self, top_k_paths)
+    def evaluate_paths(self, algorithm, top_k_paths: int = 2, verbose=False):
+        evaluation_functions.evaluate_paths(self, algorithm, top_k_paths, verbose)
+
+    def evaluate_table(self, algorithm, path_id: int, verbose=False):
+        evaluation_functions.evaluate_table(self, algorithm, path_id, verbose)
 
     def adjust_relevance_value(self, path_id: int, feature: str, value: float):
         feature_functions.adjust_relevance_value(self, path_id, feature, value)
@@ -165,11 +184,14 @@ class FeatureDiscovery:
     def adjust_null_ratio(self, path_id: int, table: str, value: float):
         feature_functions.adjust_null_ratio(self, path_id, table, value)
 
-    def move_feature_to_discarded(self, path_id: int, feature: str):
-        feature_functions.move_feature_to_discarded(self, path_id, feature)
+    def move_features_to_discarded(self, path_id: int, features: [str]):
+        feature_functions.move_features_to_discarded(self, path_id, features)
 
-    def move_feature_to_selected(self, path_id: int, feature: str):
-        feature_functions.move_feature_to_selected(self, path_id, feature)
+    def move_features_to_selected(self, path_id: int, features: [str]):
+        feature_functions.move_features_to_selected(self, path_id, features)
+
+    def materialise_join_path(self, path_id: int):
+        return tree_functions.materialise_join_path(self, path_id)
 
     def augment_dataset(self, relation_threshold: float = 0.5, matcher="coma", top_k_features: int = 10, 
                         top_k_paths: int = 2):

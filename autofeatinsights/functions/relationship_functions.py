@@ -1,4 +1,4 @@
-from functions.classes import Weight
+from autofeatinsights.functions.classes import Weight
 import pandas as pd
 from multiprocessing import Manager
 from joblib import Parallel, delayed
@@ -9,7 +9,7 @@ from valentine.algorithms import Coma, JaccardDistanceMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
 from tabulate import tabulate
-import functions.tree_functions as tree_functions
+import autofeatinsights.functions.tree_functions as tree_functions
 
 
 def read_relationships(self):
@@ -90,13 +90,14 @@ def remove_relationship(autofeat, table1: str, col1: str, table2: str, col2):
     if len(weights) == 0:
         return
     for i in weights:
-        autofeat.weights.remove(i)
+        if i in autofeat.weights:
+            autofeat.weights.remove(i)
     tree_functions.rerun(autofeat)
 
 
 def update_relationship(autofeat, table1: str, col1: str, table2: str, col2: str, weight: float):
-    autofeat.remove_relationship(table1, col1, table2, col2)
-    autofeat.add_relationship(table1, col1, table2, col2, weight)
+    remove_relationship(autofeat, table1, col1, table2, col2)
+    add_relationship(autofeat, table1, col1, table2, col2, weight)
     tree_functions.rerun(autofeat)
 
 
@@ -117,7 +118,9 @@ def display_best_relationships(autofeat):
     if len(autofeat.datasets) == 1:
         highest_weights = [[i[0].split("/")[-1], i[1].split("/")[-1], i[2]] for i in highest_weights]
     df = pd.DataFrame(highest_weights, columns=["from_table", "to_table", "weight"])
-    seaborn.heatmap(df.pivot(index="from_table", columns="to_table", values="weight"), square=True)
+    seaborn.heatmap(df.pivot(index="from_table", columns="to_table", values="weight"), square=True, cmap="PiYG")
+    plt.xlabel("")
+    plt.ylabel("")
     plt.xticks(fontsize="small", rotation=30) 
     plt.show()
 
@@ -128,8 +131,11 @@ def display_table_relationship(autofeat, table1: str, table2: str):
         return
     df = pd.DataFrame([[i.from_col, i.to_col, i.weight] for i in weights], 
                       columns=["from_column", "to_column", "weight"])
-    seaborn.heatmap(df.pivot(index="from_column", columns="to_column", values="weight"), square=True)
+    seaborn.heatmap(df.pivot(index="from_column", columns="to_column", values="weight"), square=True, cmap="PiYG")
+    plt.xlabel(table2)
+    plt.ylabel(table1)
     plt.xticks(fontsize="small", rotation=30) 
+    plt.yticks(fontsize="small", rotation=0)
     plt.show()
 
 
