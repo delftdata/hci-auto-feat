@@ -7,3 +7,5 @@ api.txt
 .idea
 env11
 AutogluonModels
+.ipynb_checkpoints
+venv
