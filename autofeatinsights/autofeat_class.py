@@ -156,6 +156,9 @@ class FeatureDiscovery:
 
     def display_join_paths(self, top_k: None):
         tree_functions.display_join_paths(self, top_k)
+    
+    def display_join_path(self, path_id):
+        tree_functions.display_join_path(self, path_id)
 
     def explain_relationship(self, table1: str, table2: str):
         relationship_functions.explain_relationship(self, table1, table2)

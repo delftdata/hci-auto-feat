@@ -45,12 +45,11 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
         ft_imp = predictor.feature_importance(data=X_test, model=model, feature_stage="original")
         result.feature_importance = dict(zip(list(ft_imp.index), ft_imp["importance"])),
         result.model = model
-        result.id = path.id + "_" + model
         result.rank = path.rank
         result.path = path
         add_result(autofeat, result)
         if verbose:
-            result.explain()
+            print(result.explain())
 
 
 def add_result(self, result):
@@ -69,7 +68,7 @@ def rerun(autofeat):
 
 def explain_result(self, path_id: int, model: str):
     for i in self.results:
-        if i.path_id == path_id and i.model == model:
+        if i.path.id == path_id and i.model == model:
             print(i.explain())
             return
     print("no result found")

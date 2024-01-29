@@ -121,6 +121,22 @@ def display_join_paths(self, top_k: None):
         plt.show()
 
 
+def display_join_path(self, path_id):
+    path = get_path_by_id(self, path_id)
+    if path is None:
+        return
+    graph = networkx.DiGraph()
+    labels = {}
+    for i in path.joins:
+        graph.add_edge(i.from_table, i.to_table)
+        labels[(i.from_table, i.to_table)] = i.from_col + " -> " + i.to_col
+    pos = graphviz_layout(graph, prog="dot")
+    networkx.draw(graph, pos=pos, with_labels=True)
+    networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
+    plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+    plt.show()
+
+
 def streaming_relevance_redundancy(
     self, top_k_features, dataframe: pd.DataFrame, new_features: list[str], selected_features: list[str]
 ) -> Optional[Tuple[float, list[dict]]]:
