@@ -65,7 +65,7 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
             autofeat.weight_string_mapping[t] = t
     if explain:
         print(f"AutoFeat computes the relationships between N tables from the {autofeat.datasets}" 
-              + f"repository, using {matcher} similarity score with a threshold of {relationship_threshold}" 
+              + f" repository, using {matcher} similarity score with a threshold of {relationship_threshold}" 
               + f"(i.e., all the relationships with a similarity < {relationship_threshold} will be discarded).")
     Parallel(n_jobs=-1)(delayed(profile)(combination, matcher)
                         for combination in tqdm.tqdm(itertools.combinations(tables, 2), 
