@@ -137,6 +137,7 @@ class Result():
     accuracy: float
     feature_importance: dict
     model: str
+    model_full_name: str
     data: pd.DataFrame
 
     def __init__(self):
@@ -199,9 +200,9 @@ class Result():
             else:
                 i_string = i
             feature_list.append([i_string, self.feature_importance[0][i]])
-        return "The result is calculated by evaluating the path with the AutoML algorithm AutoGluon." \
-            + ". \n The accuracy of the model is " + str(self.accuracy) \
-            + ". \n The feature importance of the model is \n" \
+        return f"The result is calculated by evaluating the path with the AutoML framework AutoGluon." \
+            + f"\n The accuracy of the model {self.model_full_name} is {self.accuracy}." \
+            + "\n The model used the following features: \n" \
             + tabulate(feature_list, headers=["Feature", "Importance"], tablefmt="grid")
 
 
