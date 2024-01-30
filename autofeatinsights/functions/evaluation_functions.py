@@ -1,8 +1,8 @@
 import logging
-from functions.helper_functions import get_df_with_prefix
+from autofeatinsights.functions.helper_functions import get_df_with_prefix
 import tqdm
-from functions.classes import Result, Join
-import functions.tree_functions as tree_functions
+from autofeatinsights.functions.classes import Result, Join
+import autofeatinsights.functions.tree_functions as tree_functions
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 from autogluon.tabular import TabularPredictor
 from sklearn.model_selection import train_test_split
@@ -58,14 +58,19 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
+
     if path.features is not None:
         base_df = base_df[path.features + [autofeat.targetColumn]]
+
+    columns_to_drop = set(base_df.columns).intersection(set(path.join_keys))
+    base_df.drop(columns=list(columns_to_drop), inplace=True)
+
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
         verbosity=0).fit_transform(X=base_df)
     hyper_parameters = get_hyperparameters(algorithm)
-    for model in hyper_parameters:
-        X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=[autofeat.targetColumn]), 
+    for hyperparam in hyper_parameters:
+        X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=[autofeat.targetColumn]),
                                                             df[autofeat.targetColumn], test_size=0.2, random_state=10)
         
         X_train[autofeat.targetColumn] = y_train
@@ -74,19 +79,19 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
                                      problem_type="binary",
                                      verbosity=0,
                                      path="AutogluonModels/" + "models").fit(
-                                         train_data=X_train, hyperparameters=model)
+                                         train_data=X_train, hyperparameters=hyperparam)
         model_names = predictor.model_names()
         for model in model_names[:-1]:
             result = Result()
             res = predictor.evaluate(X_test, model=model)
             result.accuracy = (res['accuracy'])
             ft_imp = predictor.feature_importance(data=X_test, model=model, feature_stage="original")
-            result.feature_importance = dict(zip(list(ft_imp.index), ft_imp["importance"])),
-            result.model = model
+            result.feature_importance = dict(zip(list(ft_imp.index), ft_imp["importance"]))
+            result.model = list(hyperparam.keys())[0]
+            result.model_full_name = model
             result.rank = path.rank
             result.path = path
-            add_result(autofeat, result)
-
+            autofeat.results.append(result)
 
 
 def add_result(self, result):

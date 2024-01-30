@@ -43,6 +43,9 @@ class Join():
 
 class Path:
 
+    features: list = []
+    join_keys: list = []
+
     def __init__(self, begin: str, joins: [Join] = None, rank: float = None):
         self.begin = begin
         if joins is None:
@@ -109,11 +112,11 @@ class Path:
             print(table)
 
     def __str__(self) -> str:
-        ret_string = "Begin: " + self.begin
+        ret_string = "Rank: " + ("%.2f" % self.rank)
+        ret_string += "\nFrom base table: " + self.begin
         table = tabulate([[i.from_table + "." + i.from_col, i.to_table + "." + i.to_col, i.non_null_ratio] 
-                          for i in self.joins], headers=["From", "To", "Non-Null Ratio"], tablefmt="grid")
-        ret_string += "\nJoins: \n" + table
-        ret_string += "\nRank: " + ("%.2f" % self.rank)
+                          for i in self.joins], headers=["From Table.Column", "To Table.Column", "Non-Null Ratio"], tablefmt="grid")
+        ret_string += "\nJoin paths: \n" + table
         return ret_string
     
     def __repr__(self) -> str:
@@ -137,6 +140,7 @@ class Result():
     accuracy: float
     feature_importance: dict
     model: str
+    model_full_name: str
     data: pd.DataFrame
 
     def __init__(self):
@@ -192,16 +196,17 @@ class Result():
         return ret_string
     
     def explain(self) -> str:
-        feature_list = []
-        for i in self.feature_importance[0]:
-            if len(i) > 20:
-                i_string = i[:10] + "..." + i[-10:]
-            else:
-                i_string = i
-            feature_list.append([i_string, self.feature_importance[0][i]])
-        return "The result is calculated by evaluating the path with the AutoML algorithm AutoGluon." \
-            + ". \n The accuracy of the model is " + str(self.accuracy) \
-            + ". \n The feature importance of the model is \n" \
+        feature_list = list(map(lambda x: [x[0], x[1]], self.feature_importance.items()))
+        # for i in self.feature_importance[0]:
+        #     if len(i) > 20:
+        #         i_string = i[:10] + "..." + i[-10:]
+        #     else:
+        #         i_string = i
+        #     feature_list.append([i_string, self.feature_importance[0][i]])
+        return f"The result is calculated by evaluating the dataset corresponding to the join tree\n" \
+               f" using the AutoML framework AutoGluon." \
+            + f"\n The accuracy of the model {self.model_full_name} is {self.accuracy}." \
+            + "\n The model used the following features: \n" \
             + tabulate(feature_list, headers=["Feature", "Importance"], tablefmt="grid")
 
 

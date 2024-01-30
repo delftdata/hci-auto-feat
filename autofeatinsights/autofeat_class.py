@@ -2,13 +2,13 @@ import logging
 import glob
 import tempfile
 import os.path
-import functions.relationship_functions as relationship_functions
-import functions.tree_functions as tree_functions
-import functions.feature_functions as feature_functions
-import functions.evaluation_functions as evaluation_functions
-from functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
+import autofeatinsights.functions.relationship_functions as relationship_functions
+import autofeatinsights.functions.tree_functions as tree_functions
+import autofeatinsights.functions.feature_functions as feature_functions
+import autofeatinsights.functions.evaluation_functions as evaluation_functions
+from autofeatinsights.functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
 from typing import List, Set
-from functions.classes import Weight, Path, Result
+from autofeatinsights.functions.classes import Weight, Path, Result
 import pandas as pd
 from sklearn.model_selection import train_test_split
 logging.basicConfig(level=logging.INFO)
@@ -25,6 +25,7 @@ class FeatureDiscovery:
     extra_tables: [(str, str)]
     exlude_tables: [(str, str)]
     partial_join_selected_features: dict = {}
+    join_keys: dict = {}
     explore: bool
     non_null_ratio_threshold: float
 
@@ -56,6 +57,7 @@ class FeatureDiscovery:
         features = list(X_train.columns)
         features.remove(target_column)
         self.partial_join_selected_features[str([base_table])] = features
+        self.join_keys[str([base_table])] = []
         self.rel_red = RelevanceRedundancy(target_column)
 
     def set_dataset_repository(self, dataset_repository: List[str] = [], all_tables: bool = False):
@@ -170,7 +172,7 @@ class FeatureDiscovery:
     def remove_join_from_path(self, path_id: int, table: str):
         tree_functions.remove_join_from_path(self, path_id, table)
 
-    def explain_result(self, path_id: int, model: str):
+    def explain_result(self, path_id: int, model: str = 'GBM'):
         evaluation_functions.explain_result(self, path_id, model)
 
     def inspect_join_path(self, path_id: int):
@@ -182,8 +184,9 @@ class FeatureDiscovery:
     def get_best_result(self):
         evaluation_functions.get_best_result(self)
 
-    def evaluate_table(self, algorithm, path_id: int, verbose=False):
+    def evaluate_table(self, path_id: int, algorithm='GBM', verbose=False):
         evaluation_functions.evaluate_table(self, algorithm, path_id, verbose)
+        evaluation_functions.explain_result(self, path_id, algorithm)
 
     def adjust_relevance_value(self, path_id: int, feature: str, value: float):
         feature_functions.adjust_relevance_value(self, path_id, feature, value)
