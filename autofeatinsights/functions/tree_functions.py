@@ -119,7 +119,7 @@ def stream_feature_selection(autofeat, top_k_features, tree: Tree, queue: set, n
 
 def display_join_trees(self, top_k: None):
     if top_k is None:
-        top_k = len(self.paths)
+        top_k = len(self.trees)
     sorted_trees = sorted(self.trees, key=lambda x: x.rank, reverse=True)[:top_k]
     for index, tree in enumerate(sorted_trees):
         if len(tree.joins) > 0:
@@ -269,7 +269,7 @@ def remove_join_from_tree(self, tree_id: int, table: str):
             features = [i[0] for i in join.rel_red["rel"]] + [i[0] for i in join.rel_red["red"]]
             tree.features = [item for item in tree.features if item not in features]
             tree.joins.pop(index)    
-    evaluation_functions.rerun(self)
+    # evaluation_functions.rerun(self)
 
 
 def rerun(autofeat):
