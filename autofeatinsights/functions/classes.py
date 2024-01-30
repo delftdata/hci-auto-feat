@@ -109,11 +109,11 @@ class Path:
             print(table)
 
     def __str__(self) -> str:
-        ret_string = "Begin: " + self.begin
+        ret_string = "Rank: " + ("%.2f" % self.rank)
+        ret_string += "\nFrom base table: " + self.begin
         table = tabulate([[i.from_table + "." + i.from_col, i.to_table + "." + i.to_col, i.non_null_ratio] 
-                          for i in self.joins], headers=["From", "To", "Non-Null Ratio"], tablefmt="grid")
+                          for i in self.joins], headers=["From Table.Column", "To Table.Column", "Non-Null Ratio"], tablefmt="grid")
         ret_string += "\nJoins: \n" + table
-        ret_string += "\nRank: " + ("%.2f" % self.rank)
         return ret_string
     
     def __repr__(self) -> str:
