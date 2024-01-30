@@ -9,6 +9,7 @@ from autofeatinsights.functions.helper_functions import get_df_with_prefix
 import uuid
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
+import autofeatinsights.functions.feature_functions as feature_functions
 import autofeatinsights.functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
@@ -134,12 +135,12 @@ def display_join_paths(self, top_k: None):
                 labels[(mapping[i.from_table], mapping[i.to_table])] = (from_col + " -> " + to_col)
             ids = list(mapping.values())
             names = list(mapping.keys())
-            df = pd.DataFrame({"ids": ids, "names": names})
+            df = pd.DataFrame({"Node ID": ids, "Feature Name": names})
             pos = graphviz_layout(graph, prog="dot")
             networkx.draw(graph, pos=pos, with_labels=True)
             networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-            plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
-            plt.table(cellText=df.values, colLabels=df.columns, loc="right")
+            plt.title(f"Join Tree ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+            plt.table(cellText=df.values, cellLoc="center", colLabels=df.columns, loc="right").auto_set_column_width([0,1])
             plt.show()
 
 
@@ -160,12 +161,12 @@ def display_join_path(self, path_id):
         labels[(mapping[i.from_table], mapping[i.to_table])] = (from_col + " -> " + to_col)
     ids = list(mapping.values())
     names = list(mapping.keys())
-    df = pd.DataFrame({"ids": ids, "names": names})
+    df = pd.DataFrame({"Node ID": ids, "Feature Name": names})
     pos = graphviz_layout(graph, prog="dot")
     networkx.draw(graph, pos=pos, with_labels=True)
     networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-    plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
-    plt.table(cellText=df.values, colLabels=df.columns, loc="right")
+    plt.title(f"Join Tree ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+    plt.table(cellText=df.values, cellLoc="center", colLabels=df.columns, loc="right").auto_set_column_width([0,1])
     plt.show()
 
 
@@ -219,6 +220,8 @@ def inspect_join_path(self, path_id):
     if path is None:
         return
     print(path)
+    feature_functions.show_features(self, path_id)
+
 
 
 def materialise_join_path(self, path_id):
@@ -228,7 +231,6 @@ def materialise_join_path(self, path_id):
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
-    print(path.features)
     base_df = base_df[path.features]
     # Filter on selected features in rel_red
     return base_df
