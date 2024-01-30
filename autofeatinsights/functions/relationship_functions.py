@@ -154,15 +154,16 @@ def display_table_relationship(autofeat, table1: str, table2: str):
         return
     df = pd.DataFrame([[i.from_col, i.to_col, i.weight] for i in weights], 
                       columns=["from_column", "to_column", "weight"])
-    df.to_csv("test2.csv", index=False)
     plt.figure(figsize=(15, 3))
     seaborn.heatmap(df.pivot(index="from_column", columns="to_column", values="weight"), square=True, cmap="PiYG", 
                     vmin=0, vmax=1)
     plt.xlabel(table2)
     plt.ylabel(table1)
+    tab1_name = table1.split('/')[-1].split('.')[0]
+    tab2_name = table2.split('/')[-1].split('.')[0]
     plt.xticks(fontsize="small", rotation=60)
     plt.yticks(fontsize="small", rotation=0)
-    plt.savefig("heatmap_tab1_tab2.pdf", dpi=300, bbox_inches='tight')
+    plt.savefig(f"heatmap_{tab1_name}_{tab2_name}.pdf", dpi=300, bbox_inches='tight')
 
 
 def explain_relationship(autofeat, table1: str, table2: str):
