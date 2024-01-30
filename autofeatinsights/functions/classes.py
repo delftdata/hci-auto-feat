@@ -91,10 +91,11 @@ class Path:
         scores = self.get_rel_red()
         table_data = []
         for key, values in scores.items():
-            if len(key) > 20:
-                key = key[:10] + "..." + key[-10:]
+            # if len(key) > 20:
+            #     key = key[:10] + "..." + key[-10:]
             row = [key, values["non_null_ratio"], values['rel'], values['red']]
             table_data.append(row)
+        print('\n\tSelected features:\n')
         # Displaying the table 
         table = tabulate(table_data, headers=["Key", "Non-Null Ratio", "Relevance", "Redundancy"], tablefmt="grid")
         print(table)

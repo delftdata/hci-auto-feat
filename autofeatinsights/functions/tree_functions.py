@@ -266,7 +266,7 @@ def remove_join_from_path(self, path_id: int, table: str):
             features = [i[0] for i in join.rel_red["rel"]] + [i[0] for i in join.rel_red["red"]]
             path.features = [item for item in path.features if item not in features]
             path.joins.pop(index)    
-    evaluation_functions.rerun(self)
+    # evaluation_functions.rerun(self)
 
 
 
