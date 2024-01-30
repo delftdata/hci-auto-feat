@@ -25,6 +25,7 @@ class FeatureDiscovery:
     extra_tables: [(str, str)]
     exlude_tables: [(str, str)]
     partial_join_selected_features: dict = {}
+    join_keys: dict = {}
     explore: bool
     non_null_ratio_threshold: float
 
@@ -56,6 +57,7 @@ class FeatureDiscovery:
         features = list(X_train.columns)
         features.remove(target_column)
         self.partial_join_selected_features[str([base_table])] = features
+        self.join_keys[str([base_table])] = []
         self.rel_red = RelevanceRedundancy(target_column)
 
     def set_dataset_repository(self, dataset_repository: List[str] = [], all_tables: bool = False):

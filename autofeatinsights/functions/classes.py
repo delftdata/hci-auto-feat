@@ -43,6 +43,9 @@ class Join():
 
 class Path:
 
+    features: list = []
+    join_keys: list = []
+
     def __init__(self, begin: str, joins: [Join] = None, rank: float = None):
         self.begin = begin
         if joins is None:
@@ -193,14 +196,15 @@ class Result():
         return ret_string
     
     def explain(self) -> str:
-        feature_list = []
-        for i in self.feature_importance[0]:
-            if len(i) > 20:
-                i_string = i[:10] + "..." + i[-10:]
-            else:
-                i_string = i
-            feature_list.append([i_string, self.feature_importance[0][i]])
-        return f"The result is calculated by evaluating the path with the AutoML framework AutoGluon." \
+        feature_list = list(map(lambda x: [x[0], x[1]], self.feature_importance.items()))
+        # for i in self.feature_importance[0]:
+        #     if len(i) > 20:
+        #         i_string = i[:10] + "..." + i[-10:]
+        #     else:
+        #         i_string = i
+        #     feature_list.append([i_string, self.feature_importance[0][i]])
+        return f"The result is calculated by evaluating the dataset corresponding to the join tree\n" \
+               f" using the AutoML framework AutoGluon." \
             + f"\n The accuracy of the model {self.model_full_name} is {self.accuracy}." \
             + "\n The model used the following features: \n" \
             + tabulate(feature_list, headers=["Feature", "Importance"], tablefmt="grid")
