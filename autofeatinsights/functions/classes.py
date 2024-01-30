@@ -41,7 +41,7 @@ class Join():
             + " with Non-Null Ratio: " + str(self.nnon_ull_ratio) + "." 
 
 
-class Path:
+class Tree:
 
     features: list = []
     join_keys: list = []
@@ -116,7 +116,7 @@ class Path:
         ret_string += "\nFrom base table: " + self.begin
         table = tabulate([[i.from_table + "." + i.from_col, i.to_table + "." + i.to_col, i.non_null_ratio] 
                           for i in self.joins], headers=["From Table.Column", "To Table.Column", "Non-Null Ratio"], tablefmt="grid")
-        ret_string += "\nJoin paths: \n" + table
+        ret_string += "\nJoin Trees: \n" + table
         return ret_string
     
     def __repr__(self) -> str:
@@ -129,14 +129,14 @@ class Path:
             ret_str += "\n \t from (table.column) " + i.get_from_prefix() \
                 + " to (table.column)" + i.get_to_prefix() + " with Non-Null ratio " \
                 + ("%.2f" % i.non_null_ratio) + "."
-        ret_str += "\nThe rank of the path is " + ("%.2f" % self.rank) + "."
+        ret_str += "\nThe rank of the tree is " + ("%.2f" % self.rank) + "."
         return ret_str
     
 
 class Result():
 
     # rank: float
-    path: Path
+    tree: Tree
     accuracy: float
     feature_importance: dict
     model: str
@@ -168,10 +168,10 @@ class Result():
     
     def show_graph(self, ax=None, plot=True):
         G = nx.Graph()
-        if len(self.path.joins) == 0:
-            G.add_node(self.path.begin)
+        if len(self.tree.joins) == 0:
+            G.add_node(self.tree.begin)
         else:
-            for i in self.path.joins:
+            for i in self.tree.joins:
                 G.add_edge(i.from_table, i.to_table)
         if plot:
             plt.figure()
@@ -187,7 +187,7 @@ class Result():
     def __str__(self) -> str:
         ret_string = "Result with model" + self.model \
             + "\n \t rank:" + ("%.2f" % self.rank) \
-            + " \n \t with path:" + str(self.path) \
+            + " \n \t with tree:" + str(self.tree) \
             + " \n \t Accuracy:" + ("%.2f" % self.accuracy) \
             + " \n \t Feature importance:"
         for i in self.feature_importance[0]:

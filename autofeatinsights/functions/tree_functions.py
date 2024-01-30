@@ -1,4 +1,4 @@
-from autofeatinsights.functions.classes import Path, Join, Weight
+from autofeatinsights.functions.classes import Tree, Join, Weight
 import networkx
 from matplotlib import pyplot as plt
 from pathlib import Path as pt
@@ -15,20 +15,20 @@ import autofeatinsights.functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
 
-def compute_join_paths(autofeat, top_k_features, non_null_ratio_threshold: float = 0.5, explain=False, verbose=True):
-    autofeat.paths = []
+def compute_join_trees(autofeat, top_k_features, non_null_ratio_threshold: float = 0.5, explain=False, verbose=True):
+    autofeat.trees = []
     autofeat.top_k_features = top_k_features
-    emptyPath = Path(begin=autofeat.base_table, joins=[], rank=0)
-    emptyPath.id = 0
-    autofeat.paths.append(emptyPath)
+    emptyTree = Tree(begin=autofeat.base_table, joins=[], rank=0)
+    emptyTree.id = 0
+    autofeat.trees.append(emptyTree)
     if verbose:
         print("Calculating join trees...")
     stream_feature_selection(autofeat=autofeat, top_k_features=top_k_features, queue={autofeat.base_table}, 
-                             path=Path(begin=(autofeat.base_table), joins=[], rank=0, ), 
+                             tree=Tree(begin=(autofeat.base_table), joins=[], rank=0, ), 
                              non_null_ratio_threshold=non_null_ratio_threshold)
 
 
-def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, non_null_ratio_threshold: float, 
+def stream_feature_selection(autofeat, top_k_features, tree: Tree, queue: set, non_null_ratio_threshold: float, 
                              previous_queue: list = None):
     if len(queue) == 0:
         return
@@ -97,38 +97,38 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                         all_features = autofeat.partial_join_selected_features[str(previous_table_join)]
                         all_features.extend(final_features)
                         autofeat.partial_join_selected_features[str(join_list)] = all_features
-                        path.features = all_features
+                        tree.features = all_features
 
                         join_keys = autofeat.join_keys[str(previous_table_join)]
                         join_keys.extend([prop.get_from_prefix(), prop.get_to_prefix()])
                         autofeat.join_keys[str(join_list)] = join_keys
-                        path.join_keys = join_keys
+                        tree.join_keys = join_keys
 
-                        path.rank = score
-                        path.add_join(join)
-                        path.id = len(autofeat.paths)
+                        tree.rank = score
+                        tree.add_join(join)
+                        tree.id = len(autofeat.trees)
                     else:
                         autofeat.partial_join_selected_features[str(join_list)] = \
                             autofeat.partial_join_selected_features[str(previous_table_join)]
-                    autofeat.paths.append(deepcopy(path))
+                    autofeat.trees.append(deepcopy(tree))
                     autofeat.join_name_mapping[str(join_list)] = filename
                     current_queue.append(join_list)
             previous_queue += current_queue
-    stream_feature_selection(autofeat, top_k_features, path, all_neighbours, non_null_ratio_threshold, previous_queue)
+    stream_feature_selection(autofeat, top_k_features, tree, all_neighbours, non_null_ratio_threshold, previous_queue)
 
 
-def display_join_paths(self, top_k: None):
+def display_join_trees(self, top_k: None):
     if top_k is None:
-        top_k = len(self.paths)
-    sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k]
-    for index, path in enumerate(sorted_paths):
-        if len(path.joins) > 0:
+        top_k = len(self.trees)
+    sorted_trees = sorted(self.trees, key=lambda x: x.rank, reverse=True)[:top_k]
+    for index, tree in enumerate(sorted_trees):
+        if len(tree.joins) > 0:
             graph = networkx.DiGraph()
             plt.gca()
             labels = {}
-            mapping = {path.joins[0].from_table: 0}
+            mapping = {tree.joins[0].from_table: 0}
             count = 0
-            for i in path.joins:
+            for i in tree.joins:
                 count += 1
                 mapping[i.to_table] = count
                 graph.add_edge(mapping[i.from_table], mapping[i.to_table])
@@ -141,21 +141,21 @@ def display_join_paths(self, top_k: None):
             pos = graphviz_layout(graph, prog="dot")
             networkx.draw(graph, pos=pos, with_labels=True)
             # networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-            plt.title(f"Join Tree ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+            plt.title(f"Join Tree ID: {tree.id}. Rank: {('%.2f' % tree.rank)}")
             plt.table(cellText=df.values, cellLoc="center", colLabels=df.columns, loc="right").auto_set_column_width([0,1])
             plt.show()
 
 
-def display_join_path(self, path_id):
-    path = get_path_by_id(self, path_id)
-    if path is None or len(path.joins) == 0:
+def display_join_tree(self, tree_id):
+    tree = get_tree_by_id(self, tree_id)
+    if tree is None or len(tree.joins) == 0:
         return
     graph = networkx.DiGraph()
     plt.gca()
     labels = {}
-    mapping = {path.joins[0].from_table: 0}
+    mapping = {tree.joins[0].from_table: 0}
     count = 0
-    for i in path.joins:
+    for i in tree.joins:
         count += 1
         mapping[i.to_table] = count
         graph.add_edge(mapping[i.from_table], mapping[i.to_table])
@@ -168,7 +168,7 @@ def display_join_path(self, path_id):
     pos = graphviz_layout(graph, prog="dot")
     networkx.draw(graph, pos=pos, with_labels=True)
     # networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-    plt.title(f"Join Tree ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+    plt.title(f"Join Tree ID: {tree.id}. Rank: {('%.2f' % tree.rank)}")
     plt.table(cellText=df.values, cellLoc="center", colLabels=df.columns, loc="right").auto_set_column_width([0, 1])
     plt.show()
 
@@ -218,29 +218,28 @@ def streaming_relevance_redundancy(
             rel_discarded_features, red_discarded_features)
 
 
-def inspect_join_path(self, path_id):
-    path = get_path_by_id(self, path_id)
-    if path is None:
+def inspect_join_tree(self, tree_id):
+    tree = get_tree_by_id(self, tree_id)
+    if tree is None:
         return
-    print(path)
-    feature_functions.show_features(self, path_id)
+    print(tree)
+    feature_functions.show_features(self, tree_id)
 
 
-
-def materialise_join_path(self, path_id):
-    path = get_path_by_id(self, path_id)
+def materialise_join_tree(self, tree_id):
+    tree = get_tree_by_id(self, tree_id)
     base_df = get_df_with_prefix(self.base_table, self.targetColumn)
     i: Join
-    for i in path.joins:
+    for i in tree.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
-    base_df = base_df[path.features]
+    base_df = base_df[tree.features]
     # Filter on selected features in rel_red
     return base_df
 
 
-def get_path_by_id(self, path_id) -> Path:
-    list = [i for i in self.paths if i.id == path_id]
+def get_tree_by_id(self, tree_id) -> Tree:
+    list = [i for i in self.trees if i.id == tree_id]
     if len(list) == 0:
         return None
     return list[0]
@@ -260,28 +259,27 @@ def non_null_ratio_calculation(joined_df: pd.DataFrame, prop: Weight) -> float:
     return non_nulls / total_length
 
 
-def remove_join_from_path(self, path_id: int, table: str):
-    path = get_path_by_id(self, path_id)
-    if path is None:
+def remove_join_from_tree(self, tree_id: int, table: str):
+    tree = get_tree_by_id(self, tree_id)
+    if tree is None:
         return
-    for index, join in enumerate(path.joins):
+    for index, join in enumerate(tree.joins):
         if join.to_table == table:
             features = [i[0] for i in join.rel_red["rel"]] + [i[0] for i in join.rel_red["red"]]
-            path.features = [item for item in path.features if item not in features]
-            path.joins.pop(index)    
+            tree.features = [item for item in tree.features if item not in features]
+            tree.joins.pop(index)    
     evaluation_functions.rerun(self)
 
 
-
 def rerun(autofeat):
-    if len(autofeat.paths) > 0:
-        print("Recalculating paths")
-        compute_join_paths(autofeat, top_k_features=autofeat.top_k_features)
+    if len(autofeat.trees) > 0:
+        print("Recalculating trees")
+        compute_join_trees(autofeat, top_k_features=autofeat.top_k_features)
         evaluation_functions.rerun(autofeat)
 
 
-def explain_path(self, path_id: int):
-    path = get_path_by_id(self, path_id)
-    if path is None:
+def explain_tree(self, tree_id: int):
+    tree = get_tree_by_id(self, tree_id)
+    if tree is None:
         return
-    print(path.explain())
+    print(tree.explain())

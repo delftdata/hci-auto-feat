@@ -8,7 +8,7 @@ import autofeatinsights.functions.feature_functions as feature_functions
 import autofeatinsights.functions.evaluation_functions as evaluation_functions
 from autofeatinsights.functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
 from typing import List, Set
-from autofeatinsights.functions.classes import Weight, Path, Result
+from autofeatinsights.functions.classes import Weight, Tree, Result
 import pandas as pd
 from sklearn.model_selection import train_test_split
 logging.basicConfig(level=logging.INFO)
@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 class FeatureDiscovery:
     targetColumn: str
     threshold: float
-    paths: [Path]
+    paths: [Tree]
     weights: [Weight]
     results: [Result]
     base_dataset: str
@@ -45,7 +45,7 @@ class FeatureDiscovery:
         # self.explore = explore
         # self.top_k = top_k
         # self.rel_red = RelevanceRedundancy(targetColumn, jmi=jmi, pearson=pearson)
-        self.paths = []
+        self.trees = []
         self.join_name_mapping = {}
 
     def set_base_table(self, base_table: str, target_column: str):
@@ -152,34 +152,34 @@ class FeatureDiscovery:
         relationship_functions.display_table_relationship(self, table1, table2)
 
     def compute_join_paths(self, top_k_features: int = 10, explain=False, verbose=True):
-        tree_functions.compute_join_paths(self, top_k_features, explain=explain, verbose=verbose)
+        tree_functions.compute_join_trees(self, top_k_features, explain=explain, verbose=verbose)
 
     def show_features(self, path_id: int, show_discarded_features: bool = False):
         feature_functions.show_features(self, path_id, show_discarded_features)
 
     def display_join_paths(self, top_k: int = None):
-        tree_functions.display_join_paths(self, top_k)
+        tree_functions.display_join_trees(self, top_k)
     
     def display_join_path(self, path_id):
-        tree_functions.display_join_path(self, path_id)
+        tree_functions.display_join_tree(self, path_id)
 
     def explain_relationship(self, table1: str, table2: str):
         relationship_functions.explain_relationship(self, table1, table2)
     
     def explain_path(self, path_id: int):
-        tree_functions.explain_path(self, path_id)
+        tree_functions.explain_tree(self, path_id)
 
     def remove_join_from_path(self, path_id: int, table: str):
-        tree_functions.remove_join_from_path(self, path_id, table)
+        tree_functions.remove_join_from_tree(self, path_id, table)
 
     def explain_result(self, path_id: int, model: str = 'GBM'):
         evaluation_functions.explain_result(self, path_id, model)
 
     def inspect_join_path(self, path_id: int):
-        tree_functions.inspect_join_path(self, path_id)
+        tree_functions.inspect_join_tree(self, path_id)
 
     def evaluate_paths(self, algorithm, top_k_paths: int = 2, verbose=True, explain=False):
-        evaluation_functions.evaluate_paths(self, algorithm, top_k_paths, verbose=verbose, explain=explain)
+        evaluation_functions.evalute_trees(self, algorithm, top_k_paths, verbose=verbose, explain=explain)
 
     def get_best_result(self):
         evaluation_functions.get_best_result(self)
@@ -204,7 +204,7 @@ class FeatureDiscovery:
         feature_functions.move_features_to_selected(self, path_id, features)
 
     def materialise_join_path(self, path_id: int):
-        return tree_functions.materialise_join_path(self, path_id)
+        return tree_functions.materialise_join_tree(self, path_id)
 
     def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, matcher="coma", 
                         top_k_features: int = 10, 

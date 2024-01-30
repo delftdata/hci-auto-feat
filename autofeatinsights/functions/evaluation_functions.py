@@ -1,4 +1,3 @@
-import logging
 from autofeatinsights.functions.helper_functions import get_df_with_prefix
 import tqdm
 from autofeatinsights.functions.classes import Result, Join
@@ -33,36 +32,36 @@ def get_hyperparameters(algorithm: str = None) -> list[dict]:
         )
     
 
-def evaluate_paths(autofeat, algorithm, top_k_results: int = 5,
-                   explain=False, verbose=True):
+def evalute_trees(autofeat, algorithm, top_k_results: int = 5,
+                  explain=False, verbose=True):
     autofeat.results = []
     autofeat.top_k_results = top_k_results
-    sorted_paths = sorted(autofeat.paths, key=lambda x: x.rank, reverse=True)[:top_k_results]
+    sorted_trees = sorted(autofeat.trees, key=lambda x: x.rank, reverse=True)[:top_k_results]
     if verbose:
         print("Evaluating join trees...")
-    for path in tqdm.tqdm(sorted_paths, total=len(sorted_paths)):
-        evaluate_table(autofeat, algorithm, path.id, verbose=verbose)
+    for tree in tqdm.tqdm(sorted_trees, total=len(sorted_trees)):
+        evaluate_table(autofeat, algorithm, tree.id, verbose=verbose)
     if explain:
-        best_tree = sorted(autofeat.results, key=lambda x: x.accuracy, reverse=True)[0]
-        print(f"2. AutoFeat creates {len(autofeat.paths)} join trees: the best performing join tree is tree: {best_tree.path.id}")
-        path = tree_functions.get_path_by_id(autofeat, best_tree.path.id)
-        print(path.explain())
-        autofeat.show_features(best_tree.path.id)
-        print(best_tree.explain())
+        best_result = sorted(autofeat.results, key=lambda x: x.accuracy, reverse=True)[0]
+        print(f"2. AutoFeat creates {len(autofeat.trees)} join trees: the best performing join tree is tree: {best_result.tree.id}")
+        tree = tree_functions.get_tree_by_id(autofeat, best_result.tree.id)
+        print(tree.explain())
+        autofeat.show_features(best_result.tree.id)
+        print(best_result.explain())
 
 
-def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
-    path = tree_functions.get_path_by_id(autofeat, path_id)
+def evaluate_table(autofeat, algorithm, tree_id: int, verbose=False):
+    tree = tree_functions.get_tree_by_id(autofeat, tree_id)
     base_df = get_df_with_prefix(autofeat.base_table, autofeat.targetColumn)
     i: Join
-    for i in path.joins:
+    for i in tree.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
 
-    if path.features is not None:
-        base_df = base_df[path.features + [autofeat.targetColumn]]
+    if tree.features is not None:
+        base_df = base_df[tree.features + [autofeat.targetColumn]]
 
-    columns_to_drop = set(base_df.columns).intersection(set(path.join_keys))
+    columns_to_drop = set(base_df.columns).intersection(set(tree.join_keys))
     base_df.drop(columns=list(columns_to_drop), inplace=True)
 
     df = AutoMLPipelineFeatureGenerator(
@@ -89,8 +88,8 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
             result.feature_importance = dict(zip(list(ft_imp.index), ft_imp["importance"]))
             result.model = list(hyperparam.keys())[0]
             result.model_full_name = model
-            result.rank = path.rank
-            result.path = path
+            result.rank = tree.rank
+            result.tree = tree
             autofeat.results.append(result)
 
 
@@ -109,12 +108,12 @@ def get_best_result(autofeat):
 def rerun(autofeat):
     if len(autofeat.results) > 0:
         print("Recalculating results...")
-        evaluate_paths(autofeat, autofeat.top_k_results)
+        evalute_trees(autofeat, autofeat.top_k_results)
 
 
-def explain_result(self, path_id: int, model: str):
+def explain_result(self, tree_id: int, model: str):
     for i in self.results:
-        if i.path.id == path_id and i.model == model:
+        if i.tree.id == tree_id and i.model == model:
             print(i.explain())
             return
     print("no result found")

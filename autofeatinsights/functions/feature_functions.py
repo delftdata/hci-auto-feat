@@ -2,16 +2,16 @@ import autofeatinsights.functions.tree_functions as tree_functions
 import autofeatinsights.functions.evaluation_functions as evaluation_functions
 
 
-def show_features(autofeat, path_id: int, show_discarded_features: bool = False):
-    path = tree_functions.get_path_by_id(autofeat, path_id)
-    path.show_table(show_discarded_features)
+def show_features(autofeat, tree_id: int, show_discarded_features: bool = False):
+    tree = tree_functions.get_tree_by_id(autofeat, tree_id)
+    tree.show_table(show_discarded_features)
 
 
-def adjust_relevance_value(autofeat, path_id, feature_name, value):
-    path = tree_functions.get_path_by_id(autofeat, path_id)
-    if path is None:
+def adjust_relevance_value(autofeat, tree_id, feature_name, value):
+    tree = tree_functions.get_tree_by_id(autofeat, tree_id)
+    if tree is None:
         return
-    for join in path.joins:
+    for join in tree.joins:
         for index, item in enumerate(join.rel_red["rel"]):
             if item[0] == feature_name:
                 new_item = (item[0], value)
@@ -19,11 +19,11 @@ def adjust_relevance_value(autofeat, path_id, feature_name, value):
     evaluation_functions.rerun(autofeat)
 
 
-def adjust_redundancy_value(autofeat, path_id, feature_name, value):
-    path = tree_functions.get_path_by_id(autofeat, path_id)
-    if path is None:
+def adjust_redundancy_value(autofeat, tree_id, feature_name, value):
+    tree = tree_functions.get_tree_by_id(autofeat, tree_id=tree_id)
+    if tree is None:
         return
-    for join in path.joins:
+    for join in tree.joins:
         for index, item in enumerate(join.rel_red["red"]):
             if item[0] == feature_name:
                 new_item = (item[0], value)
@@ -31,21 +31,21 @@ def adjust_redundancy_value(autofeat, path_id, feature_name, value):
     evaluation_functions.rerun(autofeat)
 
 
-def adjust_non_null_ratio(autofeat, path_id, table_name, value):
-    path = tree_functions.get_path_by_id(autofeat, path_id)
-    if path is None:
+def adjust_non_null_ratio(autofeat, tree_id, table_name, value):
+    tree = tree_functions.get_tree_by_id(autofeat, tree_id)
+    if tree is None:
         return
-    for join in path.joins:
+    for join in tree.joins:
         if join.to_table == table_name:
             join.non_null_ratio = value
     evaluation_functions.rerun(autofeat)
 
 
-def move_features_to_discarded(autofeat, path_id, features):
-    path = tree_functions.get_path_by_id(autofeat, path_id)
-    if path is None:
+def move_features_to_discarded(autofeat, tree_id, features):
+    tree = tree_functions.get_tree_by_id(autofeat, tree)
+    if tree is None:
         return
-    for join in path.joins:
+    for join in tree.joins:
         for index, item in enumerate(join.rel_red["rel"]):
             if item[0] in features:
                 join.rel_red["rel"].pop(index)
@@ -57,11 +57,11 @@ def move_features_to_discarded(autofeat, path_id, features):
     evaluation_functions.rerun(autofeat)
 
 
-def move_features_to_selected(autofeat, path_id, features):
-    path = tree_functions.get_path_by_id(autofeat, path_id)
-    if path is None:
+def move_features_to_selected(autofeat, tree_id, features):
+    tree = tree_functions.get_tree_by_id(autofeat, tree_id)
+    if tree is None:
         return
-    for join in path.joins:
+    for join in tree.joins:
         for index, item in enumerate(join.rel_red_discarded["rel"]):
             if item[0] in features:
                 join.rel_red_discarded["rel"].pop(index)
