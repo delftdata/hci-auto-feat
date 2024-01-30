@@ -263,8 +263,11 @@ def remove_join_from_path(self, path_id: int, table: str):
         return
     for index, join in enumerate(path.joins):
         if join.to_table == table:
-            path.joins.pop(index)
-    # evaluation_functions.rerun(self)
+            features = [i[0] for i in join.rel_red["rel"]] + [i[0] for i in join.rel_red["red"]]
+            path.features = [item for item in path.features if item not in features]
+            path.joins.pop(index)    
+    evaluation_functions.rerun(self)
+
 
 
 def rerun(autofeat):
