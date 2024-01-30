@@ -9,6 +9,7 @@ from autofeatinsights.functions.helper_functions import get_df_with_prefix
 import uuid
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
+import autofeatinsights.functions.evaluation_functions as evaluation_functions
 import autofeatinsights.functions.feature_functions as feature_functions
 import autofeatinsights.functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
@@ -123,6 +124,7 @@ def display_join_paths(self, top_k: None):
     for index, path in enumerate(sorted_paths):
         if len(path.joins) > 0:
             graph = networkx.DiGraph()
+            plt.gca()
             labels = {}
             mapping = {path.joins[0].from_table: 0}
             count = 0
@@ -138,7 +140,7 @@ def display_join_paths(self, top_k: None):
             df = pd.DataFrame({"Node ID": ids, "Feature Name": names})
             pos = graphviz_layout(graph, prog="dot")
             networkx.draw(graph, pos=pos, with_labels=True)
-            networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
+            # networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
             plt.title(f"Join Tree ID: {path.id}. Rank: {('%.2f' % path.rank)}")
             plt.table(cellText=df.values, cellLoc="center", colLabels=df.columns, loc="right").auto_set_column_width([0,1])
             plt.show()
@@ -149,6 +151,7 @@ def display_join_path(self, path_id):
     if path is None or len(path.joins) == 0:
         return
     graph = networkx.DiGraph()
+    plt.gca()
     labels = {}
     mapping = {path.joins[0].from_table: 0}
     count = 0
@@ -164,9 +167,9 @@ def display_join_path(self, path_id):
     df = pd.DataFrame({"Node ID": ids, "Feature Name": names})
     pos = graphviz_layout(graph, prog="dot")
     networkx.draw(graph, pos=pos, with_labels=True)
-    networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
+    # networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
     plt.title(f"Join Tree ID: {path.id}. Rank: {('%.2f' % path.rank)}")
-    plt.table(cellText=df.values, cellLoc="center", colLabels=df.columns, loc="right").auto_set_column_width([0,1])
+    plt.table(cellText=df.values, cellLoc="center", colLabels=df.columns, loc="right").auto_set_column_width([0, 1])
     plt.show()
 
 
