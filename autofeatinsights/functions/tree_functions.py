@@ -114,31 +114,52 @@ def display_join_paths(self, top_k: None):
         top_k = len(self.paths)
     sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k]
     for index, path in enumerate(sorted_paths):
-        graph = networkx.DiGraph()
-        labels = {}
-        for i in path.joins:
-            graph.add_edge(i.from_table, i.to_table)
-            labels[(i.from_table, i.to_table)] = i.from_col + " -> " + i.to_col
-        pos = graphviz_layout(graph, prog="dot")
-        networkx.draw(graph, pos=pos, with_labels=True)
-        networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-        plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
-        plt.show()
+        if len(path.joins) > 0:
+            graph = networkx.DiGraph()
+            labels = {}
+            mapping = {path.joins[0].from_table: 0}
+            count = 0
+            for i in path.joins:
+                count += 1
+                mapping[i.to_table] = count
+                graph.add_edge(mapping[i.from_table], mapping[i.to_table])
+                from_col = i.from_col if len(i.from_col) < 20 else i.from_col[:10] + "..." + i.from_col[-10:]
+                to_col = i.to_col if len(i.to_col) < 20 else i.to_col[:10] + "..." + i.to_col[-10:]
+                labels[(mapping[i.from_table], mapping[i.to_table])] = (from_col + " -> " + to_col)
+            ids = list(mapping.values())
+            names = list(mapping.keys())
+            df = pd.DataFrame({"ids": ids, "names": names})
+            pos = graphviz_layout(graph, prog="dot")
+            networkx.draw(graph, pos=pos, with_labels=True)
+            networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
+            plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+            plt.table(cellText=df.values, colLabels=df.columns, loc="right")
+            plt.show()
 
 
 def display_join_path(self, path_id):
     path = get_path_by_id(self, path_id)
-    if path is None:
+    if path is None or len(path.joins) == 0:
         return
     graph = networkx.DiGraph()
     labels = {}
+    mapping = {path.joins[0].from_table: 0}
+    count = 0
     for i in path.joins:
-        graph.add_edge(i.from_table, i.to_table)
-        labels[(i.from_table, i.to_table)] = i.from_col + " -> " + i.to_col
+        count += 1
+        mapping[i.to_table] = count
+        graph.add_edge(mapping[i.from_table], mapping[i.to_table])
+        from_col = i.from_col if len(i.from_col) < 20 else i.from_col[:10] + "..." + i.from_col[-10:]
+        to_col = i.to_col if len(i.to_col) < 20 else i.to_col[:10] + "..." + i.to_col[-10:]
+        labels[(mapping[i.from_table], mapping[i.to_table])] = (from_col + " -> " + to_col)
+    ids = list(mapping.values())
+    names = list(mapping.keys())
+    df = pd.DataFrame({"ids": ids, "names": names})
     pos = graphviz_layout(graph, prog="dot")
     networkx.draw(graph, pos=pos, with_labels=True)
     networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
     plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+    plt.table(cellText=df.values, colLabels=df.columns, loc="right")
     plt.show()
 
 
