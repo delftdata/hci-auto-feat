@@ -123,6 +123,7 @@ def display_join_paths(self, top_k: None):
     sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k]
     for index, path in enumerate(sorted_paths):
         if len(path.joins) > 0:
+            plt.figure(figsize=(5, 2))
             graph = networkx.DiGraph()
             plt.gca()
             labels = {}
