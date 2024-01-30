@@ -178,7 +178,7 @@ class FeatureDiscovery:
     def inspect_join_tree(self, tree_id: int):
         tree_functions.inspect_join_tree(self, tree_id)
 
-    def evaluate_trees(self, algorithm, top_k_paths: int = 2, verbose=True, explain=False):
+    def evaluate_trees(self, algorithm='GBM', top_k_paths: int = 3, verbose=True, explain=False):
         evaluation_functions.evalute_trees(self, algorithm, top_k_paths, verbose=verbose, explain=explain)
 
     def get_best_result(self):
@@ -208,7 +208,7 @@ class FeatureDiscovery:
 
     def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, matcher="coma", 
                         top_k_features: int = 10, 
-                        top_k_paths: int = 2, explain=True, verbose=True, use_cache=True):
+                        top_k_paths: int = 3, explain=True, verbose=True, use_cache=True):
         if use_cache:
             if os.path.isfile(f"saved_weights/{self.base_table}_{relation_threshold}_{matcher}_weights.txt"):
                 if verbose:

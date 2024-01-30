@@ -43,7 +43,7 @@ def evalute_trees(autofeat, algorithm, top_k_results: int = 5,
         evaluate_table(autofeat, algorithm, tree.id, verbose=verbose)
     if explain:
         best_result = sorted(autofeat.results, key=lambda x: x.accuracy, reverse=True)[0]
-        print(f"2. AutoFeat creates {len(autofeat.trees)} join trees: the best performing join tree is tree: {best_result.tree.id}")
+        print(f"AutoFeat creates {len(autofeat.trees)} join trees: the best performing join tree is tree: {best_result.tree.id}")
         tree = tree_functions.get_tree_by_id(autofeat, best_result.tree.id)
         print(tree.explain())
         autofeat.show_features(best_result.tree.id)
@@ -51,6 +51,7 @@ def evalute_trees(autofeat, algorithm, top_k_results: int = 5,
 
 
 def evaluate_table(autofeat, algorithm, tree_id: int, verbose=False):
+    autofeat.results = []
     tree = tree_functions.get_tree_by_id(autofeat, tree_id)
     base_df = get_df_with_prefix(autofeat.base_table, autofeat.targetColumn)
     i: Join
@@ -58,9 +59,7 @@ def evaluate_table(autofeat, algorithm, tree_id: int, verbose=False):
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
 
-    if tree.features is not None:
-        base_df = base_df[tree.features + [autofeat.targetColumn]]
-
+    base_df = base_df[tree.features + [autofeat.targetColumn]]
     columns_to_drop = set(base_df.columns).intersection(set(tree.join_keys))
     base_df.drop(columns=list(columns_to_drop), inplace=True)
 
