@@ -182,7 +182,7 @@ class FeatureDiscovery:
         evaluation_functions.evaluate_paths(self, algorithm, top_k_paths, verbose=verbose, explain=explain)
 
     def get_best_result(self):
-        evaluation_functions.get_best_result(self)
+        return evaluation_functions.get_best_result(self)
 
     def evaluate_augmented_table(self, tree_id: int, algorithm='GBM', verbose=False):
         evaluation_functions.evaluate_table(self, algorithm, tree_id, verbose)
