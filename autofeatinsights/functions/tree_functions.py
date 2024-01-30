@@ -10,6 +10,7 @@ import uuid
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 import functions.evaluation_functions as evaluation_functions
+import autofeatinsights.functions.feature_functions as feature_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
 
@@ -213,6 +214,8 @@ def inspect_join_path(self, path_id):
     if path is None:
         return
     print(path)
+    feature_functions.show_features(self, path_id)
+    
 
 
 def materialise_join_path(self, path_id):
@@ -222,7 +225,6 @@ def materialise_join_path(self, path_id):
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
-    print(path.features)
     base_df = base_df[path.features]
     # Filter on selected features in rel_red
     return base_df
