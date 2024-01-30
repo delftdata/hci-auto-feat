@@ -58,8 +58,13 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
     for i in path.joins:
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
+
     if path.features is not None:
         base_df = base_df[path.features + [autofeat.targetColumn]]
+
+    columns_to_drop = set(base_df.columns).intersection(set(path.join_keys))
+    base_df.drop(columns=list(columns_to_drop), inplace=True)
+
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
         verbosity=0).fit_transform(X=base_df)
@@ -81,7 +86,7 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
             res = predictor.evaluate(X_test, model=model)
             result.accuracy = (res['accuracy'])
             ft_imp = predictor.feature_importance(data=X_test, model=model, feature_stage="original")
-            result.feature_importance = dict(zip(list(ft_imp.index), ft_imp["importance"])),
+            result.feature_importance = dict(zip(list(ft_imp.index), ft_imp["importance"]))
             result.model = list(hyperparam.keys())[0]
             result.model_full_name = model
             result.rank = path.rank

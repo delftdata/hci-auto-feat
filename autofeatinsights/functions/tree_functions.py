@@ -1,15 +1,15 @@
-from functions.classes import Path, Join, Weight
+from autofeatinsights.functions.classes import Path, Join, Weight
 import networkx
 from matplotlib import pyplot as plt
 from pathlib import Path as pt
 import pandas as pd
 from copy import deepcopy
 import pydot
-from functions.helper_functions import get_df_with_prefix
+from autofeatinsights.functions.helper_functions import get_df_with_prefix
 import uuid
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
-import functions.evaluation_functions as evaluation_functions
+import autofeatinsights.functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
 
@@ -96,6 +96,12 @@ def stream_feature_selection(autofeat, top_k_features, path: Path, queue: set, n
                         all_features.extend(final_features)
                         autofeat.partial_join_selected_features[str(join_list)] = all_features
                         path.features = all_features
+
+                        join_keys = autofeat.join_keys[str(previous_table_join)]
+                        join_keys.extend([prop.get_from_prefix(), prop.get_to_prefix()])
+                        autofeat.join_keys[str(join_list)] = join_keys
+                        path.join_keys = join_keys
+
                         path.rank = score
                         path.add_join(join)
                         path.id = len(autofeat.paths)
@@ -256,7 +262,7 @@ def remove_join_from_path(self, path_id: int, table: str):
     for index, join in enumerate(path.joins):
         if join.to_table == table:
             path.joins.pop(index)
-    evaluation_functions.rerun(self)
+    # evaluation_functions.rerun(self)
 
 
 def rerun(autofeat):
