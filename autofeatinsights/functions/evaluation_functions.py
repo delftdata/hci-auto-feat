@@ -44,7 +44,7 @@ def evaluate_paths(autofeat, algorithm, top_k_results: int = 5,
         evaluate_table(autofeat, algorithm, path.id, verbose=verbose)
     if explain:
         best_tree = sorted(autofeat.results, key=lambda x: x.accuracy, reverse=True)[0]
-        print(f"2. AutoFeat creates {len(autofeat.paths)} join trees: the best performing join tree is tree: {best_tree.path.id}")
+        print(f"AutoFeat creates {len(autofeat.paths)} join trees: the best performing join tree is tree: {best_tree.path.id}")
         path = tree_functions.get_path_by_id(autofeat, best_tree.path.id)
         print(path.explain())
         autofeat.show_features(best_tree.path.id)
@@ -52,6 +52,7 @@ def evaluate_paths(autofeat, algorithm, top_k_results: int = 5,
 
 
 def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
+    autofeat.results = []
     path = tree_functions.get_path_by_id(autofeat, path_id)
     base_df = get_df_with_prefix(autofeat.base_table, autofeat.targetColumn)
     i: Join
@@ -59,9 +60,7 @@ def evaluate_table(autofeat, algorithm, path_id: int, verbose=False):
         df = get_df_with_prefix(i.to_table)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
 
-    if path.features is not None:
-        base_df = base_df[path.features + [autofeat.targetColumn]]
-
+    base_df = base_df[path.features + [autofeat.targetColumn]]
     columns_to_drop = set(base_df.columns).intersection(set(path.join_keys))
     base_df.drop(columns=list(columns_to_drop), inplace=True)
 

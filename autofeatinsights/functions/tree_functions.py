@@ -138,7 +138,7 @@ def display_join_paths(self, top_k: None):
                 labels[(mapping[i.from_table], mapping[i.to_table])] = (from_col + " -> " + to_col)
             ids = list(mapping.values())
             names = list(mapping.keys())
-            df = pd.DataFrame({"Node ID": ids, "Feature Name": names})
+            df = pd.DataFrame({"Node ID": ids, "Table Name": names})
             pos = graphviz_layout(graph, prog="dot")
             networkx.draw(graph, pos=pos, with_labels=True)
             # networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
@@ -264,12 +264,14 @@ def non_null_ratio_calculation(joined_df: pd.DataFrame, prop: Weight) -> float:
 def remove_join_from_path(self, path_id: int, table: str):
     path = get_path_by_id(self, path_id)
     if path is None:
+        print("Can not find path")
         return
     for index, join in enumerate(path.joins):
         if join.to_table == table:
             features = [i[0] for i in join.rel_red["rel"]] + [i[0] for i in join.rel_red["red"]]
-            path.features = [item for item in path.features if item not in features]
-            path.joins.pop(index)    
+            path.features = list(set(path.features).difference(set(features)))
+            path.joins.pop(index)
+            print("Path removed")
     # evaluation_functions.rerun(self)
 
 

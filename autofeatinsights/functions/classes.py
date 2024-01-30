@@ -128,7 +128,7 @@ class Path:
             + ". \nThe join tree has the following joins: "
         for i in self.joins:
             ret_str += "\n \t from (table.column) " + i.get_from_prefix() \
-                + " to (table.column)" + i.get_to_prefix() + " with Non-Null ratio " \
+                + " to (table.column) " + i.get_to_prefix() + " with Non-Null ratio " \
                 + ("%.2f" % i.non_null_ratio) + "."
         ret_str += "\nThe rank of the path is " + ("%.2f" % self.rank) + "."
         return ret_str
@@ -186,9 +186,9 @@ class Result():
             plt.show()
 
     def __str__(self) -> str:
-        ret_string = "Result with model" + self.model \
+        ret_string = "Result with model " + self.model_full_name \
             + "\n \t rank:" + ("%.2f" % self.rank) \
-            + " \n \t with path:" + str(self.path) \
+            + " \n \t with path: \n" + str(self.path) \
             + " \n \t Accuracy:" + ("%.2f" % self.accuracy) \
             + " \n \t Feature importance:"
         for i, j in self.feature_importance.items():
