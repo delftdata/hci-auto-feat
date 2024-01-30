@@ -128,12 +128,12 @@ def display_join_paths(self, top_k: None):
                 labels[(mapping[i.from_table], mapping[i.to_table])] = (from_col + " -> " + to_col)
             ids = list(mapping.values())
             names = list(mapping.keys())
-            df = pd.DataFrame({"ids": ids, "names": names})
+            df = pd.DataFrame({"Node ID": ids, "Feature Name": names})
             pos = graphviz_layout(graph, prog="dot")
             networkx.draw(graph, pos=pos, with_labels=True)
             networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-            plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
-            plt.table(cellText=df.values, colLabels=df.columns, loc="right")
+            plt.title(f"Join Tree ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+            plt.table(cellText=df.values, cellLoc="center", colLabels=df.columns, loc="right").auto_set_column_width([0,1])
             plt.show()
 
 
@@ -154,12 +154,12 @@ def display_join_path(self, path_id):
         labels[(mapping[i.from_table], mapping[i.to_table])] = (from_col + " -> " + to_col)
     ids = list(mapping.values())
     names = list(mapping.keys())
-    df = pd.DataFrame({"ids": ids, "names": names})
+    df = pd.DataFrame({"Node ID": ids, "Feature Name": names})
     pos = graphviz_layout(graph, prog="dot")
     networkx.draw(graph, pos=pos, with_labels=True)
     networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
-    plt.title(f"Join Path ID: {path.id}. Rank: {('%.2f' % path.rank)}")
-    plt.table(cellText=df.values, colLabels=df.columns, loc="right")
+    plt.title(f"Join Tree ID: {path.id}. Rank: {('%.2f' % path.rank)}")
+    plt.table(cellText=df.values, cellLoc="center", colLabels=df.columns, loc="right").auto_set_column_width([0,1])
     plt.show()
 
 
