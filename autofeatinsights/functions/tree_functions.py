@@ -9,6 +9,7 @@ from autofeatinsights.functions.helper_functions import get_df_with_prefix
 import uuid
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
+import autofeatinsights.functions.evaluation_functions as evaluation_functions
 import autofeatinsights.functions.feature_functions as feature_functions
 import autofeatinsights.functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
