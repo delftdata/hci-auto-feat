@@ -1,5 +1,5 @@
-import functions.tree_functions as tree_functions
-import functions.evaluation_functions as evaluation_functions
+import autofeatinsights.functions.tree_functions as tree_functions
+import autofeatinsights.functions.evaluation_functions as evaluation_functions
 
 
 def show_features(autofeat, path_id: int, show_discarded_features: bool = False):
@@ -54,7 +54,9 @@ def move_features_to_discarded(autofeat, path_id, features):
             if item[0] in features:
                 join.rel_red["red"].pop(index)
                 join.rel_red_discarded["red"].append(item)
-    evaluation_functions.rerun(autofeat)
+    new_features = set(path.features).difference(set(features))
+    path.features = list(new_features)
+    # evaluation_functions.rerun(autofeat)
 
 
 def move_features_to_selected(autofeat, path_id, features):
@@ -70,4 +72,5 @@ def move_features_to_selected(autofeat, path_id, features):
             if item[0] in features:
                 join.rel_red_discarded["red"].pop(index)
                 join.rel_red["red"].append(item)
-    evaluation_functions.rerun(autofeat)
+    path.features.extend(features)
+    # evaluation_functions.rerun(autofeat)
