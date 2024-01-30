@@ -113,7 +113,7 @@ class Path:
         ret_string += "\nFrom base table: " + self.begin
         table = tabulate([[i.from_table + "." + i.from_col, i.to_table + "." + i.to_col, i.non_null_ratio] 
                           for i in self.joins], headers=["From Table.Column", "To Table.Column", "Non-Null Ratio"], tablefmt="grid")
-        ret_string += "\nJoins: \n" + table
+        ret_string += "\nJoin paths: \n" + table
         return ret_string
     
     def __repr__(self) -> str:
