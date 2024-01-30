@@ -83,7 +83,7 @@ def evaluate_table(autofeat, algorithm, tree_id: int, verbose=False):
         for model in model_names[:-1]:
             result = Result()
             res = predictor.evaluate(X_test, model=model)
-            result.accuracy = (res['accuracy'])
+            result.accuracy = res['accuracy']
             ft_imp = predictor.feature_importance(data=X_test, model=model, feature_stage="original")
             result.feature_importance = dict(zip(list(ft_imp.index), ft_imp["importance"]))
             result.model = list(hyperparam.keys())[0]
@@ -102,7 +102,7 @@ def show_result(self, id: str):
 
 
 def get_best_result(autofeat):
-    return max(autofeat.results, key=lambda x: x.accuracy)[0]
+    return max(autofeat.results, key=lambda x: x.accuracy)
 
 
 def rerun(autofeat):

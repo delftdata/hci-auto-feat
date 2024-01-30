@@ -91,10 +91,11 @@ class Tree:
         scores = self.get_rel_red()
         table_data = []
         for key, values in scores.items():
-            if len(key) > 20:
-                key = key[:10] + "..." + key[-10:]
+            # if len(key) > 20:
+            #     key = key[:10] + "..." + key[-10:]
             row = [key, values["non_null_ratio"], values['rel'], values['red']]
             table_data.append(row)
+        print('\n\tSelected features:\n')
         # Displaying the table 
         table = tabulate(table_data, headers=["Key", "Non-Null Ratio", "Relevance", "Redundancy"], tablefmt="grid")
         print(table)
@@ -190,9 +191,8 @@ class Result():
             + " \n \t with tree:" + str(self.tree) \
             + " \n \t Accuracy:" + ("%.2f" % self.accuracy) \
             + " \n \t Feature importance:"
-        for i in self.feature_importance[0]:
-            ret_string += "\n \t \t " + str(i) + " : " \
-                + str(self.feature_importance[0][i])
+        for i, j in self.feature_importance.items():
+            ret_string += f"\n\t\t{str(i)} : {str(j)}"
         return ret_string
     
     def explain(self) -> str:

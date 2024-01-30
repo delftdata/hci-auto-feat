@@ -151,13 +151,13 @@ class FeatureDiscovery:
     def display_table_relationship(self, table1: str, table2: str):
         relationship_functions.display_table_relationship(self, table1, table2)
 
-    def compute_join_paths(self, top_k_features: int = 10, explain=False, verbose=True):
+    def compute_join_trees(self, top_k_features: int = 10, explain=False, verbose=True):
         tree_functions.compute_join_trees(self, top_k_features, explain=explain, verbose=verbose)
 
-    def show_features(self, path_id: int, show_discarded_features: bool = False):
-        feature_functions.show_features(self, path_id, show_discarded_features)
+    def show_features(self, tree_id: int, show_discarded_features: bool = False):
+        feature_functions.show_features(self, tree_id, show_discarded_features)
 
-    def display_join_paths(self, top_k: int = None):
+    def display_join_trees(self, top_k: int = None):
         tree_functions.display_join_trees(self, top_k)
     
     def display_join_path(self, path_id):
@@ -169,24 +169,24 @@ class FeatureDiscovery:
     def explain_path(self, path_id: int):
         tree_functions.explain_tree(self, path_id)
 
-    def remove_join_from_path(self, path_id: int, table: str):
-        tree_functions.remove_join_from_tree(self, path_id, table)
+    def remove_join_path_from_tree(self, tree_id: int, table: str):
+        tree_functions.remove_join_from_tree(self, tree_id, table)
 
     def explain_result(self, path_id: int, model: str = 'GBM'):
         evaluation_functions.explain_result(self, path_id, model)
 
-    def inspect_join_path(self, path_id: int):
-        tree_functions.inspect_join_tree(self, path_id)
+    def inspect_join_tree(self, tree_id: int):
+        tree_functions.inspect_join_tree(self, tree_id)
 
     def evaluate_paths(self, algorithm, top_k_paths: int = 2, verbose=True, explain=False):
         evaluation_functions.evalute_trees(self, algorithm, top_k_paths, verbose=verbose, explain=explain)
 
     def get_best_result(self):
-        evaluation_functions.get_best_result(self)
+        return evaluation_functions.get_best_result(self)
 
-    def evaluate_table(self, path_id: int, algorithm='GBM', verbose=False):
-        evaluation_functions.evaluate_table(self, algorithm, path_id, verbose)
-        evaluation_functions.explain_result(self, path_id, algorithm)
+    def evaluate_augmented_table(self, tree_id: int, algorithm='GBM', verbose=False):
+        evaluation_functions.evaluate_table(self, algorithm, tree_id, verbose)
+        evaluation_functions.explain_result(self, tree_id, algorithm)
 
     def adjust_relevance_value(self, path_id: int, feature: str, value: float):
         feature_functions.adjust_relevance_value(self, path_id, feature, value)
@@ -197,14 +197,14 @@ class FeatureDiscovery:
     def adjust_non_null_ratio(self, path_id: int, table: str, value: float):
         feature_functions.adjust_non_null_ratio(self, path_id, table, value)
 
-    def move_features_to_discarded(self, path_id: int, features: [str]):
-        feature_functions.move_features_to_discarded(self, path_id, features)
+    def move_features_to_discarded(self, tree_id: int, features: [str]):
+        feature_functions.move_features_to_discarded(self, tree_id, features)
 
-    def move_features_to_selected(self, path_id: int, features: [str]):
-        feature_functions.move_features_to_selected(self, path_id, features)
+    def move_features_to_selected(self, tree_id: int, features: [str]):
+        feature_functions.move_features_to_selected(self, tree_id, features)
 
-    def materialise_join_path(self, path_id: int):
-        return tree_functions.materialise_join_tree(self, path_id)
+    def materialise_join_tree(self, tree_id: int):
+        return tree_functions.materialise_join_tree(self, tree_id)
 
     def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, matcher="coma", 
                         top_k_features: int = 10, 
@@ -220,7 +220,7 @@ class FeatureDiscovery:
         else:
             self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, 
                                     explain=explain, verbose=verbose)
-        self.compute_join_paths(top_k_features=top_k_features, explain=explain, verbose=verbose)
+        self.compute_join_trees(top_k_features=top_k_features, explain=explain, verbose=verbose)
         self.evaluate_paths(algorithm=algorithm, top_k_paths=top_k_paths, explain=explain)
 
 
@@ -230,7 +230,7 @@ if __name__ == "__main__":
     autofeat.set_base_table(base_table="school/base.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["school"])
     autofeat.read_relationships("saved_weights/school/base.csv_0.5_coma_weights.txt")
-    autofeat.compute_join_paths(top_k_features=5)
+    autofeat.compute_join_trees(top_k_features=5)
     autofeat.display_join_path(2)
     # autofeat.augment_dataset(explain=True)
     # autofeat.read_relationships()
