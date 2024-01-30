@@ -54,8 +54,8 @@ def move_features_to_discarded(autofeat, tree_id, features):
             if item[0] in features:
                 join.rel_red["red"].pop(index)
                 join.rel_red_discarded["red"].append(item)
-    new_features = set(path.features).difference(set(features))
-    path.features = list(new_features)
+    new_features = set(tree.features).difference(set(features))
+    tree.features = list(new_features)
     # evaluation_functions.rerun(autofeat)
 
 
@@ -72,5 +72,5 @@ def move_features_to_selected(autofeat, tree_id, features):
             if item[0] in features:
                 join.rel_red_discarded["red"].pop(index)
                 join.rel_red["red"].append(item)
-    path.features.extend(features)
+    tree.features.extend(features)
     # evaluation_functions.rerun(autofeat)
