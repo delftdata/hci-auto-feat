@@ -86,6 +86,7 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
     autofeat.weights = temp
 
     if use_cache:
+        os.mkdir("saved_weights/" + autofeat.base_table.split("/")[0])
         f = open(f"saved_weights/{autofeat.base_table}_{relationship_threshold}_{matcher}_weights.txt", "w")
         stringlist = []
         for i in autofeat.weights:
