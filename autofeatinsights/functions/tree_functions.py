@@ -17,6 +17,9 @@ from networkx.drawing.nx_pydot import graphviz_layout
 
 def compute_join_trees(autofeat, top_k_features, non_null_ratio_threshold: float = 0.5, explain=False, verbose=True):
     autofeat.trees = []
+    autofeat.discovered = set()
+    autofeat.join_name_mapping = {}
+    autofeat.set_base_table(autofeat.base_table, autofeat.targetColumn)
     autofeat.top_k_features = top_k_features
     emptyTree = Tree(begin=autofeat.base_table, joins=[], rank=0)
     emptyTree.id = 0
