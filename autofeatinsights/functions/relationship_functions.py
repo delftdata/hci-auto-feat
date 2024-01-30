@@ -1,4 +1,6 @@
-from functions.classes import Weight
+import os
+
+from autofeatinsights.functions.classes import Weight
 import pandas as pd
 from multiprocessing import Manager
 from joblib import Parallel, delayed
@@ -9,7 +11,7 @@ from valentine.algorithms import Coma, JaccardDistanceMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
 from tabulate import tabulate
-import functions.tree_functions as tree_functions
+import autofeatinsights.functions.tree_functions as tree_functions
 
 
 def read_relationships(self, file_path):
@@ -32,7 +34,21 @@ def read_relationships(self, file_path):
 
 
 def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: str = "coma", 
-                       explain=False, verbose=True):
+                       explain=False, verbose=True, use_cache=True):
+
+    tables = autofeat.get_tables_repository()
+    if explain:
+        print(f"1. AutoFeat computes the relationships between {len(tables)} tables from the {autofeat.datasets}"
+              + f" repository, using {matcher} similarity score with a threshold of {relationship_threshold} "
+              + f"(i.e., all the relationships with a similarity < {relationship_threshold} will be discarded).")
+    if verbose:
+        print("Calculating relationships...")
+
+    filename = f"saved_weights/{autofeat.base_table}_{relationship_threshold}_{matcher}_weights.txt"
+    if os.path.isfile(filename):
+        read_relationships(autofeat, filename)
+        return
+
     manager = Manager()
     temp = manager.list()
     autofeat.relationship_threshold = relationship_threshold
@@ -56,7 +72,6 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
             if similarity > relationship_threshold:
                 temp.append(Weight(table1, table2, col_from, col_to, similarity))
                 temp.append(Weight(table2, table1, col_to, col_from, similarity))
-    tables = autofeat.get_tables_repository()
     autofeat.weight_string_mapping = {}
     for t in tables:
         if len(t) > 20:
@@ -64,23 +79,19 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
             autofeat.weight_string_mapping[t] = new_string
         else:
             autofeat.weight_string_mapping[t] = t
-    if explain:
-        print(f"1. AutoFeat computes the relationships between {len(tables)} tables from the {autofeat.datasets}" 
-              + f" repository, using {matcher} similarity score with a threshold of {relationship_threshold}" 
-              + f"(i.e., all the relationships with a similarity < {relationship_threshold} will be discarded).")
-    if verbose and not explain:
-        print("Calculating relationships...")
+
     Parallel(n_jobs=-1)(delayed(profile)(combination, matcher)
                         for combination in tqdm.tqdm(itertools.combinations(tables, 2), 
                                                      total=len(tables) * (len(tables) - 1) / 2))
     autofeat.weights = temp
-    # Uncomment for saving weights to file.
-    f = open(f"saved_weights/{autofeat.base_table}_{relationship_threshold}_{matcher}_weights.txt", "w")
-    stringlist = []
-    for i in autofeat.weights:
-        stringlist.append(f"{i.from_table}--{i.to_table}--{i.from_col}--{i.to_col}--{i.weight},")
-    f.writelines(stringlist)
-    f.close()
+
+    if use_cache:
+        f = open(f"saved_weights/{autofeat.base_table}_{relationship_threshold}_{matcher}_weights.txt", "w")
+        stringlist = []
+        for i in autofeat.weights:
+            stringlist.append(f"{i.from_table}--{i.to_table}--{i.from_col}--{i.to_col}--{i.weight},")
+        f.writelines(stringlist)
+        f.close()
 
 
 def add_relationship(autofeat, table1: str, col1: str, table2: str, col2: str, weight: float, update: bool = True):
@@ -129,10 +140,11 @@ def display_best_relationships(autofeat):
         highest_weights = [[i[0].split("/")[-1], i[1].split("/")[-1], i[2]] for i in highest_weights]
     df = pd.DataFrame(highest_weights, columns=["from_table", "to_table", "weight"])
     seaborn.heatmap(df.pivot(index="from_table", columns="to_table", values="weight"), square=True, cmap="PiYG",
-                    vmin=autofeat.relation_threshold, vmax=1)
+                    vmin=0, vmax=1)
     plt.xlabel("")
     plt.ylabel("")
-    plt.xticks(fontsize="small", rotation=30) 
+    plt.xticks(fontsize="small", rotation=60)
+    plt.yticks(fontsize="small", rotation=0)
     plt.savefig("heatmap.pdf", dpi=300, bbox_inches='tight')
 
 
@@ -142,13 +154,16 @@ def display_table_relationship(autofeat, table1: str, table2: str):
         return
     df = pd.DataFrame([[i.from_col, i.to_col, i.weight] for i in weights], 
                       columns=["from_column", "to_column", "weight"])
+    plt.figure(figsize=(15, 3))
     seaborn.heatmap(df.pivot(index="from_column", columns="to_column", values="weight"), square=True, cmap="PiYG", 
-                    vmin=autofeat.relation_threshold, vmax=1)
+                    vmin=0, vmax=1)
     plt.xlabel(table2)
     plt.ylabel(table1)
-    plt.xticks(fontsize="small", rotation=30) 
+    tab1_name = table1.split('/')[-1].split('.')[0]
+    tab2_name = table2.split('/')[-1].split('.')[0]
+    plt.xticks(fontsize="small", rotation=60)
     plt.yticks(fontsize="small", rotation=0)
-    plt.savefig("heatmap_base_crime.pdf", dpi=300, bbox_inches='tight')
+    plt.savefig(f"heatmap_{tab1_name}_{tab2_name}.pdf", dpi=300, bbox_inches='tight')
 
 
 def explain_relationship(autofeat, table1: str, table2: str):
