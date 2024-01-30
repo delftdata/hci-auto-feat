@@ -191,9 +191,8 @@ class Result():
             + " \n \t with path:" + str(self.path) \
             + " \n \t Accuracy:" + ("%.2f" % self.accuracy) \
             + " \n \t Feature importance:"
-        for i in self.feature_importance[0]:
-            ret_string += "\n \t \t " + str(i) + " : " \
-                + str(self.feature_importance[0][i])
+        for i, j in self.feature_importance.items():
+            ret_string += f"\n\t\t{str(i)} : {str(j)}"
         return ret_string
     
     def explain(self) -> str:
