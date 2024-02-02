@@ -27,11 +27,11 @@ def compute_join_trees(autofeat, top_k_features, non_null_ratio_threshold: float
     if verbose:
         print("Calculating join trees...")
     stream_feature_selection(autofeat=autofeat, top_k_features=top_k_features, queue={autofeat.base_table}, 
-                             tree=Tree(begin=(autofeat.base_table), joins=[], rank=0, ), 
+                             tree=Tree(begin=(autofeat.base_table), joins=[], rank=0, ),
                              non_null_ratio_threshold=non_null_ratio_threshold)
 
 
-def stream_feature_selection(autofeat, top_k_features, tree: Tree, queue: set, non_null_ratio_threshold: float, 
+def stream_feature_selection(autofeat, top_k_features, tree: Tree, queue: set, non_null_ratio_threshold: float,
                              previous_queue: list = None):
     if len(queue) == 0:
         return
@@ -141,7 +141,7 @@ def display_join_trees(self, top_k: None):
                 labels[(mapping[i.from_table], mapping[i.to_table])] = (from_col + " -> " + to_col)
             ids = list(mapping.values())
             names = list(mapping.keys())
-            df = pd.DataFrame({"Node ID": ids, "Feature Name": names})
+            df = pd.DataFrame({"Node ID": ids, "Table Name": names})
             pos = graphviz_layout(graph, prog="dot")
             networkx.draw(graph, pos=pos, with_labels=True)
             # networkx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=labels, font_size=10)
@@ -266,12 +266,14 @@ def non_null_ratio_calculation(joined_df: pd.DataFrame, prop: Weight) -> float:
 def remove_join_from_tree(self, tree_id: int, table: str):
     tree = get_tree_by_id(self, tree_id)
     if tree is None:
+        print("Can not find path")
         return
     for index, join in enumerate(tree.joins):
         if join.to_table == table:
             features = [i[0] for i in join.rel_red["rel"]] + [i[0] for i in join.rel_red["red"]]
-            tree.features = [item for item in tree.features if item not in features]
-            tree.joins.pop(index)    
+            tree.features = list(set(tree.features).difference(set(features)))
+            tree.joins.pop(index)
+            print("Path removed")
     # evaluation_functions.rerun(self)
 
 
