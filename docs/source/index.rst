@@ -10,6 +10,10 @@ Welcome to Autofeat's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. automodule:: autofeat
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 Indices and tables
