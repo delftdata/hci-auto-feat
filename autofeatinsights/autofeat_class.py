@@ -155,6 +155,13 @@ class FeatureDiscovery:
         tree_functions.compute_join_trees(self, top_k_features, explain=explain, verbose=verbose)
 
     def show_features(self, tree_id: int, show_discarded_features: bool = False):
+        """
+        Display the features for a given tree ID.
+
+        Parameters:
+        - tree_id (int): The ID of the tree.
+        - show_discarded_features (bool): Whether to show discarded features or not. Default is False.
+        """
         feature_functions.show_features(self, tree_id, show_discarded_features)
 
     def display_join_trees(self, top_k: int = None):
