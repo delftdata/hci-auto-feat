@@ -1,6 +1,6 @@
 import os
 
-from functions.classes import Weight
+from src.autofeatinsights.functions.classes import Weight
 import pandas as pd
 from multiprocessing import Manager
 from joblib import Parallel, delayed
@@ -11,7 +11,7 @@ from valentine.algorithms import Coma, JaccardDistanceMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
 from tabulate import tabulate
-import functions.tree_functions as tree_functions
+import src.autofeatinsights.functions.tree_functions as tree_functions
 
 
 def read_relationships(self, file_path):
