@@ -1,5 +1,5 @@
-import autofeatinsights.functions.tree_functions as tree_functions
-import autofeatinsights.functions.evaluation_functions as evaluation_functions
+import functions.tree_functions as tree_functions
+import functions.evaluation_functions as evaluation_functions
 
 
 def show_features(autofeat, tree_id: int, show_discarded_features: bool = False):

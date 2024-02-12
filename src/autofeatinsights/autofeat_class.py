@@ -2,13 +2,13 @@ import logging
 import glob
 import tempfile
 import os.path
-import autofeatinsights.functions.relationship_functions as relationship_functions
-import autofeatinsights.functions.tree_functions as tree_functions
-import autofeatinsights.functions.feature_functions as feature_functions
-import autofeatinsights.functions.evaluation_functions as evaluation_functions
-from autofeatinsights.functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
+import functions.relationship_functions as relationship_functions
+import functions.tree_functions as tree_functions
+import functions.feature_functions as feature_functions
+import functions.evaluation_functions as evaluation_functions
+from functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
 from typing import List, Set
-from autofeatinsights.functions.classes import Weight, Tree, Result
+from functions.classes import Weight, Tree, Result
 import pandas as pd
 from sklearn.model_selection import train_test_split
 logging.basicConfig(level=logging.INFO)
