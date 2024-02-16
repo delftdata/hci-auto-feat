@@ -7,7 +7,7 @@ from joblib import Parallel, delayed
 import itertools
 import tqdm
 import seaborn
-from valentine.algorithms import Coma, JaccardDistanceMatcher
+from valentine.algorithms import Coma, JaccardLevenMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
 from tabulate import tabulate
@@ -57,7 +57,7 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
     # This function calculates the COMA weights between 2 tables in the datasets.
     def calculate_matches(table1: pd.DataFrame, table2: pd.DataFrame, matcher: str) -> dict:
         if matcher == "jaccard":
-            matches = valentine_match(table1, table2, JaccardDistanceMatcher())
+            matches = valentine_match(table1, table2, JaccardLevenMatcher())
         else:
             matches = valentine_match(table1, table2, Coma())
         return matches

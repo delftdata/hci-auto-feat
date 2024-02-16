@@ -1,5 +1,6 @@
 api.txt
 .venv/
+docs/build/
 /**/**/__pycache__
 autofeatinsights/__pycache__
 autofeatinsights/functions/__pycache__

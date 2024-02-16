@@ -4,9 +4,9 @@ from matplotlib import pyplot as plt
 from pathlib import Path as pt
 import pandas as pd
 from copy import deepcopy
-import pydot
 from src.autofeatinsights.functions.helper_functions import get_df_with_prefix
 import uuid
+import datetime
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 import src.autofeatinsights.functions.evaluation_functions as evaluation_functions
@@ -22,21 +22,22 @@ def compute_join_trees(autofeat, top_k_features, non_null_ratio_threshold: float
     autofeat.set_base_table(autofeat.base_table, autofeat.targetColumn)
     autofeat.top_k_features = top_k_features
     emptyTree = Tree(begin=autofeat.base_table, joins=[], rank=0)
+    autofeat.tree_hash[str(autofeat.base_table)] = emptyTree
     emptyTree.id = 0
     autofeat.trees.append(emptyTree)
     if verbose:
         print("Calculating join trees...")
-    stream_feature_selection(autofeat=autofeat, top_k_features=top_k_features, queue={autofeat.base_table}, 
-                             tree=Tree(begin=(autofeat.base_table), joins=[], rank=0, ),
+    stream_feature_selection(autofeat=autofeat, top_k_features=top_k_features, queue={str(autofeat.base_table)},
                              non_null_ratio_threshold=non_null_ratio_threshold)
 
 
-def stream_feature_selection(autofeat, top_k_features, tree: Tree, queue: set, non_null_ratio_threshold: float,
-                             previous_queue: list = None):
+def stream_feature_selection(autofeat, top_k_features, queue: set, non_null_ratio_threshold: float,
+                             previous_queue: set = None):
     if len(queue) == 0:
         return
     if previous_queue is None:
-        previous_queue = [[queue.copy().pop()]]
+        previous_queue = queue.copy()
+
     all_neighbours = set()
     while len(queue) > 0:
         base_node_id = queue.pop()
@@ -46,6 +47,9 @@ def stream_feature_selection(autofeat, top_k_features, tree: Tree, queue: set, n
         neighbours = sorted((set(neighbours).difference(autofeat.discovered)))
         all_neighbours.update(neighbours)
         for n in neighbours:
+            print(n)
+            if n == "school/crime.csv":
+                print("yes")
             autofeat.discovered.add(n)
             join_keys = autofeat.get_weights_from_and_to_table(base_node_id, n)
             max_val = 0
@@ -57,11 +61,11 @@ def stream_feature_selection(autofeat, top_k_features, tree: Tree, queue: set, n
                 elif jk.weight == max_val:
                     highest_join_keys.append(jk)
             right_df = get_df_with_prefix(highest_join_keys[0].to_table)
-            current_queue = list()
+            current_queue = set()
             while len(previous_queue) > 0:
                 previous_table_join: [Join] = previous_queue.pop()
                 previous_join = None
-                if previous_table_join == [autofeat.base_table]:
+                if previous_table_join == str(autofeat.base_table):
                     previous_join = autofeat.partial_join.copy()
                 else:
                     read_file = autofeat.join_name_mapping[str(previous_table_join)]
@@ -69,23 +73,25 @@ def stream_feature_selection(autofeat, top_k_features, tree: Tree, queue: set, n
                     previous_join = pd.read_parquet(key_path)
                 prop: Weight
                 for prop in highest_join_keys:
-                    join_list: [str] = previous_table_join + [prop.to_table]
+                    join_list: [str] = previous_table_join + "--" + prop.to_table
                     filename = f"{autofeat.base_table.replace('/', '-')}_{str(uuid.uuid4())}.parquet"
-                    if previous_join[prop.get_from_prefix()].dtype != right_df[prop.get_to_prefix()].dtype:
+                    sampled_right_df = right_df.groupby(prop.get_to_prefix()).sample(n=1, random_state=42)
+                    if previous_join[prop.get_from_prefix()].dtype != sampled_right_df[prop.get_to_prefix()].dtype:
                         current_queue.append(previous_table_join)
                         continue
-                    joined_df = pd.merge(left=previous_join, right=right_df, left_on=(prop.get_from_prefix()),
+                    joined_df = pd.merge(left=previous_join, right=sampled_right_df, left_on=(prop.get_from_prefix()),
                                          right_on=(prop.get_to_prefix()), how="left")
                     joined_df.to_parquet(pt(autofeat.temp_dir.name) / filename)
                     non_null_ratio = non_null_ratio_calculation(joined_df, prop)
                     if non_null_ratio < non_null_ratio_threshold:
+                        current_queue.add(previous_table_join)
                         continue
                     result = streaming_relevance_redundancy(
                         autofeat,
                         top_k_features=top_k_features,
                         dataframe=joined_df.copy(),
                         new_features=list(right_df.columns),
-                        selected_features=autofeat.partial_join_selected_features[str(previous_table_join)],
+                        selected_features=autofeat.partial_join_selected_features[previous_table_join],
                     )
                     if result is not None:
                         score, rel_score, red_score, final_features, rel_discarded, red_discarded = result
@@ -100,24 +106,28 @@ def stream_feature_selection(autofeat, top_k_features, tree: Tree, queue: set, n
                         all_features = autofeat.partial_join_selected_features[str(previous_table_join)]
                         all_features.extend(final_features)
                         autofeat.partial_join_selected_features[str(join_list)] = all_features
+                        tree = deepcopy(autofeat.tree_hash[str(previous_table_join)])
                         tree.features = all_features
 
                         join_keys = autofeat.join_keys[str(previous_table_join)]
                         join_keys.extend([prop.get_from_prefix(), prop.get_to_prefix()])
                         autofeat.join_keys[str(join_list)] = join_keys
                         tree.join_keys = join_keys
-
                         tree.rank = score
                         tree.add_join(join)
                         tree.id = len(autofeat.trees)
+                        autofeat.tree_hash[str(join_list)] = tree
+                        autofeat.trees.append(deepcopy(tree))
                     else:
                         autofeat.partial_join_selected_features[str(join_list)] = \
                             autofeat.partial_join_selected_features[str(previous_table_join)]
-                    autofeat.trees.append(deepcopy(tree))
+                        autofeat.tree_hash[str(join_list)] = autofeat.tree_hash[str(previous_table_join)]
+                        autofeat.join_keys[str(join_list)] = autofeat.join_keys[str(previous_table_join)]
                     autofeat.join_name_mapping[str(join_list)] = filename
-                    current_queue.append(join_list)
-            previous_queue += current_queue
-    stream_feature_selection(autofeat, top_k_features, tree, all_neighbours, non_null_ratio_threshold, previous_queue)
+                    current_queue.add(join_list)
+            previous_queue.update(current_queue)
+            
+    stream_feature_selection(autofeat, top_k_features, all_neighbours, non_null_ratio_threshold, previous_queue)
 
 
 def display_join_trees(self, top_k: None):
@@ -180,10 +190,10 @@ def display_join_tree(self, tree_id):
 def streaming_relevance_redundancy(
     self, top_k_features, dataframe: pd.DataFrame, new_features: list[str], selected_features: list[str]
 ) -> Optional[Tuple[float, list[dict]]]:
+    t = datetime.datetime.now()
     df = AutoMLPipelineFeatureGenerator(
-        enable_text_special_features=False, enable_text_ngram_features=False, verbosity=0
+        enable_text_special_features=False, enable_text_ngram_features=False
     ).fit_transform(X=dataframe, random_state=42, random_seed=42)
-
     X = df.drop(columns=[self.targetColumn])
     y = df[self.targetColumn]
 

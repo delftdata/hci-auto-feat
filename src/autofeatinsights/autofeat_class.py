@@ -2,6 +2,8 @@ import logging
 import glob
 import tempfile
 import os.path
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 import src.autofeatinsights.functions.relationship_functions as relationship_functions
 import src.autofeatinsights.functions.tree_functions as tree_functions
 import src.autofeatinsights.functions.feature_functions as feature_functions
@@ -11,7 +13,7 @@ from typing import List, Set
 from src.autofeatinsights.functions.classes import Weight, Tree, Result
 import pandas as pd
 from sklearn.model_selection import train_test_split
-logging.basicConfig(level=logging.INFO)
+logging.getLogger().setLevel(logging.WARNING)
 
 
 class FeatureDiscovery:
@@ -51,13 +53,13 @@ class FeatureDiscovery:
     def set_base_table(self, base_table: str, target_column: str):
         self.base_table = base_table
         self.targetColumn = target_column
-        X_train, X_test = train_test_split(
-            get_df_with_prefix(self.base_table, self.targetColumn), random_state=42)
+        X_train = get_df_with_prefix(self.base_table, self.targetColumn)
         self.partial_join = X_train.copy()
         features = list(X_train.columns)
         features.remove(target_column)
-        self.partial_join_selected_features[str([base_table])] = features
-        self.join_keys[str([base_table])] = []
+        self.partial_join_selected_features[str(base_table)] = features
+        self.join_keys[str(base_table)] = []
+        self.tree_hash = {}
         self.rel_red = RelevanceRedundancy(target_column)
 
     def set_dataset_repository(self, dataset_repository: List[str] = [], all_tables: bool = False):
@@ -151,8 +153,9 @@ class FeatureDiscovery:
     def display_table_relationship(self, table1: str, table2: str):
         relationship_functions.display_table_relationship(self, table1, table2)
 
-    def compute_join_trees(self, top_k_features: int = 10, explain=False, verbose=True):
-        tree_functions.compute_join_trees(self, top_k_features, explain=explain, verbose=verbose)
+    def compute_join_trees(self, top_k_features: int = 10, non_null_threshold=0.5, explain=False, verbose=True):
+        tree_functions.compute_join_trees(self, top_k_features, non_null_ratio_threshold=non_null_threshold, 
+                                          explain=explain, verbose=verbose)
 
     def show_features(self, tree_id: int, show_discarded_features: bool = False):
         """
@@ -213,7 +216,7 @@ class FeatureDiscovery:
     def materialise_join_tree(self, tree_id: int):
         return tree_functions.materialise_join_tree(self, tree_id)
 
-    def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, matcher="coma", 
+    def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, non_null_threshold=0.5, matcher="coma", 
                         top_k_features: int = 10, 
                         top_k_paths: int = 3, explain=True, verbose=True, use_cache=True):
         if use_cache:
@@ -227,7 +230,9 @@ class FeatureDiscovery:
         else:
             self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, 
                                     explain=explain, verbose=verbose)
-        self.compute_join_trees(top_k_features=top_k_features, explain=explain, verbose=verbose)
+        self.compute_join_trees(top_k_features=top_k_features, explain=explain, non_null_threshold=non_null_threshold, 
+                                verbose=verbose)
+        print(self.trees)
         self.evaluate_trees(algorithm=algorithm, top_k_paths=top_k_paths, explain=explain)
 
 
@@ -236,9 +241,10 @@ if __name__ == "__main__":
     autofeat = FeatureDiscovery()
     autofeat.set_base_table(base_table="school/base.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["school"])
-    autofeat.read_relationships("saved_weights/school/base.csv_0.5_coma_weights.txt")
-    autofeat.compute_join_trees(top_k_features=5)
-    autofeat.display_join_path(2)
+    autofeat.augment_dataset(non_null_threshold=0.65, top_k_paths=30, algorithm="LR", top_k_features=15)
+    # autofeat.read_relationships("saved_weights/school/base.csv_0.5_coma_weights.txt")
+    # autofeat.compute_join_trees(top_k_features=5)
+    # autofeat.display_join_path(2)
     # autofeat.augment_dataset(explain=True)
     # autofeat.read_relationships()
     # autofeat.compute_join_paths(top_k_features=5)
