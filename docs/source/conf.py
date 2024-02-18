@@ -18,7 +18,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.automodule'
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
