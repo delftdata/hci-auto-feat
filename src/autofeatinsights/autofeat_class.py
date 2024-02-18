@@ -51,6 +51,16 @@ class FeatureDiscovery:
         self.join_name_mapping = {}
 
     def set_base_table(self, base_table: str, target_column: str):
+        """
+        Sets the base table and target column for feature generation.
+
+        Args:
+            base_table (str): The name of the base table.
+            target_column (str): The name of the target column.
+
+        Returns:
+            None
+        """
         self.base_table = base_table
         self.targetColumn = target_column
         X_train = get_df_with_prefix(self.base_table, self.targetColumn)
@@ -63,6 +73,18 @@ class FeatureDiscovery:
         self.rel_red = RelevanceRedundancy(target_column)
 
     def set_dataset_repository(self, dataset_repository: List[str] = [], all_tables: bool = False):
+        """
+        Sets the dataset repository for the AutofeatClass object.
+
+        Parameters:
+        - dataset_repository (List[str]): A list of dataset paths.
+        - all_tables (bool): Flag indicating whether to use all tables in the repository.
+
+        Raises:
+        - Exception: If both dataset_repository and all_tables are specified.
+        - Exception: If neither dataset_repository nor all_tables are specified.
+
+        """
         if len(dataset_repository) > 0 and all_tables:
             raise Exception("You can't set all_tables to True and specify a dataset repository.")
         if len(dataset_repository) == 0 and not all_tables:
@@ -74,86 +96,157 @@ class FeatureDiscovery:
             self.datasets = dataset_repository
 
     def get_tables_repository(self):
+        """
+        Retrieves the tables from the repository.
+
+        Returns:
+            tables (list): A list of table paths.
+        """
         tables = []
         for dataset in self.datasets:
             for table in glob.glob("data/benchmark/" + dataset + "/*.csv"):
                 tables.append((table.split("/")[-2]) + "/" + table.split("/")[-1])
         return tables
 
-    # def display_join_paths_dsplot(self, top_k: None):
-    #     if top_k is None:
-    #         top_k = len(self.paths)
-    #     sorted_paths = sorted(self.paths, key=lambda x: x.rank, reverse=True)[:top_k]
-    #     for index, path in enumerate(sorted_paths):
-    #         graph_dic = {}
-    #         graph_dic[path.begin] = []
-    #         i: Join
-    #         for i in path.joins:
-    #             if i.from_table not in graph_dic:
-    #                 graph_dic[i.from_table] = []
-    #             if i.to_table not in graph_dic:
-    #                 graph_dic[i.to_table] = []
-    #         for i in path.joins:
-    #             graph_dic[i.from_table].append(i.to_table)
-    #         dsGraph(graph_dic, directed=True).plot(output_path=(f"graph-{index}.png"))
-
     def add_table(self, table: str):
+        """
+        Adds an extra table to the list of tables used for feature generation.
+
+        Args:
+            table (str): The name of the table to be added.
+        """
         self.extra_tables.append(table)
         if self.relationship_threshold is not None and self.matcher is not None:
             relationship_functions.rerun(self, self.relationship_threshold, self.matcher)
 
     def remove_table(self, table: str):
+        """
+        Removes a table from the list of extra tables and adds it to the list of excluded tables.
+        
+        Args:
+            table (str): The name of the table to be removed.
+        """
         if table in self.extra_tables:
             self.extra_tables.remove(table)
         self.exclude_tables.append(table)
         if self.relationship_threshold is not None and self.matcher is not None:
             relationship_functions.rerun(self, self.relationship_threshold, self.matcher)
 
-    # def add_feature(self, dataset: str, table: str, feature: str):
-    #     # logging.warnin("This means that the algorithm has to recalculate it's weights and paths.")
-    #     self.definite_features.append(dataset + "/" + table + "." + feature)
-
-    # def remove_feature(self, dataset: str, table: str, feature: str):
-    #     if (dataset + "/" + table + "." + feature) in self.definite_features:
-    #         self.definite_features.remove(dataset + "/" + table + "." + feature)
-    #     self.exclude_features.append(dataset + "/" + table + "." + feature)  
-    
-    # def get_path_length(self, path: str) -> int:
-    #     path_tokens = path.split("--")
-    #     return len(path_tokens) - 1
-
     def get_weights_from_table(self, table: str):
+        """
+        Returns a list of weights from the specified table.
+
+        Args:
+            table (str): The name of the table.
+
+        Returns:
+            list: A list of weights from the specified table.
+        """
         return [i for i in self.weights if i.from_table == table]
     
     def get_weights_from_and_to_table(self, from_table, to_table):
+        """
+        Returns a list of weights that have the specified 'from_table' and 'to_table' values.
+
+        Parameters:
+            from_table (str): The source table name.
+            to_table (str): The destination table name.
+
+        Returns:
+            list: A list of weights that match the specified 'from_table' and 'to_table' values.
+        """
         return [i for i in self.weights if i.from_table == from_table and i.to_table == to_table]
 
     def find_relationships(self, matcher="coma", relationship_threshold: float = 0.5, explain=False, 
                            use_cache=True, verbose=True):
+        """
+        Finds relationships between features in the dataset.
+
+        Args:
+            matcher (str, optional): The name of the matcher to use for finding relationships. Defaults to "coma".
+            relationship_threshold (float, optional): The threshold value for determining the strength of a relationship. Defaults to 0.5.
+            explain (bool, optional): Whether to provide an explanation for the relationships found. Defaults to False.
+            use_cache (bool, optional): Whether to use a cache for storing previously computed relationships. Defaults to True.
+            verbose (bool, optional): Whether to print verbose output during the process. Defaults to True.
+        """
         self.matcher = matcher
         self.relation_threshold = relationship_threshold
         relationship_functions.find_relationships(self, relationship_threshold, matcher, explain, 
                                                   use_cache=use_cache, verbose=verbose)
 
     def read_relationships(self, file_path):
+        """
+        Reads the relationships from a file and updates the object's internal state.
+
+        Args:
+            file_path (str): The path to the file containing the relationships.
+        """
         relationship_functions.read_relationships(self, file_path)
 
     def display_best_relationships(self):
+        """
+        Displays the best relationships found by  FeatureDiscovery.
+        """
         relationship_functions.display_best_relationships(self)
 
     def add_relationship(self, table1: str, col1: str, table2: str, col2: str, weight: float):
+        """
+        Adds a relationship between two columns in different tables.
+
+        Args:
+            table1 (str): The name of the first table.
+            col1 (str): The name of the column in the first table.
+            table2 (str): The name of the second table.
+            col2 (str): The name of the column in the second table.
+            weight (float): The weight of the relationship.
+        """
         relationship_functions.add_relationship(self, table1, col1, table2, col2, weight)
 
     def remove_relationship(self, table1: str, col1: str, table2: str, col2: str):
+        """
+        Removes a relationship between two columns in different tables.
+
+        Args:
+            table1 (str): The name of the first table.
+            col1 (str): The name of the column in the first table.
+            table2 (str): The name of the second table.
+            col2 (str): The name of the column in the second table.
+        """
         relationship_functions.remove_relationship(self, table1, col1, table2, col2)
 
     def update_relationship(self, table1: str, col1: str, table2: str, col2: str, weight: float):
+        """
+        Update the relationship between two tables and their respective columns with a given weight.
+
+        Args:
+            table1 (str): The name of the first table.
+            col1 (str): The name of the column in the first table.
+            table2 (str): The name of the second table.
+            col2 (str): The name of the column in the second table.
+            weight (float): The weight of the relationship.
+        """
         relationship_functions.update_relationship(self, table1, col1, table2, col2, weight)
     
     def display_table_relationship(self, table1: str, table2: str):
+        """
+        Display the relationship between two tables.
+
+        Args:
+            table1 (str): The name of the first table.
+            table2 (str): The name of the second table.
+        """
         relationship_functions.display_table_relationship(self, table1, table2)
 
     def compute_join_trees(self, top_k_features: int = 10, non_null_threshold=0.5, explain=False, verbose=True):
+        """
+        Compute join trees for feature selection.
+
+        Args:
+            top_k_features (int): Number of top features to select. Defaults to 10.
+            non_null_threshold (float): Threshold for non-null ratio. Defaults to 0.5.
+            explain (bool): Whether to explain the join trees. Defaults to False.
+            verbose (bool): Whether to print verbose output. Defaults to True.
+        """
         tree_functions.compute_join_trees(self, top_k_features, non_null_ratio_threshold=non_null_threshold, 
                                           explain=explain, verbose=verbose)
 
@@ -161,64 +254,193 @@ class FeatureDiscovery:
         """
         Display the features for a given tree ID.
 
-        Parameters:
-        - tree_id (int): The ID of the tree.
-        - show_discarded_features (bool): Whether to show discarded features or not. Default is False.
+        Args:
+            tree_id (int): The ID of the tree.
+            show_discarded_features (bool): Whether to show discarded features or not. Default is False.
         """
         feature_functions.show_features(self, tree_id, show_discarded_features)
 
     def display_join_trees(self, top_k: int = None):
+        """
+        Display the join trees for the AutoFeatClass instance.
+
+        Args:
+            top_k (int): The number of join trees to display. If None, display all join trees.
+        """
         tree_functions.display_join_trees(self, top_k)
     
-    def display_join_path(self, path_id):
-        tree_functions.display_join_tree(self, path_id)
+    def display_join_tree(self, tree_id):
+        """
+        Display the join path with the given tree_id.
+
+        Parameters:
+        - tree_id: The ID of the join path to display.
+        """
+        tree_functions.display_join_tree(self, tree_id)
 
     def explain_relationship(self, table1: str, table2: str):
+        """
+        Explains the relationship between two tables.
+
+        Args:
+            table1 (str): The name of the first table.
+            table2 (str): The name of the second table.
+        """
         relationship_functions.explain_relationship(self, table1, table2)
     
-    def explain_path(self, path_id: int):
-        tree_functions.explain_tree(self, path_id)
+    def explain_tree(self, tree_id: int):
+        """
+        Explain the tree identified by the given tree_id.
+
+        Args:
+            tree_id (int): The ID of the tree to explain.
+        """
+        tree_functions.explain_tree(self, tree_id)
 
     def remove_join_path_from_tree(self, tree_id: int, table: str):
+        """
+        Removes a join path from the tree.
+
+        Args:
+            tree_id (int): The ID of the tree.
+            table (str): The name of the table to remove the join path from.
+        """
         tree_functions.remove_join_from_tree(self, tree_id, table)
 
-    def explain_result(self, path_id: int, model: str = 'GBM'):
-        evaluation_functions.explain_result(self, path_id, model)
+    def explain_result(self, tree_id: int, model: str = 'GBM'):
+        """
+        Explain the result of a specific tree in the AutoFeat pipeline.
+
+        Args:
+            tree_id (int): The ID of the tree to explain.
+            model (str, optional): The model to use for explanation. Defaults to 'GBM'.
+        """
+        evaluation_functions.explain_result(self, tree_id, model)
 
     def inspect_join_tree(self, tree_id: int):
+        """
+        Inspects the join tree with the given tree_id.
+
+        Parameters:
+            tree_id (int): The ID of the join tree to inspect.
+        """
         tree_functions.inspect_join_tree(self, tree_id)
 
     def evaluate_trees(self, algorithm='GBM', top_k_paths: int = 3, verbose=True, explain=False):
+        """
+        Evaluate the performance of the generated trees.
+
+        Parameters:
+        - algorithm (str): The algorithm to use for evaluation. Default is 'GBM'.
+        - top_k_paths (int): The number of top paths to consider. Default is 3.
+        - verbose (bool): Whether to print verbose output. Default is True.
+        - explain (bool): Whether to explain the evaluation results. Default is False.
+        """
         evaluation_functions.evalute_trees(self, algorithm, top_k_paths, verbose=verbose, explain=explain)
 
     def get_best_result(self):
+        """
+        Returns the best result obtained by the evaluation module.
+        """
         return evaluation_functions.get_best_result(self)
 
     def evaluate_augmented_table(self, tree_id: int, algorithm='GBM', verbose=False):
+        """
+        Evaluate the augmented table using the specified algorithm and tree ID.
+
+        Parameters:
+        - tree_id (int): The ID of the tree to use for evaluation.
+        - algorithm (str): The algorithm to use for evaluation. Default is 'GBM'.
+        - verbose (bool): Whether to print verbose output. Default is False.
+        """
         evaluation_functions.evaluate_table(self, algorithm, tree_id, verbose)
         evaluation_functions.explain_result(self, tree_id, algorithm)
 
-    def adjust_relevance_value(self, path_id: int, feature: str, value: float):
-        feature_functions.adjust_relevance_value(self, path_id, feature, value)
+    def adjust_relevance_value(self, tree_id: int, feature: str, value: float):
+        """
+        Adjusts the relevance value of a feature for a specific tree.
 
-    def adjust_redundancy_value(self, path_id: int, feature: str, value: float):
-        feature_functions.adjust_redundancy_value(self, path_id, feature, value)
+        Args:
+            tree_id (int): The ID of the tree.
+            feature (str): The name of the feature.
+            value (float): The new relevance value.
 
-    def adjust_non_null_ratio(self, path_id: int, table: str, value: float):
-        feature_functions.adjust_non_null_ratio(self, path_id, table, value)
+        Returns:
+            None
+        """
+        feature_functions.adjust_relevance_value(self, tree_id, feature, value)
+
+    def adjust_redundancy_value(self, tree_id: int, feature: str, value: float):
+        """
+        Adjusts the redundancy value for a specific feature in a given tree.
+
+        Args:
+            tree_id (int): The ID of the tree.
+            feature (str): The name of the feature.
+            value (float): The new redundancy value.
+        """
+        feature_functions.adjust_redundancy_value(self, tree_id, feature, value)
+
+    def adjust_non_null_ratio(self, tree_id: int, table: str, value: float):
+        """
+        Adjusts the non-null ratio for a specific tree and table.
+
+        Args:
+            tree_id (int): The ID of the tree.
+            table (str): The name of the table.
+            value (float): The new non-null ratio value.
+        """
+        feature_functions.adjust_non_null_ratio(self, tree_id, table, value)
 
     def move_features_to_discarded(self, tree_id: int, features: [str]):
+        """
+        Moves the specified features to the discarded list for the given tree.
+
+        Args:
+            tree_id (int): The ID of the tree.
+            features (list[str]): The list of features to be moved to the discarded list.
+        """
         feature_functions.move_features_to_discarded(self, tree_id, features)
 
     def move_features_to_selected(self, tree_id: int, features: [str]):
+        """
+        Moves the specified features from discarded to the selected features list for the given tree.
+
+        Args:
+            tree_id (int): The ID of the tree.
+            features (list[str]): The list of features to be moved.
+        """
         feature_functions.move_features_to_selected(self, tree_id, features)
 
     def materialise_join_tree(self, tree_id: int):
+        """
+        Materializes the join tree with the given tree_id.
+
+        Args:
+            tree_id (int): The ID of the join tree to materialize.
+
+        Returns:
+            The materialized join tree.
+        """
         return tree_functions.materialise_join_tree(self, tree_id)
 
     def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, non_null_threshold=0.5, matcher="coma", 
                         top_k_features: int = 10, 
                         top_k_paths: int = 3, explain=True, verbose=True, use_cache=True):
+        """
+        Augments the dataset by finding relationships between features, computing join trees, and evaluating the trees.
+        
+        Args:
+            algorithm (str): The algorithm to use for tree evaluation. Default is "GBM".
+            relation_threshold (float): The threshold for considering a relationship between features. Default is 0.5.
+            non_null_threshold: The threshold for considering a feature as non-null. Default is 0.5.
+            matcher (str): The matcher to use for finding relationships. Default is "coma".
+            top_k_features (int): The number of top features to select. Default is 10.
+            top_k_paths (int): The number of top paths to select. Default is 3.
+            explain (bool): Whether to explain the process. Default is True.
+            verbose (bool): Whether to print verbose output. Default is True.
+            use_cache (bool): Whether to use cached relationship weights. Default is True.
+        """
         if use_cache:
             if os.path.isfile(f"saved_weights/{self.base_table}_{relation_threshold}_{matcher}_weights.txt"):
                 if verbose:

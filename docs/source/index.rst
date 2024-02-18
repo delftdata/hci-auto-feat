@@ -6,14 +6,20 @@
 Welcome to Autofeat's documentation!
 ====================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+FeatureDiscovery
+================
 
-.. automodule:: autofeat
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Autofeat's FeatureDiscovery can help you with Automatic Relational Data Augmentation. 
+It can be used to automatically find relevant data and select the best features for your machine learning model.
+
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Contents:
+      
+   installation
+   API
+   Use_Cases
 
 
 Indices and tables
