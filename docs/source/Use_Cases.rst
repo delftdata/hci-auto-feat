@@ -1,3 +1,5 @@
+.. _use_cases:
+
 Use Cases
 =========
 These use cases gives you examples to show how to use the package. Not all methods are covered. 
