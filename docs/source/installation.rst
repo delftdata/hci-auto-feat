@@ -86,11 +86,13 @@ The function has multiple parameters to tune your feature discovery process.
       - float
       - 0.5
     * - non_null_threshold
-      - The threshold of non-null values in the resulting table after a possible join.
+      - The threshold of non-null values in the resulting table after a possible join. 
       - float
       - 0.5
     * - matcher
-      - The matcher to use for the join.
+      - The matcher to use for the join. Possible options are:
+        | - COMA
+        | - JACCARD
       - str
       - COMA
     * - top_k_features
