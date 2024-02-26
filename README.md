@@ -9,7 +9,13 @@ This repo contains the development and experimental codebase of Human-in-the-loo
 - Python 3.10
 
 ### Documentation
-For the entire documentation, please have a look at: [HCI Autofeat Docs](https://autofeat.readthedocs.io/en/latest/)
+For the entire documentation, please have a look at [HCI Autofeat Docs](https://autofeat.readthedocs.io/en/latest/)
+
+## Installation
+HCI Autofeat is developed for work in a notebook environment. For use in another environment, make sure you have a virtual environment.
+1. `python -m venv {env-name}`
+2. `source {env-name}/bin/activate`
+3. `pip install -e .`
 
 ## Run AutoFeat
 1. 
