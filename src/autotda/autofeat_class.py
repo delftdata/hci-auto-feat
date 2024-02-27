@@ -4,19 +4,19 @@ import tempfile
 import os.path
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
-import src.autofeatinsights.functions.relationship_functions as relationship_functions
-import src.autofeatinsights.functions.tree_functions as tree_functions
-import src.autofeatinsights.functions.feature_functions as feature_functions
-import src.autofeatinsights.functions.evaluation_functions as evaluation_functions
-from src.autofeatinsights.functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
+import src.autotda.functions.relationship_functions as relationship_functions
+import src.autotda.functions.tree_functions as tree_functions
+import src.autotda.functions.feature_functions as feature_functions
+import src.autotda.functions.evaluation_functions as evaluation_functions
+from src.autotda.functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
 from typing import List, Set
-from src.autofeatinsights.functions.classes import Weight, Tree, Result
+from src.autotda.functions.classes import Weight, Tree, Result
 import pandas as pd
 from sklearn.model_selection import train_test_split
 logging.getLogger().setLevel(logging.WARNING)
 
 
-class FeatureDiscovery:
+class TDA:
     targetColumn: str
     threshold: float
     paths: [Tree]
@@ -24,8 +24,8 @@ class FeatureDiscovery:
     results: [Result]
     base_dataset: str
     partial_join: pd.DataFrame
-    extra_tables: [(str, str)]
-    exlude_tables: [(str, str)]
+    extra_tables: [str]
+    exclude_tables: [str]
     partial_join_selected_features: dict = {}
     join_keys: dict = {}
     explore: bool
@@ -40,7 +40,7 @@ class FeatureDiscovery:
         self.results = []
         self.discovered: Set[str] = set()
         self.extra_tables = []
-        self.exlude_tables = []
+        self.exclude_tables = []
         self.definite_features = []
         self.exclude_features = []
         self.temp_dir = tempfile.TemporaryDirectory()
@@ -49,6 +49,8 @@ class FeatureDiscovery:
         # self.rel_red = RelevanceRedundancy(targetColumn, jmi=jmi, pearson=pearson)
         self.trees = []
         self.join_name_mapping = {}
+        self.relationship_threshold = None
+        self.matcher = None
 
     def set_base_table(self, base_table: str, target_column: str):
         """
@@ -182,7 +184,7 @@ class FeatureDiscovery:
             None
         """
         self.matcher = matcher
-        self.relation_threshold = relationship_threshold
+        self.relationship_threshold = relationship_threshold
         relationship_functions.find_relationships(self, relationship_threshold, matcher, explain, 
                                                   use_cache=use_cache, verbose=verbose)
 
@@ -497,7 +499,7 @@ class FeatureDiscovery:
         """
         return tree_functions.materialise_join_tree(self, tree_id)
 
-    def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, non_null_threshold=0.5, matcher="coma", 
+    def augment_dataset(self, algorithm="GBM", relationship_threshold: float = 0.5, non_null_threshold=0.5, matcher="coma", 
                         top_k_features: int = 10, 
                         top_k_trees: int = 3, explain=True, verbose=True, use_cache=True):
         """
@@ -505,7 +507,7 @@ class FeatureDiscovery:
         
         Args:
             algorithm (str): The algorithm to use for tree evaluation. Default is "GBM".
-            relation_threshold (float): The threshold for considering a relationship between features. Default is 0.5.
+            relationship_threshold (float): The threshold for considering a relationship between features. Default is 0.5.
             non_null_threshold: The threshold for considering a feature as non-null. Default is 0.5.
             matcher (str): The matcher to use for finding relationships. Default is "coma".
             top_k_features (int): The number of top features to select. Default is 10.
@@ -517,16 +519,18 @@ class FeatureDiscovery:
         Returns:
             None
         """
+        self.relationship_threshold = relationship_threshold
+        self.matcher = matcher
         if use_cache:
-            if os.path.isfile(f"saved_weights/{self.base_table}_{relation_threshold}_{matcher}_weights.txt"):
+            if os.path.isfile(f"saved_weights/{self.base_table}_{relationship_threshold}_{matcher}_weights.txt"):
                 if verbose:
-                    print("Reading from cache file: " + f"saved_weights/{self.base_table}_{relation_threshold}_{matcher}_weights.txt")
-                    self.read_relationships(f"saved_weights/{self.base_table}_{relation_threshold}_{matcher}_weights.txt")
+                    print("Reading from cache file: " + f"saved_weights/{self.base_table}_{relationship_threshold}_{matcher}_weights.txt")
+                    self.read_relationships(f"saved_weights/{self.base_table}_{relationship_threshold}_{matcher}_weights.txt")
             else:
-                self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, 
+                self.find_relationships(relationship_threshold=relationship_threshold, matcher=matcher, 
                                         explain=explain, verbose=verbose)
         else:
-            self.find_relationships(relationship_threshold=relation_threshold, matcher=matcher, 
+            self.find_relationships(relationship_threshold=relationship_threshold, matcher=matcher, 
                                     explain=explain, verbose=verbose)
         self.compute_join_trees(top_k_features=top_k_features, explain=explain, non_null_threshold=non_null_threshold, 
                                 verbose=verbose)
@@ -535,10 +539,11 @@ class FeatureDiscovery:
 
 if __name__ == "__main__":
 
-    autofeat = FeatureDiscovery()
+    autofeat = TDA()
     autofeat.set_base_table(base_table="school/base.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["school"])
-    autofeat.find_relationships()
+    autofeat.remove_table("school/qr.csv")
+    autofeat.find_relationships(explain=True)
     autofeat.display_best_relationships()
 
     # autofeat.augment_dataset(explain=True)

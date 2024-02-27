@@ -3,7 +3,7 @@
 API
 ===
 
-.. automodule:: src.autofeatinsights.autofeat_class
+.. automodule:: src.autotda.autofeat_class
    :members:
    :undoc-members:
    :show-inheritance:

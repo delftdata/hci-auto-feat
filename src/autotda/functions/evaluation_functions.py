@@ -1,7 +1,7 @@
-from src.autofeatinsights.functions.helper_functions import get_df_with_prefix
+from src.autotda.functions.helper_functions import get_df_with_prefix
 import tqdm
-from src.autofeatinsights.functions.classes import Result, Join
-import src.autofeatinsights.functions.tree_functions as tree_functions
+from src.autotda.functions.classes import Result, Join
+import src.autotda.functions.tree_functions as tree_functions
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 from autogluon.tabular import TabularPredictor
 from sklearn.model_selection import train_test_split
@@ -35,6 +35,7 @@ def get_hyperparameters(algorithm: str = None) -> list[dict]:
 def evalute_trees(autofeat, algorithm, top_k_results: int = 5,
                   explain=False, verbose=True):
     autofeat.results = []
+    autofeat.algorithm = algorithm
     autofeat.top_k_results = top_k_results
     sorted_trees = sorted(autofeat.trees, key=lambda x: x.rank, reverse=True)[:top_k_results]
     if verbose:
@@ -106,7 +107,7 @@ def get_best_result(autofeat):
 def rerun(autofeat):
     if len(autofeat.results) > 0:
         print("Recalculating results...")
-        evalute_trees(autofeat, autofeat.top_k_results)
+        evalute_trees(autofeat, autofeat.algorithm, top_k_results=autofeat.top_k_results)
 
 
 def explain_result(self, tree_id: int, model: str):

@@ -10,6 +10,9 @@ This package uses **python 3.10**.
 Set-up
 ------
 
+Make sure that PyGraphViz is installed in your system. You can install it using this tutorial:
+https://pygraphviz.github.io/documentation/stable/install.html
+
 Install the autofeat package using pip:
 
 .. code-block:: python
@@ -81,7 +84,7 @@ The function has multiple parameters to tune your feature discovery process.
         | - LR (Logistic Regression)
       - String
       - GBM
-    * - relation_threshold
+    * - relationship_threshold
       - The threshold to select relations between columns.
       - float
       - 0.5

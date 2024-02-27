@@ -1,17 +1,17 @@
-from src.autofeatinsights.functions.classes import Tree, Join, Weight
+from src.autotda.functions.classes import Tree, Join, Weight
 import networkx
 from matplotlib import pyplot as plt
 from pathlib import Path as pt
 import pandas as pd
 from copy import deepcopy
-from src.autofeatinsights.functions.helper_functions import get_df_with_prefix
+from src.autotda.functions.helper_functions import get_df_with_prefix
 import uuid
 import datetime
 from typing import Tuple, Optional
 from autogluon.features.generators import AutoMLPipelineFeatureGenerator
-import src.autofeatinsights.functions.evaluation_functions as evaluation_functions
-import src.autofeatinsights.functions.feature_functions as feature_functions
-import src.autofeatinsights.functions.evaluation_functions as evaluation_functions
+import src.autotda.functions.evaluation_functions as evaluation_functions
+import src.autotda.functions.feature_functions as feature_functions
+import src.autotda.functions.evaluation_functions as evaluation_functions
 from networkx.drawing.nx_pydot import graphviz_layout
 
 
