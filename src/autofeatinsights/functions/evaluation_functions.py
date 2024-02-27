@@ -40,7 +40,7 @@ def evalute_trees(autofeat, algorithm, top_k_results: int = 5,
     if verbose:
         print("Evaluating join trees...")
     for tree in tqdm.tqdm(sorted_trees, total=len(sorted_trees)):
-        evaluate_table(autofeat, algorithm, tree.id, verbose=verbose)
+        evaluate_table(autofeat, algorithm, tree.id, verbose=verbose, multiple=True)
     if explain:
         best_result = sorted(autofeat.results, key=lambda x: x.accuracy, reverse=True)[0]
         print(f"AutoFeat creates {len(autofeat.trees)} join trees: the best performing join tree is tree: {best_result.tree.id}")
@@ -50,19 +50,18 @@ def evalute_trees(autofeat, algorithm, top_k_results: int = 5,
         print(best_result.explain())
 
 
-def evaluate_table(autofeat, algorithm, tree_id: int, verbose=False):
-    autofeat.results = []
+def evaluate_table(autofeat, algorithm, tree_id: int, verbose=False, multiple=False):
+    if not multiple:
+        autofeat.results = []
     tree = tree_functions.get_tree_by_id(autofeat, tree_id)
     base_df = get_df_with_prefix(autofeat.base_table, autofeat.targetColumn)
     i: Join
     for i in tree.joins:
-        df = get_df_with_prefix(i.to_table)
+        df = get_df_with_prefix(i.to_table).groupby(i.get_to_prefix()).sample(n=1, random_state=42)
         base_df = pd.merge(base_df, df, left_on=i.get_from_prefix(), right_on=i.get_to_prefix(), how="left")
-
     base_df = base_df[tree.features + [autofeat.targetColumn]]
     columns_to_drop = set(base_df.columns).intersection(set(tree.join_keys))
     base_df.drop(columns=list(columns_to_drop), inplace=True)
-
     df = AutoMLPipelineFeatureGenerator(
         enable_text_special_features=False, enable_text_ngram_features=False, 
         verbosity=0).fit_transform(X=base_df)
@@ -78,7 +77,7 @@ def evaluate_table(autofeat, algorithm, tree_id: int, verbose=False):
                                      verbosity=0,
                                      path="AutogluonModels/" + "models").fit(
                                          train_data=X_train, hyperparameters=hyperparam)
-        model_names = predictor.model_names()
+        model_names = predictor.get_model_names()
         for model in model_names[:-1]:
             result = Result()
             res = predictor.evaluate(X_test, model=model)

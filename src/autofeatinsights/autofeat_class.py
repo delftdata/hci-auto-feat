@@ -76,13 +76,16 @@ class FeatureDiscovery:
         """
         Sets the dataset repository for the AutofeatClass object.
 
-        Parameters:
-        - dataset_repository (List[str]): A list of dataset paths.
-        - all_tables (bool): Flag indicating whether to use all tables in the repository.
+        Args:
+            dataset_repository (List[str]): A list of dataset paths.
+            all_tables (bool): Flag indicating whether to use all tables in the repository.
 
         Raises:
-        - Exception: If both dataset_repository and all_tables are specified.
-        - Exception: If neither dataset_repository nor all_tables are specified.
+            Exception: If both dataset_repository and all_tables are specified.
+            Exception: If neither dataset_repository nor all_tables are specified.
+
+        Returns:
+            None
 
         """
         if len(dataset_repository) > 0 and all_tables:
@@ -114,6 +117,9 @@ class FeatureDiscovery:
 
         Args:
             table (str): The name of the table to be added.
+
+        Returns:
+            None
         """
         self.extra_tables.append(table)
         if self.relationship_threshold is not None and self.matcher is not None:
@@ -122,9 +128,12 @@ class FeatureDiscovery:
     def remove_table(self, table: str):
         """
         Removes a table from the list of extra tables and adds it to the list of excluded tables.
-        
+
         Args:
             table (str): The name of the table to be removed.
+        
+        Returns:
+            None
         """
         if table in self.extra_tables:
             self.extra_tables.remove(table)
@@ -148,7 +157,7 @@ class FeatureDiscovery:
         """
         Returns a list of weights that have the specified 'from_table' and 'to_table' values.
 
-        Parameters:
+        Args:
             from_table (str): The source table name.
             to_table (str): The destination table name.
 
@@ -168,6 +177,9 @@ class FeatureDiscovery:
             explain (bool, optional): Whether to provide an explanation for the relationships found. Defaults to False.
             use_cache (bool, optional): Whether to use a cache for storing previously computed relationships. Defaults to True.
             verbose (bool, optional): Whether to print verbose output during the process. Defaults to True.
+
+        Returns:
+            None
         """
         self.matcher = matcher
         self.relation_threshold = relationship_threshold
@@ -180,12 +192,18 @@ class FeatureDiscovery:
 
         Args:
             file_path (str): The path to the file containing the relationships.
+
+        Returns:
+            None
         """
         relationship_functions.read_relationships(self, file_path)
 
     def display_best_relationships(self):
         """
         Displays the best relationships found by  FeatureDiscovery.
+
+        Returns:
+            None
         """
         relationship_functions.display_best_relationships(self)
 
@@ -199,6 +217,9 @@ class FeatureDiscovery:
             table2 (str): The name of the second table.
             col2 (str): The name of the column in the second table.
             weight (float): The weight of the relationship.
+
+        Returns:
+            None
         """
         relationship_functions.add_relationship(self, table1, col1, table2, col2, weight)
 
@@ -211,6 +232,9 @@ class FeatureDiscovery:
             col1 (str): The name of the column in the first table.
             table2 (str): The name of the second table.
             col2 (str): The name of the column in the second table.
+
+        Returns:
+            None
         """
         relationship_functions.remove_relationship(self, table1, col1, table2, col2)
 
@@ -224,6 +248,9 @@ class FeatureDiscovery:
             table2 (str): The name of the second table.
             col2 (str): The name of the column in the second table.
             weight (float): The weight of the relationship.
+
+        Returns:
+            None
         """
         relationship_functions.update_relationship(self, table1, col1, table2, col2, weight)
     
@@ -234,6 +261,9 @@ class FeatureDiscovery:
         Args:
             table1 (str): The name of the first table.
             table2 (str): The name of the second table.
+        
+        Returns:
+            None
         """
         relationship_functions.display_table_relationship(self, table1, table2)
 
@@ -243,9 +273,12 @@ class FeatureDiscovery:
 
         Args:
             top_k_features (int): Number of top features to select. Defaults to 10.
-            non_null_threshold (float): Threshold for non-null ratio. Defaults to 0.5.
-            explain (bool): Whether to explain the join trees. Defaults to False.
-            verbose (bool): Whether to print verbose output. Defaults to True.
+            non_null_threshold (float): The threshold value for determining the non-null ratio of a feature. Defaults to 0.5.
+            explain (bool): Whether to provide an explanation for the join trees. Defaults to False.
+            verbose (bool): Whether to print verbose output during the process. Defaults to True.
+
+        Returns:
+            None
         """
         tree_functions.compute_join_trees(self, top_k_features, non_null_ratio_threshold=non_null_threshold, 
                                           explain=explain, verbose=verbose)
@@ -257,6 +290,9 @@ class FeatureDiscovery:
         Args:
             tree_id (int): The ID of the tree.
             show_discarded_features (bool): Whether to show discarded features or not. Default is False.
+
+        Returns:
+            None
         """
         feature_functions.show_features(self, tree_id, show_discarded_features)
 
@@ -266,6 +302,9 @@ class FeatureDiscovery:
 
         Args:
             top_k (int): The number of join trees to display. If None, display all join trees.
+
+        Returns:
+            None
         """
         tree_functions.display_join_trees(self, top_k)
     
@@ -273,8 +312,11 @@ class FeatureDiscovery:
         """
         Display the join path with the given tree_id.
 
-        Parameters:
-        - tree_id: The ID of the join path to display.
+        Args:
+            tree_id: The ID of the join path to display.
+        
+        Returns:
+            None
         """
         tree_functions.display_join_tree(self, tree_id)
 
@@ -285,6 +327,9 @@ class FeatureDiscovery:
         Args:
             table1 (str): The name of the first table.
             table2 (str): The name of the second table.
+
+        Returns:
+            None
         """
         relationship_functions.explain_relationship(self, table1, table2)
     
@@ -294,6 +339,9 @@ class FeatureDiscovery:
 
         Args:
             tree_id (int): The ID of the tree to explain.
+        
+        Returns:
+            None
         """
         tree_functions.explain_tree(self, tree_id)
 
@@ -304,6 +352,9 @@ class FeatureDiscovery:
         Args:
             tree_id (int): The ID of the tree.
             table (str): The name of the table to remove the join path from.
+
+        Returns:
+            None
         """
         tree_functions.remove_join_from_tree(self, tree_id, table)
 
@@ -314,6 +365,9 @@ class FeatureDiscovery:
         Args:
             tree_id (int): The ID of the tree to explain.
             model (str, optional): The model to use for explanation. Defaults to 'GBM'.
+
+        Returns:
+            None
         """
         evaluation_functions.explain_result(self, tree_id, model)
 
@@ -321,26 +375,30 @@ class FeatureDiscovery:
         """
         Inspects the join tree with the given tree_id.
 
-        Parameters:
+        Args:
             tree_id (int): The ID of the join tree to inspect.
+
+        Returns:
+            None
         """
         tree_functions.inspect_join_tree(self, tree_id)
 
-    def evaluate_trees(self, algorithm='GBM', top_k_paths: int = 3, verbose=True, explain=False):
+    def evaluate_trees(self, algorithm='GBM', top_k_trees: int = 3, verbose=True, explain=False):
         """
         Evaluate the performance of the generated trees.
 
-        Parameters:
-        - algorithm (str): The algorithm to use for evaluation. Default is 'GBM'.
-        - top_k_paths (int): The number of top paths to consider. Default is 3.
-        - verbose (bool): Whether to print verbose output. Default is True.
-        - explain (bool): Whether to explain the evaluation results. Default is False.
+        Args:
+            algorithm (str): The algorithm to use for evaluation. Default is 'GBM'.
+            top_k_paths (int): The number of top paths to consider. Default is 3.
+            verbose (bool): Whether to print verbose output. Default is True.
+            explain (bool): Whether to explain the evaluation results. Default is False.
         """
-        evaluation_functions.evalute_trees(self, algorithm, top_k_paths, verbose=verbose, explain=explain)
+        evaluation_functions.evalute_trees(self, algorithm, top_k_trees, verbose=verbose, explain=explain)
 
     def get_best_result(self):
         """
-        Returns the best result obtained by the evaluation module.
+        Returns:
+            Result: The best result by accuracy.
         """
         return evaluation_functions.get_best_result(self)
 
@@ -348,10 +406,13 @@ class FeatureDiscovery:
         """
         Evaluate the augmented table using the specified algorithm and tree ID.
 
-        Parameters:
-        - tree_id (int): The ID of the tree to use for evaluation.
-        - algorithm (str): The algorithm to use for evaluation. Default is 'GBM'.
-        - verbose (bool): Whether to print verbose output. Default is False.
+        Args:
+            tree_id (int): The ID of the tree to use for evaluation.
+            algorithm (str): The algorithm to use for evaluation. Default is 'GBM'.
+            verbose (bool): Whether to print verbose output. Default is False.
+
+        Returns:
+            None
         """
         evaluation_functions.evaluate_table(self, algorithm, tree_id, verbose)
         evaluation_functions.explain_result(self, tree_id, algorithm)
@@ -378,6 +439,9 @@ class FeatureDiscovery:
             tree_id (int): The ID of the tree.
             feature (str): The name of the feature.
             value (float): The new redundancy value.
+        
+        Returns:
+            None
         """
         feature_functions.adjust_redundancy_value(self, tree_id, feature, value)
 
@@ -389,6 +453,9 @@ class FeatureDiscovery:
             tree_id (int): The ID of the tree.
             table (str): The name of the table.
             value (float): The new non-null ratio value.
+        
+        Returns:
+            None
         """
         feature_functions.adjust_non_null_ratio(self, tree_id, table, value)
 
@@ -399,6 +466,9 @@ class FeatureDiscovery:
         Args:
             tree_id (int): The ID of the tree.
             features (list[str]): The list of features to be moved to the discarded list.
+
+        Returns:
+            None
         """
         feature_functions.move_features_to_discarded(self, tree_id, features)
 
@@ -409,6 +479,9 @@ class FeatureDiscovery:
         Args:
             tree_id (int): The ID of the tree.
             features (list[str]): The list of features to be moved.
+
+        Returns:
+            None
         """
         feature_functions.move_features_to_selected(self, tree_id, features)
 
@@ -426,7 +499,7 @@ class FeatureDiscovery:
 
     def augment_dataset(self, algorithm="GBM", relation_threshold: float = 0.5, non_null_threshold=0.5, matcher="coma", 
                         top_k_features: int = 10, 
-                        top_k_paths: int = 3, explain=True, verbose=True, use_cache=True):
+                        top_k_trees: int = 3, explain=True, verbose=True, use_cache=True):
         """
         Augments the dataset by finding relationships between features, computing join trees, and evaluating the trees.
         
@@ -440,6 +513,9 @@ class FeatureDiscovery:
             explain (bool): Whether to explain the process. Default is True.
             verbose (bool): Whether to print verbose output. Default is True.
             use_cache (bool): Whether to use cached relationship weights. Default is True.
+
+        Returns:
+            None
         """
         if use_cache:
             if os.path.isfile(f"saved_weights/{self.base_table}_{relation_threshold}_{matcher}_weights.txt"):
@@ -454,8 +530,7 @@ class FeatureDiscovery:
                                     explain=explain, verbose=verbose)
         self.compute_join_trees(top_k_features=top_k_features, explain=explain, non_null_threshold=non_null_threshold, 
                                 verbose=verbose)
-        print(self.trees)
-        self.evaluate_trees(algorithm=algorithm, top_k_paths=top_k_paths, explain=explain)
+        self.evaluate_trees(algorithm=algorithm, top_k_trees=top_k_trees, explain=explain)
 
 
 if __name__ == "__main__":
@@ -463,7 +538,10 @@ if __name__ == "__main__":
     autofeat = FeatureDiscovery()
     autofeat.set_base_table(base_table="school/base.csv", target_column="class")
     autofeat.set_dataset_repository(dataset_repository=["school"])
-    autofeat.augment_dataset(non_null_threshold=0.65, top_k_paths=30, algorithm="LR", top_k_features=15)
+    autofeat.find_relationships()
+    autofeat.display_best_relationships()
+
+    # autofeat.augment_dataset(explain=True)
     # autofeat.read_relationships("saved_weights/school/base.csv_0.5_coma_weights.txt")
     # autofeat.compute_join_trees(top_k_features=5)
     # autofeat.display_join_path(2)

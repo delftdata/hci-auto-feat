@@ -9,13 +9,11 @@ Welcome to Autofeat's documentation!
 Autofeat
 ================
 
-Autofeat is a Python-based, user-friendly library that incor-
-porates our human-in-the-loop methodology for feature discovery,
+Autofeat is a Python-based, user-friendly library that incorporates our human-in-the-loop methodology for feature discovery,
 designed for seamless integration in any notebook environment.
 The primary objective of this process is to enhance
 a base table by adding new features that significantly increase the
-predictive accuracy of a target ML model, specifically for classi-
-fication tasks. AutoFeat streamlines the process of selecting and
+predictive accuracy of a target ML model, specifically for classification tasks. AutoFeat streamlines the process of selecting and
 integrating relevant tables from a dataset collection into the base
 table, thus creating an augmented table. Additionally, AutoFeat
 employs heuristic-based feature selection strategies to eliminate
@@ -41,9 +39,8 @@ of subsequent machine learning operations.
    :caption: Contents:
       
    installation
-      
+   Use_Cases   
    API
-   Use_Cases
 
 
 Indices and tables

@@ -152,6 +152,7 @@ def display_best_relationships(autofeat):
 def display_table_relationship(autofeat, table1: str, table2: str):
     weights = [i for i in autofeat.weights if i.from_table == table1 and i.to_table == table2]
     if len(weights) == 0:
+        print("No Weights found")
         return
     df = pd.DataFrame([[i.from_col, i.to_col, i.weight] for i in weights], 
                       columns=["from_column", "to_column", "weight"])

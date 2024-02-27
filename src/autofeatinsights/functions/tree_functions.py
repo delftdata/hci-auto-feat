@@ -22,6 +22,7 @@ def compute_join_trees(autofeat, top_k_features, non_null_ratio_threshold: float
     autofeat.set_base_table(autofeat.base_table, autofeat.targetColumn)
     autofeat.top_k_features = top_k_features
     emptyTree = Tree(begin=autofeat.base_table, joins=[], rank=0)
+    emptyTree.features = autofeat.partial_join_selected_features[str(autofeat.base_table)]
     autofeat.tree_hash[str(autofeat.base_table)] = emptyTree
     emptyTree.id = 0
     autofeat.trees.append(emptyTree)
@@ -47,9 +48,6 @@ def stream_feature_selection(autofeat, top_k_features, queue: set, non_null_rati
         neighbours = sorted((set(neighbours).difference(autofeat.discovered)))
         all_neighbours.update(neighbours)
         for n in neighbours:
-            print(n)
-            if n == "school/crime.csv":
-                print("yes")
             autofeat.discovered.add(n)
             join_keys = autofeat.get_weights_from_and_to_table(base_node_id, n)
             max_val = 0
@@ -103,7 +101,8 @@ def stream_feature_selection(autofeat, top_k_features, queue: set, non_null_rati
                                     prop.from_col, prop.to_col, non_null_ratio, {"rel": remaining_rel_score, 
                                                                              "red": remaining_red_score}, 
                                     {"rel": rel_discarded, "red": red_discarded})
-                        all_features = autofeat.partial_join_selected_features[str(previous_table_join)]
+                        all_features = autofeat.partial_join_selected_features[str(previous_table_join)].copy()
+
                         all_features.extend(final_features)
                         autofeat.partial_join_selected_features[str(join_list)] = all_features
                         tree = deepcopy(autofeat.tree_hash[str(previous_table_join)])
