@@ -32,5 +32,5 @@ Install and update using [pip](https://pip.pypa.io/en/stable/getting-started/):
 ## Documentation
 ***
 - Documentation: https://autofeat.readthedocs.io/ 
-- Demonstration Notebook: https://www.kaggle.com/zegermouw2/human-in-the-loop-tabular-data-augmentation 
-- Demonstration Video: https://youtu.be/z3ZmR_A0nyE 
+- Example Notebook: https://www.kaggle.com/zegermouw2/human-in-the-loop-tabular-data-augmentation  
+- Demonstration Video: [https://youtu.be/z3ZmR_A0nyE](https://youtu.be/VPtKBQqVDro) 
