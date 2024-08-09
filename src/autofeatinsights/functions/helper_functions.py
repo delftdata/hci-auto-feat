@@ -299,10 +299,10 @@ def measure_joint_mutual_information(
 def get_df_with_prefix(node_id: str, targetColumn=None):
     prefix = node_id + "."
     if targetColumn:
-        dataframe = pd.read_csv('data/benchmark/' + node_id).set_index(targetColumn) \
+        dataframe = pd.read_csv('data/benchmark/' + node_id, encoding="utf8", engine="python", quotechar='"', escapechar='\\').set_index(targetColumn) \
             .add_prefix(prefix).reset_index()
     else:
-        dataframe = pd.read_csv('data/benchmark/' + node_id).add_prefix(prefix)
+        dataframe = pd.read_csv('data/benchmark/' + node_id, encoding="utf8", engine="python", quotechar='"', escapechar='\\').add_prefix(prefix)
     return dataframe
 
 

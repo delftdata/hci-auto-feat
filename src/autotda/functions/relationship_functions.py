@@ -1,17 +1,17 @@
 import os
 
-from src.autofeatinsights.functions.classes import Weight
+from src.autotda.functions.classes import Weight
 import pandas as pd
 from multiprocessing import Manager
 from joblib import Parallel, delayed
 import itertools
 import tqdm
 import seaborn
-from valentine.algorithms import Coma, JaccardDistanceMatcher
+from valentine.algorithms import Coma, JaccardLevenMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
 from tabulate import tabulate
-import src.autofeatinsights.functions.tree_functions as tree_functions
+import src.autotda.functions.tree_functions as tree_functions
 
 
 def read_relationships(self, file_path):
@@ -37,8 +37,11 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
                        explain=False, verbose=True, use_cache=True):
 
     tables = autofeat.get_tables_repository()
+    tables.extend(autofeat.extra_tables)
+    tables = [i for i in tables if i not in autofeat.exclude_tables]
     if explain:
-        print(f"1. AutoFeat computes the relationships between {len(tables)} tables from the {autofeat.datasets}"
+        print(f" 1. AutoFeat computes the relationships between {len(tables)} tables from the datasets: {autofeat.datasets}."
+              + f" extra tables: {autofeat.extra_tables} and excludes: {autofeat.exclude_tables}" 
               + f" repository, using {matcher} similarity score with a threshold of {relationship_threshold} "
               + f"(i.e., all the relationships with a similarity < {relationship_threshold} will be discarded).")
     if verbose:
@@ -57,7 +60,7 @@ def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: s
     # This function calculates the COMA weights between 2 tables in the datasets.
     def calculate_matches(table1: pd.DataFrame, table2: pd.DataFrame, matcher: str) -> dict:
         if matcher == "jaccard":
-            matches = valentine_match(table1, table2, JaccardDistanceMatcher())
+            matches = valentine_match(table1, table2, JaccardLevenMatcher())
         else:
             matches = valentine_match(table1, table2, Coma())
         return matches
@@ -152,6 +155,7 @@ def display_best_relationships(autofeat):
 def display_table_relationship(autofeat, table1: str, table2: str):
     weights = [i for i in autofeat.weights if i.from_table == table1 and i.to_table == table2]
     if len(weights) == 0:
+        print("No Weights found")
         return
     df = pd.DataFrame([[i.from_col, i.to_col, i.weight] for i in weights], 
                       columns=["from_column", "to_column", "weight"])

@@ -1,0 +1,15 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Autofeat"
+version = "0.0.1"
+requires-python = "3.10"
+readme = {file = "README.md", context-type= "text/markdown"}
+authors = [
+    {name = "Zeger Mouw, email = "z.f.mouw@student.tudelft.nl"}
+]
+[project.urls]
+Documentation = "https://autofeat.readthedocs.io/en/latest/"
+Repository = "https://github.com/delftdata/hci-auto-feat"
