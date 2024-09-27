@@ -48,19 +48,19 @@ if st.session_state.stage == 1:
         
         if data:
             json_data = st.json(data)
-            next_button = st.button("Start process", on_click=set_state, args=[2])
+            next_button = st.button("Find relations", on_click=set_state, args=[2])
 
     else:
         data = sp.pydantic_form(
             key="auto_process", 
             model=FeatureDiscovery, 
-            submit_label="Find Relations",
+            submit_label="Submit data",
             clear_on_submit=True,
             )
         
         if data:
             json_data = st.json(data) 
-            next_button = st.button("Start process", on_click=set_state, args=[2])
+            next_button = st.button("Find relations", on_click=set_state, args=[2])
 
 if st.session_state.stage == 2:
     st.header("2. Find relations")
