@@ -1,12 +1,16 @@
+from enum import Enum
+from glob import glob
 import os
+from typing import List
 
-from src.autotda.functions.classes import Weight
+from src.autotda.data_models.dataset_model import ALL_DATASETS, Dataset, filter_datasets, init_datasets
 import pandas as pd
 from multiprocessing import Manager
 from joblib import Parallel, delayed
 import itertools
 import tqdm
 import seaborn
+from src.config import CONNECTIONS, DATA_FOLDER, RELATIONS_FOLDER
 from valentine.algorithms import Coma, JaccardLevenMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
@@ -14,88 +18,160 @@ from tabulate import tabulate
 import src.autotda.functions.tree_functions as tree_functions
 
 
-def read_relationships(self, file_path):
-    self.weights = []
-    f = open(file_path, "r")
-    stringlist = f.read().split(",")
-    for i in stringlist:
-        if i != "":
-            table1, table2, col1, col2, weight = i.split("--")
-            self.weights.append(Weight(table1, table2, col1, col2, float(weight)))
-    f.close()
-    tables = self.get_tables_repository()
-    self.weight_string_mapping = {}
-    for t in tables:
-        if len(t) > 20:
-            new_string = t.split("/")[0] + "/" + t.split("/")[1][:3] + "..." + t.split("/")[1][-7:]
-            self.weight_string_mapping[t] = new_string
-        else:
-            self.weight_string_mapping[t] = t
+MATCHER = {
+    "jaccard": JaccardLevenMatcher,
+    "coma": Coma
+}
+
+class Relation:
+    from_table: str 
+    to_table: str
+    from_column: str
+    to_column: str 
+    similarity: float 
+
+    def __init__(self, from_table, to_table, from_col, to_col, weight):
+        self.from_table = from_table
+        self.to_table = to_table
+        self.from_col = from_col
+        self.to_col = to_col
+        self.weight = weight
+
+class DatasetDiscovery:
+    data_repository: List[Dataset] = ALL_DATASETS
+    table_repository: List[str] = None
+    matcher: str = None 
+    similarity_threshold: float = 0.65
+    relations: List[Relation] = None
+    relations_filename: str = None
+
+    def init(self, matcher: str, data_repositories: List[str]=None):
+        self.matcher = matcher
+        if data_repositories:
+            self.data_repository = self.set_dataset_repository(dataset_repository=data_repositories)
+
+        self.set_table_repository()
+
+    def set_dataset_repository(self, dataset_repository: List[str]):
+        """
+        Sets the dataset repository for the AutofeatClass object.
+
+        Args:
+            dataset_repository (List[str]): A list of dataset paths.
+
+        Returns:
+            None
+
+        """
+        self.data_repository = filter_datasets(dataset_labels=dataset_repository)
+
+        filename = '_'.join(list(map(lambda f: f.base_table_label, self.data_repository)))
+        self.relations_filename = f"{filename}_{self.similarity_threshold}_{self.matcher}_weights.txt"
 
 
-def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: str = "coma", 
-                       explain=False, verbose=True, use_cache=True):
+    def set_table_repository(self):
+        """
+        Retrieves the tables from the repository.
 
-    tables = autofeat.get_tables_repository()
-    tables.extend(autofeat.extra_tables)
-    tables = [i for i in tables if i not in autofeat.exclude_tables]
-    if explain:
-        print(f" 1. AutoFeat computes the relationships between {len(tables)} tables from the datasets: {autofeat.datasets}."
-              + f" extra tables: {autofeat.extra_tables} and excludes: {autofeat.exclude_tables}" 
-              + f" repository, using {matcher} similarity score with a threshold of {relationship_threshold} "
-              + f"(i.e., all the relationships with a similarity < {relationship_threshold} will be discarded).")
-    if verbose:
-        print("Calculating relationships...")
+        Returns:
+            tables (list): A list of table paths.
+        """
+        tables = []
 
-    filename = f"saved_weights/{autofeat.base_table}_{relationship_threshold}_{matcher}_weights.txt"
-    if os.path.isfile(filename):
-        read_relationships(autofeat, filename)
-        return
+        for dataset in self.data_repository:
+            files = glob(f"{DATA_FOLDER}/{dataset.base_table_path}/*.csv", recursive=True)
+            files = [f for f in files if CONNECTIONS not in f and f.endswith("csv")]
 
-    manager = Manager()
-    temp = manager.list()
-    autofeat.relationship_threshold = relationship_threshold
-    autofeat.matcher = matcher
+        for f in files:
+            table_path = f.partition(f"{DATA_FOLDER}/")[2]
+            table_name = table_path.split("/")[-1]
+            tables.append(table_path)
+
+        self.table_repository = tables    
+
+    def set_similarity_threshold(self, threshold):
+        self.similarity_threshold = threshold
+
+        filename = '_'.join(list(map(lambda f: f.base_table_label, self.data_repository)))
+        self.relations_filename = f"{filename}_{self.similarity_threshold}_{self.matcher}_weights.txt"
+
+
+    # def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: str = "coma", explain=False, verbose=True, use_cache=True):
+    def find_relationships(self, use_cache=True):
+        # tables = autofeat.get_tables_repository()
+        # tables.extend(autofeat.extra_tables)
+        # tables = [i for i in tables if i not in autofeat.exclude_tables]
+        # if explain:
+        #     print(f" 1. AutoFeat computes the relationships between {len(tables)} tables from the datasets: {autofeat.datasets}."
+        #         + f" extra tables: {autofeat.extra_tables} and excludes: {autofeat.exclude_tables}" 
+        #         + f" repository, using {matcher} similarity score with a threshold of {relationship_threshold} "
+        #         + f"(i.e., all the relationships with a similarity < {relationship_threshold} will be discarded).")
+        # if verbose:
+        #     print("Calculating relationships...")
+
+        # filename = f"saved_weights/{autofeat.base_table}_{relationship_threshold}_{matcher}_weights.txt"
+        if os.path.isfile(self.relations_filename):
+            df = pd.read_csv(RELATIONS_FOLDER / self.relations_filename)
+            self.relations = [Relation(row.from_table, row.to_table, row.from_col, row.to_col, row.weight) for index, row in df.iterrows()]  
+            return
+
+        manager = Manager()
+        temp = manager.list()
+        
+        def profile(table_pair):
+            (table1, table2) = table_pair
+            df1 = pd.read_csv(DATA_FOLDER / table1)
+            df2 = pd.read_csv(DATA_FOLDER / table2)
+            matches = valentine_match(table1, table2, MATCHER[self.matcher]())
+            for item in matches.items():
+                ((_, col_from), (_, col_to)), similarity = item
+                if similarity > self.similarity_threshold:
+                    temp.append(Relation(table1, table2, col_from, col_to, similarity))
+                    temp.append(Relation(table2, table1, col_to, col_from, similarity))
+
+        # If the name is too long 
+        # autofeat.weight_string_mapping = {}
+        # for t in tables:
+        #     if len(t) > 20:
+        #         new_string = t.split("/")[0] + "/" + t.split("/")[1][:3] + "..." + t.split("/")[1][-7:]
+        #         autofeat.weight_string_mapping[t] = new_string
+        #     else:
+        #         autofeat.weight_string_mapping[t] = t
+
+        Parallel(n_jobs=-1)(delayed(profile)(combination)
+                            for combination in tqdm.tqdm(itertools.combinations(self.table_repository, r=2)))
+        
+        self.relations = temp
+
+        if use_cache:
+            # os.mkdir("saved_weights/" + autofeat.base_table.split("/")[0])
+            # f = open(RELATIONS_FOLDER / filename, "w")
+            # stringlist = []
+            # for i in temp:
+            #     stringlist.append(vars(i))
+            # f.writelines(stringlist)
+            # f.close()
+            pd.DataFrame.from_records([vars(s) for s in temp]).to_csv(RELATIONS_FOLDER / self.relations_filename, index=False)
+
     
-    # This function calculates the COMA weights between 2 tables in the datasets.
-    def calculate_matches(table1: pd.DataFrame, table2: pd.DataFrame, matcher: str) -> dict:
-        if matcher == "jaccard":
-            matches = valentine_match(table1, table2, JaccardLevenMatcher())
-        else:
-            matches = valentine_match(table1, table2, Coma())
-        return matches
-    
-    def profile(combination, matcher="coma"):
-        (table1, table2) = combination
-        df1 = pd.read_csv("data/benchmark/" + table1)
-        df2 = pd.read_csv("data/benchmark/" + table2)
-        matches = calculate_matches(df1, df2, matcher)
-        for m in matches.items():
-            ((_, col_from), (_, col_to)), similarity = m
-            if similarity > relationship_threshold:
-                temp.append(Weight(table1, table2, col_from, col_to, similarity))
-                temp.append(Weight(table2, table1, col_to, col_from, similarity))
-    autofeat.weight_string_mapping = {}
-    for t in tables:
-        if len(t) > 20:
-            new_string = t.split("/")[0] + "/" + t.split("/")[1][:3] + "..." + t.split("/")[1][-7:]
-            autofeat.weight_string_mapping[t] = new_string
-        else:
-            autofeat.weight_string_mapping[t] = t
+    # def read_relationships(self):
+    #     self.weights = []
+    #     f = open(file_path, "r")
+    #     stringlist = f.read().split(",")
+    #     for i in stringlist:
+    #         if i != "":
+    #             table1, table2, col1, col2, weight = i.split("--")
+    #             self.weights.append(Weight(table1, table2, col1, col2, float(weight)))
+    #     f.close()
+        # tables = self.get_tables_repository()
+        # self.weight_string_mapping = {}
+        # for t in tables:
+        #     if len(t) > 20:
+        #         new_string = t.split("/")[0] + "/" + t.split("/")[1][:3] + "..." + t.split("/")[1][-7:]
+        #         self.weight_string_mapping[t] = new_string
+        #     else:
+        #         self.weight_string_mapping[t] = t
 
-    Parallel(n_jobs=-1)(delayed(profile)(combination, matcher)
-                        for combination in tqdm.tqdm(itertools.combinations(tables, 2), 
-                                                     total=len(tables) * (len(tables) - 1) / 2))
-    autofeat.weights = temp
-
-    if use_cache:
-        os.mkdir("saved_weights/" + autofeat.base_table.split("/")[0])
-        f = open(f"saved_weights/{autofeat.base_table}_{relationship_threshold}_{matcher}_weights.txt", "w")
-        stringlist = []
-        for i in autofeat.weights:
-            stringlist.append(f"{i.from_table}--{i.to_table}--{i.from_col}--{i.to_col}--{i.weight},")
-        f.writelines(stringlist)
-        f.close()
 
 
 def add_relationship(autofeat, table1: str, col1: str, table2: str, col2: str, weight: float, update: bool = True):
