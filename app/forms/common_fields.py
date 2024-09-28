@@ -1,8 +1,10 @@
 from enum import Enum
+from src.autotda.data_models.dataset_model import ALL_DATASETS
 
 
 def get_valid_input_repositories() -> tuple[str, ...]:
-    return "foo", "bar"
+    dataset_labels = [dataset.base_table_label for dataset in ALL_DATASETS]
+    return dataset_labels
 
 def get_valid_input_base_table() -> tuple[str, ...]:
     return "foo", "bar"

@@ -7,11 +7,11 @@ from pydantic import BaseModel, Field
 from app.forms.automatic import FeatureDiscovery
 from app.forms.human_in_the_loop import HILProcess
 from app.forms.join_trees import JoinTreeData
+from src.autotda.functions.relationship_functions import DatasetDiscovery
 
 hil_process = "Human-in-the-loop"
 auto_process = "Automatic"
 process_types = [hil_process, auto_process]
-
 
 if 'stage' not in st.session_state:
     st.session_state.stage = 0
@@ -19,11 +19,19 @@ if 'stage' not in st.session_state:
 if "tree" not in st.session_state:
     st.session_state.tree = False
 
+if "dataset_discovery" not in st.session_state:
+    st.session_state.dataset_discovery = None
+
 def set_state(i):
     st.session_state.stage = i
 
 def set_tree_state(state: bool):
     st.session_state.tree = state
+
+def find_relations(state: int, dataset_discovery: DatasetDiscovery):
+    set_state(state)
+    dataset_discovery.find_relationships()
+    st.session_state.dataset_discovery = dataset_discovery
     
 if st.session_state.stage == 0:
     st.header("Saved Process")
@@ -47,8 +55,11 @@ if st.session_state.stage == 1:
             )
         
         if data:
-            json_data = st.json(data)
-            next_button = st.button("Find relations", on_click=set_state, args=[2])
+            selected_repos = [repo.value for repo in list(data.repositories)]
+            selected_matcher = data.matcher.value
+            dataset_discovery = DatasetDiscovery(matcher=selected_matcher, data_repositories=selected_repos)
+           
+            next_button = st.button("Find relations", on_click=find_relations, args=[2, dataset_discovery])
 
     else:
         data = sp.pydantic_form(
@@ -65,8 +76,8 @@ if st.session_state.stage == 1:
 if st.session_state.stage == 2:
     st.header("2. Find relations")
     form = st.form(key='similarity_th_form')
-    form.number_input(
-        value=0.0,
+    similarity_score = form.number_input(
+        value=0.65,
         label='Similarity threshold',
         min_value=0.0,
         max_value=1.0,
@@ -74,8 +85,13 @@ if st.session_state.stage == 2:
         help="The similarity threshold will filter the nodes.")
     submit_button = form.form_submit_button(label='Update graph')
 
+    dataset_discovery = st.session_state.dataset_discovery
+    if submit_button:
+        dataset_discovery.set_similarity_threshold(similarity_score)
+        dataset_discovery.find_relationships()
+
     placeholder = st.empty()
-    placeholder.write("This is where the graph is going to be")
+    placeholder.write(dataset_discovery.relations)
 
     create_tree_button = st.button("Create join trees", on_click=set_state, args=[3])
 
