@@ -3,11 +3,16 @@ from typing import Set
 import streamlit as st
 import streamlit_pydantic as sp
 from pydantic import BaseModel, Field
+from st_link_analysis import st_link_analysis, NodeStyle, EdgeStyle
 
 from app.forms.automatic import FeatureDiscovery
 from app.forms.human_in_the_loop import HILProcess
 from app.forms.join_trees import JoinTreeData
+from app.graph.graph_model import edge_styles, from_relations_to_graph, node_styles
 from src.autotda.functions.relationship_functions import DatasetDiscovery
+
+
+# st.set_page_config(layout="wide")
 
 hil_process = "Human-in-the-loop"
 auto_process = "Automatic"
@@ -90,8 +95,13 @@ if st.session_state.stage == 2:
         dataset_discovery.set_similarity_threshold(similarity_score)
         dataset_discovery.find_relationships()
 
-    placeholder = st.empty()
-    placeholder.write(dataset_discovery.relations)
+    nodes, edges = from_relations_to_graph(dataset_discovery.relations)
+    elements = {
+        "nodes": nodes,
+        "edges": edges
+    }
+        
+    st_link_analysis(elements, "cose", node_styles, edge_styles)    
 
     create_tree_button = st.button("Create join trees", on_click=set_state, args=[3])
 

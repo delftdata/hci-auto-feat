@@ -3,13 +3,13 @@ from glob import glob
 import os
 from typing import List
 
-from autotda.data_models.dataset_model import ALL_DATASETS, Dataset, filter_datasets, init_datasets
+from src.autotda.data_models.dataset_model import ALL_DATASETS, Dataset, filter_datasets, init_datasets
 import pandas as pd
 from joblib import Parallel, delayed
 import itertools
 import tqdm
 import seaborn
-from config import CONNECTIONS, DATA_FOLDER, RELATIONS_FOLDER
+from src.config import CONNECTIONS, DATA_FOLDER, RELATIONS_FOLDER
 from valentine.algorithms import Coma, JaccardDistanceMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
@@ -42,6 +42,10 @@ class DatasetDiscovery:
         if data_repositories:
             self.set_dataset_repository(dataset_repository=data_repositories)
         self.set_table_repository()
+
+    def set_relations_filename(self):
+        filename = '_'.join(list(map(lambda f: f.base_table_label, self.data_repository)))
+        self.relations_filename = f"{filename}_{self.similarity_threshold}_{self.matcher}_weights.csv"
         
 
     def set_dataset_repository(self, dataset_repository: List[str]):
@@ -57,8 +61,7 @@ class DatasetDiscovery:
         """
         self.data_repository = filter_datasets(dataset_labels=dataset_repository)
 
-        filename = '_'.join(list(map(lambda f: f.base_table_label, self.data_repository)))
-        self.relations_filename = f"{filename}_{self.similarity_threshold}_{self.matcher}_weights.csv"
+        self.set_relations_filename()
 
 
     def set_table_repository(self):
@@ -84,8 +87,7 @@ class DatasetDiscovery:
     def set_similarity_threshold(self, threshold):
         self.similarity_threshold = threshold
 
-        filename = '_'.join(list(map(lambda f: f.base_table_label, self.data_repository)))
-        self.relations_filename = f"{filename}_{self.similarity_threshold}_{self.matcher}_weights.csv"
+        self.set_relations_filename()
 
 
     # def find_relationships(autofeat, relationship_threshold: float = 0.5, matcher: str = "coma", explain=False, verbose=True, use_cache=True):
@@ -124,12 +126,11 @@ class DatasetDiscovery:
                 return
             matches = valentine_match(df1, df2, valentine_matcher())
 
-            print(matches)
             for item in matches.items():
                 ((_, col_from), (_, col_to)), similarity = item
                 if similarity > self.similarity_threshold:
                     temp.append(Relation(table1, table2, col_from, col_to, similarity))
-                    temp.append(Relation(table2, table1, col_to, col_from, similarity))
+                    # temp.append(Relation(table2, table1, col_to, col_from, similarity))
 
         # If the name is too long 
         # autofeat.weight_string_mapping = {}
