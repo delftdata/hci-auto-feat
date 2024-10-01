@@ -2,8 +2,7 @@ from enum import Enum
 from typing import Set
 from pydantic import BaseModel, Field, validator
 
-from app.forms.common_fields import BaseTables, MatcherValues, Repositories, TargetVariable
-
+from app.forms.common_fields import MatcherValues, Repositories
 
 class FeatureDiscovery(BaseModel):
     repositories: Set[Repositories] = Field(
@@ -14,15 +13,15 @@ class FeatureDiscovery(BaseModel):
         default=MatcherValues.JACCARD, 
         description="Select one matcher."
         )
-    base_table: BaseTables = Field(
-        ...,
-        description="Select the base table for augmentation."
-    )
-    target_variable: TargetVariable = Field(
-        ...,
-        description="Select the target variable.",
+    # base_table: BaseTables = Field(
+    #     ...,
+    #     description="Select the base table for augmentation."
+    # )
+    # target_variable: TargetVariable = Field(
+    #     ...,
+    #     description="Select the target variable.",
         
-    )
+    # )
     non_null_ratio: float = Field(
         default=0.65,
         ge=0,

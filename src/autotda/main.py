@@ -23,7 +23,7 @@ if __name__ == "__main__":
     trees = dict(sorted(autofeat.join_tree_maping.items(), key=lambda item: item[1][0].rank, reverse=True))
     for tr in trees.keys():
         print(tr)
-        tree_node, filename = autofeat.join_tree_maping[tr]
+        tree_node, filename = trees[tr]
         print(f"\t\t{tree_node.rank}")
         print(filename)
         # print(list(map(lambda x: vars(x), tree_node.relations)))
