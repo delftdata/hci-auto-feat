@@ -1,15 +1,15 @@
 from enum import Enum
 from glob import glob
 import os
-from typing import List
+from typing import Dict, List
 
-from src.autotda.data_models.dataset_model import ALL_DATASETS, Dataset, filter_datasets, init_datasets
+from autotda.data_models.dataset_model import ALL_DATASETS, Dataset, filter_datasets, init_datasets
 import pandas as pd
 from joblib import Parallel, delayed
 import itertools
 import tqdm
 import seaborn
-from src.config import CONNECTIONS, DATA_FOLDER, RELATIONS_FOLDER
+from autotda.config import CONNECTIONS, DATA_FOLDER, RELATIONS_FOLDER
 from valentine.algorithms import Coma, JaccardDistanceMatcher
 from valentine import valentine_match
 import matplotlib.pyplot as plt
@@ -29,6 +29,23 @@ class Relation:
         self.from_col = from_col
         self.to_col = to_col
         self.similarity = similarity
+
+    def __eq__(self, other):
+        if self.from_table != other.from_table:
+            return False 
+        if self.to_table != other.to_table:
+            return False
+        if self.from_col != other.from_col: 
+            return False 
+        if self.to_col != other.to_col:
+            return False 
+        if self.similarity != other.similarity:
+            return False
+        return True 
+    
+    def __str__(self) -> str:
+        return str(vars(self))
+
 
 class DatasetDiscovery:
     relations_filename: str = None
@@ -130,7 +147,7 @@ class DatasetDiscovery:
                 ((_, col_from), (_, col_to)), similarity = item
                 if similarity > self.similarity_threshold:
                     temp.append(Relation(table1, table2, col_from, col_to, similarity))
-                    # temp.append(Relation(table2, table1, col_to, col_from, similarity))
+                    temp.append(Relation(table2, table1, col_to, col_from, similarity))
 
         # If the name is too long 
         # autofeat.weight_string_mapping = {}
@@ -152,6 +169,26 @@ class DatasetDiscovery:
         if use_cache:
             pd.DataFrame.from_records([vars(s) for s in temp]).to_csv(RELATIONS_FOLDER / self.relations_filename, index=False)
 
+def get_adjacent_nodes(relations: List[Relation], node: str) -> Dict[str, List[Relation]]:
+    neighbours = {}
+    for relation in relations:
+        if relation.from_table == node:
+            if relation.to_table in neighbours.keys():
+                if relation not in neighbours[relation.to_table]:
+                    neighbours[relation.to_table].append(relation)
+            else: 
+                neighbours[relation.to_table] = [relation]
+
+        # if relation.to_table == node:
+        #     if relation.from_table in neighbours.keys():
+        #         if relation not in neighbours[relation.from_table]:
+        #             neighbours[relation.from_table].append(relation)
+        #     else:
+        #         neighbours[relation.from_table] = [relation]
+
+    for n in neighbours.keys():
+        sorted(neighbours[n], key = lambda x : x.similarity)
+    return neighbours
     
     # def read_relationships(self):
     #     self.weights = []

@@ -95,20 +95,3 @@ def from_relations_to_graph(relations: List[Relation]) -> Tuple[List, List]:
     
      return nodes, edges
 
-        
-if __name__ == "__main__":
-    n1 = NodeTable("credit")
-    n2 = NodeTable("school")
-
-    edge = EdgeRelation(source=n1.id, 
-                        target=n2.id, 
-                        source_name=n1.name, 
-                        target_name=n2.name,
-                        source_column="ID", 
-                        target_column="DBN")
-
-    a = []
-    a.append(n1.to_dict())
-
-    print(a)
-    print(edge.to_dict())

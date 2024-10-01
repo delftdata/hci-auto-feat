@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 ROOT_FOLDER = Path(
-    os.getenv("TFD_ROOT_FOLDER", Path(os.path.abspath(__file__)).parent.parent.resolve())
+    os.getenv("TFD_ROOT_FOLDER", Path(os.path.abspath(__file__)).parent.parent.parent.resolve())
 ).resolve()
 
 CONNECTIONS = "connections.csv"
