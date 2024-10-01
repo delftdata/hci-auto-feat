@@ -1,4 +1,4 @@
-from src.autotda.functions.helper_functions import get_df_with_prefix
+from src.autotda.functions.relevance_redundancy import get_df_with_prefix
 import tqdm
 from src.autotda.functions.classes import Result, Join
 import src.autotda.functions.tree_functions as tree_functions

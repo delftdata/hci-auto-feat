@@ -3,7 +3,7 @@ from typing import List, Optional
 
 import pandas as pd
 
-from src.config import DATA_FOLDER
+from autotda.config import DATA_FOLDER
 
 
 CLASSIFICATION = "binary"

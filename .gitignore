@@ -12,3 +12,4 @@ AutogluonModels
 .ipynb_checkpoints
 venv
 env
+/src/Autofeat.egg-info

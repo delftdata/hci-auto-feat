@@ -4,13 +4,13 @@ import tempfile
 import os.path
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
-import src.autotda.functions.relationship_functions as relationship_functions
-import src.autotda.functions.tree_functions as tree_functions
-import src.autotda.functions.feature_functions as feature_functions
-import src.autotda.functions.evaluation_functions as evaluation_functions
-from src.autotda.functions.helper_functions import RelevanceRedundancy, get_df_with_prefix
+import autotda.functions.relationship_functions as relationship_functions
+import autotda.functions.tree_functions as tree_functions
+import autotda.functions.feature_functions as feature_functions
+import autotda.functions.evaluation_functions as evaluation_functions
+from src.autotda.functions.relevance_redundancy import RelevanceRedundancy, get_df_with_prefix
 from typing import List, Set
-from src.autotda.functions.classes import Weight, Tree, Result
+from autotda.functions.classes import Weight, Tree, Result
 import pandas as pd
 from sklearn.model_selection import train_test_split
 logging.getLogger().setLevel(logging.WARNING)
@@ -143,30 +143,30 @@ class TDA:
         if self.relationship_threshold is not None and self.matcher is not None:
             relationship_functions.rerun(self, self.relationship_threshold, self.matcher)
 
-    def get_weights_from_table(self, table: str):
-        """
-        Returns a list of weights from the specified table.
+    # def get_weights_from_table(self, table: str):
+    #     """
+    #     Returns a list of weights from the specified table.
 
-        Args:
-            table (str): The name of the table.
+    #     Args:
+    #         table (str): The name of the table.
 
-        Returns:
-            list: A list of weights from the specified table.
-        """
-        return [i for i in self.weights if i.from_table == table]
+    #     Returns:
+    #         list: A list of weights from the specified table.
+    #     """
+    #     return [i for i in self.weights if i.from_table == table]
     
-    def get_weights_from_and_to_table(self, from_table, to_table):
-        """
-        Returns a list of weights that have the specified 'from_table' and 'to_table' values.
+    # def get_weights_from_and_to_table(self, from_table, to_table):
+    #     """
+    #     Returns a list of weights that have the specified 'from_table' and 'to_table' values.
 
-        Args:
-            from_table (str): The source table name.
-            to_table (str): The destination table name.
+    #     Args:
+    #         from_table (str): The source table name.
+    #         to_table (str): The destination table name.
 
-        Returns:
-            list: A list of weights that match the specified 'from_table' and 'to_table' values.
-        """
-        return [i for i in self.weights if i.from_table == from_table and i.to_table == to_table]
+    #     Returns:
+    #         list: A list of weights that match the specified 'from_table' and 'to_table' values.
+    #     """
+    #     return [i for i in self.weights if i.from_table == from_table and i.to_table == to_table]
 
     def find_relationships(self, matcher="coma", relationship_threshold: float = 0.5, explain=False, 
                            use_cache=True, verbose=True):
@@ -546,7 +546,7 @@ if __name__ == "__main__":
     autofeat.find_relationships(explain=True)
     autofeat.display_best_relationships()
 
-    # autofeat.augment_dataset(explain=True)
+    autofeat.augment_dataset(explain=True)
     # autofeat.read_relationships("saved_weights/school/base.csv_0.5_coma_weights.txt")
     # autofeat.compute_join_trees(top_k_features=5)
     # autofeat.display_join_path(2)
