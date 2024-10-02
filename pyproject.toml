@@ -19,17 +19,18 @@ dependencies = [
 "neo4j == 4.4.0",
 "notebook == 6.4.5",
 "numpy == 1.24.4",
-"pandas == 2.2.3",
+"pandas == 2.1.4",
 "qpsolvers[daqp] == 4.3.0",
 "scikit-learn == 1.4.0",
 "seaborn == 0.11.2",
-"streamlit == 1.38.0",
+"streamlit == 1.39.0",
 "streamlit_pandas_profiling == 0.1.3",
 "streamlit-navigation-bar == 3.3.0",
 "streamlit-pydantic == 0.6.0",
+"st-link-analysis == 0.3.0",
 "tqdm == 4.64.0",
 "typer == 0.9.0",
-"ydata-profiling == 4.10.0",
+"watchdog==5.0.3"
 ]
 
 [project.urls]

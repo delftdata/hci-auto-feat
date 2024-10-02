@@ -20,9 +20,6 @@ hil_process = "Human-in-the-loop"
 auto_process = "Automatic"
 process_types = [hil_process, auto_process]
 
-BASE_TABLE_VALUES = []
-TARGET_VARS = []
-
 if 'stage' not in st.session_state:
     st.session_state.stage = 0
 
@@ -51,7 +48,7 @@ def compute_join_trees(autofeat: HCIAutoFeat):
 
     trees = dict(sorted(autofeat.join_tree_maping.items(), key=lambda item: item[1][0].rank, reverse=True))
 
-    st.session_state.join_trees = trees[:autofeat.top_k_join_trees]
+    st.session_state.join_trees = trees
     set_tree_state(True)
     
     
@@ -80,8 +77,6 @@ if st.session_state.stage == 1:
             selected_repos = [repo.value for repo in list(data.repositories)]
             selected_matcher = data.matcher.value
             dataset_discovery = DatasetDiscovery(matcher=selected_matcher, data_repositories=selected_repos)
-            BASE_TABLE_VALUES = dataset_discovery.table_repository
-            TARGET_VARS = [dataset.target_column for dataset in dataset_discovery.data_repository]
            
             next_button = st.button("Find relations", on_click=find_relations, args=[2, dataset_discovery])
 
@@ -100,6 +95,7 @@ if st.session_state.stage == 1:
 
 if st.session_state.stage == 2:
     st.header("2. Find relations")
+    
     form = st.form(key='similarity_th_form')
     similarity_score = form.number_input(
         value=0.65,
@@ -135,80 +131,71 @@ if st.session_state.stage == 2:
 #     dataset_discovery = st.session_state.dataset_discovery
 #     return [dataset.target_column for dataset in dataset_discovery.data_repository]
 
-
-
-
+def print_value(value):
+    st.write(value)
 
 if st.session_state.stage == 3:
-    BaseTables = Enum(
-        "Base Tables",
-        ((value, value) for value in BASE_TABLE_VALUES),
-        type=str,
-    )
-
-    TargetVariable = Enum(
-        "Target Variable",
-        ((value, value) for value in TARGET_VARS),
-        type=str,
-    )
-    class JoinTreeData(BaseModel):
-        base_table: BaseTables = Field(
-            ...,
-            description="Select the base table for augmentation."
-        )
-        target_variable: TargetVariable = Field(
-            ...,
-            description="Select the target variable.",
-            
-        )
-        non_null_ratio: float = Field(
-            default=0.65,
-            ge=0,
-            le=1,
-            description="A number between 0 and 1. 0 means that null values are accepted in any proporion. 1 means that no null value is accepted."
-        )
-        top_k_features: int = Field(
-            default=15,
-            description="Maximum number of features to select."
-        )
-        top_k_join_trees: int = Field(
-            default=4,
-            description="Maximum number of join trees to return."
-        )
-
-
-
     st.header("3. Create join trees")
 
     if st.session_state.tree == False:
-        data = sp.pydantic_form(
-                key="join_tree_process", 
-                model=JoinTreeData, 
-                submit_label="Submit data",
-                )
+        dataset_discovery = st.session_state.dataset_discovery
+        target_variable_choices = [dataset.target_column for dataset in dataset_discovery.data_repository]
+        form_jt = st.form(key="join_tree_form")
+        base_table = form_jt.selectbox(label="Base Table", options=tuple(dataset_discovery.table_repository), index=None)
+        target_var = form_jt.selectbox(label="Target Variable", options=tuple(target_variable_choices), index=None)
+        non_null_ratio = form_jt.number_input(
+            value=0.65,
+            label='Non-Null Ratio',
+            min_value=0.0,
+            max_value=1.0,
+            step=0.01,
+            help="A number between 0 and 1. 0 means that null values are accepted in any proporion. 1 means that no null value is accepted."
+        )
+        top_k_features = form_jt.number_input(
+            value=15,
+            label='Top-k Features',
+            min_value=1,
+            step=1,
+            help="Maximum number of features to select"
+        )
+        top_k_join_trees = form_jt.number_input(
+            value=5,
+            label='Top-k Join Trees',
+            min_value=1,
+            step=1,
+            help="Maximum number of features to select"
+        )
             
-        if data:
-            dataset_discovery = st.session_state.dataset_discovery
+        submit_button = form_jt.form_submit_button(label='Submit data')
+        if submit_button:
             autofeat = HCIAutoFeat(
-                base_table=data.base_table.value,
-                target_variable=data.target_variable.value,
-                non_null_ratio=data.non_null_ratio.value,
-                top_k_features=data.top_k_features.value,
-                top_k_join_trees=data.top_k_join_trees.value,
+                base_table=base_table,
+                target_variable=target_var,
+                non_null_ratio=non_null_ratio,
+                top_k_features=top_k_features,
+                top_k_join_trees=top_k_join_trees,
                 relations=dataset_discovery.relations,
             )
+
             next_button = st.button("Start process", on_click=compute_join_trees, args=[autofeat])
     else:
         placeholder = st.empty()
         join_trees = st.session_state.join_trees
 
-        json_data = st.json(join_trees) 
-
-        # for tr in join_trees.keys():
-        #     st.write(tr)
-        #     tree_node, filename = join_trees[tr]
-        #     print(f"\t\t{tree_node.rank}")
-        #     print(filename)
+        # json_data = st.json(join_trees) 
+        index = 0
+        for tr in join_trees.keys():
+            if index > 5:
+                break
+            index += 1
+            tree_node, filename = join_trees[tr] 
+            container = st.container(key=f"cont_{index}", border=True)
+            a, b, c = container.columns(3)
+            a.write(tree_node.rank)                
+            b.write(filename)
+            clicked = c.button("Click", key=f"btn_{index}", on_click=print_value, args=[index])
+            if clicked:
+                st.write(index)
         # placeholder.write("Here we will have a list")
         click_tree_button = st.button("Click on a join tree", on_click=set_state, args=[4])
 

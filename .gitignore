@@ -13,3 +13,4 @@ AutogluonModels
 venv
 env
 /src/Autofeat.egg-info
+.streamlit
