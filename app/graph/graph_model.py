@@ -1,7 +1,8 @@
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 import uuid
 from st_link_analysis import st_link_analysis, NodeStyle, EdgeStyle
 
+from autotda.functions.tree_functions import JoinTree
 from src.autotda.functions.relationship_functions import Relation
 
 # Style node & edge groups
@@ -17,11 +18,13 @@ class NodeTable:
     id: str
     name: str
     label: str
+    alias: int
 
-    def __init__(self, table_name: str) -> None:
+    def __init__(self, table_name: str, alias: int = None) -> None:
          self.id = str(uuid.uuid4())
          self.name = table_name
          self.label = "TABLE"
+         self.alias = alias
 
     def to_dict(self): 
          data = {
@@ -71,14 +74,22 @@ def from_relations_to_graph(relations: List[Relation]) -> Tuple[List, List]:
      edges = []
 
      visited = {}
+     alias = {}
+     index = 0 
      for relation in relations:
+        if relation.from_table not in alias:
+            alias[relation.from_table] = index
+            index += 1
+        if relation.to_table not in alias:
+            alias[relation.to_table] = index
+            index += 1
         if not relation.from_table in visited.keys():     
-            node_source = NodeTable(relation.from_table) 
+            node_source = NodeTable(relation.from_table, alias=alias[relation.from_table]) 
             visited[relation.from_table] = node_source
             nodes.append(node_source.to_dict())
 
         if not relation.to_table in visited.keys():     
-            node_target = NodeTable(relation.to_table) 
+            node_target = NodeTable(relation.to_table, alias=alias[relation.to_table]) 
             visited[relation.to_table] = node_target
             nodes.append(node_target.to_dict())
 
@@ -94,4 +105,5 @@ def from_relations_to_graph(relations: List[Relation]) -> Tuple[List, List]:
         edges.append(edge.to_dict())
     
      return nodes, edges
+
 

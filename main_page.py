@@ -8,6 +8,7 @@ from st_link_analysis import st_link_analysis, NodeStyle, EdgeStyle
 
 from app.forms.automatic import FeatureDiscovery
 from app.forms.human_in_the_loop import HILProcess
+from app.forms.join_trees import print_join_trees
 from app.graph.graph_model import edge_styles, from_relations_to_graph, node_styles
 from autotda.data_models.dataset_model import ALL_DATASETS, Dataset
 from autotda.functions.tree_functions import HCIAutoFeat
@@ -32,6 +33,9 @@ if "dataset_discovery" not in st.session_state:
 if "join_trees" not in st.session_state:
     st.session_state.join_trees = None
 
+if "top_k_join_trees" not in st.session_state:
+    st.session_state.top_k_join_trees = None
+
 def set_state(i):
     st.session_state.stage = i
 
@@ -48,6 +52,9 @@ def compute_join_trees(autofeat: HCIAutoFeat):
 
     trees = dict(sorted(autofeat.join_tree_maping.items(), key=lambda item: item[1][0].rank, reverse=True))
 
+    # for k, v in trees.items():
+    #     print(k)
+    #     print(v[0].rank)
     st.session_state.join_trees = trees
     set_tree_state(True)
     
@@ -131,8 +138,9 @@ if st.session_state.stage == 2:
 #     dataset_discovery = st.session_state.dataset_discovery
 #     return [dataset.target_column for dataset in dataset_discovery.data_repository]
 
-def print_value(value):
+def print_value(value, state_num):
     st.write(value)
+    set_state(state_num)
 
 if st.session_state.stage == 3:
     st.header("3. Create join trees")
@@ -165,6 +173,8 @@ if st.session_state.stage == 3:
             step=1,
             help="Maximum number of features to select"
         )
+        
+        st.session_state.top_k_join_trees = top_k_join_trees
             
         submit_button = form_jt.form_submit_button(label='Submit data')
         if submit_button:
@@ -182,23 +192,25 @@ if st.session_state.stage == 3:
         placeholder = st.empty()
         join_trees = st.session_state.join_trees
 
-        # json_data = st.json(join_trees) 
-        index = 0
-        for tr in join_trees.keys():
-            if index > 5:
-                break
-            index += 1
-            tree_node, filename = join_trees[tr] 
-            container = st.container(key=f"cont_{index}", border=True)
-            a, b, c = container.columns(3)
-            a.write(tree_node.rank)                
-            b.write(filename)
-            clicked = c.button("Click", key=f"btn_{index}", on_click=print_value, args=[index])
-            if clicked:
-                st.write(index)
-        # placeholder.write("Here we will have a list")
-        click_tree_button = st.button("Click on a join tree", on_click=set_state, args=[4])
+        top_k_join_trees = st.session_state.top_k_join_trees
+        display_trees = print_join_trees(join_trees=join_trees, top_k_trees=top_k_join_trees)
 
+        node_styles_list = [
+            NodeStyle("TABLE", "#FF7F3E", "alias"),
+        ]
+
+        for i, tr in enumerate(display_trees):
+            container = st.container(key=f"cont_{i}", border=True)
+            rank_col, graph_col, btn_col = container.columns([.4, 2, .3], vertical_alignment="center")
+
+            rank_col.write("Score:")
+            rank_col.write("{:.3f}".format(tr.rank)) 
+            with graph_col:
+                st_link_analysis(tr.elements, "breadthfirst", node_styles_list, edge_styles, height=150) 
+
+            # table_col.dataframe(tr.table_data, width=250, height=150)
+
+            clicked = btn_col.button(" ", key=f"btn_{i}", icon=":material/arrow_forward_ios:", on_click=print_value, args=[i, 4])
 
 if st.session_state.stage == 4:
-    st.header("4. Update and Evaluate")
+    st.header("4. View and Evaluate")

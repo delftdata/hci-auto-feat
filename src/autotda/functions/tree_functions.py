@@ -151,7 +151,7 @@ class HCIAutoFeat:
                     # key_path = TEMP_ROOT_PATH / previous_table_join
                     # previous_join = pd.read_parquet(key_path)
 
-                    # prop: Relation
+                    prop: Relation
                     for prop in join_keys:
                         join_list = f"{previous_table_join}--{prop.to_table}-{prop.to_col}"
 
@@ -193,7 +193,9 @@ class HCIAutoFeat:
 
                             relations = join_tree_node.relations.copy()
                             relations.append(prop)
-                            tree_node = JoinTree(rank=score, features=all_features, join_keys=keys, relations=relations)
+                            final_keys = join_tree_node.join_keys.copy()
+                            final_keys.extend(keys)
+                            tree_node = JoinTree(rank=score, features=all_features, join_keys=final_keys, relations=relations)
                             self.join_tree_maping[join_list] = (tree_node, join_filename)
                             # autofeat.partial_join_selected_features[str(join_list)] = all_features
 
