@@ -21,6 +21,10 @@ hil_process = "Human-in-the-loop"
 auto_process = "Automatic"
 process_types = [hil_process, auto_process]
 
+node_styles_list = [
+    NodeStyle("TABLE", "#FF7F3E", "alias"),
+]
+
 if 'stage' not in st.session_state:
     st.session_state.stage = 0
 
@@ -35,6 +39,9 @@ if "join_trees" not in st.session_state:
 
 if "top_k_join_trees" not in st.session_state:
     st.session_state.top_k_join_trees = None
+
+if "selected_tree" not in st.session_state:
+    st.session_state.selected_tree = None
 
 def set_state(i):
     st.session_state.stage = i
@@ -60,7 +67,7 @@ def compute_join_trees(autofeat: HCIAutoFeat):
     
     
 if st.session_state.stage == 0:
-    st.header("Saved Process")
+    st.title("Saved Process")
 
     st.write("Welcome to your saved feature discovery process")
     st.write("Empty process collections")
@@ -68,7 +75,7 @@ if st.session_state.stage == 0:
     btn_start = st.button("Start process", on_click=set_state, args=[1])
 
 if st.session_state.stage == 1:
-    st.header("1. Input Data")
+    st.title("1. Input Data")
     # Radio boxes with options for choosing the process: default = HIL 
     process_type = st.radio("Type of process", process_types, index=0)
     
@@ -101,7 +108,7 @@ if st.session_state.stage == 1:
 
 
 if st.session_state.stage == 2:
-    st.header("2. Find relations")
+    st.title("2. Find relations")
     
     form = st.form(key='similarity_th_form')
     similarity_score = form.number_input(
@@ -138,12 +145,12 @@ if st.session_state.stage == 2:
 #     dataset_discovery = st.session_state.dataset_discovery
 #     return [dataset.target_column for dataset in dataset_discovery.data_repository]
 
-def print_value(value, state_num):
-    st.write(value)
+def prepare_next_state(display_trees, value, state_num):
+    st.session_state.selected_tree = display_trees[value]
     set_state(state_num)
 
 if st.session_state.stage == 3:
-    st.header("3. Create join trees")
+    st.title("3. Create join trees")
 
     if st.session_state.tree == False:
         dataset_discovery = st.session_state.dataset_discovery
@@ -195,10 +202,6 @@ if st.session_state.stage == 3:
         top_k_join_trees = st.session_state.top_k_join_trees
         display_trees = print_join_trees(join_trees=join_trees, top_k_trees=top_k_join_trees)
 
-        node_styles_list = [
-            NodeStyle("TABLE", "#FF7F3E", "alias"),
-        ]
-
         for i, tr in enumerate(display_trees):
             container = st.container(key=f"cont_{i}", border=True)
             rank_col, graph_col, btn_col = container.columns([.4, 2, .3], vertical_alignment="center")
@@ -210,7 +213,30 @@ if st.session_state.stage == 3:
 
             # table_col.dataframe(tr.table_data, width=250, height=150)
 
-            clicked = btn_col.button(" ", key=f"btn_{i}", icon=":material/arrow_forward_ios:", on_click=print_value, args=[i, 4])
+            clicked = btn_col.button(" ", key=f"btn_{i}", icon=":material/arrow_forward_ios:", on_click=prepare_next_state, args=[display_trees, i, 4])
 
 if st.session_state.stage == 4:
-    st.header("4. View and Evaluate")
+    st.title("4. View and Evaluate")
+
+    display_tree = st.session_state.selected_tree
+
+    container = st.container(key=f"cont_selected_tree", border=True)
+    rank_col, graph_col = container.columns([.4, 2], vertical_alignment="center")
+
+    rank_col.write("Score:")
+    rank_col.write("{:.3f}".format(display_tree.rank)) 
+    with graph_col:
+        st_link_analysis(display_tree.elements, "breadthfirst", node_styles_list, edge_styles, height=150) 
+
+    bottom_cont = container.container(key="cont_bottom")
+
+    tab1, tab2, tab3, tab4 = bottom_cont.tabs(["Selected Features", "Discarded Features", "Augmented Table", "Evaluation"])
+
+    with tab1:
+        st.header("Selected Features")
+    with tab2:
+        st.header("Discarded Features")
+    with tab3:
+        st.header("Augmented Table")
+    with tab4:
+        st.header("Evaluation")
