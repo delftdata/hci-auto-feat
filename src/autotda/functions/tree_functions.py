@@ -31,13 +31,18 @@ class JoinTree():
     relations: List[Relation]
     features: List[str]
     join_keys: List[str] 
+    discarded_features: pd.DataFrame
+    selected_features: pd.DataFrame
 
     def __init__(self, features: List[str], join_keys: List[str]=None, 
-                 rank: float=None, relations: List[Relation]=None) -> None:
+                 rank: float=None, relations: List[Relation]=None,
+                 selected_features: pd.DataFrame = None, discarded_features: pd.DataFrame = None) -> None:
         self.features = features
         self.join_keys = join_keys if join_keys else []
         self.rank = rank if rank else 0.0 
         self.relations = relations if relations else []
+        self.selected_features = selected_features 
+        self.discarded_features = discarded_features 
 
     def __str__(self) -> str:
         print(str(vars(self)))
@@ -171,6 +176,7 @@ class HCIAutoFeat:
                             current_queue.add(previous_table_join)
                             continue
                         
+                        join_tree_node: JoinTree
                         join_tree_node, _ = self.join_tree_maping[previous_table_join]
                         result = self.streaming_relevance_redundancy(
                             dataframe=joined_df.clone(),
@@ -180,14 +186,26 @@ class HCIAutoFeat:
                         
                         if result is not None:
                             score, rel_score, red_score, final_features, rel_discarded, red_discarded = result
-                            # remaining_rel_score = [i for i in rel_score if i[0] in final_features]
-                            # remaining_red_score = [i for i in red_score if i[0] in final_features]
-                            # red_discarded = red_discarded + [i for i in red_score if i[0] not in final_features]
-                            # rel_discarded = rel_discarded + [i for i in rel_score if i[0] not in final_features]
-                            # join = Join(prop.from_table, prop.to_table, 
-                            #             prop.from_col, prop.to_col, non_null_ratio, {"rel": remaining_rel_score, 
-                            #                                                     "red": remaining_red_score}, 
-                            #             {"rel": rel_discarded, "red": red_discarded})
+                            remaining_rel_score = [i for i in rel_score if i[0] in final_features]
+                            remaining_red_score = [i for i in red_score if i[0] in final_features]
+                            red_discarded = red_discarded + [i for i in red_score if i[0] not in final_features]
+                            rel_discarded = rel_discarded + [i for i in rel_score if i[0] not in final_features]
+
+                            df_rel_red = pl.from_records(remaining_rel_score, schema={'column_name': pl.String, 'relevance_score': pl.Float64}, orient="row").join(
+                                pl.from_records(remaining_red_score, schema={'column_name': pl.String, 'redundancy_score': pl.Float64}, orient="row"),
+                                on='column_name'
+                            )
+                            df_discarded_rel_red = pl.from_records(rel_discarded, schema={'column_name': pl.String, 'relevance_score': pl.Float64}, orient="row").join(
+                                pl.from_records(red_discarded, schema={'column_name': pl.String, 'redundancy_score': pl.Float64}, orient="row"),
+                                on='column_name'
+                            )
+
+                            if not join_tree_node.selected_features is None:
+                                df_rel_red = pl.concat([df_rel_red, join_tree_node.selected_features.clone()])
+
+                            if not join_tree_node.discarded_features is None :
+                                df_discarded_rel_red = pl.concat([df_discarded_rel_red, join_tree_node.discarded_features.clone()])
+
                             all_features = join_tree_node.features.copy()
                             all_features.extend(final_features)
 
@@ -195,30 +213,12 @@ class HCIAutoFeat:
                             relations.append(prop)
                             final_keys = join_tree_node.join_keys.copy()
                             final_keys.extend(keys)
-                            tree_node = JoinTree(rank=score, features=all_features, join_keys=final_keys, relations=relations)
+                            tree_node = JoinTree(rank=score, features=all_features, join_keys=final_keys, relations=relations,
+                                                 selected_features=df_rel_red, discarded_features=df_discarded_rel_red)
                             self.join_tree_maping[join_list] = (tree_node, join_filename)
-                            # autofeat.partial_join_selected_features[str(join_list)] = all_features
-
-                            # tree = deepcopy(autofeat.tree_hash[str(previous_table_join)])
-                            # tree.features = all_features
-
-                            # join_keys = autofeat.join_keys[str(previous_table_join)]
-                            # join_keys.extend([prop.get_from_prefix(), prop.get_to_prefix()])
-                            # autofeat.join_keys[str(join_list)] = join_keys
-                            # tree.join_keys = join_keys
-                            # tree.rank = score
-                            # tree.add_join(join)
-                            # tree.id = len(autofeat.trees)
-                            # autofeat.tree_hash[str(join_list)] = tree
-                            # autofeat.trees.append(deepcopy(tree))
                         else:
                             self.join_tree_maping[join_list] = (join_tree_node, join_filename)
-                            # autofeat.partial_join_selected_features[str(join_list)] = \
-                            #     autofeat.partial_join_selected_features[str(previous_table_join)]
-                            # autofeat.tree_hash[str(join_list)] = autofeat.tree_hash[str(previous_table_join)]
-                            # autofeat.join_keys[str(join_list)] = autofeat.join_keys[str(previous_table_join)]
                         
-                        # autofeat.join_name_mapping[str(join_list)] = filename
                         current_queue.add(join_list)
                 previous_queue.update(current_queue)
                 

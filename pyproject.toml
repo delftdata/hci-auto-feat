@@ -30,7 +30,8 @@ dependencies = [
 "st-link-analysis == 0.3.0",
 "tqdm == 4.64.0",
 "typer == 0.9.0",
-"watchdog==5.0.3"
+"watchdog==5.0.3",
+"uv==0.4.17",
 ]
 
 [project.urls]

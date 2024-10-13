@@ -3,6 +3,7 @@ from typing import Set
 from polars import List
 import streamlit as st
 import streamlit_pydantic as sp
+import polars as pl
 from pydantic import BaseModel, Field
 from st_link_analysis import st_link_analysis, NodeStyle, EdgeStyle
 
@@ -42,6 +43,9 @@ if "top_k_join_trees" not in st.session_state:
 
 if "selected_tree" not in st.session_state:
     st.session_state.selected_tree = None
+
+if "target_variable" not in st.session_state:
+    st.session_state.target_variable = None
 
 def set_state(i):
     st.session_state.stage = i
@@ -137,14 +141,6 @@ if st.session_state.stage == 2:
     create_tree_button = st.button("Create join trees", on_click=set_state, args=[3])
 
 
-# def get_valid_input_base_table() -> tuple[str, ...]:
-#     dataset_discovery = st.session_state.dataset_discovery
-#     return dataset_discovery.table_repository
-
-# def get_valid_input_target_variable() -> tuple[str, ...]:
-#     dataset_discovery = st.session_state.dataset_discovery
-#     return [dataset.target_column for dataset in dataset_discovery.data_repository]
-
 def prepare_next_state(display_trees, value, state_num):
     st.session_state.selected_tree = display_trees[value]
     set_state(state_num)
@@ -158,6 +154,7 @@ if st.session_state.stage == 3:
         form_jt = st.form(key="join_tree_form")
         base_table = form_jt.selectbox(label="Base Table", options=tuple(dataset_discovery.table_repository), index=None)
         target_var = form_jt.selectbox(label="Target Variable", options=tuple(target_variable_choices), index=None)
+        st.session_state.target_variable = target_var
         non_null_ratio = form_jt.number_input(
             value=0.65,
             label='Non-Null Ratio',
@@ -233,10 +230,39 @@ if st.session_state.stage == 4:
     tab1, tab2, tab3, tab4 = bottom_cont.tabs(["Selected Features", "Discarded Features", "Augmented Table", "Evaluation"])
 
     with tab1:
-        st.header("Selected Features")
+        st.subheader("Selected Features")
+        event = st.dataframe(
+            display_tree.selected_features,
+            key="selected_features",
+            on_select="rerun",
+            column_config={
+                "column_name": "Feature Name",
+                "redundancy_score": "Redundancy Score",
+                "relevance_score": "Relevance Score"
+            }
+        )
+
     with tab2:
-        st.header("Discarded Features")
+        st.subheader("Discarded Features")
+        event = st.dataframe(
+            display_tree.discarded_features,
+            key="discarded_features",
+            on_select="rerun",
+            column_config={
+                "column_name": "Feature Name",
+                "redundancy_score": "Redundancy Score",
+                "relevance_score": "Relevance Score"
+            }
+        )
     with tab3:
-        st.header("Augmented Table")
+        st.subheader("Augmented Table")
+
+        columns = list(display_tree.selected_features.get_column("column_name"))
+        columns.append(st.session_state.target_variable)
+
+        materialised_join = pl.read_parquet(display_tree.join_tree_filename).select(columns)
+        
+        st.dataframe(materialised_join)
+
     with tab4:
-        st.header("Evaluation")
+        st.subheader("Evaluation")

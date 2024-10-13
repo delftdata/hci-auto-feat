@@ -9,14 +9,22 @@ class DisplayJoinTree:
     rank: float 
     elements: Tuple[List, List]
     table_data: DataFrame
+    selected_features: DataFrame
+    discarded_features: DataFrame
+    join_tree_filename: str
 
-    def __init__(self, nodes: List[dict], edges: List[dict], rank: int, dataframe: DataFrame) -> None:
+    def __init__(self, nodes: List[dict], edges: List[dict], rank: int, dataframe: DataFrame,
+                 selected_features: DataFrame, discarded_features: DataFrame, 
+                 join_tree_filename: str) -> None:
         self.elements = {
             "nodes": nodes,
             "edges": edges
         }
         self.rank = rank
         self.table_data = dataframe
+        self.selected_features = selected_features
+        self.discarded_features = discarded_features
+        self.join_tree_filename = join_tree_filename
 
 
 def from_join_keys_to_dataframe(join_keys: List[str]) -> DataFrame:
@@ -42,10 +50,14 @@ def print_join_trees(join_trees: Dict[str, Tuple[JoinTree, str]], top_k_trees: i
         print(tree_node.rank)
         nodes, edges = from_relations_to_graph(tree_node.relations)
         dataframe = from_join_keys_to_dataframe(tree_node.join_keys)
-        display_tree = DisplayJoinTree(nodes=nodes, edges=edges, rank=tree_node.rank, dataframe=dataframe)
+        display_tree = DisplayJoinTree(nodes=nodes, edges=edges, rank=tree_node.rank, dataframe=dataframe,
+                                       selected_features=tree_node.selected_features,
+                                       discarded_features=tree_node.discarded_features, 
+                                       join_tree_filename=v[1])
         trees.append(display_tree)
 
     return trees
+
 
 
 
