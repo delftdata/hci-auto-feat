@@ -9,9 +9,10 @@ from st_link_analysis import st_link_analysis, NodeStyle, EdgeStyle
 
 from app.forms.automatic import FeatureDiscovery
 from app.forms.human_in_the_loop import HILProcess
-from app.forms.join_trees import print_join_trees
+from app.forms.join_trees import DisplayJoinTree, print_join_trees
 from app.graph.graph_model import edge_styles, from_relations_to_graph, node_styles
 from autotda.data_models.dataset_model import ALL_DATASETS, Dataset
+from autotda.functions.evaluation_functions import evaluate_join_tree
 from autotda.functions.tree_functions import HCIAutoFeat
 from src.autotda.functions.relationship_functions import DatasetDiscovery, Relation
 
@@ -212,10 +213,20 @@ if st.session_state.stage == 3:
 
             clicked = btn_col.button(" ", key=f"btn_{i}", icon=":material/arrow_forward_ios:", on_click=prepare_next_state, args=[display_trees, i, 4])
 
+
+class MLModels(Enum):
+    GBM = "LightGBM" 
+    XGB = "XGBoost"
+    RF = "Random Forest" 
+    XT = "Extremely Randomized Trees"
+    KNN = "k-Nearest Neighbors"
+    LR = "Linear Regression"
+
+    
 if st.session_state.stage == 4:
     st.title("4. View and Evaluate")
 
-    display_tree = st.session_state.selected_tree
+    display_tree: DisplayJoinTree = st.session_state.selected_tree
 
     container = st.container(key=f"cont_selected_tree", border=True)
     rank_col, graph_col = container.columns([.4, 2], vertical_alignment="center")
@@ -257,12 +268,21 @@ if st.session_state.stage == 4:
     with tab3:
         st.subheader("Augmented Table")
 
-        columns = list(display_tree.selected_features.get_column("column_name"))
-        columns.append(st.session_state.target_variable)
+        join_trees = st.session_state.join_trees
+        selected_tree, _ = join_trees[display_tree.join_tree_id]
 
-        materialised_join = pl.read_parquet(display_tree.join_tree_filename).select(columns)
+        columns_to_drop = set(selected_tree.features).intersection(set(selected_tree.join_keys))
+        materialised_join = pl.read_parquet(display_tree.join_tree_filename).select(selected_tree.features).drop(columns_to_drop)
         
         st.dataframe(materialised_join)
 
     with tab4:
         st.subheader("Evaluation")
+
+        target_variable = st.session_state.target_variable
+
+        model = st.selectbox("Select ML Model:", options=[model.value for model in MLModels])
+
+        result = evaluate_join_tree(join_trees=join_trees, join_tree_id=display_tree.join_tree_id, target_variable=target_variable, ml_model=MLModels(model).name)
+        st.write(result)
+

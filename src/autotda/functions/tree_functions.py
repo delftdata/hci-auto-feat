@@ -31,12 +31,12 @@ class JoinTree():
     relations: List[Relation]
     features: List[str]
     join_keys: List[str] 
-    discarded_features: pd.DataFrame
-    selected_features: pd.DataFrame
+    discarded_features: pl.DataFrame
+    selected_features: pl.DataFrame
 
     def __init__(self, features: List[str], join_keys: List[str]=None, 
                  rank: float=None, relations: List[Relation]=None,
-                 selected_features: pd.DataFrame = None, discarded_features: pd.DataFrame = None) -> None:
+                 selected_features: pl.DataFrame = None, discarded_features: pl.DataFrame = None) -> None:
         self.features = features
         self.join_keys = join_keys if join_keys else []
         self.rank = rank if rank else 0.0 
@@ -106,6 +106,8 @@ class HCIAutoFeat:
         if self.target_variable in features:
             features.remove(self.target_variable)
 
+        selected_features = list(base_table_df.columns)
+        selected_features.remove(self.target_variable)
         root_node = JoinTree(features=features)
 
         self.join_tree_maping[self.base_table] = (root_node, partial_join_filename) 
@@ -291,7 +293,7 @@ class HCIAutoFeat:
             dataframe=X, new_features=features, target_column=y
         )
         feature_score_relevance = feature_score_relevance[:top_feat]
-        rel_discarded_features += feature_score_relevance[top_feat:]
+        rel_discarded_features.extend(feature_score_relevance[top_feat:])
 
         if len(feature_score_relevance) == 0:
             return None
