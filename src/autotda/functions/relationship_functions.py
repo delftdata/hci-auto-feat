@@ -48,14 +48,16 @@ class Relation:
 
 
 class DatasetDiscovery:
+    matcher: str
     relations_filename: str = None
     similarity_threshold: float = 0.65
     relations: List[Relation] = None
     table_repository: List[str]
+    data_repository: List[Dataset]
 
     def __init__(self, matcher: str, data_repositories: List[str]=None):
-        self.matcher: str = matcher
-        self.data_repository: List[Dataset] = ALL_DATASETS
+        self.matcher = matcher
+        self.data_repository = ALL_DATASETS
         if data_repositories:
             self.set_dataset_repository(dataset_repository=data_repositories)
         self.set_table_repository()

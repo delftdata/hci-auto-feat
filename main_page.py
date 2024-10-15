@@ -60,7 +60,7 @@ def find_relations(state: int, dataset_discovery: DatasetDiscovery):
     st.session_state.dataset_discovery = dataset_discovery
 
 def compute_join_trees(autofeat: HCIAutoFeat):
-    autofeat.streaming_feature_selection(queue={autofeat.base_table})
+    autofeat.compute_join_trees(queue={autofeat.base_table})
 
     trees = dict(sorted(autofeat.join_tree_maping.items(), key=lambda item: item[1][0].rank, reverse=True))
 
@@ -91,13 +91,13 @@ if st.session_state.stage == 1:
             submit_label="Submit data",
             # clear_on_submit=True,
             )
-        
+        _, col2 = st.columns([3, 1], gap="large")
         if data:
             selected_repos = [repo.value for repo in list(data.repositories)]
             selected_matcher = data.matcher.value
             dataset_discovery = DatasetDiscovery(matcher=selected_matcher, data_repositories=selected_repos)
            
-            next_button = st.button("Find relations", on_click=find_relations, args=[2, dataset_discovery])
+            next_button = col2.button("Find relations", on_click=find_relations, args=[2, dataset_discovery])
 
     else:
         data = sp.pydantic_form(
@@ -114,8 +114,10 @@ if st.session_state.stage == 1:
 
 if st.session_state.stage == 2:
     st.title("2. Find relations")
+
+    sim_col, buffer, create_col = st.columns([.6, .5, .4], vertical_alignment="bottom", gap="large")
     
-    form = st.form(key='similarity_th_form')
+    form = sim_col.form(key='similarity_th_form', border=False)
     similarity_score = form.number_input(
         value=0.65,
         label='Similarity threshold',
@@ -139,7 +141,7 @@ if st.session_state.stage == 2:
         
     st_link_analysis(elements, "cose", node_styles, edge_styles)    
 
-    create_tree_button = st.button("Create join trees", on_click=set_state, args=[3])
+    create_tree_button = create_col.button("Create join trees", on_click=set_state, args=[3])
 
 
 def prepare_next_state(display_trees, value, state_num):
@@ -152,9 +154,12 @@ if st.session_state.stage == 3:
     if st.session_state.tree == False:
         dataset_discovery = st.session_state.dataset_discovery
         target_variable_choices = [dataset.target_column for dataset in dataset_discovery.data_repository]
+        base_table_options = [dataset.base_table_id for dataset in dataset_discovery.data_repository]
+
         form_jt = st.form(key="join_tree_form")
-        base_table = form_jt.selectbox(label="Base Table", options=tuple(dataset_discovery.table_repository), index=None)
-        target_var = form_jt.selectbox(label="Target Variable", options=tuple(target_variable_choices), index=None)
+
+        base_table = form_jt.selectbox(label="Base Table", options=tuple(base_table_options), index=None, help="The Base Table is the table to be augmented.")
+        target_var = form_jt.selectbox(label="Target Variable", options=tuple(target_variable_choices), index=None, help="The Target Variable is the column containing the class labels for ML modelling.")
         st.session_state.target_variable = target_var
         non_null_ratio = form_jt.number_input(
             value=0.65,
@@ -182,9 +187,10 @@ if st.session_state.stage == 3:
         st.session_state.top_k_join_trees = top_k_join_trees
             
         submit_button = form_jt.form_submit_button(label='Submit data')
+        _, col2 = st.columns([3, 1], gap="large")
         if submit_button:
             autofeat = HCIAutoFeat(
-                base_table=base_table,
+                base_table=str(base_table),
                 target_variable=target_var,
                 non_null_ratio=non_null_ratio,
                 top_k_features=top_k_features,
@@ -192,7 +198,7 @@ if st.session_state.stage == 3:
                 relations=dataset_discovery.relations,
             )
 
-            next_button = st.button("Start process", on_click=compute_join_trees, args=[autofeat])
+            next_button = col2.button("Start process", on_click=compute_join_trees, args=[autofeat])
     else:
         placeholder = st.empty()
         join_trees = st.session_state.join_trees

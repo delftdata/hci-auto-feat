@@ -62,6 +62,16 @@ class EdgeRelation:
          self.weight = weight
          self.label = "RELATED"
 
+    def __eq__(self, value: object) -> bool:
+        if self.source_name == value.source_name and self.source_column == value.source_column and self.weight == value.weight and self.target_name == value.target_name and self.target_column == value.target_column:
+            return True
+        
+        if self.source_name == value.target_name and self.source_column == value.target_column and self.weight == value.weight and self.target_name == value.source_name and self.target_column == value.source_column:
+            return True 
+        
+        return False 
+            
+        
     def to_dict(self):
          data = {
               "data": vars(self)
@@ -72,6 +82,8 @@ class EdgeRelation:
 def from_relations_to_graph(relations: List[Relation]) -> Tuple[List, List]:
      nodes = []
      edges = []
+
+     visited_edges = []
 
      visited = {}
      alias = {}
@@ -102,7 +114,10 @@ def from_relations_to_graph(relations: List[Relation]) -> Tuple[List, List]:
             target_column=relation.to_col,
             weight=relation.similarity
         )
-        edges.append(edge.to_dict())
+
+        if not edge in visited_edges:
+            visited_edges.append(edge)
+            edges.append(edge.to_dict())
     
      return nodes, edges
 

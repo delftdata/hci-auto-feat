@@ -1,3 +1,5 @@
+import os
+import pickle
 import tempfile
 from pydantic import BaseModel
 from autotda.data_models.dataset_model import Dataset
@@ -20,7 +22,7 @@ from autogluon.features.generators import AutoMLPipelineFeatureGenerator
 
 from autotda.functions.relationship_functions import Relation, get_adjacent_nodes
 from autotda.functions.relevance_redundancy import RelevanceRedundancy
-from autotda.config import DATA_FOLDER
+from autotda.config import DATA_FOLDER, RELATIONS_FOLDER
 
 
 TEMP_DIR = tempfile.TemporaryDirectory()
@@ -57,6 +59,7 @@ class HCIAutoFeat:
     join_tree_maping: Dict[str, Tuple[str, JoinTree]]
     discovered: Set[str]
     sample_size: int = 3000
+    join_tree_cache_filename: str
 
     def __init__(self,
                 base_table: str,
@@ -112,16 +115,20 @@ class HCIAutoFeat:
 
         self.join_tree_maping[self.base_table] = (root_node, partial_join_filename) 
 
-    # def compute_join_trees(self, autofeat, top_k_features, non_null_ratio_threshold: float = 0.5, explain=False, verbose=True):
-    #     autofeat.trees = []
-    #     autofeat.set_base_table(autofeat.base_table, autofeat.targetColumn)
-    #     emptyTree = Tree(begin=autofeat.base_table, joins=[], rank=0)
-    #     emptyTree.features = autofeat.partial_join_selected_features[str(autofeat.base_table)]
-    #     emptyTree.id = 0
-    #     autofeat.trees.append(emptyTree)
-    #     if verbose:
-    #         print("Calculating join trees...")
-    #     self.stream_feature_selection(autofeat=autofeat, queue={str(self.base_table)})
+
+    def compute_join_trees(self, queue: set, previous_queue: set = None, use_cache: bool = True):
+        self.join_tree_cache_filename = f"{self.base_table}_{self.target_variable}_{self.non_null_ratio}_{self.top_k_join_trees}_{self.top_k_features}_cache.pickle"
+
+        if os.path.isfile(RELATIONS_FOLDER / self.join_tree_cache_filename):
+            with open(RELATIONS_FOLDER / self.join_tree_cache_filename, 'rb') as f: 
+                self.join_tree_maping = pickle.load(f)
+            return 
+        
+        self.streaming_feature_selection(queue=queue, previous_queue=previous_queue)
+
+        if use_cache:
+            with open(RELATIONS_FOLDER / self.join_tree_cache_filename, 'wb') as f:
+                pickle.dump(self.join_tree_maping, f)            
 
 
     def streaming_feature_selection(self, queue: set, previous_queue: set = None):

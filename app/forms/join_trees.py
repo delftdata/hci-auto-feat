@@ -50,7 +50,6 @@ def print_join_trees(join_trees: Dict[str, Tuple[JoinTree, str]], top_k_trees: i
 
         tree_node: JoinTree = v[0]
 
-        print(tree_node.rank)
         nodes, edges = from_relations_to_graph(tree_node.relations)
         dataframe = from_join_keys_to_dataframe(tree_node.join_keys)
         display_tree = DisplayJoinTree(nodes=nodes, edges=edges, rank=tree_node.rank, dataframe=dataframe,
