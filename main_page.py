@@ -13,7 +13,7 @@ from app.forms.join_trees import DisplayJoinTree, print_join_trees
 from app.graph.graph_model import edge_styles, from_relations_to_graph, node_styles
 from autotda.data_models.dataset_model import ALL_DATASETS, Dataset
 from autotda.functions.evaluation_functions import evaluate_join_tree
-from autotda.functions.tree_functions import HCIAutoFeat
+from autotda.functions.tree_functions import HCIAutoFeat, JoinTree
 from src.autotda.functions.relationship_functions import DatasetDiscovery, Relation
 
 
@@ -228,11 +228,22 @@ class MLModels(Enum):
     KNN = "k-Nearest Neighbors"
     LR = "Linear Regression"
 
+def move_to_discarded(rows_to_discard: List[int], display_tree: DisplayJoinTree):
+    join_trees = st.session_state.join_trees
+
+    features_to_discard = list(display_tree.selected_features[rows_to_discard]['column_name'])
+    join_tree_features = join_trees[display_tree.join_tree_id][0].features
+
+    for el in features_to_discard:
+        if el in join_tree_features:
+            join_tree_features.remove(el)
+
     
 if st.session_state.stage == 4:
     st.title("4. View and Evaluate")
 
     display_tree: DisplayJoinTree = st.session_state.selected_tree
+    join_trees = st.session_state.join_trees
 
     container = st.container(key=f"cont_selected_tree", border=True)
     rank_col, graph_col = container.columns([.4, 2], vertical_alignment="center")
@@ -258,6 +269,12 @@ if st.session_state.stage == 4:
                 "relevance_score": "Relevance Score"
             }
         )
+        if "selection" in event and 'rows' in event['selection']:
+            rows_to_discard = event['selection']['rows']
+            
+        _, col2 = st.columns([2.5, 1], gap="large")
+        col2.button("Move to discarded", key='discarded-button')
+        
 
     with tab2:
         st.subheader("Discarded Features")

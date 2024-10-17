@@ -122,13 +122,12 @@ class HCIAutoFeat:
         if os.path.isfile(RELATIONS_FOLDER / self.join_tree_cache_filename):
             with open(RELATIONS_FOLDER / self.join_tree_cache_filename, 'rb') as f: 
                 self.join_tree_maping = pickle.load(f)
-            return 
-        
-        self.streaming_feature_selection(queue=queue, previous_queue=previous_queue)
+        else: 
+            self.streaming_feature_selection(queue=queue, previous_queue=previous_queue)
 
-        if use_cache:
-            with open(RELATIONS_FOLDER / self.join_tree_cache_filename, 'wb') as f:
-                pickle.dump(self.join_tree_maping, f)            
+            if use_cache:
+                with open(RELATIONS_FOLDER / self.join_tree_cache_filename, 'wb') as f:
+                    pickle.dump(self.join_tree_maping, f)            
 
 
     def streaming_feature_selection(self, queue: set, previous_queue: set = None):
