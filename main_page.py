@@ -1,6 +1,5 @@
 from enum import Enum
-from typing import Set
-from polars import List
+from typing import List, Set
 import streamlit as st
 import streamlit_pydantic as sp
 import polars as pl
@@ -232,18 +231,43 @@ def move_to_discarded(rows_to_discard: List[int], display_tree: DisplayJoinTree)
     join_trees = st.session_state.join_trees
 
     features_to_discard = list(display_tree.selected_features[rows_to_discard]['column_name'])
-    join_tree_features = join_trees[display_tree.join_tree_id][0].features
+    jt, fn = join_trees[display_tree.join_tree_id]
+    join_tree_features = jt.features
 
     for el in features_to_discard:
         if el in join_tree_features:
             join_tree_features.remove(el)
 
+    jt.features = join_tree_features
+    
+    join_trees[display_tree.join_tree_id] = (jt, fn) 
+
+    display_tree.discarded_features.extend(display_tree.selected_features[rows_to_discard])
+    display_tree.selected_features = display_tree.selected_features.with_row_index().filter(~pl.col("index").is_in(rows_to_discard)).drop(['index'])
+    
+    st.session_state.join_trees = join_trees
+    st.session_state.selected_tree = display_tree
+
+
+def move_to_selected(rows_to_select: List[int], display_tree: DisplayJoinTree):
+    join_trees = st.session_state.join_trees
+
+    features_to_add = list(display_tree.discarded_features[rows_to_select]['column_name'])
+
+    jt, fn = join_trees[display_tree.join_tree_id]
+    jt.features.extend(features_to_add)
+    join_trees[display_tree.join_tree_id] = (jt, fn) 
+
+    display_tree.selected_features.extend(display_tree.discarded_features[rows_to_select])
+    display_tree.discarded_features = display_tree.discarded_features.with_row_index().filter(~pl.col("index").is_in(rows_to_select)).drop(['index'])
+    
+    st.session_state.join_trees = join_trees
+    st.session_state.selected_tree = display_tree
     
 if st.session_state.stage == 4:
     st.title("4. View and Evaluate")
 
     display_tree: DisplayJoinTree = st.session_state.selected_tree
-    join_trees = st.session_state.join_trees
 
     container = st.container(key=f"cont_selected_tree", border=True)
     rank_col, graph_col = container.columns([.4, 2], vertical_alignment="center")
@@ -258,6 +282,7 @@ if st.session_state.stage == 4:
     tab1, tab2, tab3, tab4 = bottom_cont.tabs(["Selected Features", "Discarded Features", "Augmented Table", "Evaluation"])
 
     with tab1:
+        display_tree: DisplayJoinTree = st.session_state.selected_tree
         st.subheader("Selected Features")
         event = st.dataframe(
             display_tree.selected_features,
@@ -273,10 +298,11 @@ if st.session_state.stage == 4:
             rows_to_discard = event['selection']['rows']
             
         _, col2 = st.columns([2.5, 1], gap="large")
-        col2.button("Move to discarded", key='discarded-button')
+        col2.button("Move to discarded", key='discarded-button', on_click=move_to_discarded, args=[rows_to_discard, display_tree])
         
 
     with tab2:
+        display_tree: DisplayJoinTree = st.session_state.selected_tree
         st.subheader("Discarded Features")
         event = st.dataframe(
             display_tree.discarded_features,
@@ -288,10 +314,18 @@ if st.session_state.stage == 4:
                 "relevance_score": "Relevance Score"
             }
         )
+
+        if "selection" in event and 'rows' in event['selection']:
+            rows_to_select = event['selection']['rows']
+            
+        _, col2 = st.columns([2.5, 1], gap="large")
+        col2.button("Move to selected", key='selected-button', on_click=move_to_selected, args=[rows_to_select, display_tree])
+
     with tab3:
         st.subheader("Augmented Table")
 
         join_trees = st.session_state.join_trees
+        display_tree: DisplayJoinTree = st.session_state.selected_tree
         selected_tree, _ = join_trees[display_tree.join_tree_id]
 
         columns_to_drop = set(selected_tree.features).intersection(set(selected_tree.join_keys))
@@ -302,7 +336,9 @@ if st.session_state.stage == 4:
     with tab4:
         st.subheader("Evaluation")
 
+        join_trees = st.session_state.join_trees
         target_variable = st.session_state.target_variable
+        display_tree: DisplayJoinTree = st.session_state.selected_tree
 
         model = st.selectbox("Select ML Model:", options=[model.value for model in MLModels])
 

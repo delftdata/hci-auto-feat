@@ -24,9 +24,7 @@ from autotda.functions.relationship_functions import Relation, get_adjacent_node
 from autotda.functions.relevance_redundancy import RelevanceRedundancy
 from autotda.config import DATA_FOLDER, RELATIONS_FOLDER
 
-
-TEMP_DIR = tempfile.TemporaryDirectory()
-TEMP_ROOT_PATH = pt(TEMP_DIR.name)
+# TEMP_ROOT_PATH = pt(TEMP_DIR.name)
 
 class JoinTree():
     rank: float
@@ -79,6 +77,8 @@ class HCIAutoFeat:
 
         self.relations = relations
         self.rel_red = RelevanceRedundancy(self.target_variable)
+        
+        self.TEMP_ROOT_PATH = pt(tempfile.mkdtemp())
 
         self.init_tree_root()
 
@@ -89,7 +89,7 @@ class HCIAutoFeat:
         base_table_df = get_df_with_prefix(
             self.base_table, self.target_variable
         )
-        partial_join_filename = TEMP_ROOT_PATH / f"{self.base_table.replace('/', '_')}.parquet"
+        partial_join_filename = self.TEMP_ROOT_PATH / pt(f"{self.base_table.replace('/', '_')}.parquet")
 
         # Stratified sampling
         if self.sample_size < base_table_df.shape[0]:
@@ -161,7 +161,7 @@ class HCIAutoFeat:
                 while len(previous_queue) > 0:
                     previous_table_join = previous_queue.pop()
                   
-                    # key_path = TEMP_ROOT_PATH / previous_table_join
+                    # key_path = self.TEMP_ROOT_PATH / previous_table_join
                     # previous_join = pd.read_parquet(key_path)
 
                     prop: Relation
@@ -240,7 +240,7 @@ class HCIAutoFeat:
         right_df: pl.DataFrame,
     ) -> Tuple[pl.DataFrame, str, list]:
         
-        # key_path = TEMP_ROOT_PATH / left_filename
+        # key_path = self.TEMP_ROOT_PATH / left_filename
         left_df = pl.read_parquet(self.join_tree_maping[left_filename][1])
 
         # Step - Sample neighbour data - Transform to 1:1 or M:1
@@ -249,7 +249,7 @@ class HCIAutoFeat:
         )
 
         # File naming convention as the filename can be gigantic
-        join_filename = TEMP_ROOT_PATH / f"{str(uuid.uuid4())}.parquet"
+        join_filename = self.TEMP_ROOT_PATH / f"{str(uuid.uuid4())}.parquet"
 
         # Join
         left_on = f"{relation.from_table}.{relation.from_col}"
