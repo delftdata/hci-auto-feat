@@ -10,6 +10,7 @@ from app.forms.automatic import FeatureDiscovery
 from app.forms.human_in_the_loop import HILProcess
 from app.forms.join_trees import DisplayJoinTree, print_join_trees
 from app.graph.graph_model import edge_styles, from_relations_to_graph, node_styles
+from autotda.config import DATA_FOLDER
 from autotda.data_models.dataset_model import ALL_DATASETS, Dataset
 from autotda.functions.evaluation_functions import evaluate_join_tree
 from autotda.functions.tree_functions import HCIAutoFeat, JoinTree
@@ -55,6 +56,9 @@ if "relations_updated" not in st.session_state:
 
 if "selected_edge" not in st.session_state:
     st.session_state.selected_edge = None
+
+if "selected_node" not in st.session_state:
+    st.session_state.selected_node = None
 
 def set_state(i):
     st.session_state.stage = i
@@ -225,13 +229,25 @@ def graph_actions() -> None:
         selected_edge = [edge for edge in edges if edge['data']['id'] == edge_id]
         st.session_state.selected_edge = selected_edge
 
+    elif payload['action'] == 'clicked_node':
+        elements = st.session_state.elements
+        nodes: List = elements['nodes']
+        node_id = payload['data']['target_id']
+        selected_node = [node for node in nodes if node['data']['id'] in node_id]
+        if selected_node and len(selected_node) > 0:
+            selected_node = selected_node[0]
+            st.session_state.selected_node = selected_node
+
     else:
         st.session_state.selected_edge = None
+        st.session_state.selected_node = None
 
     # st.session_state['drg'] = None
 
 
 if st.session_state.stage == 2:
+    _, b = st.columns([3, .4])
+    b.button("Back", on_click=set_state, args=[1])
     st.title("2. Find relations")
 
     sim_col, buffer, create_col = st.columns([.6, .5, .4], vertical_alignment="bottom", gap="large")
@@ -249,7 +265,8 @@ if st.session_state.stage == 2:
     events = [
         Event("clicked_node", "click tap", "node"),
         Event("clicked_edge", "click tap", "edge"),
-        Event("deselect", "unselect", "edge")
+        Event("deselect", "unselect", "edge"),
+        Event("deselect_node", "unselect", "node")
     ]
 
     elements = st.session_state.elements 
@@ -281,12 +298,19 @@ if st.session_state.stage == 2:
 
     create_tree_button = create_col.button("Create join trees", on_click=set_state, args=[3])
 
+    selected_node = st.session_state.selected_node
+    if selected_node:
+        st.subheader(f"Sample from table: {selected_node['data']['name']}")
+        st.write(pl.read_csv(DATA_FOLDER / selected_node['data']['name'], n_rows=20))
+
 
 def prepare_next_state(display_trees, value, state_num):
     st.session_state.selected_tree = display_trees[value]
     set_state(state_num)
 
 if st.session_state.stage == 3:
+    _, b = st.columns([3, .4])
+    b.button("Back", on_click=set_state, args=[2])
     st.title("3. Create join trees")
 
     if st.session_state.tree == False:
@@ -403,8 +427,19 @@ def move_to_selected(rows_to_select: List[int], display_tree: DisplayJoinTree):
     
     st.session_state.join_trees = join_trees
     st.session_state.selected_tree = display_tree
+
+
+def update_tree():
+    payload = st.session_state['small_join_tree']
     
+    if payload['action'] == 'remove':
+        node_ids = payload["data"]["node_ids"]
+        display_tree: DisplayJoinTree = st.session_state.selected_tree
+
+
 if st.session_state.stage == 4:
+    _, b = st.columns([3, .4])
+    b.button("Back", on_click=set_state, args=[3])
     st.title("4. View and Evaluate")
 
     display_tree: DisplayJoinTree = st.session_state.selected_tree
@@ -415,7 +450,9 @@ if st.session_state.stage == 4:
     rank_col.write("Score:")
     rank_col.write("{:.3f}".format(display_tree.rank)) 
     with graph_col:
-        st_link_analysis(display_tree.elements, "breadthfirst", node_styles, edge_styles, height=150) 
+        st_link_analysis(display_tree.elements, "breadthfirst", node_styles, edge_styles, 
+                         height=150,
+                         key="small_join_tree") 
 
     bottom_cont = container.container(key="cont_bottom")
 

@@ -314,5 +314,5 @@ def get_adjacent_nodes(relations: List[Relation], node: str) -> Dict[str, List[R
 
 
 if __name__ == "__main__":
-    ddisc = DatasetDiscovery(matcher="jaccard", data_repositories=["credit"])
+    ddisc = DatasetDiscovery(matcher="Jaccard", data_repositories=["school"])
     ddisc.find_relationships()
