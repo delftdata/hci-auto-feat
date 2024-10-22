@@ -65,13 +65,15 @@ class HCIAutoFeat:
                 relations: List[Relation],
                 top_k_features: int = 15,  
                 top_k_join_trees: int = 5, 
-                non_null_ratio: float = 0.65) -> None:
+                non_null_ratio: float = 0.65,
+                updated: bool = False) -> None:
         
         self.base_table = base_table
         self.target_variable = target_variable
         self.top_k_features = top_k_features
         self.top_k_join_trees = top_k_join_trees
         self.non_null_ratio = non_null_ratio
+        self.updated = updated
         self.discovered = set()
         self.join_tree_maping = {}
 
@@ -119,7 +121,7 @@ class HCIAutoFeat:
     def compute_join_trees(self, queue: set, previous_queue: set = None, use_cache: bool = True):
         self.join_tree_cache_filename = f"{self.base_table}_{self.target_variable}_{self.non_null_ratio}_{self.top_k_join_trees}_{self.top_k_features}_cache.pickle"
 
-        if os.path.isfile(RELATIONS_FOLDER / self.join_tree_cache_filename):
+        if os.path.isfile(RELATIONS_FOLDER / self.join_tree_cache_filename) and not self.updated:
             with open(RELATIONS_FOLDER / self.join_tree_cache_filename, 'rb') as f: 
                 self.join_tree_maping = pickle.load(f)
         else: 

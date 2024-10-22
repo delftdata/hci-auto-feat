@@ -121,8 +121,7 @@ def evaluate_join_tree(join_trees: Dict[str, Tuple[JoinTree, str]], join_tree_id
     hyper_parameters = get_hyperparameters(ml_model)
     for hyperparam in hyper_parameters:
         X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=[target_variable]),
-                                                            df[target_variable], test_size=0.2, random_state=10)
-        
+                                                            df[target_variable], test_size=0.2, random_state=10)        
         X_train[target_variable] = y_train
         X_test[target_variable] = y_test
         predictor = TabularPredictor(label=target_variable,
@@ -133,7 +132,7 @@ def evaluate_join_tree(join_trees: Dict[str, Tuple[JoinTree, str]], join_tree_id
         model_names = predictor.get_model_names()
         for model in model_names[:-1]:
             evaluation_result = predictor.evaluate(X_test, model=model)
-            ft_imp = predictor.feature_importance(data=X_test, model=model, feature_stage="original")
+            ft_imp = predictor.feature_importance(data=X_train, model=model, feature_stage="original")            
             
             result = Result(model=model)
             result.accuracy = evaluation_result['accuracy']

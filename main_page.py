@@ -4,7 +4,7 @@ import streamlit as st
 import streamlit_pydantic as sp
 import polars as pl
 from pydantic import BaseModel, Field
-from st_link_analysis import st_link_analysis, NodeStyle, EdgeStyle
+from st_link_analysis import Event, st_link_analysis, NodeStyle, EdgeStyle
 
 from app.forms.automatic import FeatureDiscovery
 from app.forms.human_in_the_loop import HILProcess
@@ -22,9 +22,9 @@ hil_process = "Human-in-the-loop"
 auto_process = "Automatic"
 process_types = [hil_process, auto_process]
 
-node_styles_list = [
-    NodeStyle("TABLE", "#FF7F3E", "alias"),
-]
+# node_styles_list = [
+#     NodeStyle("TABLE", "#FF7F3E", "alias"),
+# ]
 
 if 'stage' not in st.session_state:
     st.session_state.stage = 0
@@ -47,6 +47,15 @@ if "selected_tree" not in st.session_state:
 if "target_variable" not in st.session_state:
     st.session_state.target_variable = None
 
+if "elements" not in st.session_state:
+    st.session_state.elements = None
+
+if "relations_updated" not in st.session_state:
+    st.session_state.relations_updated = False  
+
+if "selected_edge" not in st.session_state:
+    st.session_state.selected_edge = None
+
 def set_state(i):
     st.session_state.stage = i
 
@@ -68,7 +77,7 @@ def compute_join_trees(autofeat: HCIAutoFeat):
     #     print(v[0].rank)
     st.session_state.join_trees = trees
     set_tree_state(True)
-    
+
     
 if st.session_state.stage == 0:
     st.title("Saved Process")
@@ -77,6 +86,23 @@ if st.session_state.stage == 0:
     st.write("Empty process collections")
 
     btn_start = st.button("Start process", on_click=set_state, args=[1])
+
+
+def discover_relations(similarity_score=None):
+    dataset_discovery = st.session_state.dataset_discovery
+    if similarity_score:
+        dataset_discovery.set_similarity_threshold(similarity_score)
+    dataset_discovery.find_relationships()
+    nodes, edges = from_relations_to_graph(dataset_discovery.relations)
+    elements = {
+        "nodes": nodes,
+        "edges": edges
+    }
+    
+    st.session_state.dataset_discovery = dataset_discovery
+    st.session_state.elements = elements
+
+    set_state(2)
 
 if st.session_state.stage == 1:
     st.title("1. Input Data")
@@ -95,9 +121,9 @@ if st.session_state.stage == 1:
             selected_repos = [repo.value for repo in list(data.repositories)]
             selected_matcher = data.matcher.value
             dataset_discovery = DatasetDiscovery(matcher=selected_matcher, data_repositories=selected_repos)
+            st.session_state.dataset_discovery = dataset_discovery
            
-            next_button = col2.button("Find relations", on_click=find_relations, args=[2, dataset_discovery])
-
+            next_button = col2.button("Find relations", on_click=discover_relations)
     else:
         data = sp.pydantic_form(
             key="auto_process", 
@@ -109,6 +135,100 @@ if st.session_state.stage == 1:
         if data:
             json_data = st.json(data) 
             next_button = st.button("Find relations", on_click=set_state, args=[2])
+
+
+def update_weight(weight_value, selected_edge, elements):
+    dataset_discovery: DatasetDiscovery = st.session_state.dataset_discovery
+
+    nodes = elements['nodes']
+    edges = elements['edges']
+
+    edges.remove(selected_edge[0])
+
+    my_edge = selected_edge[0]['data']
+    relations = [rel for rel in dataset_discovery.relations if (rel.from_table == my_edge['source_name'] and
+                                                                     rel.to_table == my_edge['target_name'] and
+                                                                     rel.from_col == my_edge['source_column'] and 
+                                                                     rel.to_col == my_edge['target_column'] and 
+                                                                     rel.similarity == my_edge['weight'])]
+    dataset_discovery.relations.remove(relations[0])
+    my_relation = relations[0]
+    my_relation.similarity = weight_value
+    dataset_discovery.relations.append(my_relation)
+
+    selected_edge[0]['data']['weight'] = weight_value
+    edges.append(selected_edge[0])
+   
+    st.session_state.elements = {
+        "nodes": nodes,
+        "edges": edges
+    }
+    st.session_state.selected_edge = None
+    st.session_state.dataset_discovery = dataset_discovery
+
+
+def delete_edge(selected_edge, elements):
+    dataset_discovery: DatasetDiscovery = st.session_state.dataset_discovery
+    nodes = elements['nodes']
+    edges = elements['edges']
+    edges.remove(selected_edge[0])
+
+    my_edge = selected_edge[0]['data']
+    relations = [rel for rel in dataset_discovery.relations if (rel.from_table == my_edge['source_name'] and
+                                                                     rel.to_table == my_edge['target_name'] and
+                                                                     rel.from_col == my_edge['source_column'] and 
+                                                                     rel.to_col == my_edge['target_column'] and 
+                                                                     rel.similarity == my_edge['weight'])]
+    dataset_discovery.relations.remove(relations[0])
+
+    st.session_state.elements = {
+        "nodes": nodes,
+        "edges": edges
+    }
+    st.session_state.selected_edge = None
+    st.session_state.dataset_discovery = dataset_discovery
+
+
+def graph_actions() -> None:
+    dataset_discovery: DatasetDiscovery = st.session_state.dataset_discovery
+    payload = st.session_state['drg']
+
+    if payload["action"] == "remove":
+        node_ids = payload["data"]["node_ids"]
+
+        elements = st.session_state.elements
+        nodes: List = elements['nodes']
+        edges = elements['edges']
+
+        nodes_to_remove = [node for node in nodes if node['data']['id'] in node_ids]
+        for node in nodes_to_remove:
+            nodes.remove(node)
+
+            relations = [rel for rel in dataset_discovery.relations if not (rel.from_table == node['data']['name'] or rel.to_table == node['data']['name'])]
+            dataset_discovery.relations = relations
+
+        elements = {
+            "nodes": nodes,
+            "edges": edges
+        }
+
+        st.session_state.elements = elements
+        st.session_state.dataset_discovery = dataset_discovery
+        st.session_state.relations_updated = True
+
+    elif payload['action'] == 'clicked_edge':
+        elements = st.session_state.elements
+        nodes: List = elements['nodes']
+        edges: List = elements['edges']
+
+        edge_id = payload['data']['target_id']
+        selected_edge = [edge for edge in edges if edge['data']['id'] == edge_id]
+        st.session_state.selected_edge = selected_edge
+
+    else:
+        st.session_state.selected_edge = None
+
+    # st.session_state['drg'] = None
 
 
 if st.session_state.stage == 2:
@@ -124,21 +244,40 @@ if st.session_state.stage == 2:
         max_value=1.0,
         step=0.01,
         help="The similarity threshold will filter the nodes.")
-    submit_button = form.form_submit_button(label='Update graph')
+    submit_button = form.form_submit_button(label='Update graph', on_click=discover_relations, args=[similarity_score])
+   
+    events = [
+        Event("clicked_node", "click tap", "node"),
+        Event("clicked_edge", "click tap", "edge"),
+        Event("deselect", "unselect", "edge")
+    ]
 
-    dataset_discovery = st.session_state.dataset_discovery
-    if submit_button:
-        dataset_discovery.set_similarity_threshold(similarity_score)
-        dataset_discovery.find_relationships()
-        st.session_state.dataset_discovery = dataset_discovery
+    elements = st.session_state.elements 
 
-    nodes, edges = from_relations_to_graph(dataset_discovery.relations)
-    elements = {
-        "nodes": nodes,
-        "edges": edges
-    }
-        
-    st_link_analysis(elements, "cose", node_styles, edge_styles)    
+    st_link_analysis(elements, "cose", node_styles, edge_styles, 
+                    key="drg", 
+                    node_actions=['remove'], 
+                    events=events,
+                    on_change=graph_actions) 
+    
+    selected_edge = st.session_state.selected_edge
+    
+    if selected_edge and len(selected_edge) > 0:
+        slt_col, upt_col, del_col = st.columns([.7, .5, .4], vertical_alignment="bottom", gap="large")
+
+        weight_value = slt_col.number_input(
+            value=selected_edge[0]['data']['weight'],
+            label='Edge Weight',
+            min_value=0.0,
+            step=0.01,
+            max_value=1.0,
+            help="Adjust the weight of the relation."
+        )
+
+        if weight_value != float(selected_edge[0]['data']['weight']):
+            upt_col.button("Update edge", on_click=update_weight, args=[weight_value, selected_edge, elements])
+
+        del_col.button("Delete edge", on_click=delete_edge, args=[selected_edge, elements])    
 
     create_tree_button = create_col.button("Create join trees", on_click=set_state, args=[3])
 
@@ -195,6 +334,7 @@ if st.session_state.stage == 3:
                 top_k_features=top_k_features,
                 top_k_join_trees=top_k_join_trees,
                 relations=dataset_discovery.relations,
+                updated=st.session_state.relations_updated
             )
 
             next_button = col2.button("Start process", on_click=compute_join_trees, args=[autofeat])
@@ -212,7 +352,7 @@ if st.session_state.stage == 3:
             rank_col.write("Score:")
             rank_col.write("{:.3f}".format(tr.rank)) 
             with graph_col:
-                st_link_analysis(tr.elements, "breadthfirst", node_styles_list, edge_styles, height=150) 
+                st_link_analysis(tr.elements, "breadthfirst", node_styles, edge_styles, height=150) 
 
             # table_col.dataframe(tr.table_data, width=250, height=150)
 
@@ -220,8 +360,8 @@ if st.session_state.stage == 3:
 
 
 class MLModels(Enum):
-    GBM = "LightGBM" 
     XGB = "XGBoost"
+    GBM = "LightGBM" 
     RF = "Random Forest" 
     XT = "Extremely Randomized Trees"
     KNN = "k-Nearest Neighbors"
@@ -275,7 +415,7 @@ if st.session_state.stage == 4:
     rank_col.write("Score:")
     rank_col.write("{:.3f}".format(display_tree.rank)) 
     with graph_col:
-        st_link_analysis(display_tree.elements, "breadthfirst", node_styles_list, edge_styles, height=150) 
+        st_link_analysis(display_tree.elements, "breadthfirst", node_styles, edge_styles, height=150) 
 
     bottom_cont = container.container(key="cont_bottom")
 
@@ -342,6 +482,16 @@ if st.session_state.stage == 4:
 
         model = st.selectbox("Select ML Model:", options=[model.value for model in MLModels])
 
-        result = evaluate_join_tree(join_trees=join_trees, join_tree_id=display_tree.join_tree_id, target_variable=target_variable, ml_model=MLModels(model).name)
-        st.write(result)
+        result = evaluate_join_tree(join_trees=join_trees, 
+                                    join_tree_id=display_tree.join_tree_id, 
+                                    target_variable=target_variable, 
+                                    ml_model=MLModels(model).name
+                                    )
+        if len(result) > 0:
+            st.write("We evaluate the dataset using the AutoML framework AutoGluon.")
+            st.write(f"The **accuracy** of the model {result[0].model} is **{result[0].accuracy}**")
+            st.write("The model used the following features:")
+            st.write(pl.DataFrame({"Feature": result[0].feature_importance.keys(),
+                                   "Feature Importance": result[0].feature_importance.values()
+                                   }))
 
